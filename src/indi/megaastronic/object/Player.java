@@ -1,5 +1,8 @@
-package indi.megaastronic.paint;
+package indi.megaastronic.object;
 
+import indi.megaastronic.paint.LimitedByCanvas;
+import indi.megaastronic.paint.Moveable;
+import indi.megaastronic.paint.Paintable;
 import javafx.scene.canvas.GraphicsContext;
 
 public class Player implements Paintable , Moveable ,LimitedByCanvas {

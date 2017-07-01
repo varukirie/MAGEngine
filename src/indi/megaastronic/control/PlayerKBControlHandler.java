@@ -1,6 +1,6 @@
 package indi.megaastronic.control;
 
-import indi.megaastronic.paint.Player;
+import indi.megaastronic.object.Player;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;

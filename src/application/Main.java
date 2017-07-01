@@ -2,8 +2,10 @@ package application;
 	
 import indi.megaastronic.MyCanvas;
 import indi.megaastronic.control.PlayerKBControlHandler;
+import indi.megaastronic.object.Enemy;
+import indi.megaastronic.object.Player;
 import indi.megaastronic.paint.MoveHandler;
-import indi.megaastronic.paint.Player;
+import indi.megaastronic.util.ObjectUtils;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
@@ -23,6 +25,7 @@ public class Main extends Application {
 			root.getChildren().add(canvas);
 			Scene scene=new Scene(root);
 			primaryStage.setScene(scene);
+			primaryStage.setTitle("Canvas Demo!");
 			primaryStage.show();
 			
 			//运行 线程MoveHandle
@@ -36,11 +39,18 @@ public class Main extends Application {
 			});
 			//
 			Player player = new Player(10,10);
+
 			//
 			new PlayerKBControlHandler().bindEvent(scene, player);
 			//
 			canvas.getWantPaintMap().put("player", player);//让MyCanvas管理player
 			mh.getWantMoveMap().put("player", player);//让MoveHandler管理player
+			//
+			ObjectUtils ou = new ObjectUtils(mh, canvas);
+			Enemy enemy = new Enemy(50, 50);
+			enemy.setVelocityX(1.5);
+			enemy.setVelocityY(1.12);
+			ou.putObject("enemy1", enemy);
 			//
 			
 		} catch(Exception e) {
