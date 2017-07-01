@@ -7,7 +7,7 @@ import javafx.scene.input.KeyEvent;
 
 public class PlayerKBControlHandler {
 	//速度V
-	public static final int V=2;
+	public static final double V=1;
 	private Player player = null;
 	
 	public PlayerKBControlHandler() {

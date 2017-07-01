@@ -16,11 +16,11 @@ public interface Moveable {
 
 	void setY(int y);
 	
-	int getVelocityX();
+	double getVelocityX();
 	
-	int getVelocityY();
+	double getVelocityY();
 	
-	void setVelocityX(int vx);
+	void setVelocityX(double vx);
 
-	void setVelocityY(int vy);
+	void setVelocityY(double vy);
 }

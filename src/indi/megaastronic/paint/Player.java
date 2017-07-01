@@ -2,12 +2,12 @@ package indi.megaastronic.paint;
 
 import javafx.scene.canvas.GraphicsContext;
 
-public class Player implements Paintable , Moveable {
+public class Player implements Paintable , Moveable ,LimitedByCanvas {
 
 	private int x;
 	private int y;
-	private int VelocityX=0;
-	private int VelocityY=0;
+	private double VelocityX=0;
+	private double VelocityY=0;
 	public final int width = 10;
 	public final int height = 10;
 	
@@ -24,16 +24,16 @@ public class Player implements Paintable , Moveable {
 		this.y = y;
 	}
 
-	public int getVelocityX() {
+	public double getVelocityX() {
 		return VelocityX;
 	}
-	public void setVelocityX(int velocityX) {
+	public void setVelocityX(double velocityX) {
 		VelocityX = velocityX;
 	}
-	public int getVelocityY() {
+	public double getVelocityY() {
 		return VelocityY;
 	}
-	public void setVelocityY(int velocityY) {
+	public void setVelocityY(double velocityY) {
 
 		VelocityY = velocityY;
 	}
