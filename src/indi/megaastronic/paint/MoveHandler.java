@@ -1,5 +1,6 @@
 package indi.megaastronic.paint;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -29,6 +30,7 @@ public class MoveHandler implements Runnable {
 
 	@Override
 	public void run() {
+		ArrayList<String> removeMark = new ArrayList<>();
 		Moveable m;
 		Entry<String,Moveable> entry;
 		int nextX;
@@ -56,10 +58,17 @@ public class MoveHandler implements Runnable {
 						wantMoveMap.remove(entry.getKey());
 						myCanvas.getWantPaintMap().remove(entry.getKey());
 						*/
+						removeMark.add(entry.getKey());
 					}
 				}
-
 			}
+			//删除出界元素
+			for (String str : removeMark) {
+				wantMoveMap.remove(str);
+				myCanvas.getWantPaintMap().remove(str);
+			}
+			removeMark.clear();
+			
 			this.lastTime = currentTime;
 			myCanvas.repaint();
 			try {

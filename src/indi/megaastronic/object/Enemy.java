@@ -43,7 +43,7 @@ public class Enemy implements Moveable , Paintable{
 	@Override
 	public void paint(GraphicsContext gc) {
 		gc.fillOval(x, y, 5, 5);
-		
+		System.out.println("enemy exist millis="+System.currentTimeMillis());
 	}
 	
 	
