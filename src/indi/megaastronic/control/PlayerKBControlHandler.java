@@ -10,12 +10,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 /**
  * 此类负责绑定玩家操作事件
- * @author Astronic
+ * @author MegaAstronic
  *
  */
 public class PlayerKBControlHandler {
 	//速度V
-	public static final double BALL_V=2;
+	public static final double BALL_V=4;
 	public static final double PLAYER_V=1;
 	private Player player = null;
 	private ObjectUtils ou = null;

@@ -4,7 +4,11 @@ import indi.megaastronic.paint.LimitedByCanvas;
 import indi.megaastronic.paint.Moveable;
 import indi.megaastronic.paint.Paintable;
 import javafx.scene.canvas.GraphicsContext;
-
+/**
+ * 玩家控制的物体
+ * @author MegaAstronic
+ *
+ */
 public class Player implements Paintable , Moveable ,LimitedByCanvas {
 
 	private int x;

@@ -1,9 +1,18 @@
 package indi.megaastronic.object;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import indi.megaastronic.paint.Moveable;
 import indi.megaastronic.paint.Paintable;
 import javafx.scene.canvas.GraphicsContext;
-
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+/**
+ * 子弹
+ * @author MegaAstronic
+ *
+ */
 public class Ball implements Moveable , Paintable{
 
 	private int x;
@@ -42,7 +51,17 @@ public class Ball implements Moveable , Paintable{
 	}
 	@Override
 	public void paint(GraphicsContext gc) {
+		gc.setFill(Color.RED);
 		gc.fillOval(x, y, 5, 5);
+		//gc.fillText("fuckYou", this.x, this.y);
+		/*
+		try {
+			gc.drawImage(new Image(new FileInputStream("d:\\gh.png")), this.x, this.y);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
 		//System.out.println("enemy exist millis="+System.currentTimeMillis());
 	}
 	

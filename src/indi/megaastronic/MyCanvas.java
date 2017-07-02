@@ -1,6 +1,5 @@
 package indi.megaastronic;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -12,14 +11,14 @@ import javafx.scene.canvas.GraphicsContext;
 /**
  * 本类的实例化对象负责完成绘画
  * 将调用wantPaintMap中所有元素的paint方法，完成绘制
- * @author Administrator
+ * @author MegaAstronic
  *
  */
 public class MyCanvas extends Canvas {
 	//画布大小
 	public final static int CANVAS_WIDTH = 640;
 	public final static int CANVAS_HEIGHT = 480;
-	private GraphicsContext gc;
+	private GraphicsContext gc=null;
 	private Map<String, Paintable> wantPaintMap = new ConcurrentHashMap<>();
 
 	public Map<String, Paintable> getWantPaintMap() {
