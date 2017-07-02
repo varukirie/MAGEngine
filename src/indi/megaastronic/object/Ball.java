@@ -4,14 +4,14 @@ import indi.megaastronic.paint.Moveable;
 import indi.megaastronic.paint.Paintable;
 import javafx.scene.canvas.GraphicsContext;
 
-public class Enemy implements Moveable , Paintable{
+public class Ball implements Moveable , Paintable{
 
 	private int x;
 	private int y;
 	private double velocityX=0;
 	private double velocityY=0;
 	
-	public Enemy(int x, int y) {
+	public Ball(int x, int y) {
 		this.x=x;
 		this.y=y;
 	}
@@ -43,7 +43,7 @@ public class Enemy implements Moveable , Paintable{
 	@Override
 	public void paint(GraphicsContext gc) {
 		gc.fillOval(x, y, 5, 5);
-		System.out.println("enemy exist millis="+System.currentTimeMillis());
+		//System.out.println("enemy exist millis="+System.currentTimeMillis());
 	}
 	
 	

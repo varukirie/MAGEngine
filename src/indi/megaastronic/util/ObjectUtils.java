@@ -14,7 +14,7 @@ public class ObjectUtils {
 		this.myCanvas = myCanvas;
 	}
 	
-	public void putObject(String key,Object value){
+	public void addWantMoveAndPaint(String key,Object value){
 		mh.getWantMoveMap().put(key, (Moveable) value);
 		myCanvas.getWantPaintMap().put(key, (Paintable) value);
 	}

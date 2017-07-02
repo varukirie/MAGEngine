@@ -2,7 +2,7 @@ package application;
 	
 import indi.megaastronic.MyCanvas;
 import indi.megaastronic.control.PlayerKBControlHandler;
-import indi.megaastronic.object.Enemy;
+import indi.megaastronic.object.Ball;
 import indi.megaastronic.object.Player;
 import indi.megaastronic.paint.MoveHandler;
 import indi.megaastronic.util.ObjectUtils;
@@ -15,7 +15,7 @@ import javafx.scene.layout.StackPane;
 
 
 public class Main extends Application {
-	
+	public static final boolean DEBUG = true;
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -31,27 +31,24 @@ public class Main extends Application {
 			//运行 线程MoveHandle
 			MoveHandler mh = new MoveHandler(canvas);
 			new Thread(mh).start();
+			//关闭窗口时关闭所有线程
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				@Override
 				public void handle(WindowEvent event) {
 					mh.keepRun=false;
 				}
 			});
-			//
+			//创建玩家
 			Player player = new Player(10,10);
-
-			//
-			new PlayerKBControlHandler().bindEvent(scene, player);
+			
+			ObjectUtils ou = new ObjectUtils(mh, canvas);
+			//绑定玩家与键盘控制
+			PlayerKBControlHandler PKBH= new PlayerKBControlHandler(ou,player);
+			PKBH.bindEvent(scene);
 			//
 			canvas.getWantPaintMap().put("player", player);//让MyCanvas管理player
 			mh.getWantMoveMap().put("player", player);//让MoveHandler管理player
-			//
-			ObjectUtils ou = new ObjectUtils(mh, canvas);
-			Enemy enemy = new Enemy(50, 50);
-			enemy.setVelocityX(1.5);
-			enemy.setVelocityY(1.12);
-			ou.putObject("enemy1", enemy);
-			//
+			
 			
 		} catch(Exception e) {
 			e.printStackTrace();

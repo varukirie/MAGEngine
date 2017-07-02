@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 
 import indi.megaastronic.MyCanvas;
 
@@ -12,7 +13,7 @@ public class MoveHandler implements Runnable {
 	public static double speed = 0.2;
 	public static final long SLEEP_TIME = 16;
 	public static final long BLANK = 1;
-	private Map<String, Moveable> wantMoveMap = new HashMap<>();
+	private Map<String, Moveable> wantMoveMap = new ConcurrentHashMap<>();
 
 	public Map<String, Moveable> getWantMoveMap() {
 		return wantMoveMap;

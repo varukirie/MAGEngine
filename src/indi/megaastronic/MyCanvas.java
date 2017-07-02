@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 
 import indi.megaastronic.paint.Paintable;
 import javafx.scene.canvas.Canvas;
@@ -16,10 +17,10 @@ import javafx.scene.canvas.GraphicsContext;
  */
 public class MyCanvas extends Canvas {
 	//画布大小
-	public final static int CANVAS_WIDTH = 800;
-	public final static int CANVAS_HEIGHT = 600;
+	public final static int CANVAS_WIDTH = 640;
+	public final static int CANVAS_HEIGHT = 480;
 	private GraphicsContext gc;
-	private Map<String, Paintable> wantPaintMap = new HashMap<>();
+	private Map<String, Paintable> wantPaintMap = new ConcurrentHashMap<>();
 
 	public Map<String, Paintable> getWantPaintMap() {
 		return wantPaintMap;
