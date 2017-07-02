@@ -2,7 +2,6 @@ package application;
 	
 import indi.megaastronic.MyCanvas;
 import indi.megaastronic.control.PlayerKBControlHandler;
-import indi.megaastronic.object.Ball;
 import indi.megaastronic.object.Player;
 import indi.megaastronic.paint.MoveHandler;
 import indi.megaastronic.util.ObjectUtils;

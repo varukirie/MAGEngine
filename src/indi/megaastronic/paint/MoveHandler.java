@@ -1,7 +1,6 @@
 package indi.megaastronic.paint;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -38,16 +37,16 @@ public class MoveHandler implements Runnable {
 		ArrayList<String> removeMark = new ArrayList<>();
 		Moveable m;
 		Entry<String,Moveable> entry;
-		int nextX;
-		int nextY;
+		double nextX;
+		double nextY;
 		while (keepRun) {
 			long currentTime = System.currentTimeMillis();
 			Iterator<Entry<String, Moveable>> iter = wantMoveMap.entrySet().iterator();
 			while (iter.hasNext()) {
 				entry = iter.next();
 				m=entry.getValue();
-				nextX = (int) (m.getX() + m.getVelocityX() * ((currentTime - this.lastTime) / BLANK) * speed);
-				nextY = (int) (m.getY() + m.getVelocityY() * ((currentTime - this.lastTime) / BLANK) * speed);
+				nextX = m.getX() + m.getVelocityX() * ((currentTime - this.lastTime) / BLANK) * speed;
+				nextY = m.getY() + m.getVelocityY() * ((currentTime - this.lastTime) / BLANK) * speed;
 
 				if (nextX < MyCanvas.CANVAS_WIDTH && nextX > 0 && nextY < MyCanvas.CANVAS_HEIGHT && nextY > 0) {
 					m.setX(nextX);

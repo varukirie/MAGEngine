@@ -1,12 +1,8 @@
 package indi.megaastronic.object;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 import indi.megaastronic.paint.Moveable;
 import indi.megaastronic.paint.Paintable;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 /**
  * 子弹
@@ -15,26 +11,26 @@ import javafx.scene.paint.Color;
  */
 public class Ball implements Moveable , Paintable{
 
-	private int x;
-	private int y;
+	private double x;
+	private double y;
 	private double velocityX=0;
 	private double velocityY=0;
 	
-	public Ball(int x, int y) {
+	public Ball(double x, double y) {
 		this.x=x;
 		this.y=y;
 	}
 	
-	public int getX() {
+	public double getX() {
 		return x;
 	}
-	public void setX(int x) {
+	public void setX(double x) {
 		this.x = x;
 	}
-	public int getY() {
+	public double getY() {
 		return y;
 	}
-	public void setY(int y) {
+	public void setY(double y) {
 		this.y = y;
 	}
 	public double getVelocityX() {

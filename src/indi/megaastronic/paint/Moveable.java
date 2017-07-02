@@ -8,13 +8,13 @@ package indi.megaastronic.paint;
  *
  */
 public interface Moveable {
-	int getX();
+	double getX();
 
-	int getY();
+	double getY();
 
-	void setX(int x);
+	void setX(double x);
 
-	void setY(int y);
+	void setY(double y);
 	
 	double getVelocityX();
 	
