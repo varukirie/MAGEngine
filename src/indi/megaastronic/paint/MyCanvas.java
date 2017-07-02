@@ -1,11 +1,10 @@
-package indi.megaastronic;
+package indi.megaastronic.paint;
 
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
-import indi.megaastronic.paint.Paintable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 /**

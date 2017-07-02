@@ -1,9 +1,9 @@
 package application;
 	
-import indi.megaastronic.MyCanvas;
 import indi.megaastronic.control.PlayerKBControlHandler;
 import indi.megaastronic.element.Player;
 import indi.megaastronic.paint.MoveHandler;
+import indi.megaastronic.paint.MyCanvas;
 import indi.megaastronic.util.ElementUtils;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -37,6 +37,7 @@ public class Main extends Application {
 					mh.keepRun=false;
 				}
 			});
+			
 			//创建玩家
 			Player player = new Player(10,10);
 			

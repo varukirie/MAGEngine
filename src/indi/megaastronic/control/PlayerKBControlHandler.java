@@ -3,6 +3,7 @@ package indi.megaastronic.control;
 
 import indi.megaastronic.element.Ball;
 import indi.megaastronic.element.Player;
+import indi.megaastronic.paint.MoveHandler;
 import indi.megaastronic.util.ElementUtils;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -15,8 +16,9 @@ import javafx.scene.input.MouseEvent;
  */
 public class PlayerKBControlHandler {
 	//速度V
-	public static final double BALL_V=4;
-	public static final double PLAYER_V=1;
+	public static double DEFAULT_BALL_V=4;
+	public static double BALL_V=DEFAULT_BALL_V;
+	public static double PLAYER_V=1;
 	private Player player = null;
 	private ElementUtils elementUtils = null;
 	private double mouseX=0;
@@ -54,6 +56,12 @@ public class PlayerKBControlHandler {
 				//System.out.println("mouse x="+mouseX+" mouseY="+mouseY);
 			}
 		});
+		scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				playerShootToMouse();
+			}
+		});
 		
 	}
 	
@@ -81,14 +89,7 @@ public class PlayerKBControlHandler {
 			pressed[3]=true;
 			break;
 		case SPACE:
-			Ball ball = new Ball(player.getX(), player.getY());
-			double dx=mouseX-player.getX();
-			double dy=mouseY-player.getY();
-			double s=Math.sqrt(dx*dx+dy*dy);
-			ball.setVelocityX(dx*BALL_V/s);
-			ball.setVelocityY(dy*BALL_V/s);
-			elementUtils.addWantMoveAndPaint("ball"+ballCount++, ball);
-			
+			MoveHandler.speed=MoveHandler.DEFAULT_SPEED/4;
 			break;
 		}
 	}
@@ -125,6 +126,17 @@ public class PlayerKBControlHandler {
 				player.setVelocityX(PLAYER_V);
 			pressed[3]=false;
 			break;
+		case SPACE:
+			MoveHandler.speed=MoveHandler.DEFAULT_SPEED;
 		}
+	}
+	private void playerShootToMouse(){
+		Ball ball = new Ball(player.getX(), player.getY());
+		double dx=mouseX-player.getX();
+		double dy=mouseY-player.getY();
+		double s=Math.sqrt(dx*dx+dy*dy);
+		ball.setVelocityX(dx*BALL_V/s);
+		ball.setVelocityY(dy*BALL_V/s);
+		elementUtils.addWantMoveAndPaint("ball"+ballCount++, ball);
 	}
 }

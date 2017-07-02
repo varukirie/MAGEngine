@@ -60,6 +60,6 @@ public class Ball implements Moveable , Paintable{
 		*/
 		//System.out.println("enemy exist millis="+System.currentTimeMillis());
 	}
-	
+
 	
 }

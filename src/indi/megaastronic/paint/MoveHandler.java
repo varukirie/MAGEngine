@@ -5,15 +5,14 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
-
-import indi.megaastronic.MyCanvas;
 /**
- * 
+ * 单独一个线程，不断重复执行：计算当前时刻所有Moveable元素的坐标，并调用MyCanvas的repaint方法
  * @author MegaAstronic
  *
  */
 public class MoveHandler implements Runnable {
-	public static double speed = 0.2;
+	public static final double DEFAULT_SPEED=0.2;
+	public static double speed = DEFAULT_SPEED;
 	public static final long SLEEP_TIME = 17;
 	public static final long BLANK = 1;
 	private Map<String, Moveable> wantMoveMap = new ConcurrentHashMap<>();
