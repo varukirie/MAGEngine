@@ -1,4 +1,4 @@
-package indi.megaastronic.object;
+package indi.megaastronic.element;
 
 import indi.megaastronic.paint.LimitedByCanvas;
 import indi.megaastronic.paint.Moveable;

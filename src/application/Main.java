@@ -2,9 +2,9 @@ package application;
 	
 import indi.megaastronic.MyCanvas;
 import indi.megaastronic.control.PlayerKBControlHandler;
-import indi.megaastronic.object.Player;
+import indi.megaastronic.element.Player;
 import indi.megaastronic.paint.MoveHandler;
-import indi.megaastronic.util.ObjectUtils;
+import indi.megaastronic.util.ElementUtils;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
@@ -40,9 +40,9 @@ public class Main extends Application {
 			//创建玩家
 			Player player = new Player(10,10);
 			
-			ObjectUtils ou = new ObjectUtils(mh, canvas);
+			ElementUtils elementUtils = new ElementUtils(mh, canvas);
 			//绑定玩家与键盘控制
-			PlayerKBControlHandler PKBH= new PlayerKBControlHandler(ou,player);
+			PlayerKBControlHandler PKBH= new PlayerKBControlHandler(elementUtils,player);
 			PKBH.bindEvent(scene);
 			//
 			canvas.getWantPaintMap().put("player", player);//让MyCanvas管理player

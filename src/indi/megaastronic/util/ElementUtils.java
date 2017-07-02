@@ -5,10 +5,10 @@ import indi.megaastronic.paint.MoveHandler;
 import indi.megaastronic.paint.Moveable;
 import indi.megaastronic.paint.Paintable;
 
-public class ObjectUtils {
+public class ElementUtils {
 	private MoveHandler mh = null;
 	private MyCanvas myCanvas =null;
-	public ObjectUtils(MoveHandler mh, MyCanvas myCanvas) {
+	public ElementUtils(MoveHandler mh, MyCanvas myCanvas) {
 		super();
 		this.mh = mh;
 		this.myCanvas = myCanvas;

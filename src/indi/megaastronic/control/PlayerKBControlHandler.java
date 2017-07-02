@@ -1,9 +1,9 @@
 package indi.megaastronic.control;
 
 
-import indi.megaastronic.object.Ball;
-import indi.megaastronic.object.Player;
-import indi.megaastronic.util.ObjectUtils;
+import indi.megaastronic.element.Ball;
+import indi.megaastronic.element.Player;
+import indi.megaastronic.util.ElementUtils;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
@@ -18,7 +18,7 @@ public class PlayerKBControlHandler {
 	public static final double BALL_V=4;
 	public static final double PLAYER_V=1;
 	private Player player = null;
-	private ObjectUtils ou = null;
+	private ElementUtils elementUtils = null;
 	private double mouseX=0;
 	private double mouseY=0;
 	public double getMouseX() {
@@ -27,8 +27,8 @@ public class PlayerKBControlHandler {
 	public double getMouseY() {
 		return mouseY;
 	}
-	public PlayerKBControlHandler(ObjectUtils ou,Player player) {
-		this.ou=ou;
+	public PlayerKBControlHandler(ElementUtils eu,Player player) {
+		this.elementUtils=eu;
 		this.player=player;
 	}
 	
@@ -87,7 +87,7 @@ public class PlayerKBControlHandler {
 			double s=Math.sqrt(dx*dx+dy*dy);
 			ball.setVelocityX(dx*BALL_V/s);
 			ball.setVelocityY(dy*BALL_V/s);
-			ou.addWantMoveAndPaint("ball"+ballCount++, ball);
+			elementUtils.addWantMoveAndPaint("ball"+ballCount++, ball);
 			
 			break;
 		}
