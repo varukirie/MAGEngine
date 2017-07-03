@@ -28,9 +28,12 @@ public class MyCanvas extends Canvas {
 		super(CANVAS_WIDTH,CANVAS_HEIGHT);
 		gc = super.getGraphicsContext2D();
 	}
-	
+	public void clear(){
+		gc.clearRect(0, 0, this.getWidth(), this.getHeight());
+	}
 	public void repaint(){
-		gc.clearRect(0, 0, this.getWidth(), this.getHeight());//清空屏幕
+		//清空屏幕
+		this.clear();
 		//绘制wantPaint的内容
 		Iterator<Entry<String, Paintable>> iter = wantPaintMap.entrySet().iterator();
 		while(iter.hasNext()){

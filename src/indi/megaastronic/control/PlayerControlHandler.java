@@ -14,7 +14,7 @@ import javafx.scene.input.MouseEvent;
  * @author MegaAstronic
  *
  */
-public class PlayerKBControlHandler {
+public class PlayerControlHandler {
 	//速度V
 	public static double DEFAULT_BALL_V=4;
 	public static double BALL_V=DEFAULT_BALL_V;
@@ -29,7 +29,7 @@ public class PlayerKBControlHandler {
 	public double getMouseY() {
 		return mouseY;
 	}
-	public PlayerKBControlHandler(ElementUtils eu,Player player) {
+	public PlayerControlHandler(ElementUtils eu,Player player) {
 		this.elementUtils=eu;
 		this.player=player;
 	}

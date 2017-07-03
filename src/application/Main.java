@@ -1,6 +1,7 @@
 package application;
 	
-import indi.megaastronic.control.PlayerKBControlHandler;
+import indi.megaastronic.control.PlayerControlHandler;
+import indi.megaastronic.element.Ball;
 import indi.megaastronic.element.Player;
 import indi.megaastronic.paint.MoveHandler;
 import indi.megaastronic.paint.MyCanvas;
@@ -20,16 +21,19 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			StackPane root = new StackPane();
-			MyCanvas canvas = new MyCanvas();
-			root.getChildren().add(canvas);
+			MyCanvas moveableCanvas = new MyCanvas();
+			MyCanvas staticCanvas = new MyCanvas();
+			root.getChildren().add(staticCanvas);
+			root.getChildren().add(moveableCanvas);
 			Scene scene=new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Canvas Demo!");
 			primaryStage.show();
-			
+		
 			//运行 线程MoveHandle
-			MoveHandler mh = new MoveHandler(canvas);
-			new Thread(mh).start();
+			MoveHandler mh = new MoveHandler(moveableCanvas);
+			Thread mhThread = new Thread(mh);
+			mhThread.start();
 			//关闭窗口时关闭所有线程
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				@Override
@@ -41,14 +45,20 @@ public class Main extends Application {
 			//创建玩家
 			Player player = new Player(10,10);
 			
-			ElementUtils elementUtils = new ElementUtils(mh, canvas);
-			//绑定玩家与键盘控制
-			PlayerKBControlHandler PKBH= new PlayerKBControlHandler(elementUtils,player);
-			PKBH.bindEvent(scene);
+			ElementUtils moveableElementUtils = new ElementUtils(mh, moveableCanvas);
+			ElementUtils staticElementUtils = new ElementUtils(staticCanvas);
 			//
-			canvas.getWantPaintMap().put("player", player);//让MyCanvas管理player
+			staticElementUtils.addWantMoveAndPaint("gh", new Ball(50, 50));
+			staticCanvas.repaint();
+			//绑定玩家与键盘控制
+			PlayerControlHandler PCH= new PlayerControlHandler(moveableElementUtils,player);
+			PCH.bindEvent(scene);
+			//
+			/*
+			moveableCanvas.getWantPaintMap().put("player", player);//让MyCanvas管理player
 			mh.getWantMoveMap().put("player", player);//让MoveHandler管理player
-			
+			*/
+			moveableElementUtils.addWantMoveAndPaint("player", player);
 			
 		} catch(Exception e) {
 			e.printStackTrace();

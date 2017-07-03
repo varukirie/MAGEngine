@@ -13,10 +13,16 @@ public class ElementUtils {
 		this.mh = mh;
 		this.myCanvas = myCanvas;
 	}
+	public ElementUtils(MyCanvas myCanvas) {
+		super();
+		this.myCanvas = myCanvas;
+	}
 	
 	public void addWantMoveAndPaint(String key,Object value){
-		mh.getWantMoveMap().put(key, (Moveable) value);
-		myCanvas.getWantPaintMap().put(key, (Paintable) value);
+		if(mh!=null)
+			mh.getWantMoveMap().put(key, (Moveable) value);
+		if(myCanvas!=null)
+			myCanvas.getWantPaintMap().put(key, (Paintable) value);
 	}
 	
 }
