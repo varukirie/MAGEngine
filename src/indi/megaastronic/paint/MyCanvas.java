@@ -18,14 +18,21 @@ public class MyCanvas extends Canvas {
 	public final static int CANVAS_WIDTH = 640;
 	public final static int CANVAS_HEIGHT = 480;
 	private GraphicsContext gc=null;
-	private Map<String, Paintable> wantPaintMap = new ConcurrentHashMap<>();
+	private Map<String, Paintable> wantPaintMap = null;
 
 	public Map<String, Paintable> getWantPaintMap() {
 		return wantPaintMap;
 	}
 	
+	
 	public MyCanvas(){
 		super(CANVAS_WIDTH,CANVAS_HEIGHT);
+		wantPaintMap = new ConcurrentHashMap<>();
+		gc = super.getGraphicsContext2D();
+	}
+	public MyCanvas(Map<String, Paintable> wantPaintMap){
+		super(CANVAS_WIDTH,CANVAS_HEIGHT);
+		this.wantPaintMap = wantPaintMap;
 		gc = super.getGraphicsContext2D();
 	}
 	public void clear(){

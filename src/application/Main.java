@@ -23,16 +23,19 @@ public class Main extends Application {
 			StackPane root = new StackPane();
 			MyCanvas moveableCanvas = new MyCanvas();
 			MyCanvas staticCanvas = new MyCanvas();
+			MyCanvas secondaryMCanvas = new MyCanvas(moveableCanvas.getWantPaintMap());
 			root.getChildren().add(staticCanvas);
 			root.getChildren().add(moveableCanvas);
+			root.getChildren().add(secondaryMCanvas);
 			Scene scene=new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Canvas Demo!");
 			primaryStage.show();
 		
 			//运行 线程MoveHandle
-			MoveHandler mh = new MoveHandler(moveableCanvas);
+			MoveHandler mh = new MoveHandler(moveableCanvas,secondaryMCanvas);
 			Thread mhThread = new Thread(mh);
+			mhThread.setPriority(Thread.MAX_PRIORITY);
 			mhThread.start();
 			//关闭窗口时关闭所有线程
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -59,6 +62,7 @@ public class Main extends Application {
 			mh.getWantMoveMap().put("player", player);//让MoveHandler管理player
 			*/
 			moveableElementUtils.addWantMoveAndPaint("player", player);
+			
 			
 		} catch(Exception e) {
 			e.printStackTrace();

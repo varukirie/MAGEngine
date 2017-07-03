@@ -10,26 +10,36 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author MegaAstronic
  *
  */
+
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.layout.Pane;
 public class MoveHandler implements Runnable {
 	public static final double DEFAULT_SPEED=0.2;
 	public static double speed = DEFAULT_SPEED;
-	public static final long SLEEP_TIME = 17;
+	public static final long SLEEP_TIME = 21;
 	public static final long BLANK = 1;
 	private Map<String, Moveable> wantMoveMap = new ConcurrentHashMap<>();
 
 	public Map<String, Moveable> getWantMoveMap() {
 		return wantMoveMap;
 	}
-
+	
+	private ObservableList<Node> OL=null;
 	private long lastTime;
 	private MyCanvas myCanvas = null;
-
-	public MoveHandler(MyCanvas myCanvas) {
+	private MyCanvas sCanvas = null;//辅助画布
+	public boolean keepRun = true;
+	
+	public MoveHandler(MyCanvas myCanvas,MyCanvas sCanvas) {
 		this.lastTime = System.currentTimeMillis();
 		this.myCanvas = myCanvas;
+		this.sCanvas = sCanvas;
 	}
+	
 
-	public boolean keepRun = true;
+	
 
 	@Override
 	public void run() {
@@ -38,6 +48,7 @@ public class MoveHandler implements Runnable {
 		Entry<String,Moveable> entry;
 		double nextX;
 		double nextY;
+		int switchCount = 0;
 		while (keepRun) {
 			long currentTime = System.currentTimeMillis();
 			Iterator<Entry<String, Moveable>> iter = wantMoveMap.entrySet().iterator();
@@ -73,7 +84,22 @@ public class MoveHandler implements Runnable {
 			removeMark.clear();
 			
 			this.lastTime = currentTime;
-			myCanvas.repaint();
+			
+			
+			//sCanvas.repaint();
+			
+			
+			if(switchCount==0){
+				myCanvas.repaint();
+				myCanvas.setVisible(true);
+				sCanvas.setVisible(false);
+			}else{
+				sCanvas.repaint();
+				sCanvas.setVisible(true);
+				myCanvas.setVisible(false);
+			}
+			switchCount=(switchCount+1)%2;
+			
 			try {
 				Thread.sleep(SLEEP_TIME);
 			} catch (InterruptedException e) {
