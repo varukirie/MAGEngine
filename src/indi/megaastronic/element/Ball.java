@@ -19,7 +19,6 @@ public class Ball implements Moveable , Paintable{
 	private double y;
 	private double velocityX=0;
 	private double velocityY=0;
-	
 	public Ball(double x, double y) {
 		this.x=x;
 		this.y=y;
@@ -53,8 +52,8 @@ public class Ball implements Moveable , Paintable{
 	public void paint(GraphicsContext gc) {
 		//gc.setFill(Color.RED);
 		//gc.fillOval(x, y, 10, 10);
-		//gc.fillText("fuckYou", this.x, this.y);
-		
+		gc.fillText("★", this.x, this.y);
+		/*
 		try {
 			Image img = new Image(new FileInputStream(this.getClass().getResource("/img/gh.png").getFile()));
 			gc.drawImage(img, this.x, this.y);
@@ -63,7 +62,7 @@ public class Ball implements Moveable , Paintable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		*/
 		//System.out.println("enemy exist millis="+System.currentTimeMillis());
 	}
 

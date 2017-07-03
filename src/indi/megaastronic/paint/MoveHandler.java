@@ -12,6 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 
 import indi.megaastronic.element.Ball;
+import indi.megaastronic.element.Player;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -56,12 +57,17 @@ public class MoveHandler implements Runnable {
 			while (iter.hasNext()) {
 				entry = iter.next();
 				m=entry.getValue();
-				
+				//让Ball受到重力
 				if(m instanceof Ball) m.setVelocityY(m.getVelocityY()+(currentTime-this.lastTime)*9.8*speed*5/1000);
 				
 				nextX = m.getX() + m.getVelocityX() * ((currentTime - this.lastTime) / BLANK) * speed;
 				nextY = m.getY() + m.getVelocityY() * ((currentTime - this.lastTime) / BLANK) * speed;
-
+				//Player不受speed减速影响
+				if(m instanceof Player){
+					nextX = m.getX() + m.getVelocityX() * ((currentTime - this.lastTime) / BLANK) * DEFAULT_SPEED;
+					nextY = m.getY() + m.getVelocityY() * ((currentTime - this.lastTime) / BLANK) * DEFAULT_SPEED;
+				}
+				
 				if (nextX < MyCanvas.CANVAS_WIDTH && nextX > 0 && nextY < MyCanvas.CANVAS_HEIGHT && nextY > 0) {
 					m.setX(nextX);
 					m.setY(nextY);
