@@ -56,7 +56,7 @@ public class Ball implements Moveable , Paintable{
 		//gc.fillText("fuckYou", this.x, this.y);
 		
 		try {
-			Image img = new Image(new FileInputStream("img/gh.png"));
+			Image img = new Image(new FileInputStream(this.getClass().getResource("/img/gh.png").getFile()));
 			gc.drawImage(img, this.x, this.y);
 			
 		} catch (FileNotFoundException e) {
