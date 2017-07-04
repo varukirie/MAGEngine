@@ -1,58 +1,35 @@
 package indi.megaastronic.element;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
-import indi.megaastronic.paint.Moveable;
-import indi.megaastronic.paint.Paintable;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 /**
  * 子弹
  * @author MegaAstronic
  *
  */
-public class Ball implements Moveable , Paintable{
+public class Ball extends ANormalElement{
 
-	private double x;
-	private double y;
-	private double velocityX=0;
-	private double velocityY=0;
+	private int switchCount = 0;
 	public Ball(double x, double y) {
-		this.x=x;
-		this.y=y;
-	}
-	
-	public double getX() {
-		return x;
-	}
-	public void setX(double x) {
-		this.x = x;
-	}
-	public double getY() {
-		return y;
-	}
-	public void setY(double y) {
-		this.y = y;
-	}
-	public double getVelocityX() {
-		return velocityX;
-	}
-	public void setVelocityX(double velocityX) {
-		this.velocityX = velocityX;
-	}
-	public double getVelocityY() {
-		return velocityY;
-	}
-	public void setVelocityY(double velocityY) {
-		this.velocityY = velocityY;
+		super(x, y);
 	}
 	@Override
 	public void paint(GraphicsContext gc) {
+		gc.setFont(Font.font("consolas",20));
+		gc.setFill(Color.YELLOW);
+		/*
+		if(switchCount == 0){
+			gc.setFill(Color.BLUE);
+		}else{
+			gc.setFill(Color.BLACK);
+		}
+		*/
+		gc.fillText("★", this.x, this.y);
+		switchCount=(switchCount+1)%2;
 		//gc.setFill(Color.RED);
 		//gc.fillOval(x, y, 10, 10);
-		gc.fillText("★", this.x, this.y);
+		
 		/*
 		try {
 			Image img = new Image(new FileInputStream(this.getClass().getResource("/img/gh.png").getFile()));

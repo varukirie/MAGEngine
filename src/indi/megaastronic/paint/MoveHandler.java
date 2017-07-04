@@ -18,7 +18,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 public class MoveHandler implements Runnable {
+	
 	public static final double DEFAULT_SPEED=0.2;
+	//全局速度
 	public static double speed = DEFAULT_SPEED;
 	public static final long SLEEP_TIME = 21;
 	public static final long BLANK = 1;
@@ -58,7 +60,7 @@ public class MoveHandler implements Runnable {
 				entry = iter.next();
 				m=entry.getValue();
 				//让Ball受到重力
-				if(m instanceof Ball) m.setVelocityY(m.getVelocityY()+(currentTime-this.lastTime)*9.8*speed*5/1000);
+				//if(m instanceof Ball) m.setVelocityY(m.getVelocityY()+(currentTime-this.lastTime)*9.8*speed*5/1000);
 				
 				nextX = m.getX() + m.getVelocityX() * ((currentTime - this.lastTime) / BLANK) * speed;
 				nextY = m.getY() + m.getVelocityY() * ((currentTime - this.lastTime) / BLANK) * speed;
