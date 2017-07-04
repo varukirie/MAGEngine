@@ -17,7 +17,7 @@ public class Ball extends ANormalElement{
 	@Override
 	public void paint(GraphicsContext gc) {
 		gc.setFont(Font.font("consolas",20));
-		gc.setFill(Color.YELLOW);
+		gc.setFill(Color.BLUE);
 		/*
 		if(switchCount == 0){
 			gc.setFill(Color.BLUE);
