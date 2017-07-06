@@ -1,8 +1,11 @@
 package application;
 	
+import indi.megaastronic.chapter.Chapter1;
+import indi.megaastronic.chapter.ChapterLoader;
 import indi.megaastronic.control.PlayerControlHandler;
 import indi.megaastronic.element.Ball;
 import indi.megaastronic.element.Player;
+import indi.megaastronic.element.ShowTime;
 import indi.megaastronic.paint.MoveHandler;
 import indi.megaastronic.paint.MyCanvas;
 import indi.megaastronic.util.ElementUtils;
@@ -29,7 +32,7 @@ public class Main extends Application {
 			root.getChildren().add(secondaryMCanvas);
 			Scene scene=new Scene(root);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("Canvas Demo!");
+			primaryStage.setTitle("MySTGEngine!");
 			primaryStage.show();
 		
 			//运行 线程MoveHandle
@@ -49,9 +52,9 @@ public class Main extends Application {
 			Player player = new Player(10,10);
 			
 			ElementUtils moveableElementUtils = new ElementUtils(mh, moveableCanvas);
-			ElementUtils staticElementUtils = new ElementUtils(staticCanvas);
+			
 			//
-			staticElementUtils.addWantMoveAndPaint("gh", new Ball(50, 50));
+			staticCanvas.getWantPaintMap().put("indicator", new Ball(50, 50));
 			staticCanvas.repaint();
 			//绑定玩家与键盘控制
 			PlayerControlHandler PCH= new PlayerControlHandler(moveableElementUtils,player);
@@ -61,8 +64,11 @@ public class Main extends Application {
 			moveableCanvas.getWantPaintMap().put("player", player);//让MyCanvas管理player
 			mh.getWantMoveMap().put("player", player);//让MoveHandler管理player
 			*/
-			moveableElementUtils.addWantMoveAndPaint("player", player);
+			moveableElementUtils.add("player", player);
 			
+			ChapterLoader.init(staticCanvas, moveableElementUtils);
+			moveableElementUtils.add("showTime", new ShowTime(200, 200));
+			ChapterLoader.loadChapter(new Chapter1());
 			
 		} catch(Exception e) {
 			e.printStackTrace();

@@ -14,6 +14,9 @@ public class Ball extends ANormalElement{
 	public Ball(double x, double y) {
 		super(x, y);
 	}
+	public Ball(double x,double y,double vx, double vy){
+		super(x, y, vx, vy);
+	}
 	@Override
 	public void paint(GraphicsContext gc) {
 		gc.setFont(Font.font("consolas",20));

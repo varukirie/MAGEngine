@@ -132,6 +132,6 @@ public class PlayerControlHandler {
 		double s = Math.sqrt(dx * dx + dy * dy);
 		ball.setVelocityX(dx * BALL_V / s);
 		ball.setVelocityY(dy * BALL_V / s);
-		elementUtils.addWantMoveAndPaint("ball" + ballCount++, ball);
+		elementUtils.add("ball" + ballCount++, ball);
 	}
 }
