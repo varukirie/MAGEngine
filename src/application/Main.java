@@ -45,6 +45,7 @@ public class Main extends Application {
 				@Override
 				public void handle(WindowEvent event) {
 					mh.keepRun=false;
+					ChapterLoader.getTimer().cancel();
 				}
 			});
 			
