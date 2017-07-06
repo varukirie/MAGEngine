@@ -1,6 +1,7 @@
 package indi.megaastronic.element;
 
 import indi.megaastronic.paint.LimitedByCanvas;
+import indi.megaastronic.paint.PInfo;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -16,13 +17,24 @@ public class Player extends ANormalElement implements LimitedByCanvas {
 		super(x, y);
 		// TODO Auto-generated constructor stub
 	}
+	
+	@Override
+	public void setX(double x) {
+		PInfo.setPlayerX(x);
+		super.setX(x);
+	}
+	@Override
+	public void setY(double y) {
+		PInfo.setPlayerY(y);
+		super.setY(y);
+	}
 	@Override
 	public void paint(GraphicsContext gc) {
 		//gc.strokeOval(x, y, width, height);
 		
 		gc.setFont(Font.font("consolas",30));
-		gc.setFill(Color.ORANGE);
-		gc.fillText("★", this.x, this.y);
+		gc.setFill(Color.RED);
+		gc.fillText("♥", this.x, this.y);
 	}
 	
 

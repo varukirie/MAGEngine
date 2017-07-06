@@ -60,7 +60,7 @@ public class MoveHandler implements Runnable {
 				entry = iter.next();
 				m=entry.getValue();
 				//让Ball受到重力
-				//if(m instanceof Ball) m.setVelocityY(m.getVelocityY()+(currentTime-this.lastTime)*9.8*speed*5/1000);
+				if(m instanceof Ball) m.setVelocityY(m.getVelocityY()+(currentTime-this.lastTime)*9.8*speed*(1/DEFAULT_SPEED)/1000);
 				
 				nextX = m.getX() + m.getVelocityX() * ((currentTime - this.lastTime) / BLANK) * speed;
 				nextY = m.getY() + m.getVelocityY() * ((currentTime - this.lastTime) / BLANK) * speed;
