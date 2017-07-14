@@ -12,6 +12,8 @@ public abstract class ANormalElement implements Moveable, Paintable {
 	public ANormalElement(double x, double y) {
 			this.x=x;
 			this.y=y;
+			this.velocityX=0;
+			this.velocityY=0;
 	}
 	
 	public ANormalElement(double x, double y, double velocityX, double velocityY) {

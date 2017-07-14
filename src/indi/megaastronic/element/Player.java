@@ -1,33 +1,79 @@
 package indi.megaastronic.element;
 
 import indi.megaastronic.paint.LimitedByCanvas;
-import indi.megaastronic.paint.PInfo;
+import indi.megaastronic.paint.Moveable;
+import indi.megaastronic.paint.Paintable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 /**
  * 玩家控制的物体
+ * 单例设计模式
+ * 只能存在一个实例化对象
  * @author MegaAstronic
  *
  */
-public class Player extends ANormalElement implements LimitedByCanvas {
+public class Player implements LimitedByCanvas ,Moveable , Paintable {
+	private static Player player = null;
 	public final int width = 10;
 	public final int height = 10;
-	public Player(double x, double y) {
-		super(x, y);
-		// TODO Auto-generated constructor stub
+	private double x=0;
+	private double y=0;
+	private double velocityX=0;
+	private double velocityY=0;
+	/**
+	 * 获取Player对象
+	 * @param x 设定坐标x
+	 * @param y 设定坐标y
+	 * @return 返回Player对象
+	 */
+	public static Player getPlayer(double x,double y){
+		if(player==null){
+			player=new Player(x,y);
+			return player;
+		}else{
+			if(!(x==-1&&y==-1)){
+				player.setX(x);
+				player.setY(y);
+			}
+			return player;
+		}
+	}
+	public static Player getPlayer(){
+		return getPlayer(-1,-1);
 	}
 	
-	@Override
+	private Player(double x, double y) {
+		this.x=x;
+		this.y=y;
+	}
+	
+
+	public double getX() {
+		return x;
+	}
 	public void setX(double x) {
-		PInfo.setPlayerX(x);
-		super.setX(x);
+		this.x = x;
 	}
-	@Override
+	public double getY() {
+		return y;
+	}
 	public void setY(double y) {
-		PInfo.setPlayerY(y);
-		super.setY(y);
+		this.y = y;
 	}
+	public double getVelocityX() {
+		return velocityX;
+	}
+	public void setVelocityX(double velocityX) {
+		this.velocityX = velocityX;
+	}
+	public double getVelocityY() {
+		return velocityY;
+	}
+	public void setVelocityY(double velocityY) {
+		this.velocityY = velocityY;
+	}
+
 	@Override
 	public void paint(GraphicsContext gc) {
 		//gc.strokeOval(x, y, width, height);
@@ -36,6 +82,7 @@ public class Player extends ANormalElement implements LimitedByCanvas {
 		gc.setFill(Color.RED);
 		gc.fillText("♥", this.x, this.y);
 	}
+	
 	
 
 }

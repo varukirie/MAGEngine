@@ -4,7 +4,12 @@ import java.util.Timer;
 
 import indi.megaastronic.paint.MyCanvas;
 import indi.megaastronic.util.ElementUtils;
-
+/**
+ * 此类负责装载游戏关卡
+ * 此类不可实例化
+ * @author Astronic
+ *
+ */
 public class ChapterLoader {
 	private static MyCanvas staticCanvas =null;
 	private static ElementUtils mEU = null;

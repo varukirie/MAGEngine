@@ -3,7 +3,6 @@ package indi.megaastronic.control;
 import indi.megaastronic.element.Ball;
 import indi.megaastronic.element.Player;
 import indi.megaastronic.paint.MoveHandler;
-import indi.megaastronic.paint.PInfo;
 import indi.megaastronic.util.ElementUtils;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
@@ -16,6 +15,10 @@ import javafx.scene.input.MouseEvent;
  *
  */
 public class PlayerControlHandler {
+	
+	private static double mouseX=0;
+	private static double mouseY=0;
+	
 	// 速度V
 	public static double DEFAULT_BALL_V = 4;
 	public static double BALL_V = DEFAULT_BALL_V;
@@ -47,8 +50,8 @@ public class PlayerControlHandler {
 			releaseHandle(e);
 		});
 		scene.setOnMouseMoved((MouseEvent e)->{
-			PInfo.setMouseX(e.getX());
-			PInfo.setMouseY(e.getY());
+			PlayerControlHandler.mouseX=e.getX();
+			PlayerControlHandler.mouseY=e.getY();
 			// System.out.println("mouse x="+mouseX+" mouseY="+mouseY);
 		});
 		scene.setOnMouseClicked((MouseEvent e)->{
@@ -127,11 +130,17 @@ public class PlayerControlHandler {
 
 	private void playerShootToMouse() {
 		Ball ball = new Ball(player.getX(), player.getY());
-		double dx = PInfo.getMouseX() - player.getX();
-		double dy = PInfo.getMouseY() - player.getY();
+		double dx = PlayerControlHandler.mouseX - player.getX();
+		double dy = PlayerControlHandler.mouseY - player.getY();
 		double s = Math.sqrt(dx * dx + dy * dy);
 		ball.setVelocityX(dx * BALL_V / s);
 		ball.setVelocityY(dy * BALL_V / s);
 		elementUtils.add("ball" + ballCount++, ball);
+	}
+	public static double getMouseX(){
+		return mouseX;
+	}
+	public static double getMouseY(){
+		return mouseY;
 	}
 }
