@@ -32,7 +32,7 @@ public class Main extends Application {
 			root.getChildren().add(secondaryMCanvas);
 			Scene scene=new Scene(root);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("MySTGEngine!");
+			primaryStage.setTitle("MAEngine!");
 			primaryStage.show();
 		
 			//运行 线程MoveHandle
