@@ -5,7 +5,7 @@ import indi.megaastronic.chapter.ChapterLoader;
 import indi.megaastronic.control.PlayerControlHandler;
 import indi.megaastronic.element.Ball;
 import indi.megaastronic.element.Player;
-import indi.megaastronic.element.ShowTime;
+import indi.megaastronic.element.DisplayTime;
 import indi.megaastronic.paint.MoveHandler;
 import indi.megaastronic.paint.MyCanvas;
 import indi.megaastronic.util.ElementUtils;
@@ -62,7 +62,7 @@ public class SceneManager {
 		moveableElementUtils.add("player", player);
 		
 		ChapterLoader.init(staticCanvas, moveableElementUtils);
-		moveableElementUtils.add("showTime", new ShowTime(200, 200));
+		moveableElementUtils.add("showTime", new DisplayTime(200, 200));
 		ChapterLoader.loadChapter(new Chapter1());
 	}
 }

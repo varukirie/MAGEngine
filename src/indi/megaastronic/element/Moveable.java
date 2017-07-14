@@ -1,9 +1,7 @@
-/**
- * 
- */
 package indi.megaastronic.element;
 
 /**
+ * 
  * @author MegaAstronic
  *
  */

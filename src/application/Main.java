@@ -5,7 +5,7 @@ import indi.megaastronic.chapter.ChapterLoader;
 import indi.megaastronic.control.PlayerControlHandler;
 import indi.megaastronic.element.Ball;
 import indi.megaastronic.element.Player;
-import indi.megaastronic.element.ShowTime;
+import indi.megaastronic.element.DisplayTime;
 import indi.megaastronic.paint.MoveHandler;
 import indi.megaastronic.paint.MyCanvas;
 import indi.megaastronic.ui.SceneManager;
