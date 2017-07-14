@@ -8,6 +8,7 @@ public abstract class ANormalElement implements Moveable, Paintable,Accelerated 
 	protected double velocityY=0;
 	protected double accX = 0;
 	protected double accY = 0;
+	
 	public ANormalElement(double x, double y) {
 			this.x=x;
 			this.y=y;
