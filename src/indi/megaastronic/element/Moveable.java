@@ -1,7 +1,7 @@
 /**
  * 
  */
-package indi.megaastronic.paint;
+package indi.megaastronic.element;
 
 /**
  * @author MegaAstronic
@@ -23,4 +23,5 @@ public interface Moveable {
 	void setVelocityX(double vx);
 
 	void setVelocityY(double vy);
+	
 }

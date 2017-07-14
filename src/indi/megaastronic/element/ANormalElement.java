@@ -1,14 +1,13 @@
 package indi.megaastronic.element;
 
-import indi.megaastronic.paint.Moveable;
-import indi.megaastronic.paint.Paintable;
-
-public abstract class ANormalElement implements Moveable, Paintable {
+public abstract class ANormalElement implements Moveable, Paintable,Accelerated {
 
 	protected double x;
 	protected double y;
 	protected double velocityX=0;
 	protected double velocityY=0;
+	protected double accX = 0;
+	protected double accY = 0;
 	public ANormalElement(double x, double y) {
 			this.x=x;
 			this.y=y;
@@ -49,4 +48,20 @@ public abstract class ANormalElement implements Moveable, Paintable {
 		this.velocityY = velocityY;
 	}
 
+	public double getAccX() {
+		return accX;
+	}
+
+	public void setAccX(double accX) {
+		this.accX = accX;
+	}
+
+	public double getAccY() {
+		return accY;
+	}
+
+	public void setAccY(double accY) {
+		this.accY = accY;
+	}
+	
 }

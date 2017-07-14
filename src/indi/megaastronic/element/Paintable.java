@@ -1,4 +1,4 @@
-package indi.megaastronic.paint;
+package indi.megaastronic.element;
 
 import javafx.scene.canvas.GraphicsContext;
 

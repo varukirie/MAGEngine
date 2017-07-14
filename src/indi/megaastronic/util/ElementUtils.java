@@ -1,9 +1,9 @@
 package indi.megaastronic.util;
 
+import indi.megaastronic.element.Moveable;
+import indi.megaastronic.element.Paintable;
 import indi.megaastronic.paint.MoveHandler;
-import indi.megaastronic.paint.Moveable;
 import indi.megaastronic.paint.MyCanvas;
-import indi.megaastronic.paint.Paintable;
 
 public class ElementUtils {
 	private MoveHandler mh = null;

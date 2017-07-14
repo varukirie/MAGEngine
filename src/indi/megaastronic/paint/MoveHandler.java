@@ -5,23 +5,24 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+import indi.megaastronic.element.Accelerated;
+import indi.megaastronic.element.Moveable;
+import indi.megaastronic.element.Player;
+
+
 /**
- * 单独一个线程，不断重复执行：计算当前时刻所有Moveable元素的坐标，并调用MyCanvas的repaint方法
+ * 单独一个线程，不断重复执行：
+ * 计算当前时刻所有Moveable元素的坐标，
+ * 并调用MyCanvas的repaint方法
  * @author MegaAstronic
  *
  */
 
-import indi.megaastronic.element.Ball;
-import indi.megaastronic.element.Player;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.layout.Pane;
 public class MoveHandler implements Runnable {
 	
-	public static final double DEFAULT_SPEED=0.2;
+	public static final double DEFAULT_TIME_SPEED=0.2;
 	//全局速度
-	public static double speed = DEFAULT_SPEED;
+	public static double timeSpeed = DEFAULT_TIME_SPEED;
 	public static final long SLEEP_TIME = 21;
 	public static final long BLANK = 1;
 	private Map<String, Moveable> wantMoveMap = new ConcurrentHashMap<>();
@@ -30,7 +31,6 @@ public class MoveHandler implements Runnable {
 		return wantMoveMap;
 	}
 	
-	private ObservableList<Node> OL=null;
 	private long lastTime;
 	private MyCanvas myCanvas = null;
 	private MyCanvas sCanvas = null;//辅助画布
@@ -59,15 +59,18 @@ public class MoveHandler implements Runnable {
 			while (iter.hasNext()) {
 				entry = iter.next();
 				m=entry.getValue();
-				//让Ball受到重力
-				//if(m instanceof Ball) m.setVelocityY(m.getVelocityY()+(currentTime-this.lastTime)*9.8*speed*(1/DEFAULT_SPEED)/1000);
-				
-				nextX = m.getX() + m.getVelocityX() * ((currentTime - this.lastTime) / BLANK) * speed;
-				nextY = m.getY() + m.getVelocityY() * ((currentTime - this.lastTime) / BLANK) * speed;
+				//使用加速度计算速度
+				if(m instanceof Accelerated){
+					m.setVelocityX(m.getVelocityX()+(currentTime-this.lastTime)*((Accelerated)m).getAccX()*timeSpeed*(1/DEFAULT_TIME_SPEED)/1000);
+					m.setVelocityY(m.getVelocityY()+(currentTime-this.lastTime)*((Accelerated)m).getAccY()*timeSpeed*(1/DEFAULT_TIME_SPEED)/1000);
+				}
+					
+				nextX = m.getX() + m.getVelocityX() * ((currentTime - this.lastTime) / BLANK) * timeSpeed;
+				nextY = m.getY() + m.getVelocityY() * ((currentTime - this.lastTime) / BLANK) * timeSpeed;
 				//Player不受speed减速影响
 				if(m instanceof Player){
-					nextX = m.getX() + m.getVelocityX() * ((currentTime - this.lastTime) / BLANK) * DEFAULT_SPEED;
-					nextY = m.getY() + m.getVelocityY() * ((currentTime - this.lastTime) / BLANK) * DEFAULT_SPEED;
+					nextX = m.getX() + m.getVelocityX() * ((currentTime - this.lastTime) / BLANK) * DEFAULT_TIME_SPEED;
+					nextY = m.getY() + m.getVelocityY() * ((currentTime - this.lastTime) / BLANK) * DEFAULT_TIME_SPEED;
 				}
 				
 				if (nextX < MyCanvas.CANVAS_WIDTH && nextX > 0 && nextY < MyCanvas.CANVAS_HEIGHT && nextY > 0) {
