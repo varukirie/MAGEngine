@@ -9,11 +9,10 @@ import indi.megaastronic.element.DisplayTime;
 import indi.megaastronic.paint.MoveHandler;
 import indi.megaastronic.paint.MyCanvas;
 import indi.megaastronic.util.ElementUtils;
-import javafx.event.EventHandler;
+import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 public class SceneManager {
 	public static void startGame(Stage primaryStage){
@@ -31,10 +30,19 @@ public class SceneManager {
 	
 		//运行 线程MoveHandle
 		MoveHandler mh = new MoveHandler(moveableCanvas,secondaryMCanvas);
-		Thread mhThread = new Thread(mh);
-		mhThread.setPriority(Thread.MAX_PRIORITY);
-		mhThread.start();
+		AnimationTimer timer = new AnimationTimer() {
+			@Override
+			public void handle(long now) {
+				mh.calAndPaint();
+			}
+		};
+		timer.start();
+		
+		//Thread mhThread = new Thread(mh);
+		//mhThread.setPriority(Thread.MAX_PRIORITY);
+		//mhThread.start();
 		//关闭窗口时关闭所有线程
+		/*
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
 			public void handle(WindowEvent event) {
@@ -42,6 +50,7 @@ public class SceneManager {
 				ChapterLoader.getTimer().cancel();//关闭关卡计划任务线程
 			}
 		});
+		*/
 		
 		//创建玩家
 		Player player = Player.getPlayer(210,110);

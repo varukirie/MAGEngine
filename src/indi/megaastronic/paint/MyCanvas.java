@@ -16,8 +16,8 @@ import javafx.scene.canvas.GraphicsContext;
  */
 public class MyCanvas extends Canvas {
 	//画布大小
-	public final static int CANVAS_WIDTH = 640;
-	public final static int CANVAS_HEIGHT = 480;
+	public final static int CANVAS_WIDTH = 800;
+	public final static int CANVAS_HEIGHT = 600;
 	private GraphicsContext gc=null;
 	private Map<String, Paintable> wantPaintMap = null;
 

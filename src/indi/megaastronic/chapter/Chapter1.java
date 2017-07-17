@@ -18,7 +18,7 @@ public class Chapter1 extends AChapter {
 				public void run() {
 					cu.slashDown(320, 240, 1);
 				}
-			}, i*1000);
+			}, i*100);
 			timer.schedule(new TimerTask() {
 				@Override
 				public void run() {
@@ -30,7 +30,13 @@ public class Chapter1 extends AChapter {
 				public void run() {
 					cu.slashDown(480, 280, 1);
 				}
-			}, i*500+10*500);
+			}, i*50+10*250);
+			timer.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					cu.slashDown(80, 280, 1);
+				}
+			}, (i+10)*150);
 		}
 	}
 
