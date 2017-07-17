@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import indi.megaastronic.element.Accelerated;
+import indi.megaastronic.element.LimitedByCanvas;
 import indi.megaastronic.element.Moveable;
 import indi.megaastronic.element.Player;
 
