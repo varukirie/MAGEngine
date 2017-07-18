@@ -12,19 +12,19 @@ public class Chapter1 extends AChapter {
 	public void design(Timer timer, MyCanvas staticCanvas, ElementUtils moveableEU) {
 		ChapterUtils cu = new ChapterUtils(moveableEU);
 				
-		for(int i=1;i<=10;i++){
+		for(int i=1;i<=10000;i++){
 			timer.schedule(new TimerTask() {
 				@Override
 				public void run() {
 					cu.slashDown(320, 240, 1);
 				}
-			}, i*100);
+			}, i*10);
 			timer.schedule(new TimerTask() {
 				@Override
 				public void run() {
 					cu.slashDown(160, 200, 1);
 				}
-			}, i*500);
+			}, i*50);
 			timer.schedule(new TimerTask() {
 				@Override
 				public void run() {
@@ -36,7 +36,7 @@ public class Chapter1 extends AChapter {
 				public void run() {
 					cu.slashDown(80, 280, 1);
 				}
-			}, (i+10)*150);
+			}, (i+10)*15);
 		}
 	}
 
