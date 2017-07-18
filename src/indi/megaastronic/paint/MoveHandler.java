@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+
+import application.Main;
 import indi.megaastronic.element.Accelerated;
 import indi.megaastronic.element.LimitedByCanvas;
 import indi.megaastronic.element.Moveable;
@@ -89,7 +91,9 @@ public class MoveHandler implements Runnable {
 				}
 			}
 
-			System.out.println("1.cal use time :"+(currentTime-lastTime));
+			if(Main.DEBUG){
+				System.out.println("1.cal use "+(currentTime-lastTime)+"ms");
+			}
 			this.lastTime = currentTime;
 		}
 
