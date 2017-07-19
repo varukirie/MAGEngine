@@ -82,11 +82,7 @@ public class MoveHandler implements Runnable {
 					} else {// 否则
 						m.setX(nextX);
 						m.setY(nextY);
-						
-						wantMoveMap.remove(entry.getKey());
-						myCanvas.getWantPaintMap().remove(entry.getKey());
-						
-						
+						removeElement(entry.getKey());	
 					}
 				}
 			}
@@ -110,6 +106,10 @@ public class MoveHandler implements Runnable {
 			myCanvas.setVisible(false);
 		}
 		switchCount = (switchCount + 1) % 2;
+	}
+	public void removeElement(String key){
+		wantMoveMap.remove(key);
+		myCanvas.getWantPaintMap().remove(key);
 		
 	}
 }
