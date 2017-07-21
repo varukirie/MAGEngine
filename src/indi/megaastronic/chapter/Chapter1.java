@@ -15,19 +15,16 @@ public class Chapter1 extends AChapter {
 		Random r = new Random();
 		ChapterUtils cu = new ChapterUtils(moveableEU);
 		long startTime=System.currentTimeMillis();
-		for(int i=1;i<=10000;i++){
-			timer.schedule(new TimerTask() {
-				@Override
-				public void run() {
-					cu.slashDown((r.nextDouble()*MyCanvas.CANVAS_WIDTH), 200+(r.nextDouble()*200), 2*r.nextDouble()+0.1);
-				}
-			}, i*300);
-			timer.schedule(new TimerTask() {
-				@Override
-				public void run() {
-					cu.slashDown((r.nextDouble()*MyCanvas.CANVAS_WIDTH), 200+(r.nextDouble()*200), 2*r.nextDouble()+0.1);
-				}
-			}, 5000+i*50);
+		for(int i=1;i<=7000;i++){
+			for(int k=1;k<=4;k++){
+				timer.schedule(new TimerTask() {
+					@Override
+					public void run() {
+						cu.slashDown((r.nextDouble()*MyCanvas.CANVAS_WIDTH), 200+(r.nextDouble()*200), 2*r.nextDouble()+0.1);
+					}
+				}, i*1000);
+			}
+
 //			timer.schedule(new TimerTask() {
 //				@Override
 //				public void run() {

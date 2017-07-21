@@ -61,7 +61,7 @@ public class PlayerControlHandler {
 	}
 
 	// 顺序是上、右、下、左
-	private boolean[] pressed = new boolean[] { false, false, false, false };
+	public boolean[] pressed = new boolean[] { false, false, false, false };
 	private int ballCount = 0;
 
 	@SuppressWarnings("incomplete-switch")
@@ -89,7 +89,7 @@ public class PlayerControlHandler {
 			break;
 		}
 	}
-
+	// 顺序是上、右、下、左
 	@SuppressWarnings("incomplete-switch")
 	public void releaseHandle(KeyEvent e) {
 		switch (e.getCode()) {

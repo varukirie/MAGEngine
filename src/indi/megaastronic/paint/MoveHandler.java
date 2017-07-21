@@ -69,8 +69,10 @@ public class MoveHandler implements Runnable {
 
 				nextX = m.getX() + m.getVelocityX() * ((currentTime - this.lastTime) / BLANK) * timeSpeed;
 				nextY = m.getY() + m.getVelocityY() * ((currentTime - this.lastTime) / BLANK) * timeSpeed;
-				// Player不受speed减速影响
+				
 				if (m instanceof Player) {
+					
+					// Player不受speed减速影响
 					nextX = m.getX() + m.getVelocityX() * ((currentTime - this.lastTime) / BLANK) * DEFAULT_TIME_SPEED;
 					nextY = m.getY() + m.getVelocityY() * ((currentTime - this.lastTime) / BLANK) * DEFAULT_TIME_SPEED;
 				}
