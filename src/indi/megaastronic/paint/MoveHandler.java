@@ -13,8 +13,9 @@ import indi.megaastronic.element.Moveable;
 import indi.megaastronic.element.Player;
 
 /**
- * 单独一个线程，不断重复执行： 计算当前时刻所有Moveable元素的坐标， 并调用MyCanvas的repaint方法
- * 
+ * 单独一个线程，不断重复执行： 计算当前时刻所有Moveable元素的坐标
+ * 为渲染提供callRepaint方法
+ * @see Moveable
  * @author MegaAstronic
  *
  */
@@ -22,9 +23,11 @@ import indi.megaastronic.element.Player;
 public class MoveHandler implements Runnable {
 
 	public static final double DEFAULT_TIME_SPEED = 0.2;
-	// 全局速度
+	/**
+	 * 全局速度
+	 */
 	public static double timeSpeed = DEFAULT_TIME_SPEED;
-	// public static final long SLEEP_TIME = 21;
+	public static final long SLEEP_TIME = 16;
 	public static final long BLANK = 1;
 	private Map<String, Moveable> wantMoveMap = new ConcurrentHashMap<>();
 
@@ -87,14 +90,24 @@ public class MoveHandler implements Runnable {
 				}
 			}
 
-			if(Main.DEBUG){
-				System.out.println("1.cal use "+(currentTime-lastTime)+"ms");
-			}
+//			if(Main.DEBUG){
+//				System.out.println("1.cal use "+(currentTime-lastTime)+"ms");
+//			}
 			this.lastTime = currentTime;
+			
+			try {
+				Thread.sleep(SLEEP_TIME);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}
 
+	/**
+	 * 交替调用MyCanvas的repaint
+	 */
 	public void callRepaint() {
 		if (switchCount == 0) {
 			myCanvas.repaint();

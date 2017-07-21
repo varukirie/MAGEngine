@@ -1,6 +1,10 @@
 package indi.megaastronic.element;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 /**
@@ -74,7 +78,12 @@ public class Player implements LimitedByCanvas ,Moveable , Paintable {
 	@Override
 	public void paint(GraphicsContext gc) {
 		//gc.strokeOval(x, y, width, height);
-		
+//		try {
+//			
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		gc.setFont(Font.font("consolas",30));
 		gc.setFill(Color.RED);
 		gc.fillText("♥", this.x, this.y);

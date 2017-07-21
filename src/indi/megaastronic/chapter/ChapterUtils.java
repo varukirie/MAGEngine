@@ -24,5 +24,13 @@ public class ChapterUtils {
 		mEU.add("ds"+count++, new Ball(x, y,speed*sqrt2d2,speed*sqrt2d2));
 	}
 	
+	public void slashDownAcc(double x,double y,double speed){
+		mEU.add("dd"+count++, new Ball(x, y,0,0,0.5,0));
+		mEU.add("aa"+count++, new Ball(x, y,0,0,-0.5,0));
+		mEU.add("ss"+count++, new Ball(x, y,0,0,0,0.5));
+		mEU.add("ww"+count++, new Ball(x, y,0,0,0,-0.5));
+		
+	}
+	
 
 }

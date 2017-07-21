@@ -4,7 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 /**
- * 子弹
+ * 
  * @author MegaAstronic
  *
  */
@@ -17,6 +17,10 @@ public class Ball extends ANormalElement{
 	public Ball(double x,double y,double vx, double vy){
 		super(x, y, vx, vy);
 	}
+	public Ball(double x,double y,double vx, double vy,double ax,double ay) {
+		super(x,y,vx,vy,ax,ay);
+	}
+	
 	@Override
 	public void paint(GraphicsContext gc) {
 		gc.setFont(Font.font("consolas",20));
