@@ -3,6 +3,7 @@ package indi.megaastronic.element;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import indi.megaastronic.util.SpritePainter;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -22,6 +23,7 @@ public class Player implements LimitedByCanvas ,Moveable , Paintable {
 	private double y=0;
 	private double velocityX=0;
 	private double velocityY=0;
+	private SpritePainter SP = null;
 	/**
 	 * 获取Player对象
 	 * @param x 设定坐标x
@@ -45,6 +47,14 @@ public class Player implements LimitedByCanvas ,Moveable , Paintable {
 	}
 	
 	private Player(double x, double y) {
+		Image img=null;
+		try {
+			img = new Image(new FileInputStream(this.getClass().getResource("/img/player.bmp").getFile()));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		SP=new SpritePainter(img, 50, 50);
 		this.x=x;
 		this.y=y;
 	}
@@ -77,16 +87,25 @@ public class Player implements LimitedByCanvas ,Moveable , Paintable {
 
 	@Override
 	public void paint(GraphicsContext gc) {
-		//gc.strokeOval(x, y, width, height);
-//		try {
-//			
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		gc.setFont(Font.font("consolas",30));
-		gc.setFill(Color.RED);
-		gc.fillText("♥", this.x, this.y);
+//		gc.strokeOval(x, y, width, height);
+//		gc.setFont(Font.font("consolas",30));
+//		gc.setFill(Color.RED);
+//		gc.fillText("♥", this.x, this.y);
+		if(this.velocityX<0)
+			SP.paintSprite(0, this.x, this.y, gc);
+		
+		if(this.velocityX==0){
+			if(this.velocityY<0)
+				SP.paintSprite(1, this.x, this.y, gc);
+			if(this.velocityY==0)
+				SP.paintSprite(4, this.x, this.y, gc);
+			if(this.velocityY>0)
+				SP.paintSprite(3, this.x, this.y, gc);
+		}
+			
+	
+		if(this.velocityX>0)
+			SP.paintSprite(2, this.x, this.y, gc);
 	}
 	
 	

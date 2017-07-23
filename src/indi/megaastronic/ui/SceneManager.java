@@ -64,7 +64,7 @@ public class SceneManager {
 		staticCanvas.getWantPaintMap().put("indicator", new Ball(50, 50));
 		staticCanvas.repaint();
 		//绑定玩家与键盘控制
-		PlayerControlHandler PCH= new PlayerControlHandler(moveableElementUtils,player);
+		PlayerControlHandler PCH= PlayerControlHandler.getPlayerControlHandler(moveableElementUtils, player);
 		PCH.bindEvent(scene);
 		//
 		/*

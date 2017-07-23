@@ -19,15 +19,24 @@ public class PlayerControlHandler {
 	private static double mouseX=0;
 	private static double mouseY=0;
 	
+	private static PlayerControlHandler pch = null;
+	
 	// 速度V
 	public static double DEFAULT_BALL_V = 4;
 	public static double BALL_V = DEFAULT_BALL_V;
 	public static double PLAYER_V = 1;//用于设置按键导致的player移动速度
 	private Player player = null;
 	private ElementUtils elementUtils = null;
+	
+	public static PlayerControlHandler getPlayerControlHandler(ElementUtils eu, Player player){
+		if(pch==null){
+			pch=new PlayerControlHandler(eu, player);
+		}
+		return pch;
+	}
 
 
-	public PlayerControlHandler(ElementUtils eu, Player player) {
+	private PlayerControlHandler(ElementUtils eu, Player player) {
 		this.elementUtils = eu;
 		this.player = player;
 	}
