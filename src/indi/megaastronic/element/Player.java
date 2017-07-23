@@ -24,6 +24,8 @@ public class Player implements LimitedByCanvas ,Moveable , Paintable {
 	private double velocityX=0;
 	private double velocityY=0;
 	private SpritePainter SP = null;
+	
+
 	/**
 	 * 获取Player对象
 	 * @param x 设定坐标x
@@ -85,6 +87,7 @@ public class Player implements LimitedByCanvas ,Moveable , Paintable {
 		this.velocityY = velocityY;
 	}
 
+	private int currentSpriteIndex=0;
 	@Override
 	public void paint(GraphicsContext gc) {
 //		gc.strokeOval(x, y, width, height);
@@ -97,8 +100,13 @@ public class Player implements LimitedByCanvas ,Moveable , Paintable {
 		if(this.velocityX==0){
 			if(this.velocityY<0)
 				SP.paintSprite(1, this.x, this.y, gc);
-			if(this.velocityY==0)
-				SP.paintSprite(4, this.x, this.y, gc);
+			
+			if(this.velocityY==0){
+				int delayF = 10;
+				SP.paintSprite(4+(currentSpriteIndex)/delayF, this.x, this.y, gc);
+				currentSpriteIndex=(currentSpriteIndex+1)%(5*delayF);
+			}
+				
 			if(this.velocityY>0)
 				SP.paintSprite(3, this.x, this.y, gc);
 		}

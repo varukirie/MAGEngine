@@ -20,7 +20,7 @@ public class Chapter1 extends AChapter {
 				timer.schedule(new TimerTask() {
 					@Override
 					public void run() {
-						cu.slashDown((r.nextDouble()*MyCanvas.CANVAS_WIDTH), 200+(r.nextDouble()*200), 2*r.nextDouble()+0.1);
+						cu.slash((r.nextDouble()*MyCanvas.CANVAS_WIDTH), 200+(r.nextDouble()*200), 2*r.nextDouble()+0.1);
 					}
 				}, i*1000);
 			}
