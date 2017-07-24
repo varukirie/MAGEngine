@@ -1,0 +1,45 @@
+package indi.megaastronic.util;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+
+/**
+ * 此类为了辅助输出精灵(sprite)动画
+ * 
+ * @author Astronic
+ *
+ */
+public class SpritePainter {
+	private Image sprite = null;
+	private int spriteWidth = 0;
+	private int spriteHeight = 0;
+
+	public SpritePainter(Image sprite, int spriteWidth, int spriteHeight) {
+		super();
+		this.sprite = sprite;
+		this.spriteWidth = spriteWidth;
+		this.spriteHeight = spriteHeight;
+	}
+
+	/**
+	 * 输出精灵动画
+	 * 
+	 * @param index
+	 *            输出第index个精灵动画，index从0开始
+	 * @param x
+	 *            输在屏幕上的坐标x
+	 * @param y
+	 *            输在屏幕上的坐标x
+	 * @param gc
+	 *            Canvas的GraphicsContext
+	 */
+	public void paintSprite(int index, double x, double y, GraphicsContext gc) {
+		gc.drawImage(sprite, (index % 3) * this.spriteWidth, (index / 3) * this.spriteHeight, 
+				this.spriteWidth,this.spriteHeight, 
+				x, y, this.spriteWidth, this.spriteHeight);
+	}
+
+}

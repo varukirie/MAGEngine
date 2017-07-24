@@ -1,58 +1,50 @@
 package indi.megaastronic.element;
 
-import indi.megaastronic.paint.Moveable;
-import indi.megaastronic.paint.Paintable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 /**
- * 子弹
+ * 
  * @author MegaAstronic
  *
  */
-public class Ball implements Moveable , Paintable{
+public class Ball extends ANormalElement{
 
-	private double x;
-	private double y;
-	private double velocityX=0;
-	private double velocityY=0;
-	
+	private int switchCount = 0;
 	public Ball(double x, double y) {
-		this.x=x;
-		this.y=y;
+		super(x, y);
+	}
+	public Ball(double x,double y,double vx, double vy){
+		super(x, y, vx, vy);
+	}
+	public Ball(double x,double y,double[] VCoodinate){
+		super(x, y, VCoodinate[0], VCoodinate[1]);
+	}
+	public Ball(double x,double y,double vx, double vy,double ax,double ay) {
+		super(x,y,vx,vy,ax,ay);
 	}
 	
-	public double getX() {
-		return x;
-	}
-	public void setX(double x) {
-		this.x = x;
-	}
-	public double getY() {
-		return y;
-	}
-	public void setY(double y) {
-		this.y = y;
-	}
-	public double getVelocityX() {
-		return velocityX;
-	}
-	public void setVelocityX(double velocityX) {
-		this.velocityX = velocityX;
-	}
-	public double getVelocityY() {
-		return velocityY;
-	}
-	public void setVelocityY(double velocityY) {
-		this.velocityY = velocityY;
-	}
 	@Override
 	public void paint(GraphicsContext gc) {
-		gc.setFill(Color.RED);
-		gc.fillOval(x, y, 5, 5);
-		//gc.fillText("fuckYou", this.x, this.y);
+		gc.setFont(Font.font("consolas",20));
+		gc.setFill(Color.BLUE);
+		/*
+		if(switchCount == 0){
+			gc.setFill(Color.BLUE);
+		}else{
+			gc.setFill(Color.BLACK);
+		}
+		*/
+		gc.fillText("★", this.x, this.y);
+		switchCount=(switchCount+1)%2;
+		//gc.setFill(Color.RED);
+		//gc.fillOval(x, y, 10, 10);
+		
 		/*
 		try {
-			gc.drawImage(new Image(new FileInputStream("d:\\gh.png")), this.x, this.y);
+			Image img = new Image(new FileInputStream(this.getClass().getResource("/img/gh.png").getFile()));
+			gc.drawImage(img, this.x, this.y);
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
