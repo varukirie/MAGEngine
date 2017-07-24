@@ -54,7 +54,7 @@ public class SceneManager {
 			@Override
 			public void handle(WindowEvent event) {
 				mh.keepRun=false;//关闭MoveHandler
-				ChapterLoader.getTimer().cancel();//关闭关卡计划任务线程
+				ChapterLoader.getScheduledExecutorService().shutdownNow();//关闭关卡计划任务线程
 			}
 		});
 		

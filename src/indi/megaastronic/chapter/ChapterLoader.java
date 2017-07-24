@@ -1,6 +1,7 @@
 package indi.megaastronic.chapter;
 
-import java.util.Timer;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import indi.megaastronic.paint.MyCanvas;
 import indi.megaastronic.util.ElementUtils;
@@ -17,7 +18,7 @@ public class ChapterLoader {
 		
 	}
 	
-	private static Timer timer = new Timer();
+	private static ScheduledExecutorService scheduleES=Executors.newScheduledThreadPool(2);
 	
 	public static void init(MyCanvas staticCanvas,ElementUtils mEU){
 		ChapterLoader.staticCanvas = staticCanvas ;
@@ -25,16 +26,13 @@ public class ChapterLoader {
 		
 	}
 	public static void loadChapter(AChapter c){
-		c.design(timer,staticCanvas,mEU);
+		c.design(scheduleES,staticCanvas,mEU);
 	}
 
-	public static Timer getTimer() {
-		return timer;
+	public static ScheduledExecutorService getScheduledExecutorService() {
+		return scheduleES;
 	}
 
-	public static void setTimer(Timer timer) {
-		ChapterLoader.timer = timer;
-	}
 	
 	
 
