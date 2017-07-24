@@ -1,2 +1,2 @@
-#CanvasDemo
-学习使用JavaFX
+#MAGEngine
+使用javaFX制作游戏
