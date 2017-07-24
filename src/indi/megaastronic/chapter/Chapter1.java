@@ -21,25 +21,32 @@ Random r = new Random();
 		long startTime=System.currentTimeMillis();
 		for(i=1;i<=7000;i++){
 			for(int k=1;k<=1;k++){
+				double x=400;//(r.nextDouble()*MyCanvas.CANVAS_WIDTH);
+				double y=300;//200+(r.nextDouble()*200);
+				double v=0.7*r.nextDouble()+0.3;
 				sES.schedule(()->{
-					double x=(r.nextDouble()*MyCanvas.CANVAS_WIDTH);
-					double y=200+(r.nextDouble()*200);
-					double v=1*r.nextDouble()+0.5;
+					
 					cu.slashTransform(x, y,v,
 							new double[][]{
 								{1,0},
 								{1,1}
 							}
 						);
+					
+				}, i*1000, TimeUnit.MILLISECONDS);
+				
+				sES.schedule(()->{
 					cu.slashTransform(x, y,v*0.5,
 							new double[][]{
 								{1,0},
 								{-1,1}
 							}
 						);
-				}, i*1000, TimeUnit.MILLISECONDS);
+				}, i*1000+200, TimeUnit.MILLISECONDS);
 			}
 		}
+		
+		
 
 
 		if(Main.DEBUG) System.out.println("chapter load completed!"+(System.currentTimeMillis()-startTime)+"ms");
