@@ -46,11 +46,10 @@ public class PlayerControlHandler {
 		scene.setOnKeyPressed((KeyEvent e) -> {
 			pressHandle(e);
 		});
-		/*旧写法 样例
+		/*等同的旧写法 样例
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent e) {
-				// System.out.println("tri");
 				pressHandle(e);
 			}
 		});
@@ -94,7 +93,7 @@ public class PlayerControlHandler {
 			pressed[3] = true;
 			break;
 		case SPACE:
-			MoveHandler.timeSpeed = 0.01 ;//MoveHandler.DEFAULT_TIME_SPEED
+			MoveHandler.timeSpeed = MoveHandler.DEFAULT_TIME_SPEED*0.5 ;//MoveHandler.DEFAULT_TIME_SPEED
 			break;
 		}
 	}

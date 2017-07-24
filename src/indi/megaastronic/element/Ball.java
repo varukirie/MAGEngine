@@ -17,6 +17,9 @@ public class Ball extends ANormalElement{
 	public Ball(double x,double y,double vx, double vy){
 		super(x, y, vx, vy);
 	}
+	public Ball(double x,double y,double[] VCoodinate){
+		super(x, y, VCoodinate[0], VCoodinate[1]);
+	}
 	public Ball(double x,double y,double vx, double vy,double ax,double ay) {
 		super(x,y,vx,vy,ax,ay);
 	}

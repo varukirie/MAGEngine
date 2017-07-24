@@ -9,18 +9,24 @@ import indi.megaastronic.paint.MyCanvas;
 import indi.megaastronic.util.ElementUtils;
 
 public class Chapter1 extends AChapter {
-
+	private int i;
 	@Override
 	public void design(Timer timer, MyCanvas staticCanvas, ElementUtils moveableEU) {
 		Random r = new Random();
+		
 		ChapterUtils cu = new ChapterUtils(moveableEU);
 		long startTime=System.currentTimeMillis();
-		for(int i=1;i<=7000;i++){
+		for(i=1;i<=7000;i++){
 			for(int k=1;k<=4;k++){
 				timer.schedule(new TimerTask() {
 					@Override
 					public void run() {
-						cu.slash((r.nextDouble()*MyCanvas.CANVAS_WIDTH), 200+(r.nextDouble()*200), 2*r.nextDouble()+0.1);
+						cu.slashTransform((r.nextDouble()*MyCanvas.CANVAS_WIDTH), 200+(r.nextDouble()*200), 2*r.nextDouble()+0.1,
+								new double[][]{
+									{1,0},
+									{1,1}
+								}
+							);
 					}
 				}, i*1000);
 			}

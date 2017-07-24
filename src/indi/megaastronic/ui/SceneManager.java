@@ -15,7 +15,11 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
+/**
+ * 负责Scene切换
+ * @author Astronic
+ *
+ */
 public class SceneManager {
 	public static void startGame(Stage primaryStage){
 		StackPane root = new StackPane();
