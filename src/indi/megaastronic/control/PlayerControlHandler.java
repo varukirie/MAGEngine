@@ -1,6 +1,6 @@
 package indi.megaastronic.control;
 
-import indi.megaastronic.element.Ball;
+import indi.megaastronic.element.Bullet;
 import indi.megaastronic.element.Player;
 import indi.megaastronic.paint.MoveHandler;
 import indi.megaastronic.util.ElementUtils;
@@ -137,7 +137,7 @@ public class PlayerControlHandler {
 	}
 
 	private void playerShootToMouse() {
-		Ball ball = new Ball(player.getX(), player.getY());
+		Bullet ball = new Bullet(player.getX(), player.getY());
 		double dx = PlayerControlHandler.mouseX - player.getX();
 		double dy = PlayerControlHandler.mouseY - player.getY();
 		double s = Math.sqrt(dx * dx + dy * dy);

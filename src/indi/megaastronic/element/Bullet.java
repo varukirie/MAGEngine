@@ -8,19 +8,29 @@ import javafx.scene.text.Font;
  * @author MegaAstronic
  *
  */
-public class Ball extends ANormalElement{
+public class Bullet extends ANormalElement{
 
 	private int switchCount = 0;
-	public Ball(double x, double y) {
+	public Bullet(double x, double y) {
 		super(x, y);
 	}
-	public Ball(double x,double y,double vx, double vy){
-		super(x, y, vx, vy);
-	}
-	public Ball(double x,double y,double[] VCoodinate){
+	
+	public Bullet(double x,double y,double[] VCoodinate){
 		super(x, y, VCoodinate[0], VCoodinate[1]);
 	}
-	public Ball(double x,double y,double vx, double vy,double ax,double ay) {
+	public Bullet(double x,double y,double vx, double vy){
+		super(x, y,vx, vy);
+	}
+	
+	public Bullet(double x,double y,double vx, double vy,double[] ACoodinate) {
+		super(x,y,vx, vy,ACoodinate[0], ACoodinate[1]);
+	}
+	
+	public Bullet(double x,double y,double[] VCoodinate,double ax,double ay) {
+		super(x,y,VCoodinate[0], VCoodinate[1],ax,ay);
+	}
+	
+	public Bullet(double x,double y,double vx, double vy,double ax,double ay) {
 		super(x,y,vx,vy,ax,ay);
 	}
 	

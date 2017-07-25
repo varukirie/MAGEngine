@@ -17,32 +17,31 @@ public class Chapter1 extends AChapter {
 	public void design(ScheduledExecutorService sES, MyCanvas staticCanvas, ElementUtils moveableEU) {
 Random r = new Random();
 		
-		ChapterUtils cu = new ChapterUtils(moveableEU);
+		DanmukuUtils cu = new DanmukuUtils(moveableEU);
 		long startTime=System.currentTimeMillis();
 		for(i=1;i<=7000;i++){
 			for(int k=1;k<=1;k++){
 				double x=400;//(r.nextDouble()*MyCanvas.CANVAS_WIDTH);
 				double y=300;//200+(r.nextDouble()*200);
-				double v=0.7*r.nextDouble()+0.3;
+				double v=1;//0.7*r.nextDouble()+0.3;
 				sES.schedule(()->{
-					
-					cu.slashTransform(x, y,v,
+					cu.slashTransformAcc(x, y,v,
 							new double[][]{
 								{1,0},
 								{1,1}
 							}
 						);
 					
-				}, i*1000, TimeUnit.MILLISECONDS);
+				}, i*2000, TimeUnit.MILLISECONDS);
 				
 				sES.schedule(()->{
-					cu.slashTransform(x, y,v*0.5,
+					cu.slashTransformAcc(x, y,v*1.1,
 							new double[][]{
 								{1,0},
 								{-1,1}
 							}
 						);
-				}, i*1000+200, TimeUnit.MILLISECONDS);
+				}, i*2000+600, TimeUnit.MILLISECONDS);
 			}
 		}
 		

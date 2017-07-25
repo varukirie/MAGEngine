@@ -3,7 +3,7 @@ package indi.megaastronic.ui;
 import indi.megaastronic.chapter.Chapter1;
 import indi.megaastronic.chapter.ChapterLoader;
 import indi.megaastronic.control.PlayerControlHandler;
-import indi.megaastronic.element.Ball;
+import indi.megaastronic.element.Bullet;
 import indi.megaastronic.element.Player;
 import indi.megaastronic.element.DisplayTime;
 import indi.megaastronic.paint.MoveHandler;
@@ -65,7 +65,7 @@ public class SceneManager {
 		ElementUtils moveableElementUtils = new ElementUtils(mh, moveableCanvas);
 		
 		//
-		staticCanvas.getWantPaintMap().put("indicator", new Ball(50, 50));
+		staticCanvas.getWantPaintMap().put("indicator", new Bullet(50, 50));
 		staticCanvas.repaint();
 		//绑定玩家与键盘控制
 		PlayerControlHandler PCH= PlayerControlHandler.getPlayerControlHandler(moveableElementUtils, player);
