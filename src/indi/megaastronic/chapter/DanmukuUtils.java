@@ -28,10 +28,10 @@ public class DanmukuUtils {
 	
 	/**
 	 * 线性变换版本的slash
-	 * @param x
-	 * @param y
-	 * @param speed
-	 * @param t
+	 * @param x 坐标
+	 * @param y 坐标
+	 * @param speed 速度v
+	 * @param t 线性变换矩阵
 	 */
 	public void slashTransform(double x,double y,double speed,double[][] t){
 		Transform tsf=new Transform(t);
@@ -48,11 +48,11 @@ public class DanmukuUtils {
 	}
 	
 	/**
-	 * 线性变换版本的slash
-	 * @param x
-	 * @param y
-	 * @param accRate
-	 * @param t
+	 * 加速线性变换版本的slash
+	 * @param x 坐标
+	 * @param y 坐标
+	 * @param accRate 加速度a
+	 * @param t 线性变换矩阵
 	 */
 	public void slashTransformAcc(double x,double y,double accRate,double[][] t){
 		Transform tsf=new Transform(t);
