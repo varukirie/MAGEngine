@@ -1,6 +1,7 @@
 package indi.megaastronic.chapter;
 
-import indi.megaastronic.element.Bullet;
+import indi.megaastronic.element.Moveable;
+import indi.megaastronic.element.impl.Bullet;
 import indi.megaastronic.util.ElementUtils;
 import indi.megaastronic.util.Transform;
 
@@ -66,6 +67,26 @@ public class DanmukuUtils {
 		mEU.add("dw"+count++, new Bullet(x, y,0,0,tsf.transform(accRate*sqrt2d2,-accRate*sqrt2d2)));
 		mEU.add("as"+count++, new Bullet(x, y,0,0,tsf.transform(-accRate*sqrt2d2,accRate*sqrt2d2)));
 		mEU.add("ds"+count++, new Bullet(x, y,0,0,tsf.transform(accRate*sqrt2d2,accRate*sqrt2d2)));
+	}
+	
+	public Bullet snipe(Moveable source,Moveable target,double v){
+		double dx = target.getX() - source.getX();
+		double dy = target.getY() - source.getY();
+		double s = Math.sqrt(dx * dx + dy * dy);
+		Bullet bullet =new Bullet(source.getX(), source.getY());
+		bullet.setVelocityX(dx *v/ s);
+		bullet.setVelocityY(dy *v/ s);
+		return bullet;
+	}
+	
+	public Bullet snipe(double sx,double sy,double tx,double ty,double v){
+		double dx = sx - tx;
+		double dy = sy - ty;
+		double s = Math.sqrt(dx * dx + dy * dy);
+		Bullet bullet =new Bullet(sx, sy);
+		bullet.setVelocityX(dx *v/ s);
+		bullet.setVelocityY(dy *v/ s);
+		return bullet;
 	}
 	
 

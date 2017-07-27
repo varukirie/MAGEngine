@@ -1,5 +1,6 @@
-package indi.megaastronic.element;
+package indi.megaastronic.element.impl;
 
+import indi.megaastronic.element.ANormalElement;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -33,6 +34,7 @@ public class Bullet extends ANormalElement{
 	public Bullet(double x,double y,double vx, double vy,double ax,double ay) {
 		super(x,y,vx,vy,ax,ay);
 	}
+	
 	
 	@Override
 	public void paint(GraphicsContext gc) {

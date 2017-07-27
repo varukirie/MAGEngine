@@ -22,4 +22,8 @@ public interface Moveable {
 
 	void setVelocityY(double vy);
 	
+	default void modify(){
+		
+	}
+	
 }

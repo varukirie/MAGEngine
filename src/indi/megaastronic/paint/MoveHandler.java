@@ -10,7 +10,7 @@ import application.Main;
 import indi.megaastronic.element.Accelerated;
 import indi.megaastronic.element.LimitedByCanvas;
 import indi.megaastronic.element.Moveable;
-import indi.megaastronic.element.Player;
+import indi.megaastronic.element.impl.Player;
 
 /**
  * 单独一个线程，不断重复执行： 计算当前时刻所有Moveable元素的坐标
@@ -59,6 +59,8 @@ public class MoveHandler implements Runnable {
 			while (iter.hasNext()) {
 				entry = iter.next();
 				m = entry.getValue();
+				m.modify();
+				
 				// 使用加速度计算速度
 				if (m instanceof Accelerated) {
 					m.setVelocityX(m.getVelocityX() + (currentTime - this.lastTime) * ((Accelerated) m).getAccX()
@@ -84,7 +86,7 @@ public class MoveHandler implements Runnable {
 					// System.out.println("出界"+System.currentTimeMillis());
 					if (m instanceof LimitedByCanvas) {// 如果他是被边界限制的
 
-					} else {// 否则
+					} else {// 否则可以移动
 						m.setX(nextX);
 						m.setY(nextY);
 						removeElement(entry.getKey());	
@@ -125,6 +127,6 @@ public class MoveHandler implements Runnable {
 	public void removeElement(String key){
 		wantMoveMap.remove(key);
 		myCanvas.getWantPaintMap().remove(key);
-		
 	}
+	
 }

@@ -1,7 +1,7 @@
 package indi.megaastronic.control;
 
-import indi.megaastronic.element.Bullet;
-import indi.megaastronic.element.Player;
+import indi.megaastronic.element.impl.Bullet;
+import indi.megaastronic.element.impl.Player;
 import indi.megaastronic.paint.MoveHandler;
 import indi.megaastronic.util.ElementUtils;
 import javafx.scene.Scene;

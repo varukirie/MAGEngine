@@ -1,8 +1,11 @@
-package indi.megaastronic.element;
+package indi.megaastronic.element.impl;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import indi.megaastronic.element.LimitedByCanvas;
+import indi.megaastronic.element.Moveable;
+import indi.megaastronic.element.Paintable;
 import indi.megaastronic.util.SpritePainter;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;

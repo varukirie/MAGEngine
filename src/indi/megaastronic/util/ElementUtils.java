@@ -1,5 +1,7 @@
 package indi.megaastronic.util;
 
+import java.util.Map;
+
 import indi.megaastronic.element.Moveable;
 import indi.megaastronic.element.Paintable;
 import indi.megaastronic.paint.MoveHandler;
@@ -17,9 +19,29 @@ public class ElementUtils {
 	
 	public void add(String key,Object value){
 		if(mh!=null)
-			mh.getWantMoveMap().put(key, (Moveable) value);
+			if(value instanceof Moveable)
+				mh.getWantMoveMap().put(key, (Moveable) value);
 		if(myCanvas!=null)
-			myCanvas.getWantPaintMap().put(key, (Paintable) value);
+			if(value instanceof Paintable)
+				myCanvas.getWantPaintMap().put(key, (Paintable) value);
+	}
+	
+	public void removeMove(String key){
+		mh.getWantMoveMap().remove(key);
+	}
+	public void removePaint(String key){
+		myCanvas.getWantPaintMap().remove(key);
+	}
+	public void removeBoth(String key){
+		removeMove(key);
+		removePaint(key);
+	}
+	
+	public Map<String, Moveable> getWantMoveMap(){
+		return mh.getWantMoveMap();
+	}
+	public Map<String,Paintable> getWantPaintMap(){
+		return myCanvas.getWantPaintMap();
 	}
 	
 }
