@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 
 import indi.megaastronic.element.impl.Helper;
 import indi.megaastronic.element.impl.OvalHelper;
-import indi.megaastronic.paint.MyCanvas;
 import indi.megaastronic.util.ElementUtils;
 
 public class SeqDanmuku {
