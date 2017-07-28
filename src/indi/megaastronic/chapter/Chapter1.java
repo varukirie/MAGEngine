@@ -70,7 +70,7 @@ public class Chapter1 extends AChapter {
 		ArrayList<MissileBullet> mblist = new ArrayList<>();
 		for (i = 51; i <= 195; i++) {
 			sES.schedule(() -> {
-				MissileBullet tem = new MissileBullet(sourceHelper.getX(), sourceHelper.getY(), targetHelper, 0.1);
+				MissileBullet tem = new MissileBullet(sourceHelper.getX(), sourceHelper.getY(), targetHelper, 0.2);
 				mblist.add(tem);
 				mEU.add("missile" + count++, tem);
 			}, i * 200, TimeUnit.MILLISECONDS);

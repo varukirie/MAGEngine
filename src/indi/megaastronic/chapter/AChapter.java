@@ -7,5 +7,5 @@ import indi.megaastronic.paint.MyCanvas;
 import indi.megaastronic.util.ElementUtils;
 
 public abstract class AChapter {
-	public abstract void design(ScheduledExecutorService sES,MyCanvas staticCanvas,ElementUtils moveableEU);
+	public abstract void design(ScheduledExecutorService sES,MyCanvas staticCanvas,ElementUtils mEU);
 }

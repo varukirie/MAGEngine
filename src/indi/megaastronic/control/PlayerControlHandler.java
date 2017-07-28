@@ -93,7 +93,7 @@ public class PlayerControlHandler {
 			pressed[3] = true;
 			break;
 		case SPACE:
-			MoveHandler.timeSpeed = MoveHandler.DEFAULT_TIME_SPEED*0.5 ;//MoveHandler.DEFAULT_TIME_SPEED
+			MoveHandler.timeSpeed = MoveHandler.DEFAULT_TIME_SPEED*0.3 ;//MoveHandler.DEFAULT_TIME_SPEED
 			break;
 		}
 	}

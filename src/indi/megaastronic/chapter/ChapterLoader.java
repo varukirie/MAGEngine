@@ -28,6 +28,11 @@ public class ChapterLoader {
 	public static void loadChapter(AChapter c){
 		c.design(scheduleES,staticCanvas,mEU);
 	}
+	
+	public static void loadChapter(String chapterName) throws Exception{
+		Class<AChapter> cls = (Class<AChapter>) Class.forName(chapterName);
+		cls.newInstance().design(scheduleES,staticCanvas,mEU);
+	}
 
 	public static ScheduledExecutorService getScheduledExecutorService() {
 		return scheduleES;

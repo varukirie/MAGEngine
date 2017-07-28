@@ -84,8 +84,17 @@ public class DanmukuUtils {
 		double dy = sy - ty;
 		double s = Math.sqrt(dx * dx + dy * dy);
 		Bullet bullet =new Bullet(sx, sy);
-		bullet.setVelocityX(dx *v/ s);
-		bullet.setVelocityY(dy *v/ s);
+		bullet.setVelocityX(-dx *v/ s);
+		bullet.setVelocityY(-dy *v/ s);
+		return bullet;
+	}
+	public Bullet snipeAcc(double sx,double sy,double tx,double ty,double v){
+		double dx = sx - tx;
+		double dy = sy - ty;
+		double s = Math.sqrt(dx * dx + dy * dy);
+		Bullet bullet =new Bullet(sx, sy);
+		bullet.setAccX(-dx *v/ s);
+		bullet.setAccY(-dy *v/ s);
 		return bullet;
 	}
 	

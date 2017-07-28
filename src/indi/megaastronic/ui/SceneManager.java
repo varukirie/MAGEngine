@@ -2,6 +2,7 @@ package indi.megaastronic.ui;
 
 import indi.megaastronic.chapter.Chapter1;
 import indi.megaastronic.chapter.ChapterLoader;
+import indi.megaastronic.chapter.TestChapter;
 import indi.megaastronic.control.PlayerControlHandler;
 import indi.megaastronic.element.impl.Bullet;
 import indi.megaastronic.element.impl.DisplayTime;
@@ -81,6 +82,8 @@ public class SceneManager {
 		moveableElementUtils.add("showTime", new DisplayTime(1, MyCanvas.CANVAS_HEIGHT-7));
 
 		
-		ChapterLoader.loadChapter(new Chapter1());
+		
+			ChapterLoader.loadChapter(new TestChapter());
+		
 	}
 }
