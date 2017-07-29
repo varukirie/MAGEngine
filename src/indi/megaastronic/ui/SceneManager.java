@@ -61,7 +61,7 @@ public class SceneManager {
 		
 		
 		//创建玩家
-		Player player = Player.getPlayer(210,110);
+		Player player = Player.getPlayer(210,600);
 		
 		ElementUtils moveableElementUtils = new ElementUtils(mh, moveableCanvas);
 		
@@ -82,7 +82,7 @@ public class SceneManager {
 		moveableElementUtils.add("showTime", new DisplayTime(1, MyCanvas.CANVAS_HEIGHT-7));
 
 		
-		
+//			ChapterLoader.loadChapter(new Chapter1());
 			ChapterLoader.loadChapter(new TestChapter());
 		
 	}

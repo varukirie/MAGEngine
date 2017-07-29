@@ -14,7 +14,7 @@ public class TestChapter extends AChapter {
 		SeqDanmuku seq = new SeqDanmuku(sES, mEU);
 		seq.rotate(midX+30, midY,2000);
 		seq.rotate(midX, midY,1000);
-		//seq.rotateSlash(midX, midY, 1000);
+		seq.rotateSlash(midX, midY, 1000);
 		//seq.rotateSlash(midX-100, midY+100, 15000);
 		
 	}

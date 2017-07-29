@@ -41,56 +41,60 @@ public class Chapter1 extends AChapter {
 		for (i = 1; i <= 50; i++) {
 			for (int k = 1; k <= 1; k++) {
 
-				sES.schedule(() -> {
+//				sES.schedule(() -> {
+//					cu.slashTransform(300, 350, 1, new double[][] { { 1, 0 },
+//						 { -1, 1 } });
 					// mEU.add("snipe"+r.nextInt(),cu.snipe(sourceHelper,
 					// targetHelper, 3));
-					 cu.slashTransformAcc(targetHelper.getX(),
-					 targetHelper.getY(), v, new double[][] { { 1, 0 }, { 1, 1
-					 } });
+//					 cu.slashTransformAcc(targetHelper.getX(),
+//					 targetHelper.getY(), v, new double[][] { { 1, 0 }, { 1, 1
+//					 } });
 					// cu.slashTransformAcc(targetHelper.getX(),
-					// targetHelper.getY(), v * 1.1, new double[][] { { 1, 0 },
-					// { -1, 1 } });
+//					 targetHelper.getY(), v * 1.1, new double[][] { { 1, 0 },
+//					 { -1, 1 } });
 					// mEU.add("missile"+r.nextInt(), new
 					// MissileBullet(sourceHelper.getX(), sourceHelper.getY(),
 					// targetHelper, v));
-				}, i * 200, TimeUnit.MILLISECONDS);
+//				}, i * 200, TimeUnit.MILLISECONDS);
 
-				// sES.schedule(() -> {
-				// cu.slashTransformAcc(x, y, v, new double[][] { { 1, 0 }, { 1,
-				// 1 } });
-				//
-				// }, i * 2000, TimeUnit.MILLISECONDS);
-				//
-				// sES.schedule(() -> {
-				// cu.slashTransformAcc(x, y, v * 1.1, new double[][] { { 1, 0
-				// }, { -1, 1 } });
-				// }, i * 2000 + 600, TimeUnit.MILLISECONDS);
+				 sES.schedule(() -> {
+//				 cu.slashTransformAcc(x, y, v, new double[][] { { 1, 0 }, { 1,
+//				 1 } });
+				cu.slash(x, y, v);
+				 }, i * 2000, TimeUnit.MILLISECONDS);
+				
+//				 sES.schedule(() -> {
+//				 cu.slashTransformAcc(x, y, v * 1.1, new double[][] { { 1, 0
+//				 }, { -1, 1 } });
+//				 }, i * 2000 + 600, TimeUnit.MILLISECONDS);
 			}
 		}
-		ArrayList<MissileBullet> mblist = new ArrayList<>();
-		for (i = 51; i <= 195; i++) {
-			sES.schedule(() -> {
-				MissileBullet tem = new MissileBullet(sourceHelper.getX(), sourceHelper.getY(), targetHelper, 0.2);
-				mblist.add(tem);
-				mEU.add("missile" + count++, tem);
-			}, i * 200, TimeUnit.MILLISECONDS);
-
-		}
-		sES.schedule(() -> {
-			for (MissileBullet mb : mblist) {
-				mb.setTarget(null);
-			}
-		}, 196 * 200, TimeUnit.MILLISECONDS);
-
-		for (i = 1; i <= 1000; i++) {
-			sES.schedule(() -> {
-				cu.slashTransformAcc(x, y, v, new double[][] { { 1, 0 }, { 1, 1 } });
-
-			},76*200+i * 2000, TimeUnit.MILLISECONDS);
-			sES.schedule(() -> {
-				cu.slashTransformAcc(x, y, v * 1.1, new double[][] { { 1, 0 }, { -1, 1 } });
-			}, 196*200+i * 2000 + 600, TimeUnit.MILLISECONDS);
-		}
+		
+		//
+//		ArrayList<MissileBullet> mblist = new ArrayList<>();
+//		for (i = 51; i <= 195; i++) {
+//			sES.schedule(() -> {
+//				MissileBullet tem = new MissileBullet(sourceHelper.getX(), sourceHelper.getY(), targetHelper, 0.2);
+//				mblist.add(tem);
+//				mEU.add("missile" + count++, tem);
+//			}, i * 200, TimeUnit.MILLISECONDS);
+//
+//		}
+//		sES.schedule(() -> {
+//			for (MissileBullet mb : mblist) {
+//				mb.setTarget(null);
+//			}
+//		}, 196 * 200, TimeUnit.MILLISECONDS);
+//
+//		for (i = 1; i <= 1000; i++) {
+//			sES.schedule(() -> {
+//				cu.slashTransformAcc(x, y, v, new double[][] { { 1, 0 }, { 1, 1 } });
+//
+//			},76*200+i * 2000, TimeUnit.MILLISECONDS);
+//			sES.schedule(() -> {
+//				cu.slashTransformAcc(x, y, v * 1.1, new double[][] { { 1, 0 }, { -1, 1 } });
+//			}, 196*200+i * 2000 + 600, TimeUnit.MILLISECONDS);
+//		}
 
 		if (Main.DEBUG)
 			System.out.println("chapter load completed!" + (System.currentTimeMillis() - startTime) + "ms");
