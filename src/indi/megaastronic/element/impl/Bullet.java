@@ -1,7 +1,11 @@
 package indi.megaastronic.element.impl;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import indi.megaastronic.element.ANormalElement;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 /**
@@ -52,16 +56,16 @@ public class Bullet extends ANormalElement{
 		//gc.setFill(Color.RED);
 		//gc.fillOval(x, y, 10, 10);
 		
-		/*
-		try {
-			Image img = new Image(new FileInputStream(this.getClass().getResource("/img/gh.png").getFile()));
-			gc.drawImage(img, this.x, this.y);
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
+		
+//		try {
+//			Image img = new Image(new FileInputStream(this.getClass().getResource("/img/Bullet.png").getFile()));
+//			gc.drawImage(img, this.x, this.y);
+//			
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
 		//System.out.println("enemy exist millis="+System.currentTimeMillis());
 	}
 

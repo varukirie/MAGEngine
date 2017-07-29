@@ -1,5 +1,7 @@
 package indi.megaastronic.chapter;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -13,21 +15,25 @@ public class SeqDanmuku {
 	private ElementUtils mEU;
 	private DanmukuUtils du;
 	private int callCount=0;
+	Map<String,Helper> helperMap = new HashMap<>();
 	public SeqDanmuku(ScheduledExecutorService sES, ElementUtils mEU) {
 		this.sES = sES;
 		this.mEU = mEU;
 		du=new DanmukuUtils(mEU);
 	}
-
+	Helper tHelper;
 	public void rotate(double midX,double midY,long startTime) {
+		
 		int i;
 		double helperLenght = 70;
 		int count=100;
 		int currentHelperCount=callCount++;
-		Helper tHelper = new OvalHelper(midX,midY, helperLenght, 20);
-		mEU.add("tHelper"+currentHelperCount, tHelper);
+		
 		Random r = new Random();
 		sES.schedule(()->{
+			tHelper = new OvalHelper(midX,midY, helperLenght, 20);
+			
+			mEU.add("tHelper"+currentHelperCount, tHelper);
 		}, startTime, TimeUnit.MILLISECONDS);
 	
 		for(i=1;i<=count;i++){

@@ -12,10 +12,10 @@ public class TestChapter extends AChapter {
 	@Override
 	public void design(ScheduledExecutorService sES, MyCanvas staticCanvas, ElementUtils mEU) {
 		SeqDanmuku seq = new SeqDanmuku(sES, mEU);
-		seq.rotate(midX+30, midY,15000);
+		seq.rotate(midX+30, midY,2000);
 		seq.rotate(midX, midY,1000);
-		seq.rotateSlash(midX, midY, 1000);
-		seq.rotateSlash(midX-100, midY+100, 15000);
+		//seq.rotateSlash(midX, midY, 1000);
+		//seq.rotateSlash(midX-100, midY+100, 15000);
 		
 	}
 
