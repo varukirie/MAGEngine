@@ -30,13 +30,7 @@ public class Transform {
 		return result;
 	}
 	
-	public Coodinate transform(Coodinate inCo){
-		Coodinate ansCo= new Coodinate(0, 0);
-		ansCo.setX(inCo.getX()*this.transformMartix[0][0]+inCo.getY()*this.transformMartix[1][0]);
-		ansCo.setY(inCo.getX()*this.transformMartix[0][1]+inCo.getY()*this.transformMartix[1][1]);
-		return ansCo;
-	}
-	
+
 	public void delta(double[][] in,double x,double y){
 		for(int i=0;i<in[0].length;i++){
 			in[0][i]=in[0][i]+x;

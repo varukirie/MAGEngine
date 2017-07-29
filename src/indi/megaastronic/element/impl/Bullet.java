@@ -17,6 +17,7 @@ import javafx.scene.text.Font;
 public class Bullet extends ANormalElement{
 
 	private int switchCount = 0;
+	
 	public Bullet(double x, double y) {
 		super(x, y);
 	}

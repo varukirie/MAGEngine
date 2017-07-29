@@ -8,7 +8,7 @@ public abstract class ANormalElement implements Moveable, Paintable,Accelerated 
 	protected double velocityY=0;
 	protected double accX = 0;
 	protected double accY = 0;
-	
+	protected boolean deleted = false;
 	public ANormalElement(double x, double y) {
 			this(x,y,0,0);
 	}
@@ -67,5 +67,14 @@ public abstract class ANormalElement implements Moveable, Paintable,Accelerated 
 	public void setAccY(double accY) {
 		this.accY = accY;
 	}
+
+	public boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean isDelete) {
+		this.deleted = isDelete;
+	}
+	
 	
 }

@@ -2,11 +2,16 @@ package indi.megaastronic.util;
 
 import java.util.Map;
 
+import indi.megaastronic.element.ANormalElement;
 import indi.megaastronic.element.Moveable;
 import indi.megaastronic.element.Paintable;
 import indi.megaastronic.paint.MoveHandler;
 import indi.megaastronic.paint.MyCanvas;
-
+/**
+ * 为了使得元素加入运动与移除元素更简便
+ * @author Astronic
+ *
+ */
 public class ElementUtils {
 	private MoveHandler mh = null;
 	private MyCanvas myCanvas =null;
@@ -27,6 +32,10 @@ public class ElementUtils {
 	}
 	
 	public void removeMove(String key){
+		Object obj = getWantMoveMap().get(key);
+		if(obj instanceof ANormalElement){
+			((ANormalElement)obj).setDeleted(true);
+		}
 		mh.getWantMoveMap().remove(key);
 	}
 	public void removePaint(String key){
@@ -35,6 +44,7 @@ public class ElementUtils {
 	public void removeBoth(String key){
 		removeMove(key);
 		removePaint(key);
+		
 	}
 	
 	public Map<String, Moveable> getWantMoveMap(){

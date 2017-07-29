@@ -64,7 +64,7 @@ public class SceneManager {
 		Player player = Player.getPlayer(210,600);
 		
 		ElementUtils moveableElementUtils = new ElementUtils(mh, moveableCanvas);
-		
+		mh.setmEU(moveableElementUtils);
 		//
 		staticCanvas.getWantPaintMap().put("indicator", new Bullet(50, 50));
 		staticCanvas.repaint();

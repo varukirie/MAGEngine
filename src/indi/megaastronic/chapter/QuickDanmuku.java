@@ -1,16 +1,20 @@
 package indi.megaastronic.chapter;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Random;
+
 import indi.megaastronic.element.Moveable;
 import indi.megaastronic.element.impl.Bullet;
 import indi.megaastronic.util.ElementUtils;
 import indi.megaastronic.util.Transform;
 
-public class DanmukuUtils {
+public class QuickDanmuku {
 	
 	private ElementUtils mEU;
 	private final double sqrt2d2=0.7071;
 	private int count = 0;
-	public DanmukuUtils(ElementUtils mEU) {
+	private Random r=new Random();
+	public QuickDanmuku(ElementUtils mEU) {
 		super();
 		this.mEU = mEU;
 	}
@@ -69,33 +73,36 @@ public class DanmukuUtils {
 		mEU.add("ds"+count++, new Bullet(x, y,0,0,tsf.transform(accRate*sqrt2d2,accRate*sqrt2d2)));
 	}
 	
-	public Bullet snipe(Moveable source,Moveable target,double v){
-		double dx = target.getX() - source.getX();
-		double dy = target.getY() - source.getY();
-		double s = Math.sqrt(dx * dx + dy * dy);
-		Bullet bullet =new Bullet(source.getX(), source.getY());
-		bullet.setVelocityX(dx *v/ s);
-		bullet.setVelocityY(dy *v/ s);
-		return bullet;
-	}
+
 	
-	public Bullet snipe(double sx,double sy,double tx,double ty,double v){
+	public void snipe(double sx,double sy,double tx,double ty,double v){
+		snipe(sx, sy, tx, ty, v, Bullet.class);
+	}
+	public void snipe(double sx,double sy,double tx,double ty,double v,Class<? extends Bullet> cls){
 		double dx = sx - tx;
 		double dy = sy - ty;
 		double s = Math.sqrt(dx * dx + dy * dy);
-		Bullet bullet =new Bullet(sx, sy);
+//		Bullet bullet =new Bullet(sx, sy);
+		Bullet bullet=null;
+		try {
+			bullet =cls.getConstructor(double.class,double.class).newInstance(sx,sy);
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		bullet.setVelocityX(-dx *v/ s);
 		bullet.setVelocityY(-dy *v/ s);
-		return bullet;
+		mEU.add("snipe"+r.nextInt(), bullet);
 	}
-	public Bullet snipeAcc(double sx,double sy,double tx,double ty,double v){
+	public void snipeAcc(double sx,double sy,double tx,double ty,double v){
 		double dx = sx - tx;
 		double dy = sy - ty;
 		double s = Math.sqrt(dx * dx + dy * dy);
 		Bullet bullet =new Bullet(sx, sy);
 		bullet.setAccX(-dx *v/ s);
 		bullet.setAccY(-dy *v/ s);
-		return bullet;
+		mEU.add("snipe"+r.nextInt(), bullet);
 	}
 	
 

@@ -11,6 +11,7 @@ import indi.megaastronic.element.Accelerated;
 import indi.megaastronic.element.LimitedByCanvas;
 import indi.megaastronic.element.Moveable;
 import indi.megaastronic.element.impl.Player;
+import indi.megaastronic.util.ElementUtils;
 
 /**
  * 单独一个线程，不断重复执行： 计算当前时刻所有Moveable元素的坐标
@@ -30,7 +31,8 @@ public class MoveHandler implements Runnable {
 	public static final long SLEEP_TIME = 16;
 	public static final long BLANK = 1;
 	private Map<String, Moveable> wantMoveMap = new ConcurrentHashMap<>();
-
+	private ElementUtils mEU = null;
+	
 	public Map<String, Moveable> getWantMoveMap() {
 		return wantMoveMap;
 	}
@@ -83,12 +85,12 @@ public class MoveHandler implements Runnable {
 					m.setX(nextX);
 					m.setY(nextY);
 				} else {// 出屏幕
-					// System.out.println("出界"+System.currentTimeMillis());
-					if (m instanceof LimitedByCanvas) {// 如果他是被边界限制的
+					 
+					if (m instanceof LimitedByCanvas) {// 如果他是被边界限制的 不能移动
 
-					} else {// 否则可以移动
-						m.setX(nextX);
-						m.setY(nextY);
+					} else {// 否则删除
+//						m.setX(nextX);
+//						m.setY(nextY);
 						removeElement(entry.getKey());	
 					}
 				}
@@ -125,8 +127,19 @@ public class MoveHandler implements Runnable {
 		switchCount = (switchCount + 1) % 2;
 	}
 	public void removeElement(String key){
-		wantMoveMap.remove(key);
-		myCanvas.getWantPaintMap().remove(key);
+		mEU.removeBoth(key);
+//		wantMoveMap.remove(key);
+//		myCanvas.getWantPaintMap().remove(key);
 	}
+
+	public ElementUtils getmEU() {
+		return mEU;
+	}
+
+	public void setmEU(ElementUtils mEU) {
+		this.mEU = mEU;
+	}
+	
+	
 	
 }

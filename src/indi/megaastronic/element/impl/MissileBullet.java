@@ -4,11 +4,16 @@ import indi.megaastronic.element.ANormalElement;
 import indi.megaastronic.element.Moveable;
 import javafx.scene.canvas.GraphicsContext;
 
-public class MissileBullet extends ANormalElement {
+public class MissileBullet extends Bullet {
 
 	
 	private double v;
 	private Moveable target;
+	public MissileBullet(double x,double y){
+		super(x,y);
+		this.target=Player.getPlayer();
+		this.v=1;
+	}
 	public MissileBullet(double x, double y,Moveable target,double v) {
 		super(x, y);
 		this.v=v;
@@ -22,8 +27,10 @@ public class MissileBullet extends ANormalElement {
 			double dx = target.getX() - x;
 			double dy = target.getY() - y;
 			double s = Math.sqrt(dx * dx + dy * dy);
-			this.setAccX(dx *v/ s);
-			this.setAccY(dy *v/ s);
+//			this.setAccX(dx *v/ s);
+//			this.setAccY(dy *v/ s);
+			this.setVelocityX(dx *v/ s);
+			this.setVelocityY(dy *v/ s);
 		}
 	}
 	

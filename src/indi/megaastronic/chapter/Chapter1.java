@@ -9,10 +9,10 @@ import java.util.concurrent.TimeUnit;
 
 import application.Main;
 import indi.megaastronic.element.impl.Player;
+import indi.megaastronic.helper.Helper;
+import indi.megaastronic.helper.OvalHelper;
 import indi.megaastronic.element.impl.Bullet;
-import indi.megaastronic.element.impl.Helper;
 import indi.megaastronic.element.impl.MissileBullet;
-import indi.megaastronic.element.impl.OvalHelper;
 import indi.megaastronic.paint.MyCanvas;
 import indi.megaastronic.util.ElementUtils;
 
@@ -24,7 +24,7 @@ public class Chapter1 extends AChapter {
 	public void design(ScheduledExecutorService sES, MyCanvas staticCanvas, ElementUtils mEU) {
 		Random r = new Random();
 
-		DanmukuUtils cu = new DanmukuUtils(mEU);
+		QuickDanmuku cu = new QuickDanmuku(mEU);
 		long startTime = System.currentTimeMillis();
 
 		Helper targetHelper = new OvalHelper(400, 300, 100, 20);
