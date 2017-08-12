@@ -11,6 +11,8 @@ import application.Main;
 import indi.megaastronic.element.impl.Player;
 import indi.megaastronic.helper.Helper;
 import indi.megaastronic.helper.OvalHelper;
+import indi.megaastronic.chapter.util.AChapter;
+import indi.megaastronic.chapter.util.QuickDanmuku;
 import indi.megaastronic.element.impl.Bullet;
 import indi.megaastronic.element.impl.MissileBullet;
 import indi.megaastronic.paint.MyCanvas;

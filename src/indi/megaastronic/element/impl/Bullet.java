@@ -44,7 +44,7 @@ public class Bullet extends ANormalElement{
 	
 	@Override
 	public void paint(GraphicsContext gc) {
-		gc.setFont(Font.font("consolas",25));
+//		gc.setFont(Font.font("consolas",25));
 //		gc.setFill(Color.BLUE);
 		/*
 		if(switchCount == 0){

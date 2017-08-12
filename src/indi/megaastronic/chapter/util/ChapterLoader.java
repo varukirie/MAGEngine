@@ -1,8 +1,9 @@
-package indi.megaastronic.chapter;
+package indi.megaastronic.chapter.util;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
+import application.Main;
 import indi.megaastronic.paint.MyCanvas;
 import indi.megaastronic.util.ElementUtils;
 /**
@@ -26,12 +27,15 @@ public class ChapterLoader {
 		
 	}
 	public static void loadChapter(AChapter c){
+		long start = System.currentTimeMillis();
 		c.design(scheduleES,staticCanvas,mEU);
+		long end = System.currentTimeMillis();
+		System.out.println("装载关卡使用 "+(end-start)+" 毫秒");
 	}
 	
 	public static void loadChapter(String chapterName) throws Exception{
 		Class<AChapter> cls = (Class<AChapter>) Class.forName(chapterName);
-		cls.newInstance().design(scheduleES,staticCanvas,mEU);
+		loadChapter(cls.newInstance());
 	}
 
 	public static ScheduledExecutorService getScheduledExecutorService() {

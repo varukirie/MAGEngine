@@ -1,8 +1,8 @@
 package indi.megaastronic.ui;
 
 import indi.megaastronic.chapter.Chapter1;
-import indi.megaastronic.chapter.ChapterLoader;
 import indi.megaastronic.chapter.TestChapter;
+import indi.megaastronic.chapter.util.ChapterLoader;
 import indi.megaastronic.control.PlayerControlHandler;
 import indi.megaastronic.element.impl.Bullet;
 import indi.megaastronic.element.impl.DisplayTime;

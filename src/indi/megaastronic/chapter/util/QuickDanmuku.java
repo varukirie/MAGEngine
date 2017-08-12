@@ -1,4 +1,4 @@
-package indi.megaastronic.chapter;
+package indi.megaastronic.chapter.util;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Random;

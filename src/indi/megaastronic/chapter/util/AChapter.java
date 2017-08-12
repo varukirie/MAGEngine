@@ -1,4 +1,4 @@
-package indi.megaastronic.chapter;
+package indi.megaastronic.chapter.util;
 
 import java.util.Timer;
 import java.util.concurrent.ScheduledExecutorService;
