@@ -8,7 +8,7 @@ import indi.megaastronic.element.Paintable;
 import indi.megaastronic.paint.MoveHandler;
 import indi.megaastronic.paint.MyCanvas;
 /**
- * 为了使得元素加入运动与移除元素更简便
+ * 统一处理元素的运动与绘画
  * @author Astronic
  *
  */
@@ -44,7 +44,6 @@ public class ElementUtils {
 	public void removeBoth(String key){
 		removeMove(key);
 		removePaint(key);
-		
 	}
 	
 	public Map<String, Moveable> getWantMoveMap(){

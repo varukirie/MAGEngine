@@ -5,7 +5,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import indi.megaastronic.element.impl.Bullet;
-import indi.megaastronic.element.impl.FBullet;
+import indi.megaastronic.element.impl.ArrowBullet;
 import indi.megaastronic.element.impl.MissileBullet;
 import indi.megaastronic.element.impl.Player;
 import indi.megaastronic.helper.Helper;
@@ -27,9 +27,9 @@ public class SeqDanmuku {
 	}
 		
 	public void rotate(double midX,double midY,long startTime,double helperDelta){
-		rotate(midX, midY, startTime, 0,Bullet.class);
+		rotate(midX, midY, startTime, helperDelta,Bullet.class);
 	}
-	public void rotate(double midX,double midY,long startTime,double helperDelta,Class cls) {
+	public void rotate(double midX,double midY,long startTime,double helperDelta,Class<?> bulletClass) {
 		
 		int i;
 		double helperLenght = 70;
@@ -37,7 +37,6 @@ public class SeqDanmuku {
 		int currentHelperCount=callCount++;
 		long interval=100;
 		Helper tHelper= new OvalHelper(midX,midY, helperLenght, 20,helperDelta);
-		Random r = new Random();
 		sES.schedule(()->{
 			mEU.add("tHelper"+currentHelperCount, tHelper);
 		}, startTime, TimeUnit.MILLISECONDS);
@@ -45,7 +44,7 @@ public class SeqDanmuku {
 		for(i=1;i<=count;i++){
 			sES.schedule(()->{
 						quick.snipe((midX+tHelper.getX())/2, (midY+ tHelper.getY())/2, 
-									tHelper.getX(), tHelper.getY(),0.4,cls);
+									tHelper.getX(), tHelper.getY(),0.4,bulletClass);
 			}, startTime+i*interval, TimeUnit.MILLISECONDS);
 		}
 		sES.schedule(()->{

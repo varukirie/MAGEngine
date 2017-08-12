@@ -24,8 +24,6 @@ public class Chapter1 extends AChapter {
 
 	@Override
 	public void design(ScheduledExecutorService sES, MyCanvas staticCanvas, ElementUtils mEU) {
-		Random r = new Random();
-
 		QuickDanmuku cu = new QuickDanmuku(mEU);
 		long startTime = System.currentTimeMillis();
 

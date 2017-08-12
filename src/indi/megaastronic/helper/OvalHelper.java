@@ -1,6 +1,10 @@
 package indi.megaastronic.helper;
 
+import java.util.logging.MemoryHandler;
+
+
 import application.Main;
+import indi.megaastronic.paint.MoveHandler;
 import javafx.scene.canvas.GraphicsContext;
 /**
  * 圆形轨迹运动的Helper
@@ -42,8 +46,8 @@ public class OvalHelper extends Helper {
 	
 	@Override
 	public void modify() {
-		this.x=this.ovalX+r*Math.cos((System.currentTimeMillis()-startTime)*speed/BLANK);
-		this.y=this.ovalY+r*Math.sin((System.currentTimeMillis()-startTime)*speed/BLANK);
+		this.x=this.ovalX+r*Math.cos((System.currentTimeMillis()-startTime)*speed/BLANK );
+		this.y=this.ovalY+r*Math.sin((System.currentTimeMillis()-startTime)*speed/BLANK );
 	}
 	
 

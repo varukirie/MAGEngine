@@ -8,27 +8,27 @@ import javafx.scene.canvas.GraphicsContext;
  * @author Astronic
  *
  */
-public class FBullet extends Bullet {
+public class ArrowBullet extends Bullet {
 
-	public FBullet(double x, double y) {
+	public ArrowBullet(double x, double y) {
 		super(x, y);
 	}
-	public FBullet(double x,double y,double[] VCoodinate){
+	public ArrowBullet(double x,double y,double[] VCoodinate){
 		super(x, y, VCoodinate[0], VCoodinate[1]);
 	}
-	public FBullet(double x,double y,double vx, double vy){
+	public ArrowBullet(double x,double y,double vx, double vy){
 		super(x, y,vx, vy);
 	}
 	
-	public FBullet(double x,double y,double vx, double vy,double[] ACoodinate) {
+	public ArrowBullet(double x,double y,double vx, double vy,double[] ACoodinate) {
 		super(x,y,vx, vy,ACoodinate[0], ACoodinate[1]);
 	}
 	
-	public FBullet(double x,double y,double[] VCoodinate,double ax,double ay) {
+	public ArrowBullet(double x,double y,double[] VCoodinate,double ax,double ay) {
 		super(x,y,VCoodinate[0], VCoodinate[1],ax,ay);
 	}
 	
-	public FBullet(double x,double y,double vx, double vy,double ax,double ay) {
+	public ArrowBullet(double x,double y,double vx, double vy,double ax,double ay) {
 		super(x,y,vx,vy,ax,ay);
 	}
 	

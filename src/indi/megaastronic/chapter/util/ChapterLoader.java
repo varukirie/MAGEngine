@@ -34,8 +34,8 @@ public class ChapterLoader {
 	}
 	
 	public static void loadChapter(String chapterName) throws Exception{
-		Class<AChapter> cls = (Class<AChapter>) Class.forName(chapterName);
-		loadChapter(cls.newInstance());
+		Class<?> cls = Class.forName(chapterName);
+		loadChapter((AChapter) cls.newInstance());
 	}
 
 	public static ScheduledExecutorService getScheduledExecutorService() {

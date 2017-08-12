@@ -78,17 +78,17 @@ public class QuickDanmuku {
 	public void snipe(double sx,double sy,double tx,double ty,double v){
 		snipe(sx, sy, tx, ty, v, Bullet.class);
 	}
-	public void snipe(double sx,double sy,double tx,double ty,double v,Class<? extends Bullet> cls){
+	public void snipe(double sx,double sy,double tx,double ty,double v,Class<?> bulletClass){
 		double dx = sx - tx;
 		double dy = sy - ty;
 		double s = Math.sqrt(dx * dx + dy * dy);
 //		Bullet bullet =new Bullet(sx, sy);
 		Bullet bullet=null;
 		try {
-			bullet =cls.getConstructor(double.class,double.class).newInstance(sx,sy);
+			bullet =(Bullet) bulletClass.getConstructor(double.class,double.class).newInstance(sx,sy);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
-			// TODO Auto-generated catch block
+			System.out.println("错误的子弹类型");
 			e.printStackTrace();
 		}
 		bullet.setVelocityX(-dx *v/ s);
