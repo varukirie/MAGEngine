@@ -3,7 +3,7 @@ package indi.megaastronic.element.impl;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import indi.megaastronic.element.ANormalElement;
+import indi.megaastronic.element.BaseElement;
 import indi.megaastronic.util.Transform;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -14,7 +14,7 @@ import javafx.scene.text.Font;
  * @author MegaAstronic
  *
  */
-public class Bullet extends ANormalElement{
+public class Bullet extends BaseElement{
 
 	private int switchCount = 0;
 	

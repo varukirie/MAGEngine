@@ -16,7 +16,12 @@ public class SpritePainter {
 	private Image sprite = null;
 	private int spriteWidth = 0;
 	private int spriteHeight = 0;
-
+/**
+ * 
+ * @param sprite
+ * @param spriteWidth
+ * @param spriteHeight
+ */
 	public SpritePainter(Image sprite, int spriteWidth, int spriteHeight) {
 		super();
 		this.sprite = sprite;
@@ -25,14 +30,14 @@ public class SpritePainter {
 	}
 
 	/**
-	 * 输出精灵动画
+	 * 输出精灵动画,三个一行切割
 	 * 
 	 * @param index
 	 *            输出第index个精灵动画，index从0开始
 	 * @param x
 	 *            输在屏幕上的坐标x
 	 * @param y
-	 *            输在屏幕上的坐标x
+	 *            输在屏幕上的坐标y
 	 * @param gc
 	 *            Canvas的GraphicsContext
 	 */

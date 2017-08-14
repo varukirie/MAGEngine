@@ -1,9 +1,9 @@
 package indi.megaastronic.element.impl;
 
-import indi.megaastronic.element.ANormalElement;
+import indi.megaastronic.element.BaseElement;
 import javafx.scene.canvas.GraphicsContext;
 
-public class DisplayTime extends ANormalElement {
+public class DisplayTime extends BaseElement {
 
 	private long startTime;
 	public DisplayTime(double x, double y) {

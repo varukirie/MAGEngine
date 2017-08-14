@@ -1,9 +1,9 @@
 package indi.megaastronic.ui;
 
-import indi.megaastronic.chapter.Chapter1;
 import indi.megaastronic.chapter.TestChapter;
 import indi.megaastronic.chapter.util.ChapterLoader;
 import indi.megaastronic.control.PlayerControlHandler;
+import indi.megaastronic.element.impl.ArrowBullet;
 import indi.megaastronic.element.impl.Bullet;
 import indi.megaastronic.element.impl.DisplayTime;
 import indi.megaastronic.element.impl.Player;
@@ -30,6 +30,10 @@ public class SceneManager {
 		root.getChildren().add(staticCanvas);
 		root.getChildren().add(moveableCanvas);
 		root.getChildren().add(secondaryMCanvas);
+		//
+		staticCanvas.getWantPaintMap().put("indicator", Player.getPlayer());
+		staticCanvas.repaint();
+		
 		Scene scene=new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("MAEngine!");
@@ -49,8 +53,10 @@ public class SceneManager {
 		Thread mhThread = new Thread(mh);
 		mhThread.setPriority(Thread.MAX_PRIORITY);
 		mhThread.start();
+		
+		ElementUtils moveableElementUtils = new ElementUtils(mh, moveableCanvas);
+		mh.setmEU(moveableElementUtils);
 		//关闭窗口时关闭所有线程
-	
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
 			public void handle(WindowEvent event) {
@@ -63,23 +69,16 @@ public class SceneManager {
 		//创建玩家
 		Player player = Player.getPlayer(210,600);
 		
-		ElementUtils moveableElementUtils = new ElementUtils(mh, moveableCanvas);
-		mh.setmEU(moveableElementUtils);
-		//
-		staticCanvas.getWantPaintMap().put("indicator", new Bullet(50, 50));
-		staticCanvas.repaint();
+
+
 		//绑定玩家与键盘控制
 		PlayerControlHandler PCH= PlayerControlHandler.getPlayerControlHandler(moveableElementUtils, player);
 		PCH.bindEvent(scene);
 		//
-		/*
-		moveableCanvas.getWantPaintMap().put("player", player);//让MyCanvas管理player
-		mh.getWantMoveMap().put("player", player);//让MoveHandler管理player
-		*/
 		moveableElementUtils.add("player", player);
 		
 		ChapterLoader.init(staticCanvas, moveableElementUtils);
-		moveableElementUtils.add("showTime", new DisplayTime(1, MyCanvas.CANVAS_HEIGHT-7));
+		moveableElementUtils.add("displayTime", new DisplayTime(1, MyCanvas.CANVAS_HEIGHT-7));
 
 		
 //			ChapterLoader.loadChapter(new Chapter1());

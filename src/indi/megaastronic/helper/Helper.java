@@ -1,14 +1,14 @@
 package indi.megaastronic.helper;
 
 import application.Main;
-import indi.megaastronic.element.ANormalElement;
+import indi.megaastronic.element.BaseElement;
 import javafx.scene.canvas.GraphicsContext;
 /**
  * 用于辅助弹幕绘制，运行时不显示的元素
  * @author MegaAstronic
  *
  */
-public class Helper extends ANormalElement {
+public class Helper extends BaseElement {
 
 	public Helper(double x, double y) {
 		super(x, y);

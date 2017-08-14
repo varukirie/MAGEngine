@@ -1,6 +1,6 @@
 package indi.megaastronic.element;
 
-public abstract class ANormalElement implements Moveable, Paintable,Accelerated {
+public abstract class BaseElement implements Moveable, Paintable,Accelerated{
 
 	protected double x;
 	protected double y;
@@ -9,15 +9,15 @@ public abstract class ANormalElement implements Moveable, Paintable,Accelerated 
 	protected double accX = 0;
 	protected double accY = 0;
 	protected boolean deleted = false;
-	public ANormalElement(double x, double y) {
+	public BaseElement(double x, double y) {
 			this(x,y,0,0);
 	}
 	
-	public ANormalElement(double x, double y, double velocityX, double velocityY) {
+	public BaseElement(double x, double y, double velocityX, double velocityY) {
 		this(x,y,velocityX,velocityY,0,0);
 	}
 	
-	public ANormalElement(double x, double y, double velocityX, double velocityY,double ax,double ay) {
+	public BaseElement(double x, double y, double velocityX, double velocityY,double ax,double ay) {
 		super();
 		this.x = x;
 		this.y = y;

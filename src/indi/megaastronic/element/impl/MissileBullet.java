@@ -1,6 +1,6 @@
 package indi.megaastronic.element.impl;
 
-import indi.megaastronic.element.ANormalElement;
+import indi.megaastronic.element.BaseElement;
 import indi.megaastronic.element.Moveable;
 import javafx.scene.canvas.GraphicsContext;
 

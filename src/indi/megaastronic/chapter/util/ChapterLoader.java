@@ -3,7 +3,6 @@ package indi.megaastronic.chapter.util;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
-import application.Main;
 import indi.megaastronic.paint.MyCanvas;
 import indi.megaastronic.util.ElementUtils;
 /**

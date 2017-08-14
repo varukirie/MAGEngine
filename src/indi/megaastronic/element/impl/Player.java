@@ -9,8 +9,6 @@ import indi.megaastronic.element.Paintable;
 import indi.megaastronic.util.SpritePainter;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 /**
  * 玩家控制的物体
  * 单例设计模式

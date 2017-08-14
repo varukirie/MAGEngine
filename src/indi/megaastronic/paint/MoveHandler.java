@@ -1,12 +1,10 @@
 package indi.megaastronic.paint;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
-import application.Main;
 import indi.megaastronic.element.Accelerated;
 import indi.megaastronic.element.LimitedByCanvas;
 import indi.megaastronic.element.Moveable;
@@ -128,8 +126,6 @@ public class MoveHandler implements Runnable {
 	}
 	public void removeElement(String key){
 		mEU.removeBoth(key);
-//		wantMoveMap.remove(key);
-//		myCanvas.getWantPaintMap().remove(key);
 	}
 
 	public ElementUtils getmEU() {

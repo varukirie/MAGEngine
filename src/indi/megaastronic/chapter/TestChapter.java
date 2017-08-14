@@ -5,6 +5,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import indi.megaastronic.chapter.util.AChapter;
 import indi.megaastronic.chapter.util.QuickDanmuku;
 import indi.megaastronic.chapter.util.SeqDanmuku;
+import indi.megaastronic.element.impl.ArrowBullet;
 import indi.megaastronic.paint.MyCanvas;
 import indi.megaastronic.util.ElementUtils;
 
@@ -15,6 +16,7 @@ public class TestChapter extends AChapter {
 	int midY=200;
 	@Override
 	public void design(ScheduledExecutorService sES, MyCanvas staticCanvas, ElementUtils mEU) {
+		
 		SeqDanmuku seq = new SeqDanmuku(sES, mEU);
 		QuickDanmuku quick = new QuickDanmuku(mEU);
 		seq.rotate(midX, midY,2000,Math.PI*2/3);

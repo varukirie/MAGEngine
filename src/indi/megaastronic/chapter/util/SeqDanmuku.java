@@ -1,12 +1,9 @@
 package indi.megaastronic.chapter.util;
 
-import java.util.Random;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import indi.megaastronic.element.impl.Bullet;
-import indi.megaastronic.element.impl.ArrowBullet;
-import indi.megaastronic.element.impl.MissileBullet;
 import indi.megaastronic.element.impl.Player;
 import indi.megaastronic.helper.Helper;
 import indi.megaastronic.helper.OvalHelper;
@@ -37,6 +34,29 @@ public class SeqDanmuku {
 		int currentHelperCount=callCount++;
 		long interval=100;
 		Helper tHelper= new OvalHelper(midX,midY, helperLenght, 20,helperDelta);
+		sES.schedule(()->{
+			mEU.add("tHelper"+currentHelperCount, tHelper);
+		}, startTime, TimeUnit.MILLISECONDS);
+	
+		for(i=1;i<=count;i++){
+			sES.schedule(()->{
+						quick.snipe((midX+tHelper.getX())/2, (midY+ tHelper.getY())/2, 
+									tHelper.getX(), tHelper.getY(),0.4,bulletClass);
+			}, startTime+i*interval, TimeUnit.MILLISECONDS);
+		}
+		sES.schedule(()->{
+			mEU.removeBoth("tHelper"+currentHelperCount);
+		}, startTime+count*interval+1, TimeUnit.MILLISECONDS);
+	}
+	
+	public void arc(double midX,double midY,long startTime,double startAngle,double deltaAngle,Class<?> bulletClass) {
+		//TODO 未完成
+		int i;
+		double helperLenght = 70;
+		int count=70;
+		int currentHelperCount=callCount++;
+		long interval=100;
+		Helper tHelper= new OvalHelper(midX,midY, helperLenght, 20,startAngle);
 		sES.schedule(()->{
 			mEU.add("tHelper"+currentHelperCount, tHelper);
 		}, startTime, TimeUnit.MILLISECONDS);
