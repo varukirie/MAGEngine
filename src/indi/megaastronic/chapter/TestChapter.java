@@ -30,8 +30,8 @@ public class TestChapter extends AChapter {
 //		seq.rotate(midX+100, midY,2000,0);
 
 		
-//		seq.rotateSlash(midX, midY, 5000);
-//		seq.rotateSlash(midX-100, midY+100, 15000);
+		seq.rotateSlash(midX, midY, 5000);
+		seq.rotateSlash(midX-100, midY+100, 15000);
 //		
 //		seq.lineSnipe(midX, midY-100,0.5, 0, 1000);
 //		seq.lineSnipe(midX, midY-100,-0.5, 0, 1000);

@@ -27,7 +27,6 @@ public class SeqDanmuku {
 		rotate(midX, midY, startTime, helperDelta,Bullet.class);
 	}
 	public void rotate(double midX,double midY,long startTime,double helperDelta,Class<?> bulletClass) {
-		
 		int i;
 		double helperLenght = 70;
 		int count=70;

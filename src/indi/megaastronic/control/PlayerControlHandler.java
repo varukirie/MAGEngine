@@ -144,6 +144,7 @@ public class PlayerControlHandler {
 		ball.setVelocityX(dx * BALL_V / s);
 		ball.setVelocityY(dy * BALL_V / s);
 		elementUtils.add("ball" + ballCount++, ball);
+		
 	}
 	public static double getMouseX(){
 		return mouseX;

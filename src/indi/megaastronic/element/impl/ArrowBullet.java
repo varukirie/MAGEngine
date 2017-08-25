@@ -49,5 +49,6 @@ public class ArrowBullet extends Bullet {
 		double[][] ans= t.transform(in);
 		t.delta(ans, x, y);
 		gc.fillPolygon(ans[0],ans[1], 4);
+		
 	}
 }

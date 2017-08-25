@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 import indi.megaastronic.element.Accelerated;
 import indi.megaastronic.element.LimitedByCanvas;
@@ -28,6 +29,7 @@ public class MoveHandler implements Runnable {
 	public static double timeSpeed = DEFAULT_TIME_SPEED;
 	public static final long SLEEP_TIME = 16;
 	public static final long BLANK = 1;
+
 	private Map<String, Moveable> wantMoveMap = new ConcurrentHashMap<>();
 	private ElementUtils mEU = null;
 	

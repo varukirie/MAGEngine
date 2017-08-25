@@ -13,6 +13,9 @@ import indi.megaastronic.util.ElementUtils;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.effect.Effect;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -30,6 +33,7 @@ public class SceneManager {
 		root.getChildren().add(staticCanvas);
 		root.getChildren().add(moveableCanvas);
 		root.getChildren().add(secondaryMCanvas);
+
 		//
 		staticCanvas.getWantPaintMap().put("indicator", Player.getPlayer());
 		staticCanvas.repaint();
@@ -42,20 +46,23 @@ public class SceneManager {
 
 		//运行 线程MoveHandle
 		MoveHandler mh = new MoveHandler(moveableCanvas,secondaryMCanvas);
-		AnimationTimer timer = new AnimationTimer() {
-			@Override
-			public void handle(long now) {
-				mh.callRepaint();
-			}
-		};
-		timer.start();
-		
+
 		Thread mhThread = new Thread(mh);
 		mhThread.setPriority(Thread.MAX_PRIORITY);
 		mhThread.start();
 		
-		ElementUtils moveableElementUtils = new ElementUtils(mh, moveableCanvas);
+		ElementUtils moveableElementUtils = new ElementUtils(mh, moveableCanvas,root);
 		mh.setmEU(moveableElementUtils);
+		
+		AnimationTimer timer = new AnimationTimer() {
+			@Override
+			public void handle(long now) {
+				mh.callRepaint();
+				moveableElementUtils.getSwitcher().repaint();
+			}
+		};
+		timer.start();
+		
 		//关闭窗口时关闭所有线程
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
@@ -64,6 +71,7 @@ public class SceneManager {
 				ChapterLoader.getScheduledExecutorService().shutdownNow();//关闭关卡计划任务线程
 			}
 		});
+
 		
 		
 		//创建玩家

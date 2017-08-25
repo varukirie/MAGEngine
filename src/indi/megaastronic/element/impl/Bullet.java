@@ -73,6 +73,7 @@ public class Bullet extends BaseElement{
 		double[][] ans= t.transform(in);
 		t.delta(ans, x, y);
 		gc.fillPolygon(ans[0],ans[1], 6);
+		
 //		gc.strokePolygon(new double[]{
 //				x,x-3,x-6,x,x+6,x+3
 //		}, new double[]{
