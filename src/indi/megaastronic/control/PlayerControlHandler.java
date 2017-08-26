@@ -71,69 +71,71 @@ public class PlayerControlHandler {
 	// 顺序是上、右、下、左
 	public boolean[] pressed = new boolean[] { false, false, false, false };
 	private int ballCount = 0;
+	private void changeV(){
+		double vx =0;
+		double vy =0;
+		if(pressed[0]){
+			vy-=PLAYER_V;
+		}
+		if(pressed[2]){
+			vy+=PLAYER_V;
+		}
+		if(pressed[1]){
+			vx+=PLAYER_V;
+		}
+		if(pressed[3]){
+			vx-=PLAYER_V;
+		}
+		if(vx!=0&&vy!=0){
+			vx*=0.7071;
+			vy*=0.7071;
+		}
+		player.setVelocityX(vx);
+		player.setVelocityY(vy);
+	}
 
 	@SuppressWarnings("incomplete-switch")
 	public void pressHandle(KeyEvent e) {
 
 		switch (e.getCode()) {
 		case W:
-			player.setVelocityY(-PLAYER_V);
 			pressed[0] = true;
 			break;
 		case D:
-			player.setVelocityX(PLAYER_V);
 			pressed[1] = true;
 			break;
 		case S:
-			player.setVelocityY(PLAYER_V);
 			pressed[2] = true;
 			break;
 		case A:
-			player.setVelocityX(-PLAYER_V);
 			pressed[3] = true;
 			break;
 		case SPACE:
 			MoveHandler.timeSpeed = MoveHandler.DEFAULT_TIME_SPEED*0.3 ;//MoveHandler.DEFAULT_TIME_SPEED
 			break;
 		}
+		changeV();
 	}
 	// 顺序是上、右、下、左
 	@SuppressWarnings("incomplete-switch")
 	public void releaseHandle(KeyEvent e) {
 		switch (e.getCode()) {
 		case W:
-			if (pressed[2] == false)
-				player.setVelocityY(0);
-			else
-				player.setVelocityY(PLAYER_V);
 			pressed[0] = false;
 			break;
 		case D:
-			if (pressed[3] != true)
-				player.setVelocityX(0);
-			else
-				player.setVelocityX(-PLAYER_V);
-
 			pressed[1] = false;
 			break;
 		case S:
-			if (pressed[0] != true)
-				player.setVelocityY(0);
-			else
-				player.setVelocityY(-PLAYER_V);
-
 			pressed[2] = false;
 			break;
 		case A:
-			if (pressed[1] != true)
-				player.setVelocityX(0);
-			else
-				player.setVelocityX(PLAYER_V);
 			pressed[3] = false;
 			break;
 		case SPACE:
 			MoveHandler.timeSpeed = MoveHandler.DEFAULT_TIME_SPEED;
 		}
+		changeV();
 	}
 
 	private void playerShootToMouse() {
