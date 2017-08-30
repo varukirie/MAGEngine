@@ -1,9 +1,14 @@
-package indi.megaastronic.element.impl;
+package indi.megaastronic.bullet;
 
 import com.badlogic.gdx.math.Polygon;
 
 import indi.megaastronic.util.Transform;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.paint.Color;
 
 public class DefaultBullet extends PolygonBullet {
 
@@ -51,6 +56,13 @@ public class DefaultBullet extends PolygonBullet {
 	@Override
 	protected double[][] getOrigin() {
 		return origin;
+	}
+	@Override
+	public void paint(GraphicsContext gc) {
+//		gc.setFill(Color.WHITE);
+//		gc.setEffect(new Bloom(0.999));
+		super.paint(gc);
+//		gc.setEffect(null);
 	}
 
 

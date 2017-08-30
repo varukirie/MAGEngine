@@ -23,7 +23,7 @@ public class Helper extends BaseElement {
 	@Override
 	public void paint(GraphicsContext gc) {
 		if(Main.DEBUG){
-			gc.fillText("x", this.x, this.y);
+			gc.fillText("x", getX(), getY());
 		}
 	}
 

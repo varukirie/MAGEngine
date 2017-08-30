@@ -1,4 +1,4 @@
-package indi.megaastronic.element.impl;
+package indi.megaastronic.bullet;
 
 import com.badlogic.gdx.math.Polygon;
 
@@ -49,7 +49,7 @@ public abstract class PolygonBullet extends Bullet implements PolygonCollision{
 			{-velocityY/s , velocityX/s }, 
 			{-velocityX/s,-velocityY/s } });
 		double[][] ans= t.transform(origin);
-		t.delta(ans, x, y);
+		t.delta(ans, getX(), getY());
 		return ans;
 	}
 	

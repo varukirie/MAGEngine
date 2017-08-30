@@ -39,8 +39,8 @@ public class OvalHelper extends Helper implements Initializable{
 	
 	@Override
 	public void modify() {
-		this.x=this.ovalX+r*Math.cos((System.currentTimeMillis()-startTime)*speed/BLANK );
-		this.y=this.ovalY+r*Math.sin((System.currentTimeMillis()-startTime)*speed/BLANK );
+		setX(this.ovalX+r*Math.cos((System.currentTimeMillis()-startTime)*speed/BLANK ));
+		setY(this.ovalY+r*Math.sin((System.currentTimeMillis()-startTime)*speed/BLANK ));
 	}
 	@Override
 	public void init() {

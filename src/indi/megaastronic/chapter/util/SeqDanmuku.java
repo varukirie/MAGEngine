@@ -3,8 +3,8 @@ package indi.megaastronic.chapter.util;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import indi.megaastronic.element.impl.Bullet;
-import indi.megaastronic.element.impl.DefaultBullet;
+import indi.megaastronic.bullet.Bullet;
+import indi.megaastronic.bullet.DefaultBullet;
 import indi.megaastronic.element.impl.Player;
 import indi.megaastronic.helper.Helper;
 import indi.megaastronic.helper.OvalHelper;

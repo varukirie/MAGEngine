@@ -3,9 +3,9 @@ package indi.megaastronic.chapter.util;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
+import indi.megaastronic.bullet.Bullet;
+import indi.megaastronic.bullet.DefaultBullet;
 import indi.megaastronic.element.Moveable;
-import indi.megaastronic.element.impl.Bullet;
-import indi.megaastronic.element.impl.DefaultBullet;
 import indi.megaastronic.util.ElementUtils;
 import indi.megaastronic.util.Transform;
 

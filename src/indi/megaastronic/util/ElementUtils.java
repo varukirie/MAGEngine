@@ -2,11 +2,11 @@ package indi.megaastronic.util;
 
 import java.util.Map;
 
+import indi.megaastronic.bullet.Bullet;
 import indi.megaastronic.element.BaseElement;
 import indi.megaastronic.element.Initializable;
 import indi.megaastronic.element.Moveable;
 import indi.megaastronic.element.Paintable;
-import indi.megaastronic.element.impl.Bullet;
 import indi.megaastronic.paint.MoveHandler;
 import indi.megaastronic.paint.MyCanvas;
 import javafx.scene.layout.StackPane;

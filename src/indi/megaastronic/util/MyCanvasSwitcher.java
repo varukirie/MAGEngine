@@ -60,6 +60,9 @@ public class MyCanvasSwitcher {
 		}
 		switchCount=(switchCount+1)%2;
 	}
+	
+
+	
 	private void createCanvas(Class<?> cls){
 		MyCanvas canvas = new MyCanvas();
 		MyCanvas scanvas = new MyCanvas(canvas.getWantPaintMap());

@@ -1,11 +1,11 @@
 package indi.megaastronic.ui;
 
 import application.Main;
+import indi.megaastronic.bullet.ArrowBullet;
+import indi.megaastronic.bullet.Bullet;
 import indi.megaastronic.chapter.TestChapter;
 import indi.megaastronic.chapter.util.ChapterLoader;
 import indi.megaastronic.control.PlayerControlHandler;
-import indi.megaastronic.element.impl.ArrowBullet;
-import indi.megaastronic.element.impl.Bullet;
 import indi.megaastronic.element.impl.DisplayTime;
 import indi.megaastronic.element.impl.Player;
 import indi.megaastronic.paint.MoveHandler;

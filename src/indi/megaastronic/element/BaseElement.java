@@ -1,9 +1,12 @@
 package indi.megaastronic.element;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+
 public abstract class BaseElement implements Moveable, Paintable,Accelerated{
 
-	protected double x;
-	protected double y;
+	protected DoubleProperty xProperty=new SimpleDoubleProperty();
+	protected DoubleProperty yProperty=new SimpleDoubleProperty();
 	protected double velocityX=0;
 	protected double velocityY=0;
 	protected double accX = 0;
@@ -19,8 +22,8 @@ public abstract class BaseElement implements Moveable, Paintable,Accelerated{
 	
 	public BaseElement(double x, double y, double velocityX, double velocityY,double ax,double ay) {
 		super();
-		this.x = x;
-		this.y = y;
+		this.xProperty.set(x);
+		this.yProperty.set(y);
 		this.velocityX = velocityX;
 		this.velocityY = velocityY;
 		this.accX=ax;
@@ -28,16 +31,16 @@ public abstract class BaseElement implements Moveable, Paintable,Accelerated{
 	}
 
 	public double getX() {
-		return x;
+		return xProperty.get();
 	}
 	public void setX(double x) {
-		this.x = x;
+		this.xProperty.set(x);
 	}
 	public double getY() {
-		return y;
+		return yProperty.get();
 	}
 	public void setY(double y) {
-		this.y = y;
+		this.yProperty.set(y);
 	}
 	public double getVelocityX() {
 		return velocityX;
@@ -74,6 +77,13 @@ public abstract class BaseElement implements Moveable, Paintable,Accelerated{
 
 	public void setDeleted(boolean isDelete) {
 		this.deleted = isDelete;
+	}
+	
+	public DoubleProperty getxProperty() {
+		return xProperty;
+	}
+	public DoubleProperty getyProperty() {
+		return yProperty;
 	}
 	
 	

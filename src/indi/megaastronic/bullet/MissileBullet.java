@@ -1,7 +1,8 @@
-package indi.megaastronic.element.impl;
+package indi.megaastronic.bullet;
 
 import indi.megaastronic.element.BaseElement;
 import indi.megaastronic.element.Moveable;
+import indi.megaastronic.element.impl.Player;
 import javafx.scene.canvas.GraphicsContext;
 
 public class MissileBullet extends Bullet {
@@ -24,8 +25,8 @@ public class MissileBullet extends Bullet {
 	public void modify() {
 		super.modify();
 		if(target!=null){
-			double dx = target.getX() - x;
-			double dy = target.getY() - y;
+			double dx = target.getX() - getX();
+			double dy = target.getY() - getY();
 			double s = Math.sqrt(dx * dx + dy * dy);
 //			this.setAccX(dx *v/ s);
 //			this.setAccY(dy *v/ s);
@@ -38,7 +39,7 @@ public class MissileBullet extends Bullet {
 	
 	@Override
 	public void paint(GraphicsContext gc) {
-		gc.fillOval(x, y, 10, 10);
+		gc.fillOval(getX(), getY(), 10, 10);
 	}
 
 	public Moveable getTarget() {

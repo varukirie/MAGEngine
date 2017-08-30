@@ -1,6 +1,6 @@
 package indi.megaastronic.control;
 
-import indi.megaastronic.element.impl.DefaultBullet;
+import indi.megaastronic.bullet.DefaultBullet;
 import indi.megaastronic.element.impl.Player;
 import indi.megaastronic.paint.MoveHandler;
 import indi.megaastronic.util.ElementUtils;

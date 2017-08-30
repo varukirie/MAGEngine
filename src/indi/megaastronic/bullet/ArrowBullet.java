@@ -1,4 +1,4 @@
-package indi.megaastronic.element.impl;
+package indi.megaastronic.bullet;
 
 import com.badlogic.gdx.math.Polygon;
 

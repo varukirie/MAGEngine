@@ -14,7 +14,7 @@ public class DisplayTime extends BaseElement {
 
 	@Override
 	public void paint(GraphicsContext gc) {
-		gc.fillText("Time = "+(System.currentTimeMillis()-this.startTime)/1000, x, y);
+		gc.fillText("Time = "+(System.currentTimeMillis()-this.startTime)/1000, getX(), getY());
 	}
 
 }
