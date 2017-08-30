@@ -21,12 +21,13 @@ public class TestChapter extends AChapter {
 		SeqDanmuku seq = new SeqDanmuku(sES, mEU);
 		QuickDanmuku quick = new QuickDanmuku(mEU);
 		Random r= new Random();
+		long interval = 700;
 		for(int i=1;i<=3600;i++){
 			int x=midX+r.nextInt(200);
 			int y= midY+r.nextInt(200);
-			seq.rotate(x,y,1000*i,Math.PI*2/3);
-			seq.rotate(x,y,1000*i,Math.PI*4/3);
-			seq.rotate(x,y,1000*i,Math.PI*6/3);
+			seq.rotate(x,y,interval*i,Math.PI*2/3);
+			seq.rotate(x,y,interval*i,Math.PI*4/3);
+			seq.rotate(x,y,interval*i,Math.PI*6/3);
 		}
 
 		

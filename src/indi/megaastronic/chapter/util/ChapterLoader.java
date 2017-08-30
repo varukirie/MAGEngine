@@ -18,7 +18,7 @@ public class ChapterLoader {
 		
 	}
 	
-	private static ScheduledExecutorService scheduleES=Executors.newScheduledThreadPool(12);
+	private static ScheduledExecutorService scheduleES=Executors.newScheduledThreadPool(3);
 	
 	public static void init(MyCanvas staticCanvas,ElementUtils mEU){
 		ChapterLoader.staticCanvas = staticCanvas ;
@@ -30,6 +30,7 @@ public class ChapterLoader {
 		c.design(scheduleES,staticCanvas,mEU);
 		long end = System.currentTimeMillis();
 		System.out.println("装载关卡使用 "+(end-start)+" 毫秒");
+		System.gc();
 	}
 	
 	public static void loadChapter(String chapterName) throws Exception{

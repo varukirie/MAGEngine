@@ -104,7 +104,6 @@ public class MoveHandler implements Runnable {
 							//System.out.println("碰撞! x="+m.getX()+" | y="+m.getY());
 							if(Main.DEBUG_COLLISION){
 							
-								myCanvas.getGraphicsContext2D().strokeRoundRect(m.getX()-5, m.getY()-5, 20, 20, 5, 5);
 							}
 						}
 							
@@ -113,7 +112,9 @@ public class MoveHandler implements Runnable {
 			}
 
 			if(Main.DEBUG_BENCH){
+				
 				System.out.println("1.游戏逻辑 "+(System.currentTimeMillis()-lastTime)+"ms");
+//				if((System.currentTimeMillis()-lastTime)>200) throw new RuntimeException("可能gc触发");
 			}
 			this.lastTime = currentTime;
 			
