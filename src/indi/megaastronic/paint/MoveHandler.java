@@ -1,15 +1,19 @@
 package indi.megaastronic.paint;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 
+import application.Main;
 import indi.megaastronic.element.Accelerated;
 import indi.megaastronic.element.LimitedByCanvas;
 import indi.megaastronic.element.Moveable;
+import indi.megaastronic.element.PolygonCollision;
 import indi.megaastronic.element.impl.Player;
+import indi.megaastronic.util.CollisionUtil;
 import indi.megaastronic.util.ElementUtils;
 
 /**
@@ -62,7 +66,7 @@ public class MoveHandler implements Runnable {
 				entry = iter.next();
 				m = entry.getValue();
 				m.modify();
-				
+
 				// 使用加速度计算速度
 				if (m instanceof Accelerated) {
 					m.setVelocityX(m.getVelocityX() + (currentTime - this.lastTime) * ((Accelerated) m).getAccX()
@@ -94,11 +98,23 @@ public class MoveHandler implements Runnable {
 						removeElement(entry.getKey());	
 					}
 				}
+				if(m instanceof PolygonCollision){
+					if(m!=Player.getPlayer()){
+						if(CollisionUtil.PolygonDetect(Player.getPlayer(), (PolygonCollision) m)){
+							//System.out.println("碰撞! x="+m.getX()+" | y="+m.getY());
+							if(Main.DEBUG_COLLISION){
+							
+								myCanvas.getGraphicsContext2D().strokeRoundRect(m.getX()-5, m.getY()-5, 20, 20, 5, 5);
+							}
+						}
+							
+					}
+				}
 			}
 
-//			if(Main.DEBUG){
-//				System.out.println("1.cal use "+(currentTime-lastTime)+"ms");
-//			}
+			if(Main.DEBUG_BENCH){
+				System.out.println("1.游戏逻辑 "+(System.currentTimeMillis()-lastTime)+"ms");
+			}
 			this.lastTime = currentTime;
 			
 			try {

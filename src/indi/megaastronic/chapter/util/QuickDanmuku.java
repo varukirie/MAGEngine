@@ -5,6 +5,7 @@ import java.util.Random;
 
 import indi.megaastronic.element.Moveable;
 import indi.megaastronic.element.impl.Bullet;
+import indi.megaastronic.element.impl.DefaultBullet;
 import indi.megaastronic.util.ElementUtils;
 import indi.megaastronic.util.Transform;
 
@@ -20,14 +21,14 @@ public class QuickDanmuku {
 	}
 	
 	public void slash(double x,double y,double speed){
-		mEU.add("dd"+count++, new Bullet(x, y,speed,0));
-		mEU.add("aa"+count++, new Bullet(x, y,-speed,0));
-		mEU.add("ss"+count++, new Bullet(x, y,0,speed));
-		mEU.add("ww"+count++, new Bullet(x, y,0,-speed));
-		mEU.add("aw"+count++, new Bullet(x, y,-speed*sqrt2d2,-speed*sqrt2d2));
-		mEU.add("dw"+count++, new Bullet(x, y,speed*sqrt2d2,-speed*sqrt2d2));
-		mEU.add("as"+count++, new Bullet(x, y,-speed*sqrt2d2,speed*sqrt2d2));
-		mEU.add("ds"+count++, new Bullet(x, y,speed*sqrt2d2,speed*sqrt2d2));
+		mEU.add("dd"+count++, new DefaultBullet(x, y,speed,0));
+		mEU.add("aa"+count++, new DefaultBullet(x, y,-speed,0));
+		mEU.add("ss"+count++, new DefaultBullet(x, y,0,speed));
+		mEU.add("ww"+count++, new DefaultBullet(x, y,0,-speed));
+		mEU.add("aw"+count++, new DefaultBullet(x, y,-speed*sqrt2d2,-speed*sqrt2d2));
+		mEU.add("dw"+count++, new DefaultBullet(x, y,speed*sqrt2d2,-speed*sqrt2d2));
+		mEU.add("as"+count++, new DefaultBullet(x, y,-speed*sqrt2d2,speed*sqrt2d2));
+		mEU.add("ds"+count++, new DefaultBullet(x, y,speed*sqrt2d2,speed*sqrt2d2));
 	}
 	
 	
@@ -42,14 +43,14 @@ public class QuickDanmuku {
 		Transform tsf=new Transform(t);
 		
 		
-		mEU.add("dd"+count++, new Bullet(x, y,tsf.transform(speed,0)));
-		mEU.add("aa"+count++, new Bullet(x, y,tsf.transform(-speed,0)));
-		mEU.add("ss"+count++, new Bullet(x, y,tsf.transform(0,speed)));
-		mEU.add("ww"+count++, new Bullet(x, y,tsf.transform(0,-speed)));
-		mEU.add("aw"+count++, new Bullet(x, y,tsf.transform(-speed*sqrt2d2,-speed*sqrt2d2)));
-		mEU.add("dw"+count++, new Bullet(x, y,tsf.transform(speed*sqrt2d2,-speed*sqrt2d2)));
-		mEU.add("as"+count++, new Bullet(x, y,tsf.transform(-speed*sqrt2d2,speed*sqrt2d2)));
-		mEU.add("ds"+count++, new Bullet(x, y,tsf.transform(speed*sqrt2d2,speed*sqrt2d2)));
+		mEU.add("dd"+count++, new DefaultBullet(x, y,tsf.transform(speed,0)));
+		mEU.add("aa"+count++, new DefaultBullet(x, y,tsf.transform(-speed,0)));
+		mEU.add("ss"+count++, new DefaultBullet(x, y,tsf.transform(0,speed)));
+		mEU.add("ww"+count++, new DefaultBullet(x, y,tsf.transform(0,-speed)));
+		mEU.add("aw"+count++, new DefaultBullet(x, y,tsf.transform(-speed*sqrt2d2,-speed*sqrt2d2)));
+		mEU.add("dw"+count++, new DefaultBullet(x, y,tsf.transform(speed*sqrt2d2,-speed*sqrt2d2)));
+		mEU.add("as"+count++, new DefaultBullet(x, y,tsf.transform(-speed*sqrt2d2,speed*sqrt2d2)));
+		mEU.add("ds"+count++, new DefaultBullet(x, y,tsf.transform(speed*sqrt2d2,speed*sqrt2d2)));
 	}
 	
 	/**
@@ -63,26 +64,26 @@ public class QuickDanmuku {
 		Transform tsf=new Transform(t);
 		
 		
-		mEU.add("dd"+count++, new Bullet(x, y,0,0,tsf.transform(accRate,0)));
-		mEU.add("aa"+count++, new Bullet(x, y,0,0,tsf.transform(-accRate,0)));
-		mEU.add("ss"+count++, new Bullet(x, y,0,0,tsf.transform(0,accRate)));
-		mEU.add("ww"+count++, new Bullet(x, y,0,0,tsf.transform(0,-accRate)));
-		mEU.add("aw"+count++, new Bullet(x, y,0,0,tsf.transform(-accRate*sqrt2d2,-accRate*sqrt2d2)));
-		mEU.add("dw"+count++, new Bullet(x, y,0,0,tsf.transform(accRate*sqrt2d2,-accRate*sqrt2d2)));
-		mEU.add("as"+count++, new Bullet(x, y,0,0,tsf.transform(-accRate*sqrt2d2,accRate*sqrt2d2)));
-		mEU.add("ds"+count++, new Bullet(x, y,0,0,tsf.transform(accRate*sqrt2d2,accRate*sqrt2d2)));
+		mEU.add("dd"+count++, new DefaultBullet(x, y,0,0,tsf.transform(accRate,0)));
+		mEU.add("aa"+count++, new DefaultBullet(x, y,0,0,tsf.transform(-accRate,0)));
+		mEU.add("ss"+count++, new DefaultBullet(x, y,0,0,tsf.transform(0,accRate)));
+		mEU.add("ww"+count++, new DefaultBullet(x, y,0,0,tsf.transform(0,-accRate)));
+		mEU.add("aw"+count++, new DefaultBullet(x, y,0,0,tsf.transform(-accRate*sqrt2d2,-accRate*sqrt2d2)));
+		mEU.add("dw"+count++, new DefaultBullet(x, y,0,0,tsf.transform(accRate*sqrt2d2,-accRate*sqrt2d2)));
+		mEU.add("as"+count++, new DefaultBullet(x, y,0,0,tsf.transform(-accRate*sqrt2d2,accRate*sqrt2d2)));
+		mEU.add("ds"+count++, new DefaultBullet(x, y,0,0,tsf.transform(accRate*sqrt2d2,accRate*sqrt2d2)));
 	}
 	
 
 	
 	public void snipe(double sx,double sy,double tx,double ty,double v){
-		snipe(sx, sy, tx, ty, v, Bullet.class);
+		snipe(sx, sy, tx, ty, v, DefaultBullet.class);
 	}
 	public void snipe(double sx,double sy,double tx,double ty,double v,Class<?> bulletClass){
 		double dx = sx - tx;
 		double dy = sy - ty;
 		double s = Math.sqrt(dx * dx + dy * dy);
-//		Bullet bullet =new Bullet(sx, sy);
+//		DefaultBullet DefaultBullet =new DefaultBullet(sx, sy);
 		Bullet bullet=null;
 		try {
 			bullet =(Bullet) bulletClass.getConstructor(double.class,double.class).newInstance(sx,sy);
@@ -99,7 +100,7 @@ public class QuickDanmuku {
 		double dx = sx - tx;
 		double dy = sy - ty;
 		double s = Math.sqrt(dx * dx + dy * dy);
-		Bullet bullet =new Bullet(sx, sy);
+		DefaultBullet bullet =new DefaultBullet(sx, sy);
 		bullet.setAccX(-dx *v/ s);
 		bullet.setAccY(-dy *v/ s);
 		mEU.add("snipe"+r.nextInt(), bullet);

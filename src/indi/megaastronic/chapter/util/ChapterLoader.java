@@ -18,7 +18,7 @@ public class ChapterLoader {
 		
 	}
 	
-	private static ScheduledExecutorService scheduleES=Executors.newScheduledThreadPool(2);
+	private static ScheduledExecutorService scheduleES=Executors.newScheduledThreadPool(12);
 	
 	public static void init(MyCanvas staticCanvas,ElementUtils mEU){
 		ChapterLoader.staticCanvas = staticCanvas ;

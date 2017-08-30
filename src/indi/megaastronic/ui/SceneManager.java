@@ -1,5 +1,6 @@
 package indi.megaastronic.ui;
 
+import application.Main;
 import indi.megaastronic.chapter.TestChapter;
 import indi.megaastronic.chapter.util.ChapterLoader;
 import indi.megaastronic.control.PlayerControlHandler;
@@ -57,8 +58,12 @@ public class SceneManager {
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
+//				long lasttime=System.currentTimeMillis();
 				mh.callRepaint();
 				moveableElementUtils.getSwitcher().repaint();
+//				if(Main.DEBUG_BENCH){
+//					System.out.println("2.渲染"+(System.currentTimeMillis()-lasttime)+"ms");
+//				}
 			}
 		};
 		timer.start();

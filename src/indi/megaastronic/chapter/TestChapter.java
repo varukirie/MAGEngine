@@ -1,5 +1,6 @@
 package indi.megaastronic.chapter;
 
+import java.util.Random;
 import java.util.concurrent.ScheduledExecutorService;
 
 import indi.megaastronic.chapter.util.AChapter;
@@ -19,9 +20,15 @@ public class TestChapter extends AChapter {
 		
 		SeqDanmuku seq = new SeqDanmuku(sES, mEU);
 		QuickDanmuku quick = new QuickDanmuku(mEU);
-		seq.rotate(midX, midY,2000,Math.PI*2/3);
-		seq.rotate(midX, midY,2000,Math.PI*4/3);
-		seq.rotate(midX, midY,2000,Math.PI*6/3);
+		Random r= new Random();
+		for(int i=1;i<=3600;i++){
+			int x=midX+r.nextInt(200);
+			int y= midY+r.nextInt(200);
+			seq.rotate(x,y,1000*i,Math.PI*2/3);
+			seq.rotate(x,y,1000*i,Math.PI*4/3);
+			seq.rotate(x,y,1000*i,Math.PI*6/3);
+		}
+
 		
 		//seq.rotate(midX-100, midY,2000,0);
 		//seq.rotate(midX-100, midY,2000,Math.PI);
@@ -30,8 +37,8 @@ public class TestChapter extends AChapter {
 //		seq.rotate(midX+100, midY,2000,0);
 
 		
-		seq.rotateSlash(midX, midY, 5000);
-		seq.rotateSlash(midX-100, midY+100, 15000);
+//		seq.rotateSlash(midX, midY, 5000);
+//		seq.rotateSlash(midX-100, midY+100, 15000);
 //		
 //		seq.lineSnipe(midX, midY-100,0.5, 0, 1000);
 //		seq.lineSnipe(midX, midY-100,-0.5, 0, 1000);

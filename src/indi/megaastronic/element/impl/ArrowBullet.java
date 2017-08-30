@@ -1,5 +1,7 @@
 package indi.megaastronic.element.impl;
 
+import com.badlogic.gdx.math.Polygon;
+
 import indi.megaastronic.util.Transform;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -8,7 +10,7 @@ import javafx.scene.canvas.GraphicsContext;
  * @author Astronic
  *
  */
-public class ArrowBullet extends Bullet {
+public class ArrowBullet extends PolygonBullet {
 
 	public ArrowBullet(double x, double y) {
 		super(x, y);
@@ -32,23 +34,20 @@ public class ArrowBullet extends Bullet {
 		super(x,y,vx,vy,ax,ay);
 	}
 	
+	private static final double[][] origin=new double[][]{
+		{
+			0,-9,0,9
+		},
+		{
+			-13,12,5,12
+		}
+	};
+	
+
+
 	@Override
-	public void paint(GraphicsContext gc) {
-		final double[][] in=new double[][]{
-			{
-				0,-9,0,9
-			},
-			{
-				-13,12,5,12
-			}
-		};
-		double s = Math.sqrt(velocityX*velocityX+velocityY*velocityY);
-		Transform t= new Transform(new double[][] {
-			{-velocityY/s , velocityX/s }, 
-			{-velocityX/s,-velocityY/s } });
-		double[][] ans= t.transform(in);
-		t.delta(ans, x, y);
-		gc.fillPolygon(ans[0],ans[1], 4);
-		
+	protected double[][] getOrigin() {
+		return origin;
 	}
+
 }

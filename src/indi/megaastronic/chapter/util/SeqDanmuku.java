@@ -4,6 +4,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import indi.megaastronic.element.impl.Bullet;
+import indi.megaastronic.element.impl.DefaultBullet;
 import indi.megaastronic.element.impl.Player;
 import indi.megaastronic.helper.Helper;
 import indi.megaastronic.helper.OvalHelper;
@@ -24,7 +25,7 @@ public class SeqDanmuku {
 	}
 		
 	public void rotate(double midX,double midY,long startTime,double helperDelta){
-		rotate(midX, midY, startTime, helperDelta,Bullet.class);
+		rotate(midX, midY, startTime, helperDelta,DefaultBullet.class);
 	}
 	public void rotate(double midX,double midY,long startTime,double helperDelta,Class<?> bulletClass) {
 		int i;

@@ -1,6 +1,6 @@
 package indi.megaastronic.control;
 
-import indi.megaastronic.element.impl.Bullet;
+import indi.megaastronic.element.impl.DefaultBullet;
 import indi.megaastronic.element.impl.Player;
 import indi.megaastronic.paint.MoveHandler;
 import indi.megaastronic.util.ElementUtils;
@@ -30,6 +30,8 @@ public class PlayerControlHandler {
 	
 	public static PlayerControlHandler getPlayerControlHandler(ElementUtils eu, Player player){
 		if(pch==null){
+			if(eu==null||player==null)
+				throw new RuntimeException("未接收到Player或者ElementUtils");
 			pch=new PlayerControlHandler(eu, player);
 		}
 		return pch;
@@ -139,7 +141,7 @@ public class PlayerControlHandler {
 	}
 
 	private void playerShootToMouse() {
-		Bullet ball = new Bullet(player.getX(), player.getY());
+		DefaultBullet ball = new DefaultBullet(player.getX(), player.getY());
 		double dx = PlayerControlHandler.mouseX - player.getX();
 		double dy = PlayerControlHandler.mouseY - player.getY();
 		double s = Math.sqrt(dx * dx + dy * dy);
