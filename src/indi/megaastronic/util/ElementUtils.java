@@ -1,12 +1,14 @@
 package indi.megaastronic.util;
 
 import java.util.Map;
+import java.util.concurrent.ScheduledExecutorService;
 
 import indi.megaastronic.bullet.Bullet;
 import indi.megaastronic.element.BaseElement;
 import indi.megaastronic.element.Initializable;
 import indi.megaastronic.element.Moveable;
 import indi.megaastronic.element.Paintable;
+import indi.megaastronic.launcher.BulletEvent;
 import indi.megaastronic.paint.MoveHandler;
 import indi.megaastronic.paint.MyCanvas;
 import javafx.scene.layout.StackPane;
@@ -34,7 +36,7 @@ public class ElementUtils {
 	 */
 	public void add(String name,Object value){
 		if(value instanceof Initializable){
-			((Initializable) value).init();
+			((Initializable) value).initWhenAdd();
 		}
 		if(mh!=null)
 			if(value instanceof Moveable)
@@ -91,5 +93,11 @@ public class ElementUtils {
 		this.myCanvas = myCanvas;
 	}
 	
+	public void addEventBullet(String name,BulletEvent be,Bullet bullet){
+		add(name, bullet);
+		if(be!=null){
+			be.event((ScheduledExecutorService) DI.di().get("sES"), bullet);
+		}
+	}
 	
 }

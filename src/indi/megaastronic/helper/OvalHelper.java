@@ -15,6 +15,8 @@ public class OvalHelper extends Helper implements Initializable{
 	private static final double BLANK=10000;
 	private double speed;
 	private double delta;
+	private double direction=0;
+	private boolean positive=true;
 	
 	public OvalHelper(double x, double y,double r,double speed) {
 		this(x,y,r,speed,0);
@@ -39,12 +41,26 @@ public class OvalHelper extends Helper implements Initializable{
 	
 	@Override
 	public void modify() {
-		setX(this.ovalX+r*Math.cos((System.currentTimeMillis()-startTime)*speed/BLANK ));
-		setY(this.ovalY+r*Math.sin((System.currentTimeMillis()-startTime)*speed/BLANK ));
+		if(positive){
+			this.direction=(System.currentTimeMillis()-startTime)*speed/BLANK ;
+		}else{
+			this.direction=-(System.currentTimeMillis()-startTime)*speed/BLANK ;
+		}
+		setX(this.ovalX+r*Math.cos(direction));
+		setY(this.ovalY+r*Math.sin(direction));
 	}
 	@Override
-	public void init() {
+	public void initWhenAdd() {
 		this.startTime=(long) (System.currentTimeMillis()+(delta*BLANK/speed));
+	}
+	public double getDirection() {
+		return direction;
+	}
+	public void setPositive(boolean positive) {
+		this.positive = positive;
+	}
+	public boolean getPositive() {
+		return positive;
 	}
 	
 

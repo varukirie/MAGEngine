@@ -10,6 +10,7 @@ import indi.megaastronic.element.impl.DisplayTime;
 import indi.megaastronic.element.impl.Player;
 import indi.megaastronic.paint.MoveHandler;
 import indi.megaastronic.paint.MyCanvas;
+import indi.megaastronic.util.DI;
 import indi.megaastronic.util.ElementUtils;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -47,13 +48,15 @@ public class SceneManager {
 
 		//运行 线程MoveHandle
 		MoveHandler mh = new MoveHandler(moveableCanvas,secondaryMCanvas);
-
+		DI.di().put("mh", mh);
+		
 		Thread mhThread = new Thread(mh);
 		mhThread.setPriority(Thread.MAX_PRIORITY);
 		mhThread.start();
 		
 		ElementUtils moveableElementUtils = new ElementUtils(mh, moveableCanvas,root);
 		mh.setmEU(moveableElementUtils);
+		DI.di().put("mEU", moveableElementUtils);
 		
 		AnimationTimer timer = new AnimationTimer() {
 			@Override

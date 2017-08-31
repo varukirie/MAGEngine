@@ -13,6 +13,7 @@ import indi.megaastronic.element.LimitedByCanvas;
 import indi.megaastronic.element.Moveable;
 import indi.megaastronic.element.PolygonCollision;
 import indi.megaastronic.element.impl.Player;
+import indi.megaastronic.launcher.Launcher;
 import indi.megaastronic.util.CollisionUtil;
 import indi.megaastronic.util.ElementUtils;
 
@@ -31,7 +32,7 @@ public class MoveHandler implements Runnable {
 	 * 全局速度
 	 */
 	public static double timeSpeed = DEFAULT_TIME_SPEED;
-	public static final long SLEEP_TIME = 16;
+	public static final long SLEEP_TIME = 12;
 	public static final long BLANK = 1;
 
 	private Map<String, Moveable> wantMoveMap = new ConcurrentHashMap<>();
@@ -66,6 +67,17 @@ public class MoveHandler implements Runnable {
 				entry = iter.next();
 				m = entry.getValue();
 				m.modify();
+				if(m instanceof Launcher){
+					Launcher l=(Launcher) m;
+					if(System.currentTimeMillis()-l.getStartTime()>l.getDuration()){
+						removeElement(entry.getKey());
+						continue;
+					}
+					if(System.currentTimeMillis()-l.getLastLaunch()>l.getInterval()){
+						l.setLastLaunch(System.currentTimeMillis());
+						l.launch();
+					}
+				}
 
 				// 使用加速度计算速度
 				if (m instanceof Accelerated) {
@@ -96,6 +108,7 @@ public class MoveHandler implements Runnable {
 //						m.setX(nextX);
 //						m.setY(nextY);
 						removeElement(entry.getKey());	
+						continue;
 					}
 				}
 				if(m instanceof PolygonCollision){

@@ -4,6 +4,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 import indi.megaastronic.paint.MyCanvas;
+import indi.megaastronic.util.DI;
 import indi.megaastronic.util.ElementUtils;
 /**
  * 此类负责装载游戏关卡
@@ -23,7 +24,7 @@ public class ChapterLoader {
 	public static void init(MyCanvas staticCanvas,ElementUtils mEU){
 		ChapterLoader.staticCanvas = staticCanvas ;
 		ChapterLoader.mEU = mEU;
-		
+		DI.di().put("sES", scheduleES);
 	}
 	public static void loadChapter(AChapter c){
 		long start = System.currentTimeMillis();
