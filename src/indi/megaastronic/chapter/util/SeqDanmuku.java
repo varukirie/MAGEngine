@@ -45,7 +45,8 @@ public class SeqDanmuku {
 			timer.schedule(() -> {
 				bullet.setVelocityX(bullet.getVelocityX()*200);
 				bullet.setVelocityY(bullet.getVelocityY()*200);
-				quick.snipePlayer(bullet);
+				quick.snipe(bullet,tHelper.getX(),tHelper.getY());
+//				quick.snipePlayer(bullet);
 			}, 5000, TimeUnit.MILLISECONDS);
 			
 		});

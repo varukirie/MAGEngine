@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import indi.megaastronic.bullet.ArrowBullet;
 import indi.megaastronic.chapter.util.AChapter;
+import indi.megaastronic.chapter.util.ChapterLoader;
 import indi.megaastronic.chapter.util.QuickDanmuku;
 import indi.megaastronic.chapter.util.SeqDanmuku;
 import indi.megaastronic.launcher.Launcher;
@@ -26,7 +27,7 @@ public class TestChapter extends AChapter {
 		QuickDanmuku quick = new QuickDanmuku(mEU);
 		Random r= new Random();
 		
-		for(int i=1;i<=10;i++){
+		for(int i=1;i<=20;i++){
 //			seq.rotateL(midX, midY, 500,i);	
 			seq.rotateDSnipe(midX, midY, 500,i);	
 		}
@@ -39,6 +40,7 @@ public class TestChapter extends AChapter {
 			seq.rotate(x,y,interval*i+startTime2,Math.PI*4/3+i);
 			seq.rotate(x,y,interval*i+startTime2,Math.PI*6/3+i);
 		}
+		
 		for(int i=1;i<=2;i++){
 			int x=midX;
 			int y= midY;

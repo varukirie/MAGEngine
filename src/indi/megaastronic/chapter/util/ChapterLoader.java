@@ -4,6 +4,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 import indi.megaastronic.paint.MyCanvas;
+import indi.megaastronic.ui.SceneManager;
 import indi.megaastronic.util.DI;
 import indi.megaastronic.util.ElementUtils;
 /**
@@ -40,6 +41,7 @@ public class ChapterLoader {
 		loadChapter((AChapter) cls.newInstance());
 	}
 
+	
 	public static ScheduledExecutorService getScheduledExecutorService() {
 		return scheduleES;
 	}

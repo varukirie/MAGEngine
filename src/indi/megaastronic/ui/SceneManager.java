@@ -71,13 +71,12 @@ public class SceneManager {
 			}
 		};
 		timer.start();
-		
+		DI.di().put("animationTimer", timer);
 		//关闭窗口时关闭所有线程
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
 			public void handle(WindowEvent event) {
-				mh.keepRun=false;//关闭MoveHandler
-				ChapterLoader.getScheduledExecutorService().shutdownNow();//关闭关卡计划任务线程
+				shutdownGame();
 			}
 		});
 
@@ -102,6 +101,11 @@ public class SceneManager {
 			ChapterLoader.loadChapter(new TestChapter());
 		
 	}
-	
+	public static void shutdownGame(){
+		((MoveHandler)(DI.di().get("mh"))).keepRun=false;//关闭MoveHandler
+		ChapterLoader.getScheduledExecutorService().shutdownNow();//关闭关卡计划任务线程
+		((AnimationTimer)(DI.di().get("animationTimer"))).stop();
+		DI.di().clear();
+	}
 	
 }

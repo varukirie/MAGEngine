@@ -22,9 +22,12 @@ public class QuickDanmuku {
 	}
 	
 	public void snipePlayer(Bullet bullet){
+		snipe(bullet, Player.getPlayer().getX(), Player.getPlayer().getY());
+	}
+	public void snipe(Bullet bullet,double x,double y){
 		double v=Math.sqrt(bullet.getVelocityX() * bullet.getVelocityX() + bullet.getVelocityY() * bullet.getVelocityY());
-		double dx = bullet.getX() - Player.getPlayer().getX();
-		double dy = bullet.getY() - Player.getPlayer().getY();
+		double dx = bullet.getX() - x;
+		double dy = bullet.getY() - y;
 		double s = Math.sqrt(dx * dx + dy * dy);
 		bullet.setVelocityX(-dx *v/ s);
 		bullet.setVelocityY(-dy *v/ s);
