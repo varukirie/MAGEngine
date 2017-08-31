@@ -15,8 +15,8 @@ import javafx.scene.canvas.GraphicsContext;
  */
 public class MyCanvas extends Canvas {
 	//画布大小
-	public final static int CANVAS_WIDTH = 800;
-	public final static int CANVAS_HEIGHT = 600;
+	public final static int CANVAS_WIDTH = 600;//600;
+	public final static int CANVAS_HEIGHT = 700;//700;
 	private GraphicsContext gc=null;
 	private Map<String, Paintable> wantPaintMap = null;
 
@@ -26,9 +26,7 @@ public class MyCanvas extends Canvas {
 	
 	
 	public MyCanvas(){
-		super(CANVAS_WIDTH,CANVAS_HEIGHT);
-		wantPaintMap = new ConcurrentHashMap<>();
-		gc = super.getGraphicsContext2D();
+		this(new ConcurrentHashMap<String,Paintable>());
 	}
 	public MyCanvas(Map<String, Paintable> wantPaintMap){
 		super(CANVAS_WIDTH,CANVAS_HEIGHT);

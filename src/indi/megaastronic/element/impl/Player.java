@@ -1,13 +1,17 @@
-package indi.megaastronic.element;
+package indi.megaastronic.element.impl;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import com.badlogic.gdx.math.Polygon;
+
+import indi.megaastronic.element.LimitedByCanvas;
+import indi.megaastronic.element.Moveable;
+import indi.megaastronic.element.Paintable;
+import indi.megaastronic.element.PolygonCollision;
 import indi.megaastronic.util.SpritePainter;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 /**
  * 玩家控制的物体
  * 单例设计模式
@@ -15,7 +19,7 @@ import javafx.scene.text.Font;
  * @author MegaAstronic
  *
  */
-public class Player implements LimitedByCanvas ,Moveable , Paintable {
+public class Player implements LimitedByCanvas ,Moveable , Paintable ,PolygonCollision {
 	private static Player player = null;
 	public final int width = 10;
 	public final int height = 10;
@@ -51,8 +55,8 @@ public class Player implements LimitedByCanvas ,Moveable , Paintable {
 	private Player(double x, double y) {
 		Image img=null;
 		try {
-			img = new Image(new FileInputStream(this.getClass().getResource("/img/player.bmp").getFile()));
-		} catch (FileNotFoundException e) {
+			img = new Image(this.getClass().getResourceAsStream("/img/player.bmp"));
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -90,10 +94,6 @@ public class Player implements LimitedByCanvas ,Moveable , Paintable {
 	private int currentSpriteIndex=0;
 	@Override
 	public void paint(GraphicsContext gc) {
-//		gc.strokeOval(x, y, width, height);
-//		gc.setFont(Font.font("consolas",30));
-//		gc.setFill(Color.RED);
-//		gc.fillText("♥", this.x, this.y);
 		if(this.velocityX<0)
 			SP.paintSprite(0, this.x, this.y, gc);
 		
@@ -114,6 +114,26 @@ public class Player implements LimitedByCanvas ,Moveable , Paintable {
 	
 		if(this.velocityX>0)
 			SP.paintSprite(2, this.x, this.y, gc);
+	}
+	public float[] vertices = new float[4*2];
+	private Polygon polygon=new Polygon(vertices);
+	
+	@Override
+	public Polygon getPolygon() {
+		vertices[0]=(float) x;
+		vertices[1]=(float) y;
+		vertices[2]=(float) (x+50);
+		vertices[3]=(float) y;
+		vertices[4]=(float) (x+50);
+		vertices[5]=(float) (y+50);
+		vertices[6]=(float) x;
+		vertices[7]=(float) (y+50);
+		polygon.setVertices(vertices);
+		return polygon;
+	}
+	@Override
+	public int getTeam() {
+		return 1;
 	}
 	
 	

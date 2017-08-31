@@ -6,12 +6,15 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application {
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
+	public static final boolean DEBUG_BENCH=false;
+	public static final boolean DEBUG_COLLISION=true;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			SceneManager.startGame(primaryStage);
-
+//			SceneManager.shutdownGame();
+//			SceneManager.startGame(primaryStage);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

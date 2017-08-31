@@ -1,16 +1,21 @@
 package indi.megaastronic.paint;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 import application.Main;
 import indi.megaastronic.element.Accelerated;
 import indi.megaastronic.element.LimitedByCanvas;
 import indi.megaastronic.element.Moveable;
-import indi.megaastronic.element.Player;
+import indi.megaastronic.element.PolygonCollision;
+import indi.megaastronic.element.impl.Player;
+import indi.megaastronic.launcher.Launcher;
+import indi.megaastronic.util.CollisionUtil;
+import indi.megaastronic.util.ElementUtils;
 
 /**
  * 单独一个线程，不断重复执行： 计算当前时刻所有Moveable元素的坐标
@@ -27,10 +32,12 @@ public class MoveHandler implements Runnable {
 	 * 全局速度
 	 */
 	public static double timeSpeed = DEFAULT_TIME_SPEED;
-	public static final long SLEEP_TIME = 16;
+	public static final long SLEEP_TIME = 12;
 	public static final long BLANK = 1;
-	private Map<String, Moveable> wantMoveMap = new ConcurrentHashMap<>();
 
+	private Map<String, Moveable> wantMoveMap = new ConcurrentHashMap<>();
+	private ElementUtils mEU = null;
+	
 	public Map<String, Moveable> getWantMoveMap() {
 		return wantMoveMap;
 	}
@@ -59,6 +66,19 @@ public class MoveHandler implements Runnable {
 			while (iter.hasNext()) {
 				entry = iter.next();
 				m = entry.getValue();
+				m.modify();
+				if(m instanceof Launcher){
+					Launcher l=(Launcher) m;
+					if(System.currentTimeMillis()-l.getStartTime()>l.getDuration()){
+						removeElement(entry.getKey());
+						continue;
+					}
+					if(System.currentTimeMillis()-l.getLastLaunch()>l.getInterval()){
+						l.setLastLaunch(System.currentTimeMillis());
+						l.launch();
+					}
+				}
+
 				// 使用加速度计算速度
 				if (m instanceof Accelerated) {
 					m.setVelocityX(m.getVelocityX() + (currentTime - this.lastTime) * ((Accelerated) m).getAccX()
@@ -81,20 +101,34 @@ public class MoveHandler implements Runnable {
 					m.setX(nextX);
 					m.setY(nextY);
 				} else {// 出屏幕
-					// System.out.println("出界"+System.currentTimeMillis());
-					if (m instanceof LimitedByCanvas) {// 如果他是被边界限制的
+					 
+					if (m instanceof LimitedByCanvas) {// 如果他是被边界限制的 不能移动
 
-					} else {// 否则
-						m.setX(nextX);
-						m.setY(nextY);
+					} else {// 否则删除
+//						m.setX(nextX);
+//						m.setY(nextY);
 						removeElement(entry.getKey());	
+						continue;
+					}
+				}
+				if(m instanceof PolygonCollision){
+					if(m!=Player.getPlayer()){
+						if(CollisionUtil.PolygonDetect(Player.getPlayer(), (PolygonCollision) m)){
+							//System.out.println("碰撞! x="+m.getX()+" | y="+m.getY());
+							if(Main.DEBUG_COLLISION){
+							
+							}
+						}
+							
 					}
 				}
 			}
 
-//			if(Main.DEBUG){
-//				System.out.println("1.cal use "+(currentTime-lastTime)+"ms");
-//			}
+			if(Main.DEBUG_BENCH){
+				
+				System.out.println("1.游戏逻辑 "+(System.currentTimeMillis()-lastTime)+"ms");
+//				if((System.currentTimeMillis()-lastTime)>200) throw new RuntimeException("可能gc触发");
+			}
 			this.lastTime = currentTime;
 			
 			try {
@@ -123,8 +157,17 @@ public class MoveHandler implements Runnable {
 		switchCount = (switchCount + 1) % 2;
 	}
 	public void removeElement(String key){
-		wantMoveMap.remove(key);
-		myCanvas.getWantPaintMap().remove(key);
-		
+		mEU.removeBoth(key);
 	}
+
+	public ElementUtils getmEU() {
+		return mEU;
+	}
+
+	public void setmEU(ElementUtils mEU) {
+		this.mEU = mEU;
+	}
+	
+	
+	
 }

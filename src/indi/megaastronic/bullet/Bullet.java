@@ -1,6 +1,15 @@
-package indi.megaastronic.element;
+package indi.megaastronic.bullet;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import com.badlogic.gdx.math.Polygon;
+
+import indi.megaastronic.element.BaseElement;
+import indi.megaastronic.element.PolygonCollision;
+import indi.megaastronic.util.Transform;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 /**
@@ -8,9 +17,10 @@ import javafx.scene.text.Font;
  * @author MegaAstronic
  *
  */
-public class Bullet extends ANormalElement{
+public abstract class Bullet extends BaseElement{
 
 	private int switchCount = 0;
+	
 	public Bullet(double x, double y) {
 		super(x, y);
 	}
@@ -33,35 +43,6 @@ public class Bullet extends ANormalElement{
 	public Bullet(double x,double y,double vx, double vy,double ax,double ay) {
 		super(x,y,vx,vy,ax,ay);
 	}
-	
-	@Override
-	public void paint(GraphicsContext gc) {
-		gc.setFont(Font.font("consolas",20));
-		gc.setFill(Color.BLUE);
-		/*
-		if(switchCount == 0){
-			gc.setFill(Color.BLUE);
-		}else{
-			gc.setFill(Color.BLACK);
-		}
-		*/
-		gc.fillText("★", this.x, this.y);
-		switchCount=(switchCount+1)%2;
-		//gc.setFill(Color.RED);
-		//gc.fillOval(x, y, 10, 10);
-		
-		/*
-		try {
-			Image img = new Image(new FileInputStream(this.getClass().getResource("/img/gh.png").getFile()));
-			gc.drawImage(img, this.x, this.y);
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
-		//System.out.println("enemy exist millis="+System.currentTimeMillis());
-	}
 
-	
+
 }
