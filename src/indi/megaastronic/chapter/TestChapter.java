@@ -21,16 +21,17 @@ public class TestChapter extends AChapter {
 	int midY=200;
 	@Override
 	public void design(ScheduledExecutorService sES, MyCanvas staticCanvas, ElementUtils mEU) {
-//		staticCanvas.getGraphicsContext2D().fillRect(0, 0, MyCanvas.CANVAS_WIDTH, MyCanvas.CANVAS_HEIGHT);
+		staticCanvas.getGraphicsContext2D().fillRect(0, 0, MyCanvas.CANVAS_WIDTH, MyCanvas.CANVAS_HEIGHT);
 		SeqDanmuku seq = new SeqDanmuku(sES, mEU);
 		QuickDanmuku quick = new QuickDanmuku(mEU);
 		Random r= new Random();
 		
-//		for(int i=1;i<=10;i++){
+		for(int i=1;i<=10;i++){
 //			seq.rotateL(midX, midY, 500,i);	
-//		}
+			seq.rotateDSnipe(midX, midY, 500,i);	
+		}
 		long interval = 100;
-		long startTime2=1000;
+		long startTime2=18000;
 		for(int i=1;i<=1;i++){
 			int x=midX;
 			int y= midY;

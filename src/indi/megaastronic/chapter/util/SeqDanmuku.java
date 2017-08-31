@@ -23,6 +23,43 @@ public class SeqDanmuku {
 		this.mEU = mEU;
 		quick = new QuickDanmuku(mEU);
 	}
+	
+	public void rotateDSnipe(double midX, double midY, long startTime,double helperDelta){
+		Random r=new Random();
+		double helperLenght = 70;
+		int currentHelperCount = callCount++;
+		long duration=10000;
+		OvalHelper tHelper = new OvalHelper(midX, midY, helperLenght, 20, helperDelta);
+		tHelper.setPositive(true);
+		Launcher launcher = new Launcher(100, 100, 1/2.0*Math.PI, 200, duration);
+		launcher.setModifyEvent(()->{
+			launcher.setDirection(tHelper.getDirection());
+		});
+		launcher.getxProperty().bindBidirectional(tHelper.getxProperty());
+		launcher.getyProperty().bindBidirectional(tHelper.getyProperty());
+		launcher.setBulletEvent((ScheduledExecutorService timer, Bullet bullet) -> {
+			timer.schedule(() -> {
+				bullet.setVelocityX(bullet.getVelocityX()*0.01);
+				bullet.setVelocityY(bullet.getVelocityY()*0.01);
+			}, 1000, TimeUnit.MILLISECONDS);
+			timer.schedule(() -> {
+				bullet.setVelocityX(bullet.getVelocityX()*200);
+				bullet.setVelocityY(bullet.getVelocityY()*200);
+				quick.snipePlayer(bullet);
+			}, 5000, TimeUnit.MILLISECONDS);
+			
+		});
+		sES.schedule(() -> {
+			mEU.add("tHelper" + currentHelperCount, tHelper);
+		}, startTime, TimeUnit.MILLISECONDS);
+		sES.schedule(() -> {
+			mEU.add("launcher"+callCount++, launcher);
+		}, startTime+1, TimeUnit.MILLISECONDS);
+		sES.schedule(() -> {
+			mEU.removeBoth("tHelper" + currentHelperCount);
+		}, startTime+duration+2, TimeUnit.MILLISECONDS);
+	}
+	
 	public void rotateL(double midX, double midY, long startTime,double helperDelta) {
 		rotateL(midX, midY, startTime, helperDelta, true);
 	}
@@ -46,10 +83,8 @@ public class SeqDanmuku {
 				bullet.setVelocityY(bullet.getVelocityY()*0.01);
 			}, 1000, TimeUnit.MILLISECONDS);
 			timer.schedule(() -> {
-				bullet.setVelocityX(bullet.getVelocityX()*100);
-				bullet.setVelocityY(bullet.getVelocityY()*100);
-//				bullet.setVelocityX(r.nextDouble() - 0.5);
-//				bullet.setVelocityY(r.nextDouble() - 0.5);
+				bullet.setVelocityX(bullet.getVelocityX()*200);
+				bullet.setVelocityY(bullet.getVelocityY()*200);
 			}, 5000, TimeUnit.MILLISECONDS);
 			
 		});
@@ -64,6 +99,8 @@ public class SeqDanmuku {
 		}, startTime+duration+2, TimeUnit.MILLISECONDS);
 	}
 
+	
+	
 	public void rotate(double midX, double midY, long startTime) {
 		rotate(midX, midY, startTime, 0);
 	}

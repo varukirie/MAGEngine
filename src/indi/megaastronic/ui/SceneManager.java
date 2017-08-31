@@ -57,6 +57,7 @@ public class SceneManager {
 		ElementUtils moveableElementUtils = new ElementUtils(mh, moveableCanvas,root);
 		mh.setmEU(moveableElementUtils);
 		DI.di().put("mEU", moveableElementUtils);
+		DI.di().put("switcher", moveableElementUtils.getSwitcher());
 		
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
@@ -93,12 +94,14 @@ public class SceneManager {
 		//
 		moveableElementUtils.add("player", player);
 		
-		ChapterLoader.init(staticCanvas, moveableElementUtils);
+		
 		moveableElementUtils.add("displayTime", new DisplayTime(1, MyCanvas.CANVAS_HEIGHT-7));
-
+		ChapterLoader.init(staticCanvas);
 		
 //			ChapterLoader.loadChapter(new Chapter1());
 			ChapterLoader.loadChapter(new TestChapter());
 		
 	}
+	
+	
 }

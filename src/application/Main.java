@@ -13,7 +13,6 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			SceneManager.startGame(primaryStage);
-
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

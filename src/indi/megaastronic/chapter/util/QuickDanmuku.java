@@ -6,6 +6,7 @@ import java.util.Random;
 import indi.megaastronic.bullet.Bullet;
 import indi.megaastronic.bullet.DefaultBullet;
 import indi.megaastronic.element.Moveable;
+import indi.megaastronic.element.impl.Player;
 import indi.megaastronic.util.ElementUtils;
 import indi.megaastronic.util.Transform;
 
@@ -18,6 +19,15 @@ public class QuickDanmuku {
 	public QuickDanmuku(ElementUtils mEU) {
 		super();
 		this.mEU = mEU;
+	}
+	
+	public void snipePlayer(Bullet bullet){
+		double v=Math.sqrt(bullet.getVelocityX() * bullet.getVelocityX() + bullet.getVelocityY() * bullet.getVelocityY());
+		double dx = bullet.getX() - Player.getPlayer().getX();
+		double dy = bullet.getY() - Player.getPlayer().getY();
+		double s = Math.sqrt(dx * dx + dy * dy);
+		bullet.setVelocityX(-dx *v/ s);
+		bullet.setVelocityY(-dy *v/ s);
 	}
 	
 	public void slash(double x,double y,double speed){

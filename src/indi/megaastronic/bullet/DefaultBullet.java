@@ -2,6 +2,9 @@ package indi.megaastronic.bullet;
 
 import com.badlogic.gdx.math.Polygon;
 
+import indi.megaastronic.element.Initializable;
+import indi.megaastronic.util.DI;
+import indi.megaastronic.util.MyCanvasSwitcher;
 import indi.megaastronic.util.Transform;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.Bloom;
@@ -10,7 +13,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.paint.Color;
 
-public class DefaultBullet extends PolygonBullet {
+public class DefaultBullet extends PolygonBullet implements Initializable{
 
 	public DefaultBullet(double x, double y, double vx, double vy, double ax, double ay) {
 		super(x, y, vx, vy, ax, ay);
@@ -57,12 +60,17 @@ public class DefaultBullet extends PolygonBullet {
 	protected double[][] getOrigin() {
 		return origin;
 	}
+	
+
 	@Override
 	public void paint(GraphicsContext gc) {
-//		gc.setFill(Color.WHITE);
-//		gc.setEffect(new Bloom(0.999));
+		gc.setFill(Color.WHITE);
 		super.paint(gc);
-//		gc.setEffect(null);
+	}
+
+	@Override
+	public void initWhenAdd() {
+		((MyCanvasSwitcher)DI.di().get("switcher")).setEffect(DefaultBullet.class, new Bloom());
 	}
 
 

@@ -6,6 +6,7 @@ import indi.megaastronic.element.BaseElement;
 import indi.megaastronic.paint.MoveHandler;
 import indi.megaastronic.paint.MyCanvas;
 import javafx.application.Platform;
+import javafx.scene.effect.Effect;
 import javafx.scene.layout.StackPane;
 
 public class MyCanvasSwitcher {
@@ -61,7 +62,11 @@ public class MyCanvasSwitcher {
 		switchCount=(switchCount+1)%2;
 	}
 	
-
+	public void setEffect(Class<?> cls,Effect effect){
+		if(fmyCanvasMap.get(cls)==null) createCanvas(cls);
+		fmyCanvasMap.get(cls).setEffect(effect);
+		smyCanvasMap.get(cls).setEffect(effect);
+	}
 	
 	private void createCanvas(Class<?> cls){
 		MyCanvas canvas = new MyCanvas();
@@ -73,6 +78,8 @@ public class MyCanvasSwitcher {
 			root.getChildren().add(scanvas);
 		});
 	}
+	
+	
 	
 	
 

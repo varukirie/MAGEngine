@@ -19,11 +19,12 @@ public class ChapterLoader {
 		
 	}
 	
-	private static ScheduledExecutorService scheduleES=Executors.newScheduledThreadPool(3);
+	private static ScheduledExecutorService scheduleES=null;
 	
-	public static void init(MyCanvas staticCanvas,ElementUtils mEU){
+	public static void init(MyCanvas staticCanvas){
 		ChapterLoader.staticCanvas = staticCanvas ;
-		ChapterLoader.mEU = mEU;
+		ChapterLoader.mEU = (ElementUtils) DI.di().get("mEU");
+		ChapterLoader.scheduleES=Executors.newScheduledThreadPool(3);
 		DI.di().put("sES", scheduleES);
 	}
 	public static void loadChapter(AChapter c){
