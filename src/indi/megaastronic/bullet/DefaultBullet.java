@@ -61,12 +61,12 @@ public class DefaultBullet extends PolygonBullet implements Initializable{
 		return origin;
 	}
 	
+@Override
+public void paint(GraphicsContext gc) {
+	gc.setFill(Color.CYAN);
+	super.paint(gc);
+}
 
-	@Override
-	public void paint(GraphicsContext gc) {
-		gc.setFill(Color.WHITE);
-		super.paint(gc);
-	}
 
 	@Override
 	public void initWhenAdd() {

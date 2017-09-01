@@ -21,6 +21,16 @@ public class QuickDanmuku {
 		this.mEU = mEU;
 	}
 	
+	public void stopBullet(Bullet bullet){
+		bullet.setVelocityX(bullet.getVelocityX()*0.001);
+		bullet.setVelocityY(bullet.getVelocityY()*0.001);
+	}
+	
+	public void runBullet(Bullet bullet){
+		bullet.setVelocityX(bullet.getVelocityX()*1000);
+		bullet.setVelocityY(bullet.getVelocityY()*1000);
+	}
+	
 	public void snipePlayer(Bullet bullet){
 		snipe(bullet, Player.getPlayer().getX(), Player.getPlayer().getY());
 	}

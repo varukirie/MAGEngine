@@ -28,8 +28,8 @@ public class SeqDanmuku {
 		Random r=new Random();
 		double helperLenght = 70;
 		int currentHelperCount = callCount++;
-		long duration=10000;
-		OvalHelper tHelper = new OvalHelper(midX, midY, helperLenght, 20, helperDelta);
+		long duration=4000;
+		OvalHelper tHelper = new OvalHelper(midX, midY, helperLenght, 40, helperDelta);
 		tHelper.setPositive(true);
 		Launcher launcher = new Launcher(100, 100, 1/2.0*Math.PI, 200, duration);
 		launcher.setModifyEvent(()->{
@@ -47,7 +47,7 @@ public class SeqDanmuku {
 				bullet.setVelocityY(bullet.getVelocityY()*200);
 				quick.snipe(bullet,tHelper.getX(),tHelper.getY());
 //				quick.snipePlayer(bullet);
-			}, 5000, TimeUnit.MILLISECONDS);
+			}, 3000, TimeUnit.MILLISECONDS);
 			
 		});
 		sES.schedule(() -> {

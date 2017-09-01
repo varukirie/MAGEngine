@@ -35,6 +35,7 @@ public class Launcher extends BaseElement implements Initializable {
 		this.interval = interval;
 		this.duration=duration;
 	}
+	
 
 	@Override
 	public void paint(GraphicsContext gc) {

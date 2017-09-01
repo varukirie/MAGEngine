@@ -69,13 +69,13 @@ public class MoveHandler implements Runnable {
 				m.modify();
 				if(m instanceof Launcher){
 					Launcher l=(Launcher) m;
-					if(System.currentTimeMillis()-l.getStartTime()>l.getDuration()){
-						removeElement(entry.getKey());
-						continue;
-					}
 					if(System.currentTimeMillis()-l.getLastLaunch()>l.getInterval()){
 						l.setLastLaunch(System.currentTimeMillis());
 						l.launch();
+					}
+					if(System.currentTimeMillis()-l.getStartTime()>l.getDuration()){
+						removeElement(entry.getKey());
+						continue;
 					}
 				}
 

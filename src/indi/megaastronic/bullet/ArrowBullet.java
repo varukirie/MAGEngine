@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Polygon;
 
 import indi.megaastronic.util.Transform;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 /**
  * 另一种子弹
@@ -44,7 +45,11 @@ public class ArrowBullet extends PolygonBullet {
 	};
 	
 
-
+@Override
+public void paint(GraphicsContext gc) {
+	gc.setFill(Color.WHITE);
+	super.paint(gc);
+}
 	@Override
 	protected double[][] getOrigin() {
 		return origin;

@@ -35,7 +35,7 @@ public class SceneManager {
 		root.getChildren().add(staticCanvas);
 		root.getChildren().add(moveableCanvas);
 		root.getChildren().add(secondaryMCanvas);
-
+		DI.di().put("staticCanvas", staticCanvas);
 		//
 		staticCanvas.getWantPaintMap().put("indicator", Player.getPlayer());
 		staticCanvas.repaint();
