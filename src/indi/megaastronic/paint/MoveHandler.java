@@ -59,6 +59,7 @@ public class MoveHandler implements Runnable {
 		this.sCanvas = sCanvas;
 	}
 
+	private long benchMax=0;
 	public void run() {
 		while (keepRun) {
 			long currentTime = System.currentTimeMillis();
@@ -125,9 +126,8 @@ public class MoveHandler implements Runnable {
 			}
 
 			if(Main.DEBUG_BENCH){
-				
-				System.out.println("1.游戏逻辑 "+(System.currentTimeMillis()-lastTime)+"ms");
-//				if((System.currentTimeMillis()-lastTime)>200) throw new RuntimeException("可能gc触发");
+				if((System.currentTimeMillis()-lastTime)>benchMax) benchMax=(System.currentTimeMillis()-lastTime);
+				System.out.println("1.游戏逻辑 "+(System.currentTimeMillis()-lastTime)+"ms"+" benchMax="+benchMax);
 			}
 			this.lastTime = currentTime;
 			

@@ -11,6 +11,7 @@ import indi.megaastronic.element.Paintable;
 import indi.megaastronic.launcher.BulletEvent;
 import indi.megaastronic.paint.MoveHandler;
 import indi.megaastronic.paint.MyCanvas;
+import javafx.application.Platform;
 import javafx.scene.layout.StackPane;
 /**
  * 统一处理元素的运动与绘画
@@ -36,7 +37,7 @@ public class ElementUtils {
 	 */
 	public void add(String name,Object value){
 		if(value instanceof Initializable){
-			((Initializable) value).initWhenAdd();
+				((Initializable) value).initWhenAdd();
 		}
 		if(mh!=null)
 			if(value instanceof Moveable)

@@ -4,18 +4,18 @@ import java.util.Random;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import indi.megaastronic.bullet.ArrowBullet;
 import indi.megaastronic.chapter.util.AChapter;
 import indi.megaastronic.chapter.util.ChapterLoader;
 import indi.megaastronic.chapter.util.QuickDanmuku;
 import indi.megaastronic.chapter.util.SeqDanmuku;
 import indi.megaastronic.danmuku.ArcGroup;
 import indi.megaastronic.danmuku.OvalGroup;
-import indi.megaastronic.launcher.Launcher;
 import indi.megaastronic.paint.MyCanvas;
-import indi.megaastronic.ui.SceneManager;
+import indi.megaastronic.util.DI;
 import indi.megaastronic.util.ElementUtils;
-import indi.megaastronic.bullet.Bullet;
+import indi.megaastronic.util.MyCanvasSwitcher;
+import javafx.application.Platform;
+import javafx.scene.effect.Bloom;
 import indi.megaastronic.bullet.DefaultBullet;
 
 public class TestChapter extends AChapter {
@@ -26,7 +26,10 @@ public class TestChapter extends AChapter {
 
 	@Override
 	public void design(ScheduledExecutorService sES, MyCanvas staticCanvas, ElementUtils mEU) {
-		staticCanvas.getGraphicsContext2D().fillRect(0, 0, MyCanvas.CANVAS_WIDTH, MyCanvas.CANVAS_HEIGHT);
+		Platform.runLater(()->{
+			((MyCanvasSwitcher)DI.di().get("switcher")).setEffect(DefaultBullet.class, new Bloom());
+			staticCanvas.getGraphicsContext2D().fillRect(0, 0, MyCanvas.CANVAS_WIDTH, MyCanvas.CANVAS_HEIGHT);
+		});
 		SeqDanmuku seq = new SeqDanmuku(sES, mEU);
 		QuickDanmuku quick = new QuickDanmuku(mEU);
 		Random r = new Random();

@@ -13,7 +13,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.paint.Color;
 
-public class DefaultBullet extends PolygonBullet implements Initializable{
+public class DefaultBullet extends PolygonBullet {
 
 	public DefaultBullet(double x, double y, double vx, double vy, double ax, double ay) {
 		super(x, y, vx, vy, ax, ay);
@@ -44,36 +44,18 @@ public class DefaultBullet extends PolygonBullet implements Initializable{
 		super(x, y);
 	}
 
-
-
-	static final double[][] origin=new double[][]{
-		{
-			0,0-3,0-6,0,0+6,0+3
-		},
-		{
-			0+11,0,0+2,0-10,0+2,0
-		}
-	};
-
+	static final double[][] origin = new double[][] { { 0, 0 - 3, 0 - 6, 0, 0 + 6, 0 + 3 },
+			{ 0 + 11, 0, 0 + 2, 0 - 10, 0 + 2, 0 } };
 
 	@Override
 	protected double[][] getOrigin() {
 		return origin;
 	}
-	
-@Override
-public void paint(GraphicsContext gc) {
-	gc.setFill(Color.WHITESMOKE);
-	super.paint(gc);
-}
-
 
 	@Override
-	public void initWhenAdd() {
-		((MyCanvasSwitcher)DI.di().get("switcher")).setEffect(DefaultBullet.class, new Bloom());
+	public void paint(GraphicsContext gc) {
+		gc.setFill(Color.WHITESMOKE);
+		super.paint(gc);
 	}
-
-
-
 
 }

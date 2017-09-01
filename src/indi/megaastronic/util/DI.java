@@ -2,6 +2,7 @@ package indi.megaastronic.util;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 /**
  * 通过该类能获得的对象有：<br>
  * <table>
