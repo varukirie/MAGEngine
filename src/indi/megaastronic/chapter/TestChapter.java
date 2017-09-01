@@ -20,7 +20,7 @@ import indi.megaastronic.bullet.DefaultBullet;
 public class TestChapter extends AChapter {
 
 	private int i;
-	int midX = 270;
+	int midX = MyCanvas.CANVAS_WIDTH/2;
 	int midY = 200;
 
 	@Override
@@ -52,7 +52,39 @@ public class TestChapter extends AChapter {
 		oG.delayExecute(3000);
 		oG.delayExecute(4000);
 		oG.delayExecute(5000);
-
+		
+		OvalGroup oG2 = new OvalGroup(midX, midY);
+		oG2.setLauncherConfig((launcher) -> {
+			launcher.setBulletEvent((sESx, bullet) -> {
+				sESx.schedule(() -> {
+					quick.stopBullet(bullet);
+				}, 1700, TimeUnit.MILLISECONDS);
+				sESx.schedule(() -> {
+					quick.runBullet(bullet);
+					quick.bulletVTransform(bullet,new double[][]{
+						{0,-1},{1,0}
+					});
+				}, 2000, TimeUnit.MILLISECONDS);
+			});
+		});
+		
+		oG2.delayExecute(100);
+		OvalGroup oG3 = new OvalGroup(midX, midY);
+		oG3.setLauncherConfig((launcher) -> {
+			launcher.setBulletEvent((sESx, bullet) -> {
+				sESx.schedule(() -> {
+					quick.stopBullet(bullet);
+				}, 1700, TimeUnit.MILLISECONDS);
+				sESx.schedule(() -> {
+					quick.runBullet(bullet);
+					quick.bulletVTransform(bullet,new double[][]{
+						{0,1},{-1,0}
+					});
+				}, 2000, TimeUnit.MILLISECONDS);
+			});
+		});
+		oG3.delayExecute(1000);
+		
 		int lcount = 32;
 		for (int i = 0; i < lcount; i++) {
 			seq.rotateDSnipe(midX, midY, 8000, 2 * Math.PI / lcount * i);

@@ -21,6 +21,13 @@ public class QuickDanmuku {
 		this.mEU = mEU;
 	}
 	
+	public void bulletVTransform(Bullet bullet,double[][] martix){
+		Transform t = new Transform(martix);
+		double[] ans = t.transform(bullet.getVelocityX(),bullet.getVelocityY());
+		bullet.setVelocityX(ans[0]);
+		bullet.setVelocityY(ans[1]);
+	}
+	
 	public void stopBullet(Bullet bullet){
 		bullet.setVelocityX(bullet.getVelocityX()*0.001);
 		bullet.setVelocityY(bullet.getVelocityY()*0.001);

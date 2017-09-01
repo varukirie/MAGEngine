@@ -28,7 +28,7 @@ public class SeqDanmuku {
 		Random r=new Random();
 		double helperLenght = 70;
 		int currentHelperCount = callCount++;
-		long duration=4000;
+		long duration=8000;
 		OvalHelper tHelper = new OvalHelper(midX, midY, helperLenght, 40, helperDelta);
 		tHelper.setPositive(true);
 		Launcher launcher = new Launcher(100, 100, 1/2.0*Math.PI, 200, duration);
