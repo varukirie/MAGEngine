@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	public static final boolean DEBUG = false;
 	public static final boolean DEBUG_BENCH=false;
-	public static final boolean DEBUG_COLLISION=true;
+	public static final boolean DEBUG_COLLISION=false;
 	@Override
 	public void start(Stage primaryStage) {
 		try {

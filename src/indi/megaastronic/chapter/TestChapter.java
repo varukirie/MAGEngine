@@ -13,6 +13,7 @@ import indi.megaastronic.danmuku.ArcGroup;
 import indi.megaastronic.danmuku.OvalGroup;
 import indi.megaastronic.launcher.Launcher;
 import indi.megaastronic.paint.MyCanvas;
+import indi.megaastronic.ui.SceneManager;
 import indi.megaastronic.util.ElementUtils;
 import indi.megaastronic.bullet.Bullet;
 import indi.megaastronic.bullet.DefaultBullet;
@@ -85,6 +86,22 @@ public class TestChapter extends AChapter {
 		});
 		oG3.delayExecute(1000);
 		
+		OvalGroup oG4 = new OvalGroup(midX, midY);
+		oG4.setLauncherConfig((launcher) -> {
+			launcher.setBulletEvent((sESx, bullet) -> {
+				sESx.schedule(() -> {
+					quick.stopBullet(bullet);
+				}, 1700, TimeUnit.MILLISECONDS);
+				sESx.schedule(() -> {
+					quick.runBullet(bullet);
+					quick.bulletVTransform(bullet,new double[][]{
+						{0,1},{1,0}
+					});
+				}, 2000, TimeUnit.MILLISECONDS);
+			});
+		});
+		oG4.delayExecute(1500);
+		
 		int lcount = 32;
 		for (int i = 0; i < lcount; i++) {
 			seq.rotateDSnipe(midX, midY, 8000, 2 * Math.PI / lcount * i);
@@ -106,7 +123,11 @@ public class TestChapter extends AChapter {
 			seq.rotate(x, y, interval * i + startTime2 + 7000, Math.PI * 4 / 3 + i, DefaultBullet.class, false);
 			seq.rotate(x, y, interval * i + startTime2 + 7000, Math.PI * 6 / 3 + i, DefaultBullet.class, false);
 		}
-
+		
+		sES.schedule(() -> {
+			ChapterLoader.loadChapter(new TestChapter());
+		}, 36000, TimeUnit.MILLISECONDS);
+		
 		// seq.rotate(midX-100, midY,2000,0);
 		// seq.rotate(midX-100, midY,2000,Math.PI);
 

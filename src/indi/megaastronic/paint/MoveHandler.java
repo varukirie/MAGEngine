@@ -32,7 +32,7 @@ public class MoveHandler implements Runnable {
 	 * 全局速度
 	 */
 	public static double timeSpeed = DEFAULT_TIME_SPEED;
-	public static final long SLEEP_TIME = 12;
+	public static final long SLEEP_TIME = 1;
 	public static final long BLANK = 1;
 
 	private Map<String, Moveable> wantMoveMap = new ConcurrentHashMap<>();
