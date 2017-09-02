@@ -36,9 +36,12 @@ public class TestChapter extends AChapter {
 
 		// ArcGroup arcGroup=new ArcGroup(midX,midY);
 		// arcGroup.delayExecute(500);
-		new ArcGroup(midX, midY).delayExecute(500);
-		new ArcGroup(midX + 50, midY).delayExecute(1000);
-		new ArcGroup(midX - 50, midY).delayExecute(1500);
+		
+		
+		new ArcGroup(midX, midY, Math.PI/2, Math.PI/3, 6).delayExecute(700);
+		new ArcGroup(midX, midY, Math.PI/2, Math.PI/3, 6).delayExecute(850);
+		new ArcGroup(midX, midY, Math.PI/2+Math.PI/7, Math.PI/3, 6).delayExecute(1300);
+		new ArcGroup(midX, midY, Math.PI/2-Math.PI/7, Math.PI/3, 6).delayExecute(1900);
 
 		OvalGroup oG = new OvalGroup(midX, midY);
 		oG.setLauncherConfig((launcher) -> {
@@ -107,10 +110,10 @@ public class TestChapter extends AChapter {
 		
 		int lcount = 32;
 		for (int i = 0; i < lcount; i++) {
-			seq.rotateDSnipe(midX, midY, 8000, 2 * Math.PI / lcount * i);
+			seq.rotateDSnipe(midX, midY, 7000, 2 * Math.PI / lcount * i);
 		}
 		long interval = 100;
-		long startTime2 = 18000;
+		long startTime2 = 17000;
 		for (int i = 1; i <= 1; i++) {
 			int x = midX;
 			int y = midY;
@@ -129,7 +132,7 @@ public class TestChapter extends AChapter {
 		
 		sES.schedule(() -> {
 			ChapterLoader.loadChapter(new TestChapter());
-		}, 36000, TimeUnit.MILLISECONDS);
+		}, 35000, TimeUnit.MILLISECONDS);
 		
 		// seq.rotate(midX-100, midY,2000,0);
 		// seq.rotate(midX-100, midY,2000,Math.PI);

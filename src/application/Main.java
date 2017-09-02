@@ -13,8 +13,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			SceneManager.startGame(primaryStage);
-//			SceneManager.shutdownGame();
-//			SceneManager.startGame(primaryStage);
+			SceneManager.shutdownGame();
+			SceneManager.startGame(primaryStage);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
