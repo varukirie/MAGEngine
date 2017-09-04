@@ -10,12 +10,14 @@ import indi.megaastronic.element.BaseElement;
 import indi.megaastronic.element.Initializable;
 import indi.megaastronic.util.DI;
 import indi.megaastronic.util.ElementUtils;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.canvas.GraphicsContext;
 
 public class Launcher extends BaseElement implements Initializable {
 
 	private BulletEvent bulletEvent;
-	private double direction = 0;
+	private DoubleProperty directionProperty =new SimpleDoubleProperty(0);
 	private long interval = 400;
 	private long startTime=0;
 	private long lastLaunchTime = 0;
@@ -31,7 +33,7 @@ public class Launcher extends BaseElement implements Initializable {
 
 	public Launcher(double x, double y, double direction, long interval,long duration) {
 		super(x, y);
-		this.direction = direction;
+		this.directionProperty.set(direction);
 		this.interval = interval;
 		this.duration=duration;
 	}
@@ -46,8 +48,8 @@ public class Launcher extends BaseElement implements Initializable {
 		try {
 			((ElementUtils) (DI.di().get("mEU"))).addEventBullet(UUID.randomUUID().toString(), this.bulletEvent,
 					(Bullet) bulletType.getConstructor(double.class, double.class, double.class, double.class)
-							.newInstance(getX(), getY(), Math.cos(direction) * bulletSpeed,
-									Math.sin(direction) * bulletSpeed));
+							.newInstance(getX(), getY(), Math.cos(getDirection()) * bulletSpeed,
+									Math.sin(getDirection()) * bulletSpeed));
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
 			System.out.println("错误的子弹类型");
@@ -79,11 +81,11 @@ public class Launcher extends BaseElement implements Initializable {
 	}
 
 	public double getDirection() {
-		return direction;
+		return directionProperty.get();
 	}
 
 	public void setDirection(double direction) {
-		this.direction = direction;
+		this.directionProperty.set(direction);
 	}
 
 	public long getInterval() {
@@ -141,6 +143,15 @@ public class Launcher extends BaseElement implements Initializable {
 	public void setModifyEvent(ModifyEvent modifyEvent) {
 		this.modifyEvent = modifyEvent;
 	}
+
+	public DoubleProperty getDirectionProperty() {
+		return directionProperty;
+	}
+
+	public void setDirectionProperty(DoubleProperty directionProperty) {
+		this.directionProperty = directionProperty;
+	}
+	
 	
 	
 }

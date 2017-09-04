@@ -19,7 +19,7 @@ public class OvalHelper extends Helper implements Initializable {
 	private static final double BLANK = 10000;
 	private double speed;
 	private double delta;
-	private double direction = 0;
+	private DoubleProperty directionProperty = new SimpleDoubleProperty(0);
 	private boolean positive = true;
 	private boolean rotate = true;
 
@@ -49,20 +49,20 @@ public class OvalHelper extends Helper implements Initializable {
 	public void modify() {
 		if (rotate) {
 			if (positive) {
-				this.direction = (System.currentTimeMillis() - startTime) * speed / BLANK;
+				this.directionProperty.set((System.currentTimeMillis() - startTime) * speed / BLANK);
 			} else {
-				this.direction = -(System.currentTimeMillis() - startTime) * speed / BLANK;
+				this.directionProperty.set(-(System.currentTimeMillis() - startTime) * speed / BLANK);
 			}
-			setX(this.ovalMidX.get() + r * Math.cos(direction));
-			setY(this.ovalMidY.get() + r * Math.sin(direction));
+			setX(this.ovalMidX.get() + r * Math.cos(getDirection()));
+			setY(this.ovalMidY.get() + r * Math.sin(getDirection()));
 		}else{
 			if (positive) {
-				this.direction = delta;
+				this.directionProperty.set(delta);
 			} else {
-				this.direction = -delta;
+				this.directionProperty.set(-delta);
 			}
-			setX(this.ovalMidX.get() + r * Math.cos(direction));
-			setY(this.ovalMidY.get() + r * Math.sin(direction));
+			setX(this.ovalMidX.get() + r * Math.cos(getDirection()));
+			setY(this.ovalMidY.get() + r * Math.sin(getDirection()));
 		}
 	}
 
@@ -71,8 +71,11 @@ public class OvalHelper extends Helper implements Initializable {
 		this.startTime = (long) (System.currentTimeMillis() + (delta * BLANK / speed));
 	}
 
+	private void setDirection(double direction){
+		this.directionProperty.set(direction);
+	}
 	public double getDirection() {
-		return direction;
+		return directionProperty.get();
 	}
 
 	public void setPositive(boolean positive) {
@@ -129,6 +132,14 @@ public class OvalHelper extends Helper implements Initializable {
 	
 	public DoubleProperty getOvalMidYProperty() {
 		return this.ovalMidY;
+	}
+
+	public DoubleProperty getDirectionProperty() {
+		return directionProperty;
+	}
+
+	public void setDirectionProperty(DoubleProperty directionProperty) {
+		this.directionProperty = directionProperty;
 	}
 
 	

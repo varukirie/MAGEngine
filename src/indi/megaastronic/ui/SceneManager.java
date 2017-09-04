@@ -1,5 +1,6 @@
 package indi.megaastronic.ui;
 
+import indi.megaastronic.chapter.ChapterDemo;
 import indi.megaastronic.chapter.TestChapter;
 import indi.megaastronic.chapter.util.ChapterLoader;
 import indi.megaastronic.control.PlayerControlHandler;
@@ -92,7 +93,7 @@ public class SceneManager {
 		ChapterLoader.init(staticCanvas);
 		
 //			ChapterLoader.loadChapter(new Chapter1());
-			ChapterLoader.loadChapter(new TestChapter());
+			ChapterLoader.loadChapter(new ChapterDemo());
 		
 	}
 	public static void shutdownGame(){

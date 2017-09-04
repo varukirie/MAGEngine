@@ -32,9 +32,7 @@ public class SeqDanmuku {
 		OvalHelper tHelper = new OvalHelper(midX, midY, helperLenght, 40, helperDelta);
 		tHelper.setPositive(true);
 		Launcher launcher = new Launcher(100, 100, 1/2.0*Math.PI, 400, duration);
-		launcher.setModifyEvent(()->{
-			launcher.setDirection(tHelper.getDirection());
-		});
+		launcher.getDirectionProperty().bindBidirectional(tHelper.getDirectionProperty());
 		launcher.getxProperty().bindBidirectional(tHelper.getxProperty());
 		launcher.getyProperty().bindBidirectional(tHelper.getyProperty());
 		launcher.setBulletEvent((ScheduledExecutorService timer, Bullet bullet) -> {
