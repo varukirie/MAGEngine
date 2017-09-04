@@ -1,16 +1,6 @@
 package indi.megaastronic.bullet;
 
-import com.badlogic.gdx.math.Polygon;
-
-import indi.megaastronic.element.Initializable;
-import indi.megaastronic.util.DI;
-import indi.megaastronic.util.MyCanvasSwitcher;
-import indi.megaastronic.util.Transform;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.effect.Bloom;
-import javafx.scene.effect.BoxBlur;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.GaussianBlur;
 import javafx.scene.paint.Color;
 
 public class DefaultBullet extends PolygonBullet {

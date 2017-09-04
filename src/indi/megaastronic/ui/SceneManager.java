@@ -1,8 +1,5 @@
 package indi.megaastronic.ui;
 
-import application.Main;
-import indi.megaastronic.bullet.ArrowBullet;
-import indi.megaastronic.bullet.Bullet;
 import indi.megaastronic.chapter.TestChapter;
 import indi.megaastronic.chapter.util.ChapterLoader;
 import indi.megaastronic.control.PlayerControlHandler;
@@ -15,9 +12,6 @@ import indi.megaastronic.util.ElementUtils;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.effect.Bloom;
-import javafx.scene.effect.BoxBlur;
-import javafx.scene.effect.Effect;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;

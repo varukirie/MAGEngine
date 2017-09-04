@@ -1,8 +1,5 @@
 package indi.megaastronic.bullet;
 
-import com.badlogic.gdx.math.Polygon;
-
-import indi.megaastronic.util.Transform;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 

@@ -1,17 +1,6 @@
 package indi.megaastronic.bullet;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
-import com.badlogic.gdx.math.Polygon;
-
 import indi.megaastronic.element.BaseElement;
-import indi.megaastronic.element.PolygonCollision;
-import indi.megaastronic.util.Transform;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 /**
  * 
  * @author MegaAstronic

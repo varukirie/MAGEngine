@@ -3,7 +3,6 @@ package indi.megaastronic.helper;
 import application.Main;
 import indi.megaastronic.element.BaseElement;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 /**
  * 用于辅助弹幕绘制，运行时不显示的元素
  * @author MegaAstronic

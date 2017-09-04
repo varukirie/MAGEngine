@@ -1,18 +1,11 @@
 package indi.megaastronic.chapter;
 
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import application.Main;
-import indi.megaastronic.element.impl.Player;
 import indi.megaastronic.helper.Helper;
 import indi.megaastronic.helper.OvalHelper;
-import indi.megaastronic.bullet.Bullet;
-import indi.megaastronic.bullet.MissileBullet;
 import indi.megaastronic.chapter.util.AChapter;
 import indi.megaastronic.chapter.util.QuickDanmuku;
 import indi.megaastronic.paint.MyCanvas;

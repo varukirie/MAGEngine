@@ -2,11 +2,9 @@ package indi.megaastronic.bullet;
 
 import com.badlogic.gdx.math.Polygon;
 
-import indi.megaastronic.element.Initializable;
 import indi.megaastronic.element.PolygonCollision;
 import indi.megaastronic.util.Transform;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 
 public abstract class PolygonBullet extends Bullet implements PolygonCollision{
 
