@@ -23,7 +23,6 @@ public class MyCanvasSwitcher {
 	
 	public void addElement(String key,BaseElement e){
 		Class<?> cls = e.getClass();
-		
 		MyCanvas canvas= fmyCanvasMap.get(cls);
 		if(canvas==null){
 			createCanvas(cls);

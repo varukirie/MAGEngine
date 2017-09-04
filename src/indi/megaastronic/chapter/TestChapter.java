@@ -1,6 +1,7 @@
 package indi.megaastronic.chapter;
 
 import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -10,6 +11,7 @@ import indi.megaastronic.chapter.util.QuickDanmuku;
 import indi.megaastronic.chapter.util.SeqDanmuku;
 import indi.megaastronic.danmuku.ArcGroup;
 import indi.megaastronic.danmuku.OvalGroup;
+import indi.megaastronic.launcher.Launcher;
 import indi.megaastronic.paint.MyCanvas;
 import indi.megaastronic.util.DI;
 import indi.megaastronic.util.ElementUtils;
@@ -34,8 +36,28 @@ public class TestChapter extends AChapter {
 		QuickDanmuku quick = new QuickDanmuku(mEU);
 		Random r = new Random();
 
-		// ArcGroup arcGroup=new ArcGroup(midX,midY);
-		// arcGroup.delayExecute(500);
+//		Launcher launcherx = new Launcher(midX-100, midY-100, Math.PI/2,100, 1000);
+//		launcherx.setBulletSpeed(0.001);
+//		launcherx.setBulletEvent((sesx,bullet)->{
+//			sesx.schedule(()->{
+//				bullet.setAccY(0.2);
+//			}, 2000, TimeUnit.MILLISECONDS);
+//		});
+//		launcherx.setVelocityY(0.5);
+//		mEU.add(UUID.randomUUID().toString(), launcherx);
+//		
+//		launcherx = new Launcher(midX+100, midY-100, Math.PI/2,100, 1000);
+//		launcherx.setBulletSpeed(0.001);
+//		launcherx.setBulletEvent((sesx,bullet)->{
+//			sesx.schedule(()->{
+//				bullet.setAccY(0.2);
+//			}, 2000, TimeUnit.MILLISECONDS);
+//		});
+//		launcherx.setVelocityY(0.5);
+//		mEU.add(UUID.randomUUID().toString(), launcherx);
+		
+
+		
 		
 		
 		new ArcGroup(midX, midY, Math.PI/2, Math.PI/3, 6).delayExecute(700);
@@ -107,6 +129,21 @@ public class TestChapter extends AChapter {
 			});
 		});
 		oG4.delayExecute(1500);
+		
+		OvalGroup oG5 = new OvalGroup(midX, midY);
+		oG5.setLauncherConfig((launcher) -> {
+			launcher.setBulletEvent((sESx, bullet) -> {
+				sESx.schedule(() -> {
+					quick.stopBullet(bullet);
+				}, 1000, TimeUnit.MILLISECONDS);
+				sESx.schedule(() -> {
+					quick.runBullet(bullet);
+					bullet.setVelocityX(-bullet.getVelocityX());
+					bullet.setVelocityY(-bullet.getVelocityY());
+				}, 1500, TimeUnit.MILLISECONDS);
+			});
+		});
+		oG5.delayExecute(1500);
 		
 		int lcount = 32;
 		for (int i = 0; i < lcount; i++) {

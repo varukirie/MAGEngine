@@ -31,7 +31,7 @@ public class SeqDanmuku {
 		long duration=8000;
 		OvalHelper tHelper = new OvalHelper(midX, midY, helperLenght, 40, helperDelta);
 		tHelper.setPositive(true);
-		Launcher launcher = new Launcher(100, 100, 1/2.0*Math.PI, 200, duration);
+		Launcher launcher = new Launcher(100, 100, 1/2.0*Math.PI, 400, duration);
 		launcher.setModifyEvent(()->{
 			launcher.setDirection(tHelper.getDirection());
 		});
@@ -43,8 +43,8 @@ public class SeqDanmuku {
 				bullet.setVelocityY(bullet.getVelocityY()*0.01);
 			}, 1000, TimeUnit.MILLISECONDS);
 			timer.schedule(() -> {
-				bullet.setVelocityX(bullet.getVelocityX()*200);
-				bullet.setVelocityY(bullet.getVelocityY()*200);
+				bullet.setVelocityX(bullet.getVelocityX()*120);
+				bullet.setVelocityY(bullet.getVelocityY()*120);
 				quick.snipe(bullet,tHelper.getX(),tHelper.getY());
 //				quick.snipePlayer(bullet);
 			}, 3000, TimeUnit.MILLISECONDS);

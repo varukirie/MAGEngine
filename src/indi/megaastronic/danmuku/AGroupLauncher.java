@@ -11,8 +11,8 @@ import indi.megaastronic.util.DI;
 import indi.megaastronic.util.ElementUtils;
 
 public abstract class AGroupLauncher {
-	protected long interval = 49;
-	protected long duration = 50;
+	protected long interval = 50;
+	protected long duration = 70;
 
 	protected ScheduledExecutorService sES = (ScheduledExecutorService) DI.di().get("sES");
 	protected MyCanvas staticCanvas = (MyCanvas) DI.di().get("staticCanvas");
