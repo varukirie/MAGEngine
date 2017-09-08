@@ -1,11 +1,8 @@
-package indi.megaastronic.danmuku;
+package indi.megaastronic.launcher;
 
 import java.util.UUID;
 
-import indi.megaastronic.launcher.BulletEvent;
-import indi.megaastronic.launcher.Launcher;
-
-public class OvalGroup extends AGroupLauncher {
+public class OvalGroupLauncher extends AGroupLauncher {
 
 	private double midX=200;
 	private double midY=200;
@@ -13,7 +10,7 @@ public class OvalGroup extends AGroupLauncher {
 
 	
 	
-	public OvalGroup(double midX, double midY) {
+	public OvalGroupLauncher(double midX, double midY) {
 		super();
 		this.midX = midX;
 		this.midY = midY;

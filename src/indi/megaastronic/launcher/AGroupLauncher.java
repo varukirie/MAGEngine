@@ -1,11 +1,9 @@
-package indi.megaastronic.danmuku;
+package indi.megaastronic.launcher;
 
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-import indi.megaastronic.launcher.BulletEvent;
-import indi.megaastronic.launcher.Launcher;
 import indi.megaastronic.paint.MyCanvas;
 import indi.megaastronic.util.DI;
 import indi.megaastronic.util.ElementUtils;

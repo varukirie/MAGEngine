@@ -9,9 +9,9 @@ import indi.megaastronic.chapter.util.AChapter;
 import indi.megaastronic.chapter.util.ChapterLoader;
 import indi.megaastronic.chapter.util.QuickDanmuku;
 import indi.megaastronic.chapter.util.SeqDanmuku;
-import indi.megaastronic.danmuku.ArcGroup;
-import indi.megaastronic.danmuku.OvalGroup;
+import indi.megaastronic.launcher.ArcGroupLauncher;
 import indi.megaastronic.launcher.Launcher;
+import indi.megaastronic.launcher.OvalGroupLauncher;
 import indi.megaastronic.paint.MyCanvas;
 import indi.megaastronic.util.DI;
 import indi.megaastronic.util.ElementUtils;
@@ -19,6 +19,7 @@ import indi.megaastronic.util.MyCanvasSwitcher;
 import javafx.application.Platform;
 import javafx.scene.effect.Bloom;
 import indi.megaastronic.bullet.DefaultBullet;
+import indi.megaastronic.bullet.ArrowBullet;
 
 public class ChapterDemo extends AChapter {
 
@@ -30,6 +31,7 @@ public class ChapterDemo extends AChapter {
 	public void design(ScheduledExecutorService sES, MyCanvas staticCanvas, ElementUtils mEU) {
 		Platform.runLater(()->{
 			((MyCanvasSwitcher)DI.di().get("switcher")).setEffect(DefaultBullet.class, new Bloom());
+			((MyCanvasSwitcher)DI.di().get("switcher")).setEffect(ArrowBullet.class, new Bloom());
 			staticCanvas.getGraphicsContext2D().fillRect(0, 0, MyCanvas.CANVAS_WIDTH, MyCanvas.CANVAS_HEIGHT);
 		});
 		SeqDanmuku seq = new SeqDanmuku(sES, mEU);
@@ -60,13 +62,14 @@ public class ChapterDemo extends AChapter {
 		
 		
 		
-		new ArcGroup(midX, midY, Math.PI/2, Math.PI/3, 6).delayExecute(700);
-		new ArcGroup(midX, midY, Math.PI/2, Math.PI/3, 6).delayExecute(850);
-		new ArcGroup(midX, midY, Math.PI/2+Math.PI/7, Math.PI/3, 6).delayExecute(1300);
-		new ArcGroup(midX, midY, Math.PI/2-Math.PI/7, Math.PI/3, 6).delayExecute(1900);
+		new ArcGroupLauncher(midX, midY, Math.PI/2, Math.PI/3, 6).delayExecute(700);
+		new ArcGroupLauncher(midX, midY, Math.PI/2, Math.PI/3, 6).delayExecute(850);
+		new ArcGroupLauncher(midX, midY, Math.PI/2+Math.PI/7, Math.PI/3, 6).delayExecute(1300);
+		new ArcGroupLauncher(midX, midY, Math.PI/2-Math.PI/7, Math.PI/3, 6).delayExecute(1900);
 
-		OvalGroup oG = new OvalGroup(midX, midY);
+		OvalGroupLauncher oG = new OvalGroupLauncher(midX, midY);
 		oG.setLauncherConfig((launcher) -> {
+			launcher.setBulletType(ArrowBullet.class);
 			launcher.setBulletEvent((sESx, bullet) -> {
 				sESx.schedule(() -> {
 					quick.stopBullet(bullet);
@@ -82,7 +85,7 @@ public class ChapterDemo extends AChapter {
 		oG.delayExecute(4000);
 		oG.delayExecute(5000);
 		
-		OvalGroup oG2 = new OvalGroup(midX, midY);
+		OvalGroupLauncher oG2 = new OvalGroupLauncher(midX, midY);
 		oG2.setLauncherConfig((launcher) -> {
 			launcher.setBulletEvent((sESx, bullet) -> {
 				sESx.schedule(() -> {
@@ -98,7 +101,7 @@ public class ChapterDemo extends AChapter {
 		});
 		
 		oG2.delayExecute(100);
-		OvalGroup oG3 = new OvalGroup(midX, midY);
+		OvalGroupLauncher oG3 = new OvalGroupLauncher(midX, midY);
 		oG3.setLauncherConfig((launcher) -> {
 			launcher.setBulletEvent((sESx, bullet) -> {
 				sESx.schedule(() -> {
@@ -114,7 +117,7 @@ public class ChapterDemo extends AChapter {
 		});
 		oG3.delayExecute(1000);
 		
-		OvalGroup oG4 = new OvalGroup(midX, midY);
+		OvalGroupLauncher oG4 = new OvalGroupLauncher(midX, midY);
 		oG4.setLauncherConfig((launcher) -> {
 			launcher.setBulletEvent((sESx, bullet) -> {
 				sESx.schedule(() -> {
@@ -130,7 +133,7 @@ public class ChapterDemo extends AChapter {
 		});
 		oG4.delayExecute(1500);
 		
-		OvalGroup oG5 = new OvalGroup(midX, midY);
+		OvalGroupLauncher oG5 = new OvalGroupLauncher(midX, midY);
 		oG5.setLauncherConfig((launcher) -> {
 			launcher.setBulletEvent((sESx, bullet) -> {
 				sESx.schedule(() -> {
@@ -145,7 +148,7 @@ public class ChapterDemo extends AChapter {
 		});
 		oG5.delayExecute(1500);
 		
-		int lcount = 32;
+		int lcount = 12;
 		for (int i = 0; i < lcount; i++) {
 			seq.rotateDSnipe(midX, midY, 7000, 2 * Math.PI / lcount * i);
 		}

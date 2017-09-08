@@ -11,6 +11,7 @@ import indi.megaastronic.paint.MyCanvas;
 import indi.megaastronic.util.DI;
 import indi.megaastronic.util.ElementUtils;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
@@ -37,7 +38,7 @@ public class SceneManager {
 		
 		Scene scene=new Scene(root);
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("MAEngine!");
+		primaryStage.setTitle("MAGEngine!");
 		primaryStage.show();
 	
 
@@ -92,8 +93,8 @@ public class SceneManager {
 		moveableElementUtils.add("displayTime", new DisplayTime(1, MyCanvas.CANVAS_HEIGHT-7));
 		ChapterLoader.init(staticCanvas);
 		
-//			ChapterLoader.loadChapter(new Chapter1());
-			ChapterLoader.loadChapter(new ChapterDemo());
+//		ChapterLoader.loadChapter(new TestChapter());
+		ChapterLoader.loadChapter(new ChapterDemo());
 		
 	}
 	public static void shutdownGame(){
