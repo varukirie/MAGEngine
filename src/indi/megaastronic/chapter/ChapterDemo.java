@@ -19,6 +19,8 @@ import indi.megaastronic.util.MyCanvasSwitcher;
 import javafx.application.Platform;
 import javafx.scene.effect.Bloom;
 import indi.megaastronic.bullet.DefaultBullet;
+import indi.megaastronic.bullet.StarBullet;
+import indi.megaastronic.bullet.Bullet;
 import indi.megaastronic.bullet.ArrowBullet;
 
 public class ChapterDemo extends AChapter {
@@ -32,6 +34,8 @@ public class ChapterDemo extends AChapter {
 		Platform.runLater(()->{
 			((MyCanvasSwitcher)DI.di().get("switcher")).setEffect(DefaultBullet.class, new Bloom());
 			((MyCanvasSwitcher)DI.di().get("switcher")).setEffect(ArrowBullet.class, new Bloom());
+			((MyCanvasSwitcher)DI.di().get("switcher")).setEffect(StarBullet.class, new Bloom());
+			
 			staticCanvas.getGraphicsContext2D().fillRect(0, 0, MyCanvas.CANVAS_WIDTH, MyCanvas.CANVAS_HEIGHT);
 		});
 		SeqDanmuku seq = new SeqDanmuku(sES, mEU);
@@ -63,7 +67,12 @@ public class ChapterDemo extends AChapter {
 		
 		
 		new ArcLauncherGroup(midX, midY, Math.PI/2, Math.PI/3, 6).delayExecute(700);
-		new ArcLauncherGroup(midX, midY, Math.PI/2, Math.PI/3, 6).delayExecute(850);
+		ArcLauncherGroup alg = new ArcLauncherGroup(midX, midY, Math.PI/2, Math.PI/3, 6);
+		alg.setLauncherConfig((launcher)->{
+			launcher.setBulletSpeed(1.5);
+		});
+		alg.delayExecute(850);
+
 		new ArcLauncherGroup(midX, midY, Math.PI/2+Math.PI/7, Math.PI/3, 6).delayExecute(1300);
 		new ArcLauncherGroup(midX, midY, Math.PI/2-Math.PI/7, Math.PI/3, 6).delayExecute(1900);
 
@@ -103,6 +112,7 @@ public class ChapterDemo extends AChapter {
 		oG2.delayExecute(100);
 		OvalLauncherGroup oG3 = new OvalLauncherGroup(midX, midY);
 		oG3.setLauncherConfig((launcher) -> {
+			
 			launcher.setBulletEvent((sESx, bullet) -> {
 				sESx.schedule(() -> {
 					quick.stopBullet(bullet);
@@ -119,6 +129,7 @@ public class ChapterDemo extends AChapter {
 		
 		OvalLauncherGroup oG4 = new OvalLauncherGroup(midX, midY);
 		oG4.setLauncherConfig((launcher) -> {
+			launcher.setBulletType(indi.megaastronic.bullet.StarBullet.class);
 			launcher.setBulletEvent((sESx, bullet) -> {
 				sESx.schedule(() -> {
 					quick.stopBullet(bullet);
@@ -148,7 +159,7 @@ public class ChapterDemo extends AChapter {
 		});
 		oG5.delayExecute(1500);
 		
-		int lcount = 12;
+		int lcount = 24;
 		for (int i = 0; i < lcount; i++) {
 			seq.rotateDSnipe(midX, midY, 7000, 2 * Math.PI / lcount * i);
 		}

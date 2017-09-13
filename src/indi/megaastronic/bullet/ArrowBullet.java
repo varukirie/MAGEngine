@@ -32,7 +32,7 @@ public class ArrowBullet extends PolygonBullet {
 		super(x,y,vx,vy,ax,ay);
 	}
 	
-	private static final double[][] origin=new double[][]{
+	public static final double[][] origin=new double[][]{
 		{
 			0,-9,0,9
 		},
@@ -44,7 +44,7 @@ public class ArrowBullet extends PolygonBullet {
 
 @Override
 public void paint(GraphicsContext gc) {
-	gc.setFill(Color.WHITE);
+	gc.setFill(Color.SILVER);
 	super.paint(gc);
 }
 	@Override
