@@ -9,9 +9,9 @@ import indi.megaastronic.chapter.util.AChapter;
 import indi.megaastronic.chapter.util.ChapterLoader;
 import indi.megaastronic.chapter.util.QuickDanmuku;
 import indi.megaastronic.chapter.util.SeqDanmuku;
-import indi.megaastronic.launcher.ArcGroupLauncher;
+import indi.megaastronic.launcher.ArcLauncherGroup;
 import indi.megaastronic.launcher.Launcher;
-import indi.megaastronic.launcher.OvalGroupLauncher;
+import indi.megaastronic.launcher.OvalLauncherGroup;
 import indi.megaastronic.paint.MyCanvas;
 import indi.megaastronic.util.DI;
 import indi.megaastronic.util.ElementUtils;
@@ -62,12 +62,12 @@ public class ChapterDemo extends AChapter {
 		
 		
 		
-		new ArcGroupLauncher(midX, midY, Math.PI/2, Math.PI/3, 6).delayExecute(700);
-		new ArcGroupLauncher(midX, midY, Math.PI/2, Math.PI/3, 6).delayExecute(850);
-		new ArcGroupLauncher(midX, midY, Math.PI/2+Math.PI/7, Math.PI/3, 6).delayExecute(1300);
-		new ArcGroupLauncher(midX, midY, Math.PI/2-Math.PI/7, Math.PI/3, 6).delayExecute(1900);
+		new ArcLauncherGroup(midX, midY, Math.PI/2, Math.PI/3, 6).delayExecute(700);
+		new ArcLauncherGroup(midX, midY, Math.PI/2, Math.PI/3, 6).delayExecute(850);
+		new ArcLauncherGroup(midX, midY, Math.PI/2+Math.PI/7, Math.PI/3, 6).delayExecute(1300);
+		new ArcLauncherGroup(midX, midY, Math.PI/2-Math.PI/7, Math.PI/3, 6).delayExecute(1900);
 
-		OvalGroupLauncher oG = new OvalGroupLauncher(midX, midY);
+		OvalLauncherGroup oG = new OvalLauncherGroup(midX, midY);
 		oG.setLauncherConfig((launcher) -> {
 			launcher.setBulletType(ArrowBullet.class);
 			launcher.setBulletEvent((sESx, bullet) -> {
@@ -85,7 +85,7 @@ public class ChapterDemo extends AChapter {
 		oG.delayExecute(4000);
 		oG.delayExecute(5000);
 		
-		OvalGroupLauncher oG2 = new OvalGroupLauncher(midX, midY);
+		OvalLauncherGroup oG2 = new OvalLauncherGroup(midX, midY);
 		oG2.setLauncherConfig((launcher) -> {
 			launcher.setBulletEvent((sESx, bullet) -> {
 				sESx.schedule(() -> {
@@ -101,7 +101,7 @@ public class ChapterDemo extends AChapter {
 		});
 		
 		oG2.delayExecute(100);
-		OvalGroupLauncher oG3 = new OvalGroupLauncher(midX, midY);
+		OvalLauncherGroup oG3 = new OvalLauncherGroup(midX, midY);
 		oG3.setLauncherConfig((launcher) -> {
 			launcher.setBulletEvent((sESx, bullet) -> {
 				sESx.schedule(() -> {
@@ -117,7 +117,7 @@ public class ChapterDemo extends AChapter {
 		});
 		oG3.delayExecute(1000);
 		
-		OvalGroupLauncher oG4 = new OvalGroupLauncher(midX, midY);
+		OvalLauncherGroup oG4 = new OvalLauncherGroup(midX, midY);
 		oG4.setLauncherConfig((launcher) -> {
 			launcher.setBulletEvent((sESx, bullet) -> {
 				sESx.schedule(() -> {
@@ -133,7 +133,7 @@ public class ChapterDemo extends AChapter {
 		});
 		oG4.delayExecute(1500);
 		
-		OvalGroupLauncher oG5 = new OvalGroupLauncher(midX, midY);
+		OvalLauncherGroup oG5 = new OvalLauncherGroup(midX, midY);
 		oG5.setLauncherConfig((launcher) -> {
 			launcher.setBulletEvent((sESx, bullet) -> {
 				sESx.schedule(() -> {

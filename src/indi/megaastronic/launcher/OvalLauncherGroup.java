@@ -2,7 +2,7 @@ package indi.megaastronic.launcher;
 
 import java.util.UUID;
 
-public class OvalGroupLauncher extends AGroupLauncher {
+public class OvalLauncherGroup extends ALauncherGroup {
 
 	private double midX=200;
 	private double midY=200;
@@ -10,7 +10,7 @@ public class OvalGroupLauncher extends AGroupLauncher {
 
 	
 	
-	public OvalGroupLauncher(double midX, double midY) {
+	public OvalLauncherGroup(double midX, double midY) {
 		super();
 		this.midX = midX;
 		this.midY = midY;

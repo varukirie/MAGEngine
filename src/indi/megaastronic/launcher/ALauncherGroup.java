@@ -8,13 +8,22 @@ import indi.megaastronic.paint.MyCanvas;
 import indi.megaastronic.util.DI;
 import indi.megaastronic.util.ElementUtils;
 
-public abstract class AGroupLauncher {
+public abstract class ALauncherGroup {
+	/**
+	 * 两次发射之间间隔
+	 */
 	protected long interval = 50;
+	/**
+	 * 发射器的存在时间
+	 */
 	protected long duration = 70;
 
 	protected ScheduledExecutorService sES = (ScheduledExecutorService) DI.di().get("sES");
 	protected MyCanvas staticCanvas = (MyCanvas) DI.di().get("staticCanvas");
 	protected ElementUtils mEU = (ElementUtils) DI.di().get("mEU");
+	/**
+	 * 发射器设置
+	 */
 	protected Consumer<Launcher> launcherConfig=null;
 	public ScheduledExecutorService getsES() {
 		return sES;

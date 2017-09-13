@@ -2,7 +2,7 @@ package indi.megaastronic.launcher;
 
 import java.util.UUID;
 
-public class ArcGroupLauncher extends AGroupLauncher {
+public class ArcLauncherGroup extends ALauncherGroup {
 
 	/**
 	 * direction为负角表示 单位弧度
@@ -20,7 +20,7 @@ public class ArcGroupLauncher extends AGroupLauncher {
 	private double midY = 200;
 
 	
-	public ArcGroupLauncher(double midX, double midY) {
+	public ArcLauncherGroup(double midX, double midY) {
 		super();
 		this.midX = midX;
 		this.midY = midY;
@@ -28,7 +28,7 @@ public class ArcGroupLauncher extends AGroupLauncher {
 	
 
 
-	public ArcGroupLauncher(double midX, double midY,double direction, double angle, int amount) {
+	public ArcLauncherGroup(double midX, double midY,double direction, double angle, int amount) {
 		super();
 		this.direction = direction;
 		this.angle = angle;
