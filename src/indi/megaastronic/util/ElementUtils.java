@@ -3,6 +3,7 @@ package indi.megaastronic.util;
 import java.util.Map;
 import java.util.concurrent.ScheduledExecutorService;
 
+import application.Main;
 import indi.megaastronic.bullet.Bullet;
 import indi.megaastronic.element.BaseElement;
 import indi.megaastronic.element.DurationManage;
@@ -37,6 +38,9 @@ public class ElementUtils {
 	 * @param value
 	 */
 	public void add(String name,Object value){
+		if(Main.DEBUG_ElementCreate){
+			System.out.println("addElement:"+value);
+		}
 		if(value instanceof Initializable){
 				((Initializable) value).initWhenAdd();
 		}
@@ -57,8 +61,11 @@ public class ElementUtils {
 	
 
 	public void removeBoth(String key){
-		
+	
 		Object obj = getWantMoveMap().get(key);
+		if(Main.DEBUG_ElementCreate){
+			System.out.println("removeElement:"+obj);
+		}
 		if(obj instanceof Bullet){
 			switcher.removeElement(key);
 		}else{

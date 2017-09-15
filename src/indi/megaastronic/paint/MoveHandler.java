@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentSkipListSet;
 
 import application.Main;
 import indi.megaastronic.element.Accelerated;
+import indi.megaastronic.element.DurationManage;
 import indi.megaastronic.element.LimitedByCanvas;
 import indi.megaastronic.element.Moveable;
 import indi.megaastronic.element.PolygonCollision;
@@ -68,13 +69,18 @@ public class MoveHandler implements Runnable {
 				entry = iter.next();
 				m = entry.getValue();
 				m.modify();
+
 				if(m instanceof Launcher){
 					Launcher l=(Launcher) m;
 					if(System.currentTimeMillis()-l.getLastLaunch()>l.getInterval()){
 						l.setLastLaunch(System.currentTimeMillis());
 						l.launch();
 					}
-					if(System.currentTimeMillis()-l.getStartTime()>l.getDuration()){
+				}
+				
+				if(m instanceof DurationManage){
+					DurationManage dm = (DurationManage) m;
+					if(System.currentTimeMillis()-dm.getStartTime()>dm.getDuration()){
 						removeElement(entry.getKey());
 						continue;
 					}

@@ -38,10 +38,20 @@ public class TestChapter extends AChapter {
 		QuickDanmuku quick = new QuickDanmuku(mEU);
 		Random r = new Random();
 		Launcher lc = new Launcher(midX, midY, Math.PI/2, 300, 3000);
-		OvalHelper ovalHelper=new OvalHelper(midX, midY, 10, 0.5);
-		
+		OvalHelper ovalHelper=new OvalHelper(midX, midY, 15, 3000, Math.PI*10);
+		long targetTime = System.currentTimeMillis()+10000;
 		lc.getDirectionProperty().bindBidirectional(ovalHelper.getDirectionProperty());
-		lc.setBulletSpeed(0.01);
+		lc.setBulletSpeed(0.2);
+		lc.setBulletEvent((sesx,b)->{
+			sesx.schedule(()->{
+				quick.stopBullet(b);
+			}, 1000, TimeUnit.MILLISECONDS);
+		});
+		lc.setBulletEvent((sesx,b)->{
+			sesx.schedule(()->{
+			}, 2000, TimeUnit.MILLISECONDS);
+		});
+		mEU.add(r.nextLong()+"", ovalHelper);
 		mEU.add(r.nextLong()+"", lc);
 	}
 

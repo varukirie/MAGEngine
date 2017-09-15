@@ -13,7 +13,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 public class OvalHelper extends Helper implements Initializable {
 
 	private double r;
-	private long startTime = 0;
+	private long ovalStartTime = 0;
 	private DoubleProperty ovalMidX=new SimpleDoubleProperty(0);
 	private DoubleProperty ovalMidY=new SimpleDoubleProperty(0);
 	private static final double BLANK = 10000;
@@ -27,12 +27,13 @@ public class OvalHelper extends Helper implements Initializable {
 		this(midx, midy, r, speed, 0);
 	}
 
+
 	/**
 	 * 
 	 * @param midx
 	 * @param midy
 	 * @param r
-	 * @param speed
+	 * @param speed 单位    0.1rad/s
 	 * @param startAngle
 	 *            单位 弧度，起始角度
 	 */
@@ -50,9 +51,9 @@ public class OvalHelper extends Helper implements Initializable {
 		super.modify();
 		if (rotate) {
 			if (positive) {
-				this.directionProperty.set((System.currentTimeMillis() - startTime) * speed / BLANK);
+				this.directionProperty.set((System.currentTimeMillis() - ovalStartTime) * speed / BLANK);
 			} else {
-				this.directionProperty.set(-(System.currentTimeMillis() - startTime) * speed / BLANK);
+				this.directionProperty.set(-(System.currentTimeMillis() - ovalStartTime) * speed / BLANK);
 			}
 			setX(this.ovalMidX.get() + r * Math.cos(getDirection()));
 			setY(this.ovalMidY.get() + r * Math.sin(getDirection()));
@@ -69,7 +70,7 @@ public class OvalHelper extends Helper implements Initializable {
 
 	@Override
 	public void initWhenAdd() {
-		this.startTime = (long) (System.currentTimeMillis() + (delta * BLANK / speed));
+		this.ovalStartTime = (long) (System.currentTimeMillis() + (delta * BLANK / speed));
 	}
 
 	public void setDirection(double direction){
