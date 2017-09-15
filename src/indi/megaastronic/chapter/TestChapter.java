@@ -31,7 +31,9 @@ public class TestChapter extends AChapter {
 	public void design(ScheduledExecutorService sES, MyCanvas staticCanvas, ElementUtils mEU) {
 
 		Platform.runLater(()->{
-			((MyCanvasSwitcher)DI.di().get("switcher")).setEffect(DefaultBullet.class, new Bloom());
+			((MyCanvasSwitcher)DI.di().get("switcher")).configCanvas(DefaultBullet.class, (canvas)->{
+				canvas.setEffect(new Bloom());
+			});
 			staticCanvas.getGraphicsContext2D().fillRect(0, 0, MyCanvas.CANVAS_WIDTH, MyCanvas.CANVAS_HEIGHT);
 		});
 		

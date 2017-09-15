@@ -1,6 +1,7 @@
 package indi.megaastronic.util;
 
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
 
 import indi.megaastronic.element.BaseElement;
 import indi.megaastronic.paint.MoveHandler;
@@ -59,6 +60,12 @@ public class MyCanvasSwitcher {
 			});
 		}
 		switchCount=(switchCount+1)%2;
+	}
+	
+	public void configCanvas(Class<?> cls,Consumer<MyCanvas> config){
+		if(fmyCanvasMap.get(cls)==null) createCanvas(cls);
+		config.accept(fmyCanvasMap.get(cls));
+		config.accept(smyCanvasMap.get(cls));
 	}
 	
 	public void setEffect(Class<?> cls,Effect effect){
