@@ -90,9 +90,8 @@ public class ChapterDemo extends AChapter {
 				}, 1500, TimeUnit.MILLISECONDS);
 			});
 		});
-		oG.delayExecute(3000);
 		oG.delayExecute(4000);
-		oG.delayExecute(5000);
+
 		
 		OvalLauncherGroup oG2 = new OvalLauncherGroup(midX, midY);
 		oG2.setLauncherConfig((launcher) -> {
@@ -159,7 +158,7 @@ public class ChapterDemo extends AChapter {
 		});
 		oG5.delayExecute(1500);
 		
-		int lcount = 24;
+		int lcount = 12;
 		for (int i = 0; i < lcount; i++) {
 			seq.rotateDSnipe(midX, midY, 7000, 2 * Math.PI / lcount * i);
 		}
@@ -176,9 +175,9 @@ public class ChapterDemo extends AChapter {
 		for (int i = 1; i <= 2; i++) {
 			int x = midX;
 			int y = midY;
-			seq.rotate(x, y, interval * i + startTime2 + 7000, Math.PI * 2 / 3 + i, DefaultBullet.class, false);
-			seq.rotate(x, y, interval * i + startTime2 + 7000, Math.PI * 4 / 3 + i, DefaultBullet.class, false);
-			seq.rotate(x, y, interval * i + startTime2 + 7000, Math.PI * 6 / 3 + i, DefaultBullet.class, false);
+			seq.rotate(x, y, interval * i + startTime2 + 7000, Math.PI * 2 / 3 + i, StarBullet.class, false);
+			seq.rotate(x, y, interval * i + startTime2 + 7000, Math.PI * 4 / 3 + i, StarBullet.class, false);
+			seq.rotate(x, y, interval * i + startTime2 + 7000, Math.PI * 6 / 3 + i, StarBullet.class, false);
 		}
 		
 		sES.schedule(() -> {

@@ -9,6 +9,7 @@ import indi.megaastronic.chapter.util.AChapter;
 import indi.megaastronic.chapter.util.ChapterLoader;
 import indi.megaastronic.chapter.util.QuickDanmuku;
 import indi.megaastronic.chapter.util.SeqDanmuku;
+import indi.megaastronic.helper.OvalHelper;
 import indi.megaastronic.launcher.ArcLauncherGroup;
 import indi.megaastronic.launcher.Launcher;
 import indi.megaastronic.launcher.OvalLauncherGroup;
@@ -28,6 +29,7 @@ public class TestChapter extends AChapter {
 
 	@Override
 	public void design(ScheduledExecutorService sES, MyCanvas staticCanvas, ElementUtils mEU) {
+
 		Platform.runLater(()->{
 			((MyCanvasSwitcher)DI.di().get("switcher")).setEffect(DefaultBullet.class, new Bloom());
 			staticCanvas.getGraphicsContext2D().fillRect(0, 0, MyCanvas.CANVAS_WIDTH, MyCanvas.CANVAS_HEIGHT);
@@ -35,7 +37,12 @@ public class TestChapter extends AChapter {
 		SeqDanmuku seq = new SeqDanmuku(sES, mEU);
 		QuickDanmuku quick = new QuickDanmuku(mEU);
 		Random r = new Random();
+		Launcher lc = new Launcher(midX, midY, Math.PI/2, 300, 3000);
+		OvalHelper ovalHelper=new OvalHelper(midX, midY, 10, 0.5);
 		
+		lc.getDirectionProperty().bindBidirectional(ovalHelper.getDirectionProperty());
+		lc.setBulletSpeed(0.01);
+		mEU.add(r.nextLong()+"", lc);
 	}
 
 }

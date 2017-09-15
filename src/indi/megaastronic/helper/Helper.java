@@ -10,6 +10,7 @@ import javafx.scene.canvas.GraphicsContext;
  */
 public class Helper extends BaseElement {
 
+	
 	public Helper(double x, double y) {
 		super(x, y);
 	}
@@ -19,6 +20,7 @@ public class Helper extends BaseElement {
 	public Helper(double x, double y, double velocityX, double velocityY,double ax,double ay) {
 		super(x,y,velocityX,velocityY,ax,ay);
 	}
+	
 	
 	@Override
 	public void paint(GraphicsContext gc) {

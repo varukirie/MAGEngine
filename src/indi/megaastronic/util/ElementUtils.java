@@ -5,6 +5,7 @@ import java.util.concurrent.ScheduledExecutorService;
 
 import indi.megaastronic.bullet.Bullet;
 import indi.megaastronic.element.BaseElement;
+import indi.megaastronic.element.DurationManage;
 import indi.megaastronic.element.Initializable;
 import indi.megaastronic.element.Moveable;
 import indi.megaastronic.element.Paintable;
@@ -38,6 +39,9 @@ public class ElementUtils {
 	public void add(String name,Object value){
 		if(value instanceof Initializable){
 				((Initializable) value).initWhenAdd();
+		}
+		if(value instanceof DurationManage){
+			((DurationManage) value).setStartTime(System.currentTimeMillis());
 		}
 		if(mh!=null)
 			if(value instanceof Moveable)

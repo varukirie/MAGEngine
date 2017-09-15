@@ -7,6 +7,7 @@ import application.Main;
 import indi.megaastronic.bullet.Bullet;
 import indi.megaastronic.bullet.DefaultBullet;
 import indi.megaastronic.element.BaseElement;
+import indi.megaastronic.element.DurationManage;
 import indi.megaastronic.element.Initializable;
 import indi.megaastronic.util.DI;
 import indi.megaastronic.util.ElementUtils;
@@ -14,7 +15,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.canvas.GraphicsContext;
 
-public class Launcher extends BaseElement implements Initializable {
+public class Launcher extends BaseElement implements Initializable ,DurationManage {
 
 	private BulletEvent bulletEvent;
 	private DoubleProperty directionProperty =new SimpleDoubleProperty(0);
@@ -69,7 +70,6 @@ public class Launcher extends BaseElement implements Initializable {
 	@Override
 	public void initWhenAdd() {
 		this.lastLaunchTime = System.currentTimeMillis();
-		this.startTime=System.currentTimeMillis();
 	}
 
 	public long getLastLaunch() {
@@ -151,7 +151,9 @@ public class Launcher extends BaseElement implements Initializable {
 	public void setDirectionProperty(DoubleProperty directionProperty) {
 		this.directionProperty = directionProperty;
 	}
-	
-	
-	
+
+	public void setStartTime(long startTime) {
+		this.startTime = startTime;
+	}
+
 }

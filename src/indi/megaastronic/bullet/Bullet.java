@@ -8,7 +8,6 @@ import indi.megaastronic.element.BaseElement;
  */
 public abstract class Bullet extends BaseElement{
 
-	private int switchCount = 0;
 	
 	public Bullet(double x, double y) {
 		super(x, y);

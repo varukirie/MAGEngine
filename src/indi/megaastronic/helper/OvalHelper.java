@@ -47,6 +47,7 @@ public class OvalHelper extends Helper implements Initializable {
 
 	@Override
 	public void modify() {
+		super.modify();
 		if (rotate) {
 			if (positive) {
 				this.directionProperty.set((System.currentTimeMillis() - startTime) * speed / BLANK);
@@ -71,7 +72,7 @@ public class OvalHelper extends Helper implements Initializable {
 		this.startTime = (long) (System.currentTimeMillis() + (delta * BLANK / speed));
 	}
 
-	private void setDirection(double direction){
+	public void setDirection(double direction){
 		this.directionProperty.set(direction);
 	}
 	public double getDirection() {
