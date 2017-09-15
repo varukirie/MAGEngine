@@ -1,14 +1,15 @@
 package indi.megaastronic.bullet;
 
 import indi.megaastronic.element.BaseElement;
+import indi.megaastronic.element.Initializable;
 /**
  * 
  * @author MegaAstronic
  *
  */
-public abstract class Bullet extends BaseElement{
+public abstract class Bullet extends BaseElement implements Initializable{
 
-	
+	private long launcherTime = 0;
 	public Bullet(double x, double y) {
 		super(x, y);
 	}
@@ -30,6 +31,19 @@ public abstract class Bullet extends BaseElement{
 	
 	public Bullet(double x,double y,double vx, double vy,double ax,double ay) {
 		super(x,y,vx,vy,ax,ay);
+	}
+
+	public long getLauncherTime() {
+		return launcherTime;
+	}
+
+	public void setLauncherTime(long launcherTime) {
+		this.launcherTime = launcherTime;
+	}
+	
+	@Override
+	public void initWhenAdd() {
+		setLauncherTime(System.currentTimeMillis());
 	}
 
 

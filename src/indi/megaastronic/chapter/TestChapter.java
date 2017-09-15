@@ -34,25 +34,30 @@ public class TestChapter extends AChapter {
 			((MyCanvasSwitcher)DI.di().get("switcher")).setEffect(DefaultBullet.class, new Bloom());
 			staticCanvas.getGraphicsContext2D().fillRect(0, 0, MyCanvas.CANVAS_WIDTH, MyCanvas.CANVAS_HEIGHT);
 		});
+		
 		SeqDanmuku seq = new SeqDanmuku(sES, mEU);
 		QuickDanmuku quick = new QuickDanmuku(mEU);
+		quick.slash(midX, midY, 0.5);
 		Random r = new Random();
-		Launcher lc = new Launcher(midX, midY, Math.PI/2, 300, 3000);
-		OvalHelper ovalHelper=new OvalHelper(midX, midY, 15, 3000, Math.PI*10);
-		long targetTime = System.currentTimeMillis()+10000;
+		Launcher lc = new Launcher(midX, midY, Math.PI/2, 200, 3000);
+		OvalHelper ovalHelper=new OvalHelper(midX, midY, 20, Math.PI*10);
+		ovalHelper.setDuration(3100);
+		long targetTime = System.currentTimeMillis()+4500;
 		lc.getDirectionProperty().bindBidirectional(ovalHelper.getDirectionProperty());
-		lc.setBulletSpeed(0.2);
+		lc.setBulletSpeed(0.3);
 		lc.setBulletEvent((sesx,b)->{
 			sesx.schedule(()->{
 				quick.stopBullet(b);
 			}, 1000, TimeUnit.MILLISECONDS);
-		});
-		lc.setBulletEvent((sesx,b)->{
 			sesx.schedule(()->{
-			}, 2000, TimeUnit.MILLISECONDS);
+				quick.runBullet(b);
+			}, targetTime-b.getLauncherTime(), TimeUnit.MILLISECONDS);
 		});
-		mEU.add(r.nextLong()+"", ovalHelper);
-		mEU.add(r.nextLong()+"", lc);
+
+		sES.schedule(()->{
+			mEU.add(r.nextLong()+"", ovalHelper);
+			mEU.add(r.nextLong()+"", lc);
+		}, 1000, TimeUnit.MILLISECONDS);
 	}
 
 }
