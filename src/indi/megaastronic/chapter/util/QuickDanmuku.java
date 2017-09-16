@@ -5,6 +5,7 @@ import java.util.Random;
 
 import indi.megaastronic.bullet.Bullet;
 import indi.megaastronic.bullet.DefaultBullet;
+import indi.megaastronic.element.BaseElement;
 import indi.megaastronic.element.impl.Player;
 import indi.megaastronic.util.ElementUtils;
 import indi.megaastronic.util.Transform;
@@ -20,11 +21,16 @@ public class QuickDanmuku {
 		this.mEU = mEU;
 	}
 	
-	public void bulletVTransform(Bullet bullet,double[][] martix){
+	public void VTransform(BaseElement element,double[][] martix){
 		Transform t = new Transform(martix);
-		double[] ans = t.transform(bullet.getVelocityX(),bullet.getVelocityY());
-		bullet.setVelocityX(ans[0]);
-		bullet.setVelocityY(ans[1]);
+		double[] ans = t.transform(element.getVelocityX(),element.getVelocityY());
+		element.setVelocityX(ans[0]);
+		element.setVelocityY(ans[1]);
+	}
+	
+	public void VTo(BaseElement element,double targetX,double targetY){
+		double s = Math.sqrt(targetX*targetX+targetY*targetY);
+		//TODO vto
 	}
 	
 	public void stopBullet(Bullet bullet){

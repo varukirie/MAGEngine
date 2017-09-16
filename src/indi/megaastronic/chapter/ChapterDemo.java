@@ -101,7 +101,7 @@ public class ChapterDemo extends AChapter {
 				}, 1700, TimeUnit.MILLISECONDS);
 				sESx.schedule(() -> {
 					quick.runBullet(bullet);
-					quick.bulletVTransform(bullet,new double[][]{
+					quick.VTransform(bullet,new double[][]{
 						{0,-1},{1,0}
 					});
 				}, 2000, TimeUnit.MILLISECONDS);
@@ -118,7 +118,7 @@ public class ChapterDemo extends AChapter {
 				}, 1700, TimeUnit.MILLISECONDS);
 				sESx.schedule(() -> {
 					quick.runBullet(bullet);
-					quick.bulletVTransform(bullet,new double[][]{
+					quick.VTransform(bullet,new double[][]{
 						{0,1},{-1,0}
 					});
 				}, 2000, TimeUnit.MILLISECONDS);
@@ -135,7 +135,7 @@ public class ChapterDemo extends AChapter {
 				}, 1700, TimeUnit.MILLISECONDS);
 				sESx.schedule(() -> {
 					quick.runBullet(bullet);
-					quick.bulletVTransform(bullet,new double[][]{
+					quick.VTransform(bullet,new double[][]{
 						{0,1},{1,0}
 					});
 				}, 2000, TimeUnit.MILLISECONDS);
