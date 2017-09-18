@@ -32,9 +32,9 @@ public class ChapterDemo extends AChapter {
 	@Override
 	public void design(ScheduledExecutorService sES, MyCanvas staticCanvas, ElementUtils mEU) {
 		Platform.runLater(()->{
-			((MyCanvasSwitcher)DI.di().get("switcher")).setEffect(DefaultBullet.class, new Bloom());
-			((MyCanvasSwitcher)DI.di().get("switcher")).setEffect(ArrowBullet.class, new Bloom());
-			((MyCanvasSwitcher)DI.di().get("switcher")).setEffect(StarBullet.class, new Bloom());
+			((MyCanvasSwitcher)DI.di().get("switcher")).setEffectByClass(DefaultBullet.class, new Bloom());
+			((MyCanvasSwitcher)DI.di().get("switcher")).setEffectByClass(ArrowBullet.class, new Bloom());
+			((MyCanvasSwitcher)DI.di().get("switcher")).setEffectByClass(StarBullet.class, new Bloom());
 			
 			staticCanvas.getGraphicsContext2D().fillRect(0, 0, MyCanvas.CANVAS_WIDTH, MyCanvas.CANVAS_HEIGHT);
 		});

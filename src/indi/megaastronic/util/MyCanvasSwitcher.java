@@ -68,11 +68,20 @@ public class MyCanvasSwitcher {
 		config.accept(smyCanvasMap.get(cls));
 	}
 	
-	public void setEffect(Class<?> cls,Effect effect){
+	public void setEffectByClass(Class<?> cls,Effect effect){
 		if(fmyCanvasMap.get(cls)==null) createCanvas(cls);
 		fmyCanvasMap.get(cls).setEffect(effect);
 		smyCanvasMap.get(cls).setEffect(effect);
 	}
+	
+//	public void setEffect(Effect effect){
+//		fmyCanvasMap.entrySet().forEach((entry)->{
+//			entry.getValue().setEffect(effect);
+//		});
+//		smyCanvasMap.entrySet().forEach((entry)->{
+//			entry.getValue().setEffect(effect);
+//		});
+//	}
 	
 	private void createCanvas(Class<?> cls){
 		MyCanvas canvas = new MyCanvas();

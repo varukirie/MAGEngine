@@ -1,8 +1,11 @@
 package indi.megaastronic.chapter.util;
 
+import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
+import indi.megaastronic.bullet.HiddenBullet;
+import indi.megaastronic.launcher.Launcher;
 import indi.megaastronic.paint.MyCanvas;
 import indi.megaastronic.ui.SceneManager;
 import indi.megaastronic.util.DI;
@@ -30,6 +33,9 @@ public class ChapterLoader {
 	}
 	public static void loadChapter(AChapter c){
 		long start = System.currentTimeMillis();
+		Launcher l = new Launcher(1, 1, Math.PI/2, 20, 40);
+		l.setBulletType(HiddenBullet.class);
+		mEU.add(new Random().nextLong()+"", l);
 		c.design(scheduleES,staticCanvas,mEU);
 		long end = System.currentTimeMillis();
 		System.out.println("装载关卡使用 "+(end-start)+" 毫秒");
