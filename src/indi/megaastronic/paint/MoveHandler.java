@@ -28,7 +28,7 @@ import indi.megaastronic.util.ElementUtils;
 
 public class MoveHandler implements Runnable {
 
-	public static final double DEFAULT_TIME_SPEED = 0.2;
+	public static final double DEFAULT_TIME_SPEED = 0.1;
 	/**
 	 * 全局速度
 	 */

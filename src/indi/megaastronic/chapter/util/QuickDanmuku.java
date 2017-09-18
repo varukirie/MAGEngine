@@ -7,10 +7,19 @@ import indi.megaastronic.bullet.Bullet;
 import indi.megaastronic.bullet.DefaultBullet;
 import indi.megaastronic.element.BaseElement;
 import indi.megaastronic.element.impl.Player;
+import indi.megaastronic.util.DI;
 import indi.megaastronic.util.ElementUtils;
 import indi.megaastronic.util.Transform;
 
 public class QuickDanmuku {
+	
+	private static QuickDanmuku quick =null;
+	public static QuickDanmuku getQuickDanmuku(){
+		if(quick==null){
+			quick = new QuickDanmuku((ElementUtils) DI.di().get("mEU"));
+		}
+		return quick;
+	}
 	
 	private ElementUtils mEU;
 	private final double sqrt2d2=0.7071;
@@ -29,8 +38,20 @@ public class QuickDanmuku {
 	}
 	
 	public void VTo(BaseElement element,double targetX,double targetY){
-		double s = Math.sqrt(targetX*targetX+targetY*targetY);
-		//TODO vto
+		double targetS = Math.sqrt((targetX-element.getX())*(targetX-element.getX())+(targetY-element.getY())*(targetY-element.getY()));
+		double originS = Math.sqrt(element.getVelocityX()*element.getVelocityX()+element.getVelocityY()*element.getVelocityY());
+		element.setVelocityX((targetX-element.getX())*(originS/targetS));
+		element.setVelocityY((targetY-element.getY())*(originS/targetS));
+	}
+	
+	public void VToByDirection(BaseElement element,double direction){
+		double originS = Math.sqrt(element.getVelocityX()*element.getVelocityX()+element.getVelocityY()*element.getVelocityY());
+		element.setVelocityX(Math.cos(direction)*originS);
+		element.setVelocityY(Math.sin(direction)*originS);
+	}
+	
+	public void VRotate(BaseElement element,double angle){
+		//TODO VRotate
 	}
 	
 	public void stopBullet(Bullet bullet){
