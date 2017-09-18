@@ -33,7 +33,7 @@ public class ChapterLoader {
 	}
 	public static void loadChapter(AChapter c){
 		long start = System.currentTimeMillis();
-		Launcher l = new Launcher(1, 1, Math.PI/2, 20, 40);
+		Launcher l = new Launcher(1, 1, Math.PI/2, 100, 800);
 		l.setBulletType(HiddenBullet.class);
 		mEU.add(new Random().nextLong()+"", l);
 		c.design(scheduleES,staticCanvas,mEU);

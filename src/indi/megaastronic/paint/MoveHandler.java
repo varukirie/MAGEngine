@@ -28,12 +28,12 @@ import indi.megaastronic.util.ElementUtils;
 
 public class MoveHandler implements Runnable {
 
-	public static final double DEFAULT_TIME_SPEED = 0.1;
+	public static final double DEFAULT_TIME_SPEED = 0.2;
 	/**
 	 * 全局速度
 	 */
 	public static double timeSpeed = DEFAULT_TIME_SPEED;
-	public static final long SLEEP_TIME = 1;
+	public static final long SLEEP_TIME = 2;
 	public static final long BLANK = 1;
 
 	private Map<String, Moveable> wantMoveMap = new ConcurrentHashMap<>();

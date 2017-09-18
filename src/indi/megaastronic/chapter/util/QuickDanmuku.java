@@ -54,6 +54,12 @@ public class QuickDanmuku {
 		//TODO VRotate
 	}
 	
+	public void setSpeed(BaseElement element,double speed){
+		double originS = Math.sqrt(element.getVelocityX()*element.getVelocityX()+element.getVelocityY()*element.getVelocityY());
+		element.setVelocityX(element.getVelocityX()*(speed/originS));
+		element.setVelocityY(element.getVelocityY()*(speed/originS));
+	}
+	
 	public void stopBullet(Bullet bullet){
 		bullet.setVelocityX(bullet.getVelocityX()*0.001);
 		bullet.setVelocityY(bullet.getVelocityY()*0.001);
