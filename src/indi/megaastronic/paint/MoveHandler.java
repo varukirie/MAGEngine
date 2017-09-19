@@ -86,12 +86,14 @@ public class MoveHandler implements Runnable {
 					}
 				}
 
-				// 使用加速度计算速度
-				if (m instanceof Accelerated) {
-					m.setVelocityX(m.getVelocityX() + (currentTime - this.lastTime) * ((Accelerated) m).getAccX()
-							* timeSpeed * (1 / DEFAULT_TIME_SPEED) / 1000);
-					m.setVelocityY(m.getVelocityY() + (currentTime - this.lastTime) * ((Accelerated) m).getAccY()
-							* timeSpeed * (1 / DEFAULT_TIME_SPEED) / 1000);
+				if(Main.ACC_ENABLE){
+					// 使用加速度计算速度
+					if (m instanceof Accelerated) {
+						m.setVelocityX(m.getVelocityX() + (currentTime - this.lastTime) * ((Accelerated) m).getAccX()
+								* timeSpeed * (1 / DEFAULT_TIME_SPEED) / 1000);
+						m.setVelocityY(m.getVelocityY() + (currentTime - this.lastTime) * ((Accelerated) m).getAccY()
+								* timeSpeed * (1 / DEFAULT_TIME_SPEED) / 1000);
+					}
 				}
 
 				nextX = m.getX() + m.getVelocityX() * ((currentTime - this.lastTime) / BLANK) * timeSpeed;

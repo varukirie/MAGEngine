@@ -28,12 +28,12 @@ public class ChapterLoader {
 	public static void init(MyCanvas staticCanvas){
 		ChapterLoader.staticCanvas = staticCanvas ;
 		ChapterLoader.mEU = (ElementUtils) DI.di().get("mEU");
-		ChapterLoader.scheduleES=Executors.newScheduledThreadPool(64);
+		ChapterLoader.scheduleES=Executors.newScheduledThreadPool(5);
 		DI.di().put("sES", scheduleES);
 	}
 	public static void loadChapter(AChapter c){
 		long start = System.currentTimeMillis();
-		Launcher l = new Launcher(1, 1, Math.PI/2, 100, 800);
+		Launcher l = new Launcher(1, 1, Math.PI/2, 70, 800);
 		l.setBulletType(HiddenBullet.class);
 		mEU.add(new Random().nextLong()+"", l);
 		c.design(scheduleES,staticCanvas,mEU);

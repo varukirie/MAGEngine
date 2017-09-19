@@ -10,6 +10,7 @@ public class Main extends Application {
 	public static final boolean DEBUG_ElementCreate = false;
 	public static final boolean DEBUG_BENCH=false;
 	public static final boolean DEBUG_COLLISION=false;
+	public static final boolean ACC_ENABLE=false;
 	@Override
 	public void start(Stage primaryStage) {
 		try {

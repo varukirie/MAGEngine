@@ -106,6 +106,11 @@ public class TestChapter extends AChapter {
 			ChapterLoader.loadChapter(new ChapterDemo());
 		}, 14000, TimeUnit.MILLISECONDS);
 		
+		
+//		for(int i=1;i<=100;i++){
+//			oG.delayExecute(1500+i*50);
+//		}
+//		
 		// for(int i=1;i<=10;i++){
 		// sES.schedule(() -> {
 		// Launcher l2 = new Launcher(midX, midY, Math.PI, 100, 10000);
