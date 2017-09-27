@@ -1,8 +1,8 @@
 package application;
 
-import indi.megaastronic.ui.SceneManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import magengine.ui.SceneManager;
 
 
 public class Main extends Application {
@@ -10,7 +10,7 @@ public class Main extends Application {
 	public static final boolean DEBUG_ElementCreate = false;
 	public static final boolean DEBUG_BENCH=false;
 	public static final boolean DEBUG_COLLISION=false;
-	public static final boolean ACC_ENABLE=false;
+	public static final boolean ACC_ENABLE=true;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
