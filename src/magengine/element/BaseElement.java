@@ -7,8 +7,8 @@ public abstract class BaseElement implements Moveable, Paintable,Accelerated{
 
 	protected DoubleProperty xProperty=new SimpleDoubleProperty();
 	protected DoubleProperty yProperty=new SimpleDoubleProperty();
-	protected double velocityX=0;
-	protected double velocityY=0;
+	protected volatile double velocityX=0;
+	protected volatile double velocityY=0;
 	protected double accX = 0;
 	protected double accY = 0;
 	protected boolean deleted = false;
