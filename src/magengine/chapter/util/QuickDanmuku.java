@@ -43,7 +43,11 @@ public class QuickDanmuku {
 		element.setVelocityX((targetX-element.getX())*(originS/targetS));
 		element.setVelocityY((targetY-element.getY())*(originS/targetS));
 	}
-	
+	/**
+	 * 
+	 * @param element
+	 * @param direction 负角
+	 */
 	public void VToByDirection(BaseElement element,double direction){
 		double originS = Math.sqrt(element.getVelocityX()*element.getVelocityX()+element.getVelocityY()*element.getVelocityY());
 		element.setVelocityX(Math.cos(direction)*originS);
@@ -82,6 +86,7 @@ public class QuickDanmuku {
 		bullet.setVelocityY(-dy *v/ s);
 	}
 	
+	@Deprecated
 	public void slash(double x,double y,double speed){
 		mEU.add("dd"+count++, new DefaultBullet(x, y,speed,0));
 		mEU.add("aa"+count++, new DefaultBullet(x, y,-speed,0));
@@ -101,6 +106,7 @@ public class QuickDanmuku {
 	 * @param speed 速度v
 	 * @param t 线性变换矩阵
 	 */
+	@Deprecated
 	public void slashTransform(double x,double y,double speed,double[][] t){
 		Transform tsf=new Transform(t);
 		
@@ -122,6 +128,7 @@ public class QuickDanmuku {
 	 * @param accRate 加速度a
 	 * @param t 线性变换矩阵
 	 */
+	@Deprecated
 	public void slashTransformAcc(double x,double y,double accRate,double[][] t){
 		Transform tsf=new Transform(t);
 		

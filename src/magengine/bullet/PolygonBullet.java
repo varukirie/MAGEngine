@@ -60,8 +60,8 @@ public abstract class PolygonBullet extends Bullet implements PolygonCollision{
 		}
 	}
 	@Override
-	public int getTeam() {
-		return -1;
+	public String getTeam() {
+		return "bullet";
 	}
 	@Override
 	public Polygon getPolygon() {

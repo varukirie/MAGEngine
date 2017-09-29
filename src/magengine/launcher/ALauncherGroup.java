@@ -60,8 +60,14 @@ public abstract class ALauncherGroup {
 	public Consumer<Launcher> getLauncherConfig() {
 		return launcherConfig;
 	}
-	public void setLauncherConfig(Consumer<Launcher> launcherConfig) {
+	/**
+	 * 
+	 * @param launcherConfig
+	 * @return 返回自身
+	 */
+	public ALauncherGroup setLauncherConfig(Consumer<Launcher> launcherConfig) {
 		this.launcherConfig = launcherConfig;
+		return this;
 	}
 
 	protected void configLauncher(Launcher launcher){

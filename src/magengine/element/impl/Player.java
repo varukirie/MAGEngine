@@ -27,7 +27,7 @@ public class Player implements LimitedByCanvas ,Moveable , Paintable ,PolygonCol
 	private double y=0;
 	private double velocityX=0;
 	private double velocityY=0;
-	private SpritePainter SP = null;
+	private SpritePainter spritePainter = null;
 	
 
 	/**
@@ -57,10 +57,9 @@ public class Player implements LimitedByCanvas ,Moveable , Paintable ,PolygonCol
 		try {
 			img = new Image(this.getClass().getResourceAsStream("/img/player.bmp"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		SP=new SpritePainter(img, 50, 50);
+		spritePainter=new SpritePainter(img, 50, 50);
 		this.x=x;
 		this.y=y;
 	}
@@ -95,25 +94,25 @@ public class Player implements LimitedByCanvas ,Moveable , Paintable ,PolygonCol
 	@Override
 	public void paint(GraphicsContext gc) {
 		if(this.velocityX<0)
-			SP.paintSprite(0, this.x, this.y, gc);
+			spritePainter.paintSprite(0, this.x, this.y, gc);
 		
 		if(this.velocityX==0){
 			if(this.velocityY<0)
-				SP.paintSprite(1, this.x, this.y, gc);
+				spritePainter.paintSprite(1, this.x, this.y, gc);
 			
 			if(this.velocityY==0){
 				int delayF = 10;
-				SP.paintSprite(4+(currentSpriteIndex)/delayF, this.x, this.y, gc);
+				spritePainter.paintSprite(4+(currentSpriteIndex)/delayF, this.x, this.y, gc);
 				currentSpriteIndex=(currentSpriteIndex+1)%(5*delayF);
 			}
 				
 			if(this.velocityY>0)
-				SP.paintSprite(3, this.x, this.y, gc);
+				spritePainter.paintSprite(3, this.x, this.y, gc);
 		}
 			
 	
 		if(this.velocityX>0)
-			SP.paintSprite(2, this.x, this.y, gc);
+			spritePainter.paintSprite(2, this.x, this.y, gc);
 	}
 	public float[] vertices = new float[4*2];
 	private Polygon polygon=new Polygon(vertices);
@@ -132,8 +131,8 @@ public class Player implements LimitedByCanvas ,Moveable , Paintable ,PolygonCol
 		return polygon;
 	}
 	@Override
-	public int getTeam() {
-		return 1;
+	public String getTeam() {
+		return "player";
 	}
 	
 	

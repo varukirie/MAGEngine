@@ -121,17 +121,7 @@ public class MoveHandler implements Runnable {
 						continue;
 					}
 				}
-				if(m instanceof PolygonCollision){
-					if(m!=Player.getPlayer()){
-						if(CollisionUtil.PolygonDetect(Player.getPlayer(), (PolygonCollision) m)){
-							//System.out.println("碰撞! x="+m.getX()+" | y="+m.getY());
-							if(Main.DEBUG_COLLISION){
-							
-							}
-						}
-							
-					}
-				}
+				collisionCheck(m);
 			}
 
 			if(Main.DEBUG_BENCH){
@@ -178,5 +168,17 @@ public class MoveHandler implements Runnable {
 	}
 	
 	
-	
+	private void collisionCheck(Moveable m){
+		if(m instanceof PolygonCollision){
+			if(m!=Player.getPlayer()){
+				if(CollisionUtil.PolygonDetect(Player.getPlayer(), (PolygonCollision) m)){
+					//System.out.println("碰撞! x="+m.getX()+" | y="+m.getY());
+					if(Main.DEBUG_COLLISION){
+						System.out.println("碰撞! x="+m.getX()+" | y="+m.getY());
+					}
+				}
+					
+			}
+		}
+	}
 }

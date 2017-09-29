@@ -6,7 +6,7 @@ public class OvalLauncherGroup extends ALauncherGroup {
 
 	private double midX=200;
 	private double midY=200;
-	private double amount=32;
+	private int amount=32;
 
 	
 	
@@ -15,7 +15,12 @@ public class OvalLauncherGroup extends ALauncherGroup {
 		this.midX = midX;
 		this.midY = midY;
 	}
-
+	public OvalLauncherGroup(double midX, double midY,int amount) {
+		super();
+		this.midX = midX;
+		this.midY = midY;
+		setAmount(amount);
+	}
 
 	@Override
 	public void execute() {
@@ -53,7 +58,7 @@ public class OvalLauncherGroup extends ALauncherGroup {
 	}
 
 
-	public void setAmount(double amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 	

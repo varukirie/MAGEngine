@@ -1,5 +1,6 @@
 package magengine.util;
 
+import java.util.function.BiPredicate;
 import com.badlogic.gdx.math.Polygon;
 
 import magengine.element.PolygonCollision;
@@ -7,10 +8,10 @@ import magengine.element.PolygonCollision;
 public class CollisionUtil {
 
 	public static boolean PolygonDetect(PolygonCollision elem1,PolygonCollision elem2){
-		if(elem1.getTeam()==elem2.getTeam()){
-			return false;
-		}else{
+		if(shouldDetect.test(elem1, elem2)){
 			return isOverlap(elem1.getPolygon(),elem2.getPolygon());
+		}else{
+			return false;
 		}
 	}
 	private static boolean isOverlap(Polygon polygon1, Polygon polygon2){
@@ -27,6 +28,7 @@ public class CollisionUtil {
         return false;
     }
 	
-
-
+	private static BiPredicate<PolygonCollision, PolygonCollision> shouldDetect=(elem1,elem2)->{
+		return !elem1.getTeam().equals(elem2.getTeam());
+	};
 }
