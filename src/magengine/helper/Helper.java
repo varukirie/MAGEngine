@@ -6,6 +6,12 @@ import magengine.element.BaseElement;
 import magengine.element.DurationManage;
 /**
  * 用于辅助弹幕绘制，运行时不显示的元素
+ * 
+ * 使用样例:
+ * 将launcher位置绑定到helper上
+ * 		helper.getxProperty().bindBidirectional(launcher.getxProperty());
+ *		helper.getyProperty().bindBidirectional(launcher.getyProperty());
+ *要保证launcher的 速度为0
  * @author MegaAstronic
  *
  */

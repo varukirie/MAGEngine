@@ -108,8 +108,10 @@ public class MoveHandler implements Runnable {
 				}
 
 				if (nextX < MyCanvas.CANVAS_WIDTH && nextX > 0 && nextY < MyCanvas.CANVAS_HEIGHT && nextY > 0) {
-					m.setX(nextX);
-					m.setY(nextY);
+					if(m.getVelocityX()!=0)
+						m.setX(nextX);
+					if(m.getVelocityY()!=0)
+						m.setY(nextY);
 				} else {// 出屏幕
 					 
 					if (m instanceof LimitedByCanvas) {// 如果他是被边界限制的 不能移动
