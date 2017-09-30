@@ -55,13 +55,13 @@ public class TestChapter extends AChapter {
 		
 		AEnemy em = new DefaultEnemy(midX+100, midY+100,-0.2,-0.3);
 		mEU.add("dme", em);
-		Helper helper1 = new RelativeAnchorHelper(em, -50, 0);
+		Helper helper1 = new RelativeAnchorHelper(Player.getPlayer(), -50, 0);
 		mEU.add("testHelper1", helper1);
-		Helper helper2 = new RelativeAnchorHelper(em, 50, 0);
+		Helper helper2 = new RelativeAnchorHelper(Player.getPlayer(), 50, 0);
 		mEU.add("testHelper2", helper2);
 //		ADanmuku danmuku = new StarDanmuku();
-//		ADanmuku danmuku = new TriArcDanmuku(em);
-//		danmuku.executeDanmuku();
+		ADanmuku danmuku = new TriArcDanmuku(em);
+		danmuku.executeDanmuku();
 		
 		sES.schedule(() -> {
 			ChapterLoader.loadChapter(new ChapterDemo());
