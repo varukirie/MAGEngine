@@ -27,7 +27,14 @@ public class ArcLauncherGroup extends ALauncherGroup {
 	}
 	
 
-
+/**
+ * 
+ * @param midX 		坐标
+ * @param midY		坐标
+ * @param direction 方向 （负角
+ * @param angle		扇形角度
+ * @param amount	发射器数量
+ */
 	public ArcLauncherGroup(double midX, double midY,double direction, double angle, int amount) {
 		super();
 		this.direction = direction;

@@ -34,6 +34,10 @@ public class Helper extends BaseElement implements DurationManage{
 	public long getDuration() {
 		return duration;
 	}
+	/**
+	 * 设置存活时间
+	 * @param duration
+	 */
 	public void setDuration(long duration) {
 		this.duration = duration;
 	}

@@ -6,8 +6,8 @@ import magengine.ui.SceneManager;
 
 
 public class Main extends Application {
-	public static final boolean DEBUG = false;
-	public static final boolean DEBUG_ElementCreate = true;
+	public static final boolean DEBUG = true;
+	public static final boolean DEBUG_ElementCreate = false;
 	public static final boolean DEBUG_BENCH=false;
 	public static final boolean DEBUG_COLLISION=false;
 	public static final boolean ACC_ENABLE=true;

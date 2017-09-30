@@ -52,7 +52,7 @@ public class ElementUtils {
 				mh.getWantMoveMap().put(name, (Moveable) value);
 		if(myCanvas!=null)
 			if(value instanceof Paintable)
-				if(value instanceof BaseElement){
+				if(value instanceof Bullet){
 					switcher.addElement(name,(BaseElement)value);
 				}else{
 					myCanvas.getWantPaintMap().put(name, (Paintable) value);
@@ -66,7 +66,7 @@ public class ElementUtils {
 		if(Main.DEBUG_ElementCreate){
 			System.out.println("removeElement:"+obj);
 		}
-		if(obj instanceof BaseElement){
+		if(obj instanceof Bullet){
 			switcher.removeElement(key);
 		}else{
 			myCanvas.getWantPaintMap().remove(key);

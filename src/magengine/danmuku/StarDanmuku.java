@@ -41,12 +41,13 @@ public class StarDanmuku extends ADanmuku {
 		Launcher lc = new Launcher(69, 236, Math.PI / 2, interval, 10000);
 		lc.setBulletSpeed(0.0006);
 		lc.setBulletType(StarBullet.class);
+		
 		lc.setBulletEvent((sesx,b)->{
 			sesx.schedule(() -> {
 				quick.runBullet(b);
 //				quick.VToByDirection(b, Math.PI/2);
 				quick.VToByDirection(b, r.nextDouble()*Math.PI*2);
-			}, 6000+lc.getStartTime()-System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+			}, 5000+lc.getStartTime()-System.currentTimeMillis(), TimeUnit.MILLISECONDS);
 		});
 		helper.getxProperty().bindBidirectional(lc.getxProperty());
 		helper.getyProperty().bindBidirectional(lc.getyProperty());
