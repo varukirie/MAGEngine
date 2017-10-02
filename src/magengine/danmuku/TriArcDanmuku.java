@@ -8,27 +8,27 @@ import magengine.launcher.Launcher;
 
 public class TriArcDanmuku extends ADanmuku {
 
-	private BaseElement midElem = null;
-	public TriArcDanmuku(BaseElement midElem) {
-		super();
-		this.midElem=midElem;
-	}
 	
+	
+	public TriArcDanmuku(BaseElement sourceElement) {
+		super(sourceElement);
+	}
+
 	@Override
 	public void executeDanmuku() {
 		Consumer<Launcher> config = (launcher)->{
-			launcher.getxProperty().bindBidirectional(midElem.getxProperty());
-			launcher.getyProperty().bindBidirectional(midElem.getyProperty());
+			launcher.getxProperty().bindBidirectional(sourceElement.getxProperty());
+			launcher.getyProperty().bindBidirectional(sourceElement.getyProperty());
 		};
-		new ArcLauncherGroup(midElem.getX(), midElem.getY(), Math.PI/2, Math.PI/3, 6).setLauncherConfig(config).delayExecute(700);
-		ArcLauncherGroup alg = new ArcLauncherGroup(midElem.getX(), midElem.getY(), Math.PI/2, Math.PI/3, 6);
+		new ArcLauncherGroup(sourceElement.getX(), sourceElement.getY(), Math.PI/2, Math.PI/3, 6).setLauncherConfig(config).delayExecute(700);
+		ArcLauncherGroup alg = new ArcLauncherGroup(sourceElement.getX(), sourceElement.getY(), Math.PI/2, Math.PI/3, 6);
 		alg.setLauncherConfig((launcher)->{
 			config.accept(launcher);
 			launcher.setBulletSpeed(0.9);
 		}).delayExecute(850);
 
-		new ArcLauncherGroup(midElem.getX(), midElem.getY(), Math.PI/2+Math.PI/5, Math.PI/3, 6).setLauncherConfig(config).delayExecute(1300);
-		new ArcLauncherGroup(midElem.getX(), midElem.getY(), Math.PI/2-Math.PI/5, Math.PI/3, 6).setLauncherConfig(config).delayExecute(1900);
+		new ArcLauncherGroup(sourceElement.getX(), sourceElement.getY(), Math.PI/2+Math.PI/5, Math.PI/3, 6).setLauncherConfig(config).delayExecute(1300);
+		new ArcLauncherGroup(sourceElement.getX(), sourceElement.getY(), Math.PI/2-Math.PI/5, Math.PI/3, 6).setLauncherConfig(config).delayExecute(1900);
 	}
 
 }

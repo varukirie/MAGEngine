@@ -8,6 +8,7 @@ import magengine.bullet.DefaultBullet;
 import magengine.bullet.StarBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.chapter.util.SeqDanmuku;
+import magengine.element.BaseElement;
 import magengine.helper.PloygonalLineHelper;
 import magengine.launcher.BulletEvent;
 import magengine.launcher.Launcher;
@@ -15,6 +16,10 @@ import magengine.launcher.OvalLauncherGroup;
 import magengine.util.ElementUtils;
 
 public class StarDanmuku extends ADanmuku {
+
+	public StarDanmuku(BaseElement sourceElement) {
+		super(sourceElement);
+	}
 
 	@Override
 	public void executeDanmuku() {
