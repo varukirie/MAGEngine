@@ -155,25 +155,6 @@ public class SeqDanmuku {
 		}, startTime + count * interval + 1, TimeUnit.MILLISECONDS);
 	}
 
-	public void rotateSlash(double midX, double midY, long startTime) {
-		int i;
-		double helperLenght = 70;
-		int count = 100;
-		Helper tHelper = new OvalHelper(midX, midY, helperLenght, 20);
-		int currentHelperCount = callCount++;
-
-		sES.schedule(() -> {
-			mEU.add("tHelper" + currentHelperCount, tHelper);
-		}, startTime, TimeUnit.MILLISECONDS);
-		for (i = 1; i <= count; i++) {
-			sES.schedule(() -> {
-				quick.slashTransformAcc(tHelper.getX(), tHelper.getY(), 0.1, new double[][] { { 1, 0 }, { 1, 1 } });
-			}, startTime + i * 100, TimeUnit.MILLISECONDS);
-		}
-		sES.schedule(() -> {
-			mEU.removeBoth("tHelper" + currentHelperCount);
-		}, startTime + count * 100 + 1, TimeUnit.MILLISECONDS);
-	}
 
 	public void lineSnipe(double startX, double startY, double vx, double vy, long startTime) {
 		int i;

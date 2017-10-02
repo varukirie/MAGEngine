@@ -38,24 +38,24 @@ public class StarDanmuku extends ADanmuku {
 		double[][] ploygon1 = new double[][] { { 157, 275, 392, 157 }, { 256, 74, 256, 256 } };
 		double[][] ploygon2 = new double[][] { { 393, 275, 157, 393 }, { 135, 318, 135, 135 } };
 		PloygonalLineHelper helper = new PloygonalLineHelper(ploygon1, helperSpeed);
-		Launcher lc = new Launcher(69, 236, Math.PI / 2, interval, 10000);
-		lc.setBulletSpeed(0.0006);
-		lc.setBulletType(StarBullet.class);
+		Launcher launcher = new Launcher(69, 236, Math.PI / 2, interval, 10000);
+		launcher.setBulletSpeed(0.0006);
+		launcher.setBulletType(StarBullet.class);
 		
-		lc.setBulletEvent((sesx,b)->{
+		launcher.setBulletEvent((sesx,b)->{
 			sesx.schedule(() -> {
 				quick.runBullet(b);
 //				quick.VToByDirection(b, Math.PI/2);
 				quick.VToByDirection(b, r.nextDouble()*Math.PI*2);
-			}, 5000+lc.getStartTime()-System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+			}, 5000+launcher.getStartTime()-System.currentTimeMillis(), TimeUnit.MILLISECONDS);
 		});
-		helper.getxProperty().bindBidirectional(lc.getxProperty());
-		helper.getyProperty().bindBidirectional(lc.getyProperty());
+		helper.getxProperty().bindBidirectional(launcher.getxProperty());
+		helper.getyProperty().bindBidirectional(launcher.getyProperty());
 
 		sES.schedule(() -> {
 			mEU.add(r.nextLong() + "", helper);
-			lc.setDuration(helper.getDuration());
-			mEU.add(r.nextLong() + "", lc);
+			launcher.setDuration(helper.getDuration());
+			mEU.add(r.nextLong() + "", launcher);
 		}, startMill, TimeUnit.MILLISECONDS);
 
 		PloygonalLineHelper helper2 = new PloygonalLineHelper(ploygon2, helperSpeed);
@@ -73,9 +73,9 @@ public class StarDanmuku extends ADanmuku {
 
 		
 		OvalLauncherGroup oG = new OvalLauncherGroup(275, 195.5);
-		oG.setLauncherConfig((launcher) -> {
-			launcher.setBulletType(DefaultBullet.class);
-			launcher.setBulletEvent((sESx, bullet) -> {
+		oG.setLauncherConfig((launcherx) -> {
+			launcherx.setBulletType(DefaultBullet.class);
+			launcherx.setBulletEvent((sESx, bullet) -> {
 				sESx.schedule(() -> {
 					quick.stopBullet(bullet);
 				}, 1800, TimeUnit.MILLISECONDS);

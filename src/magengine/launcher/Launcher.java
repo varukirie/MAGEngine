@@ -79,13 +79,6 @@ public class Launcher extends BaseElement implements Initializable ,DurationMana
 		this.lastLaunchTime = System.currentTimeMillis();
 	}
 
-	public long getLastLaunch() {
-		return lastLaunchTime;
-	}
-
-	public void setLastLaunch(long lastLaunch) {
-		this.lastLaunchTime = lastLaunch;
-	}
 
 	public double getDirection() {
 		return directionProperty.get();

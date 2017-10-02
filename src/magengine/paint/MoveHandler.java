@@ -69,8 +69,8 @@ public class MoveHandler implements Runnable {
 
 				if(m instanceof Launcher){
 					Launcher l=(Launcher) m;
-					if(System.currentTimeMillis()-l.getLastLaunch()>l.getInterval()){
-						l.setLastLaunch(System.currentTimeMillis());
+					if(System.currentTimeMillis()-l.getLastLaunchTime()>l.getInterval()){
+						l.setLastLaunchTime(System.currentTimeMillis());
 						l.launch();
 					}
 				}

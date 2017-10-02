@@ -6,6 +6,7 @@ import magengine.util.DI;
 import magengine.util.ElementUtils;
 
 public abstract class ADanmuku {
+	private long danmukuDuration = 0;
 	private long delay =0;
 	public abstract void executeDanmuku() ;
 	private ElementUtils mEU = (ElementUtils) DI.di().get("mEU");
@@ -21,6 +22,12 @@ public abstract class ADanmuku {
 	}
 	public void setDelay(long delay) {
 		this.delay = delay;
+	}
+	public long getDanmukuDuration() {
+		return danmukuDuration;
+	}
+	public void setDanmukuDuration(long danmukuDuration) {
+		this.danmukuDuration = danmukuDuration;
 	}
 	
 
