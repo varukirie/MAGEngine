@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Polygon;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import magengine.bullet.CollisionTeam;
 import magengine.element.BaseElement;
 import magengine.element.LimitedByCanvas;
 import magengine.element.Moveable;
@@ -107,8 +108,8 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 		return polygon;
 	}
 	@Override
-	public String getTeam() {
-		return "player";
+	public CollisionTeam getTeam() {
+		return CollisionTeam.PLAYER;
 	}
 	
 	
