@@ -17,9 +17,6 @@ import magengine.util.ElementUtils;
 
 public class StarDanmuku extends ADanmuku {
 
-	public StarDanmuku(BaseElement sourceElement) {
-		super(sourceElement);
-	}
 
 	@Override
 	public void executeDanmuku() {

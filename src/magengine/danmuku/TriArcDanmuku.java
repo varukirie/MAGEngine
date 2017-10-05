@@ -8,11 +8,6 @@ import magengine.launcher.Launcher;
 
 public class TriArcDanmuku extends ADanmuku {
 
-	
-	
-	public TriArcDanmuku(BaseElement sourceElement) {
-		super(sourceElement);
-	}
 
 	@Override
 	public void executeDanmuku() {
