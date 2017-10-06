@@ -27,7 +27,7 @@ import magengine.paint.MyCanvas;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
 import magengine.util.MyCanvasSwitcher;
-
+import magengine.bullet.PlayerBullet;
 public class TestChapter extends AChapter {
 	int midX = MyCanvas.CANVAS_WIDTH / 2;
 	int midY = 200;
@@ -45,17 +45,20 @@ public class TestChapter extends AChapter {
 			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(ArrowBullet.class, (canvas) -> {
 				canvas.setEffect(new Bloom());
 			});
+			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(PlayerBullet.class, (canvas) -> {
+				canvas.setEffect(new Bloom());
+			});
 			staticCanvas.getGraphicsContext2D().fillRect(0, 0, MyCanvas.CANVAS_WIDTH, MyCanvas.CANVAS_HEIGHT);
 		});
 		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 		
 		
-//		DefaultEnemy enemy = new DefaultEnemy(500, 300);
+		DefaultEnemy enemy = new DefaultEnemy(500, 300);
 //		ADanmuku danmuku = new TriArcDanmuku();
 //		
 //		enemy.addDanmuku(danmuku);
 //		
-//		mEU.add("enemy", enemy);
+		mEU.add("enemy", enemy);
 //		quick.moveTo(enemy, 1000, 100, 400);
 //		sES.schedule(() -> {
 //			quick.moveTo(enemy, 1000,50, 50);

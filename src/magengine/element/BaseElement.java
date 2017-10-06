@@ -12,7 +12,7 @@ public abstract class BaseElement implements Moveable, Paintable,Accelerated{
 	protected double accX = 0;
 	protected double accY = 0;
 	protected boolean deleted = false;
-	
+	public boolean wantBeRemoved = false;
 	
 	public BaseElement(double x, double y) {
 			this(x,y,0,0);

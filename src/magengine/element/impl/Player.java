@@ -7,12 +7,12 @@ import com.badlogic.gdx.math.Polygon;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import magengine.bullet.CollisionTeam;
 import magengine.element.BaseElement;
 import magengine.element.LimitedByCanvas;
 import magengine.element.Moveable;
 import magengine.element.Paintable;
 import magengine.element.PolygonCollision;
+import magengine.util.CollisionTeam;
 import magengine.util.SpritePainter;
 /**
  * 玩家控制的物体

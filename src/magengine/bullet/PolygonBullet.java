@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Polygon;
 
 import javafx.scene.canvas.GraphicsContext;
 import magengine.element.PolygonCollision;
+import magengine.util.CollisionTeam;
 import magengine.util.Transform;
 
 public abstract class PolygonBullet extends Bullet implements PolygonCollision{
@@ -49,14 +50,14 @@ public abstract class PolygonBullet extends Bullet implements PolygonCollision{
 			{-velocityY/s , velocityX/s }, 
 			{-velocityX/s,-velocityY/s } });
 		double[][] ans= t.transform(origin);
-		t.delta(ans, getX(), getY());
+		Transform.delta(ans, getX(), getY());
 		return ans;
 	}
 	
-	protected void toVertices(double[][] ans,float[] target){
-		for(int i=0;i<ans[0].length;i++){
-			target[i*2]=(float) ans[0][i];
-			target[i*2+1]=(float) ans[1][i];
+	protected void toVertices(double[][] in,float[] target){
+		for(int i=0;i<in[0].length;i++){
+			target[i*2]=(float) in[0][i];
+			target[i*2+1]=(float) in[1][i];
 		}
 	}
 	@Override
@@ -74,5 +75,9 @@ public abstract class PolygonBullet extends Bullet implements PolygonCollision{
 		toVertices(ans, vertices);
 	}
 	
+	@Override
+	public void onCollision() {
+		this.wantBeRemoved=true;
+	}
 	
 }

@@ -4,6 +4,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import magengine.bullet.DefaultBullet;
+import magengine.bullet.PlayerBullet;
 import magengine.element.impl.Player;
 import magengine.paint.MoveHandler;
 import magengine.util.ElementUtils;
@@ -20,11 +21,11 @@ public class PlayerControlHandler {
 	private static double mouseY=0;
 	
 	private static PlayerControlHandler pch = null;
-	
+	public static boolean playerLauncher = false;
 	// 速度V
 	public static double DEFAULT_BALL_V = 4;
 	public static double BALL_V = DEFAULT_BALL_V;
-	public static double PLAYER_V = 1;//用于设置按键导致的player移动速度
+	public static double PLAYER_V = 200;//用于设置按键导致的player移动速度
 	private Player player = null;
 	private ElementUtils elementUtils = null;
 	
@@ -34,6 +35,12 @@ public class PlayerControlHandler {
 				throw new RuntimeException("未接收到Player或者ElementUtils");
 			pch=new PlayerControlHandler(eu, player);
 		}
+		return pch;
+	}
+	
+	public static PlayerControlHandler getExistedPlayerControlHandler(){
+		if(pch==null)
+			throw new RuntimeException("未生成PCH");
 		return pch;
 	}
 
@@ -64,9 +71,9 @@ public class PlayerControlHandler {
 			PlayerControlHandler.mouseY=e.getY();
 			// System.out.println("mouse x="+mouseX+" mouseY="+mouseY);
 		});
-		scene.setOnMouseClicked((MouseEvent e)->{
-			playerShootToMouse();
-		});
+//		scene.setOnMouseClicked((MouseEvent e)->{
+//			playerShootToMouse();
+//		});
 
 	}
 
@@ -100,20 +107,20 @@ public class PlayerControlHandler {
 	public void pressHandle(KeyEvent e) {
 
 		switch (e.getCode()) {
-		case W:
+		case UP:
 			pressed[0] = true;
 			break;
-		case D:
+		case RIGHT:
 			pressed[1] = true;
 			break;
-		case S:
+		case DOWN:
 			pressed[2] = true;
 			break;
-		case A:
+		case LEFT:
 			pressed[3] = true;
 			break;
-		case SPACE:
-			MoveHandler.timeSpeed = MoveHandler.DEFAULT_TIME_SPEED*0.3 ;//MoveHandler.DEFAULT_TIME_SPEED
+		case X:
+			playerLauncher=true;
 			break;
 		}
 		changeV();
@@ -122,24 +129,38 @@ public class PlayerControlHandler {
 	@SuppressWarnings("incomplete-switch")
 	public void releaseHandle(KeyEvent e) {
 		switch (e.getCode()) {
-		case W:
+		case UP:
 			pressed[0] = false;
 			break;
-		case D:
+		case RIGHT:
 			pressed[1] = false;
 			break;
-		case S:
+		case DOWN:
 			pressed[2] = false;
 			break;
-		case A:
+		case LEFT:
 			pressed[3] = false;
 			break;
-		case SPACE:
-			MoveHandler.timeSpeed = MoveHandler.DEFAULT_TIME_SPEED;
+		case X:
+			playerLauncher=false;
+			break;
 		}
 		changeV();
 	}
-
+	public void playerShooting() {
+		{
+			DefaultBullet bullet = new PlayerBullet(player.getX()-10, player.getY());
+			bullet.setVelocityY(-600);
+			bullet.setVelocityX(0);
+			elementUtils.add("playerBullet" + ballCount++, bullet);
+		}
+		
+		DefaultBullet bullet = new PlayerBullet(player.getX()+10, player.getY());
+		bullet.setVelocityY(-600);
+		bullet.setVelocityX(0);
+		elementUtils.add("playerBullet" + ballCount++, bullet);
+		
+	}
 	private void playerShootToMouse() {
 		DefaultBullet ball = new DefaultBullet(player.getX(), player.getY());
 		double dx = PlayerControlHandler.mouseX - player.getX();

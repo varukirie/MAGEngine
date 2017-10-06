@@ -13,6 +13,8 @@ import magengine.element.DurationManage;
 import magengine.element.Initializable;
 import magengine.element.Moveable;
 import magengine.element.Paintable;
+import magengine.element.PolygonCollision;
+import magengine.enemy.APolygonEnemy;
 import magengine.launcher.BulletEvent;
 import magengine.paint.MoveHandler;
 import magengine.paint.MyCanvas;
@@ -48,6 +50,9 @@ public class ElementUtils {
 		if(value instanceof DurationManage){
 			((DurationManage) value).setStartTime(System.currentTimeMillis());
 		}
+		if(value instanceof APolygonEnemy){
+			((MoveHandler) DI.di().get("mh")).addCollisionElement(name, (PolygonCollision) value);
+		}
 		if(mh!=null)
 			if(value instanceof Moveable)
 				mh.getWantMoveMap().put(name, (Moveable) value);
@@ -74,6 +79,9 @@ public class ElementUtils {
 		}
 		if(obj instanceof BaseElement){
 			((BaseElement)obj).setDeleted(true);
+		}
+		if(obj instanceof APolygonEnemy){
+			((MoveHandler) DI.di().get("mh")).removeCollisionElement(key);
 		}
 		mh.getWantMoveMap().remove(key);
 

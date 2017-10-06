@@ -31,7 +31,7 @@ public class Transform {
 	}
 	
 
-	public void delta(double[][] in,double x,double y){
+	public static void delta(double[][] in,double x,double y){
 		for(int i=0;i<in[0].length;i++){
 			in[0][i]=in[0][i]+x;
 			in[1][i]=in[1][i]+y;

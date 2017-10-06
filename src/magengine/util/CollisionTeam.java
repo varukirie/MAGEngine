@@ -1,12 +1,8 @@
-package magengine.bullet;
+package magengine.util;
 
-import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map.Entry;
 import java.util.HashMap;
-import java.util.Set;
-import java.util.TreeSet;
 
 public enum CollisionTeam {
 		ENEMY_BULLET,PLAYER,PLAYER_BULLET,ENEMY;	
@@ -17,8 +13,11 @@ public enum CollisionTeam {
 		});
 		rules.get(ENEMY_BULLET).add(PLAYER);
 		rules.get(PLAYER).add(CollisionTeam.ENEMY_BULLET);
+		rules.get(PLAYER_BULLET).add(ENEMY);
+		rules.get(ENEMY).add(PLAYER_BULLET);
 	}
 	public static boolean shouldCollision(CollisionTeam team1,CollisionTeam team2){
 		return rules.get(team1).contains(team2);
+//		return true;
 	}
 }

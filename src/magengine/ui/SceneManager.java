@@ -11,6 +11,7 @@ import magengine.chapter.ChapterDemo;
 import magengine.chapter.TestChapter;
 import magengine.chapter.util.ChapterLoader;
 import magengine.control.PlayerControlHandler;
+import magengine.control.PlayerLaunchHandler;
 import magengine.element.impl.DisplayTime;
 import magengine.element.impl.Player;
 import magengine.paint.MoveHandler;
@@ -46,6 +47,7 @@ public class SceneManager {
 		MoveHandler mh = new MoveHandler(moveableCanvas,secondaryMCanvas);
 		DI.di().put("mh", mh);
 		
+		
 		Thread mhThread = new Thread(mh);
 		mhThread.setPriority(Thread.MAX_PRIORITY);
 		mhThread.start();
@@ -80,8 +82,8 @@ public class SceneManager {
 		
 		//创建玩家
 		Player player = Player.getPlayer(210,600);
+		mh.addCollisionElement("player", player);
 		
-
 
 		//绑定玩家与键盘控制
 		PlayerControlHandler PCH= PlayerControlHandler.getPlayerControlHandler(moveableElementUtils, player);
@@ -95,7 +97,7 @@ public class SceneManager {
 		
 		ChapterLoader.loadChapter(new TestChapter());
 //		ChapterLoader.loadChapter(new ChapterDemo());
-		
+		new Thread(new PlayerLaunchHandler()).start();
 	}
 	public static void shutdownGame(){
 //		ChapterLoader.getScheduledExecutorService().shutdownNow();

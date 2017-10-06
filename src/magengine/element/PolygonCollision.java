@@ -2,10 +2,12 @@ package magengine.element;
 
 import com.badlogic.gdx.math.Polygon;
 
-import magengine.bullet.CollisionTeam;
+import magengine.util.CollisionTeam;
 
 public interface PolygonCollision {
 	Polygon getPolygon();
 	CollisionTeam getTeam();
-
+	default void onCollision(){
+		
+	}
 }

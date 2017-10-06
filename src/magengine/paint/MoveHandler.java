@@ -1,11 +1,16 @@
 package magengine.paint;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 import application.Main;
 import magengine.element.Accelerated;
+import magengine.element.BaseElement;
 import magengine.element.DurationManage;
 import magengine.element.LimitedByCanvas;
 import magengine.element.Moveable;
@@ -66,7 +71,12 @@ public class MoveHandler implements Runnable {
 				entry = iter.next();
 				m = entry.getValue();
 				m.modify();
-
+				if(m instanceof BaseElement){
+					if(((BaseElement) m).wantBeRemoved==true){
+						removeElement(entry.getKey());
+						continue;
+					}
+				}
 				if(m instanceof Launcher){
 					Launcher l=(Launcher) m;
 					if(System.currentTimeMillis()-l.getLastLaunchTime()>l.getInterval()){
@@ -169,18 +179,30 @@ public class MoveHandler implements Runnable {
 		this.mEU = mEU;
 	}
 	
+	private Map<String,PolygonCollision> collisionCheckMap = new ConcurrentHashMap<>();
+	public void addCollisionElement(String key,PolygonCollision elem){
+		collisionCheckMap.put(key, elem);
+	}
 	
+	public void removeCollisionElement(String key){
+		collisionCheckMap.remove(key);
+	}
 	private void collisionCheck(Moveable m){
 		if(m instanceof PolygonCollision){
-			if(m!=Player.getPlayer()){
-				if(CollisionUtil.PolygonDetect(Player.getPlayer(), (PolygonCollision) m)){
-					//System.out.println("碰撞! x="+m.getX()+" | y="+m.getY());
-					if(Main.DEBUG_COLLISION){
-						System.out.println("碰撞! x="+m.getX()+" | y="+m.getY());
+			collisionCheckMap.entrySet().forEach((entry)->{
+				
+				PolygonCollision x= entry.getValue();
+				if(!m.equals(x)){
+//					System.out.println(x);
+					if(CollisionUtil.PolygonDetect(x, (PolygonCollision) m)){
+						x.onCollision();
+						((PolygonCollision) m).onCollision();
+						if(Main.DEBUG_COLLISION){
+							System.out.println("碰撞! x="+m.getX()+" | y="+m.getY());
+						}
 					}
 				}
-					
-			}
+			});
 		}
 	}
 	

@@ -24,7 +24,7 @@ public abstract class AEnemy extends BaseElement implements Initializable{
 		super(x, y);	
 	}
 	
-	private AtomicInteger HP=new AtomicInteger(100);
+	private AtomicInteger HP=new AtomicInteger(10);
 	private List<ADanmuku> danmukuList = new ArrayList<ADanmuku>();
 	
 	
@@ -36,7 +36,7 @@ public abstract class AEnemy extends BaseElement implements Initializable{
 		return this.HP.get();
 	}
 	
-	public int addHP(int delta){
+	public int addAndGetHP(int delta){
 		return HP.addAndGet(delta);
 	}
 
