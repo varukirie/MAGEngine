@@ -44,7 +44,7 @@ public class Helper extends BaseElement implements DurationManage{
 	@Override
 	public void paint(GraphicsContext gc) {
 		if(Main.DEBUG){
-			gc.fillText("Helper", getX(), getY());
+			gc.fillText(".Helper x="+this.getX()+" y="+this.getY(), getX(), getY());
 		}
 	}
 	public long getStartTime() {

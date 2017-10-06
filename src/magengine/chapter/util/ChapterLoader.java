@@ -28,7 +28,7 @@ public class ChapterLoader {
 	public static void init(MyCanvas staticCanvas){
 		ChapterLoader.staticCanvas = staticCanvas ;
 		ChapterLoader.mEU = (ElementUtils) DI.di().get("mEU");
-		ChapterLoader.scheduleES=Executors.newScheduledThreadPool(5);
+		ChapterLoader.scheduleES=Executors.newScheduledThreadPool(8);
 		DI.di().put("sES", scheduleES);
 	}
 	public static void loadChapter(AChapter c){
@@ -38,8 +38,8 @@ public class ChapterLoader {
 		mEU.add(new Random().nextLong()+"", l);
 		c.design(scheduleES,staticCanvas,mEU);
 		long end = System.currentTimeMillis();
-		System.out.println("装载关卡使用 "+(end-start)+" 毫秒");
 		System.gc();
+		System.out.println("装载关卡使用 "+(end-start)+" 毫秒");
 	}
 	
 	public static void loadChapter(String chapterName) throws Exception{

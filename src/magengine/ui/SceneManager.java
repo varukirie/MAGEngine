@@ -98,6 +98,7 @@ public class SceneManager {
 		
 	}
 	public static void shutdownGame(){
+//		ChapterLoader.getScheduledExecutorService().shutdownNow();
 		((MoveHandler)(DI.di().get("mh"))).keepRun=false;//关闭MoveHandler
 		ChapterLoader.getScheduledExecutorService().shutdownNow();//关闭关卡计划任务线程
 		((AnimationTimer)(DI.di().get("animationTimer"))).stop();

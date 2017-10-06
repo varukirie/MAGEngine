@@ -22,12 +22,12 @@ public class RelativeAnchorHelper extends Helper {
 
 	@Override
 	public void setVelocityX(double velocityX) {
-		throw new RuntimeException(":该Helper不允许被改变速度");
+		throw new RuntimeException("RelativeAnchorHelper:该Helper不允许被改变速度");
 	}
 	
 	@Override
 	public void setVelocityY(double velocityY) {
-		throw new RuntimeException(":该Helper不允许被改变速度");
+		throw new RuntimeException("RelativeAnchorHelper:该Helper不允许被改变速度");
 	}
 	
 	

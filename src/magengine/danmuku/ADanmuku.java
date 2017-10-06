@@ -45,8 +45,9 @@ public abstract class ADanmuku {
 	public long getDelay() {
 		return delay;
 	}
-	public void setDelay(long delay) {
+	public ADanmuku setDelay(long delay) {
 		this.delay = delay;
+		return this;
 	}
 	public long getDanmukuDuration() {
 		return danmukuDuration;

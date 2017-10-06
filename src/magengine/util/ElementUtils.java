@@ -1,6 +1,7 @@
 package magengine.util;
 
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ScheduledExecutorService;
 
 import application.Main;
@@ -112,4 +113,10 @@ public class ElementUtils {
 		}
 	}
 	
+	private Random random = new Random();
+	public void addAll(BaseElement ...value){
+		for (int i = 0; i < value.length; i++) {
+			this.add(random.nextLong()+"", value);
+		}
+	}
 }

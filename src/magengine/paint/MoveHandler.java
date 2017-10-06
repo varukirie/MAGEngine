@@ -25,13 +25,13 @@ import magengine.util.ElementUtils;
 
 public class MoveHandler implements Runnable {
 
-	public static final double DEFAULT_TIME_SPEED = 0.2;
+	public static final double DEFAULT_TIME_SPEED = 1;
 	/**
 	 * 全局速度
 	 */
 	public static double timeSpeed = DEFAULT_TIME_SPEED;
 	public static final long SLEEP_TIME = 2;
-	public static final long BLANK = 1;
+	public static final long BLANK = 1000;
 
 	private Map<String, Moveable> wantMoveMap = new ConcurrentHashMap<>();
 	private ElementUtils mEU = null;
@@ -87,24 +87,24 @@ public class MoveHandler implements Runnable {
 					// 使用加速度计算速度
 					if (m instanceof Accelerated) {
 						if(((Accelerated) m).getAccX()!=0){
-							m.setVelocityX(m.getVelocityX() + (currentTime - this.lastTime) * ((Accelerated) m).getAccX()
-									* timeSpeed * (1 / DEFAULT_TIME_SPEED) / 1000);
+							m.setVelocityX(m.getVelocityX() + (currentTime - this.lastTime)*1.0 * ((Accelerated) m).getAccX()
+									* timeSpeed * (1 / DEFAULT_TIME_SPEED) / BLANK);
 						}
 						if(((Accelerated) m).getAccY()!=0){
-							m.setVelocityY(m.getVelocityY() + (currentTime - this.lastTime) * ((Accelerated) m).getAccY()
-									* timeSpeed * (1 / DEFAULT_TIME_SPEED) / 1000);
+							m.setVelocityY(m.getVelocityY() + (currentTime - this.lastTime)*1.0 * ((Accelerated) m).getAccY()
+									* timeSpeed * (1 / DEFAULT_TIME_SPEED) / BLANK);
 						}
 					}
 				}
 
-				nextX = m.getX() + m.getVelocityX() * ((currentTime - this.lastTime) / BLANK) * timeSpeed;
-				nextY = m.getY() + m.getVelocityY() * ((currentTime - this.lastTime) / BLANK) * timeSpeed;
+				nextX = m.getX() + m.getVelocityX() * ((currentTime - this.lastTime)*1.0 / BLANK) * timeSpeed;
+				nextY = m.getY() + m.getVelocityY() * ((currentTime - this.lastTime)*1.0  / BLANK) * timeSpeed;
 				
 				if (m instanceof Player) {
 					
 					// Player不受speed减速影响
-					nextX = m.getX() + m.getVelocityX() * ((currentTime - this.lastTime) / BLANK) * DEFAULT_TIME_SPEED;
-					nextY = m.getY() + m.getVelocityY() * ((currentTime - this.lastTime) / BLANK) * DEFAULT_TIME_SPEED;
+					nextX = m.getX() + m.getVelocityX() * ((currentTime - this.lastTime)*1.0  / BLANK) * DEFAULT_TIME_SPEED;
+					nextY = m.getY() + m.getVelocityY() * ((currentTime - this.lastTime)*1.0  / BLANK) * DEFAULT_TIME_SPEED;
 				}
 
 				if (nextX < MyCanvas.CANVAS_WIDTH && nextX > 0 && nextY < MyCanvas.CANVAS_HEIGHT && nextY > 0) {
@@ -182,5 +182,9 @@ public class MoveHandler implements Runnable {
 					
 			}
 		}
+	}
+	
+	public int getSize(){
+		return this.getWantMoveMap().size();
 	}
 }

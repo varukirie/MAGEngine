@@ -23,7 +23,7 @@ public class Launcher extends BaseElement implements Initializable ,DurationMana
 	private long startTime=0;
 	private long lastLaunchTime = 0;
 	private Class<?> bulletType = DefaultBullet.class;
-	private double bulletSpeed = 0.4;
+	private double bulletSpeed = 80;
 	private long duration=10000;
 	private ModifyEvent modifyEvent=null;
 
