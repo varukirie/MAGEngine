@@ -1,7 +1,5 @@
 package magengine.enemy;
 
-import com.badlogic.gdx.math.Polygon;
-
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 /**
