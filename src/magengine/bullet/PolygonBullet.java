@@ -40,8 +40,8 @@ public abstract class PolygonBullet extends Bullet implements PolygonCollision{
 	}
 
 	protected abstract double[][] getOrigin();
-	protected float[] vertices=new float[getOrigin()[0].length*2];
-	protected Polygon polygon = new Polygon(vertices);
+	protected volatile float[] vertices=new float[getOrigin()[0].length*2];
+	protected volatile Polygon polygon = new Polygon(vertices);
 	
 	
 	protected double[][] transformVAndDelta(double[][] origin){
@@ -73,6 +73,7 @@ public abstract class PolygonBullet extends Bullet implements PolygonCollision{
 		double[][] ans=transformVAndDelta(getOrigin());
 		gc.fillPolygon(ans[0],ans[1], getOrigin()[0].length);
 		toVertices(ans, vertices);
+		polygon.setVertices(vertices);
 	}
 	
 	@Override

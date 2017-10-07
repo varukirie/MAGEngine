@@ -1,7 +1,5 @@
 package magengine.enemy;
 
-import java.util.Arrays;
-
 import com.badlogic.gdx.math.Polygon;
 
 import magengine.element.PolygonCollision;
@@ -30,7 +28,7 @@ public abstract class APolygonEnemy extends AEnemy implements PolygonCollision{
 
 	protected abstract double[][] getOrigin();
 	private volatile float[] vertices = new float[getOrigin()[0].length*2];
-	private Polygon polygon = new Polygon(vertices);
+	private volatile Polygon polygon = new Polygon(vertices);
 	
 	@Override
 	public Polygon getPolygon() {
@@ -47,6 +45,7 @@ public abstract class APolygonEnemy extends AEnemy implements PolygonCollision{
 		}
 		Transform.delta(ans, getX(), getY());
 		CollisionUtil.toVertices(ans, vertices);
+		polygon.setVertices(vertices);
 //		System.out.println("vertices "+Arrays.toString(vertices));
 //		System.out.println("polygon's vertices"+Arrays.toString(getPolygon().getVertices()));
 	}
