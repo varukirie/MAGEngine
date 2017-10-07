@@ -15,13 +15,13 @@ import magengine.util.ElementUtils;
  * @author MegaAstronic
  *
  */
-public class PloygonalLineHelper extends Helper implements Initializable{
+public class PolygonalLineHelper extends Helper implements Initializable{
 	/**
 	 * 
 	 * @param ploygonalLine 坐标集  格式 new double[][]{{x1,x2,x3,x4……},{y1,y2,y3,y4……}}
 	 * @param speed helper运动速度
 	 */
-	public PloygonalLineHelper(double[][] ploygonalLine,double speed){
+	public PolygonalLineHelper(double[][] ploygonalLine,double speed){
 		super(1, 1);
 		setPloygon(ploygonalLine);
 		setSpeed(speed);
@@ -31,7 +31,7 @@ public class PloygonalLineHelper extends Helper implements Initializable{
 	private double[][] ploygon = null;
 	private ScheduledExecutorService ses = (ScheduledExecutorService) DI.di().get("sES");
 	private QuickDanmuku quick=QuickDanmuku.getQuickDanmuku();
-	private Consumer<PloygonalLineHelper> endEvent = null;
+	private Consumer<PolygonalLineHelper> endEvent = null;
 	
 	
 	@Override
@@ -68,10 +68,10 @@ public class PloygonalLineHelper extends Helper implements Initializable{
 	public void setPloygon(double[][] ploygon) {
 		//TODO  ploygon验证数据正确性
 		if(ploygon.length!=2){
-			throw new RuntimeException("PloygonalLineHelper:点集数据不正确");
+			throw new RuntimeException("PolygonalLineHelper:点集数据不正确");
 		}
 		if(ploygon[0].length!=ploygon[1].length){
-			throw new RuntimeException("PloygonalLineHelper:点集数据不正确");
+			throw new RuntimeException("PolygonalLineHelper:点集数据不正确");
 		}
 		this.ploygon = ploygon;
 	}
@@ -81,10 +81,10 @@ public class PloygonalLineHelper extends Helper implements Initializable{
 	public void setSpeed(double speed) {
 		this.speed = speed;
 	}
-	public Consumer<PloygonalLineHelper> getEndEvent() {
+	public Consumer<PolygonalLineHelper> getEndEvent() {
 		return endEvent;
 	}
-	public void setEndEvent(Consumer<PloygonalLineHelper> endEvent) {
+	public void setEndEvent(Consumer<PolygonalLineHelper> endEvent) {
 		this.endEvent = endEvent;
 	}
 	

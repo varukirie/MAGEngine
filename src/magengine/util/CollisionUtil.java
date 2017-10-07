@@ -4,13 +4,16 @@ import java.util.Arrays;
 
 import com.badlogic.gdx.math.Polygon;
 
+import magengine.bullet.PlayerBullet;
 import magengine.element.PolygonCollision;
+import magengine.enemy.APolygonEnemy;
 
 public class CollisionUtil {
 
 	public static boolean PolygonDetect(PolygonCollision elem1,PolygonCollision elem2){
 		if(CollisionTeam.shouldCollision(elem1.getTeam(), elem2.getTeam())){
 //			System.out.println("shouldCollsion"+elem1.getTeam()+" | "+elem2.getTeam());
+
 			return isOverlap(elem1.getPolygon(),elem2.getPolygon());
 		}else{
 			return false;
@@ -20,7 +23,11 @@ public class CollisionUtil {
 //		System.out.println(Arrays.toString(polygon1.getVertices()));
         for(int i=0; i<polygon2.getVertices().length; i+=2){
             if( polygon1.contains(polygon2.getVertices()[i], polygon2.getVertices()[i+1]) ){
-                return true;
+    			System.out.println("collision occur");
+            	System.out.println("elem1 vertices"+Arrays.toString(polygon1.getVertices()));
+    			System.out.println("elem2 vertices"+Arrays.toString(polygon2.getVertices()));
+    			
+            	return true;
             }
         }
         for(int i=0; i<polygon1.getVertices().length; i+=2){

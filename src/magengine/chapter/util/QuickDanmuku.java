@@ -98,6 +98,7 @@ public class QuickDanmuku {
 		mEU.add(r.nextInt() + "", helper);
 //		System.out.println(timeCost);
 		sES.schedule(() -> {
+//			System.out.println("execute unbind");
 			// element.getxProperty().unbindBidirectional(helper.getxProperty());
 			// element.getyProperty().unbindBidirectional(helper.getyProperty());
 			element.getxProperty().unbind();

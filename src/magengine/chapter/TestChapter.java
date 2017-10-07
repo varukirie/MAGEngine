@@ -20,7 +20,7 @@ import magengine.enemy.DefaultEnemy;
 import magengine.helper.Helper;
 import magengine.helper.MoveToHelper;
 import magengine.helper.OvalHelper;
-import magengine.helper.PloygonalLineHelper;
+import magengine.helper.PolygonalLineHelper;
 import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
 import magengine.paint.MyCanvas;
@@ -54,22 +54,16 @@ public class TestChapter extends AChapter {
 		
 		
 		DefaultEnemy enemy = new DefaultEnemy(500, 300);
-//		ADanmuku danmuku = new TriArcDanmuku();
-//		
+		ADanmuku danmuku = new TriArcDanmuku();
 //		enemy.addDanmuku(danmuku);
-//		
+		enemy.setHP(30);
+		enemy.setVelocityX(-50);
+//		quick.moveTo(enemy, 2000, 100, 300);
 		mEU.add("enemy", enemy);
-//		quick.moveTo(enemy, 1000, 100, 400);
-//		sES.schedule(() -> {
-//			quick.moveTo(enemy, 1000,50, 50);
-//		},2000, TimeUnit.MILLISECONDS);
-//		sES.schedule(() -> {
-//			ChapterLoader.loadChapter(new TestChapter());
-//		},4000, TimeUnit.MILLISECONDS);
 		
 
-		for(int i=1;i<=1000;i++){
-			new StarDanmuku().setDelay(700*i).delayExecute();
-		}
+//		for(int i=1;i<=1000;i++){
+//			new StarDanmuku().setDelay(700*i).delayExecute();
+//		}
 	}
 }

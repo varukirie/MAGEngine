@@ -9,7 +9,7 @@ import magengine.bullet.StarBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.chapter.util.SeqDanmuku;
 import magengine.element.BaseElement;
-import magengine.helper.PloygonalLineHelper;
+import magengine.helper.PolygonalLineHelper;
 import magengine.launcher.BulletEvent;
 import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
@@ -39,7 +39,7 @@ public class StarDanmuku extends ADanmuku {
 		long startMill=1000;
 		double[][] ploygon1 = new double[][] { { 157, 275, 392, 157 }, { 256, 74, 256, 256 } };
 		double[][] ploygon2 = new double[][] { { 393, 275, 157, 393 }, { 135, 318, 135, 135 } };
-		PloygonalLineHelper helper = new PloygonalLineHelper(ploygon1, helperSpeed);
+		PolygonalLineHelper helper = new PolygonalLineHelper(ploygon1, helperSpeed);
 		Launcher launcher = new Launcher(69, 236, Math.PI / 2, interval, 10000);
 		launcher.setBulletSpeed(0.12);
 		launcher.setBulletType(StarBullet.class);
@@ -60,7 +60,7 @@ public class StarDanmuku extends ADanmuku {
 			mEU.add(r.nextLong() + "", launcher);
 		}, startMill, TimeUnit.MILLISECONDS);
 
-		PloygonalLineHelper helper2 = new PloygonalLineHelper(ploygon2, helperSpeed);
+		PolygonalLineHelper helper2 = new PolygonalLineHelper(ploygon2, helperSpeed);
 		Launcher lc2 = new Launcher(69, 236, Math.PI / 2, interval, 10000);
 		lc2.setBulletSpeed(0.12);
 		lc2.setBulletType(StarBullet.class);

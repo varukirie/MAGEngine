@@ -15,6 +15,8 @@ public enum CollisionTeam {
 		rules.get(PLAYER).add(CollisionTeam.ENEMY_BULLET);
 		rules.get(PLAYER_BULLET).add(ENEMY);
 		rules.get(ENEMY).add(PLAYER_BULLET);
+		rules.get(ENEMY).add(PLAYER);
+		rules.get(PLAYER).add(ENEMY);
 	}
 	public static boolean shouldCollision(CollisionTeam team1,CollisionTeam team2){
 		return rules.get(team1).contains(team2);
