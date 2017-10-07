@@ -95,9 +95,10 @@ public class SceneManager {
 		moveableElementUtils.add("displayTime", new DisplayTime(1, MyCanvas.CANVAS_HEIGHT-7));
 		ChapterLoader.init(staticCanvas);
 		
-		ChapterLoader.loadChapter(new TestChapter());
+		
 //		ChapterLoader.loadChapter(new ChapterDemo());
 		new Thread(new PlayerLaunchHandler()).start();
+		ChapterLoader.loadChapter(new TestChapter());
 	}
 	public static void shutdownGame(){
 //		ChapterLoader.getScheduledExecutorService().shutdownNow();
