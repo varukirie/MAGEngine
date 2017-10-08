@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import magengine.chapter.ChapterDemo;
 import magengine.chapter.TestChapter;
+import magengine.chapter.TestChapter1;
 import magengine.chapter.util.ChapterLoader;
 import magengine.control.PlayerControlHandler;
 import magengine.control.PlayerLaunchHandler;
