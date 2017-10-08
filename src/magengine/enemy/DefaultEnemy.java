@@ -32,7 +32,7 @@ public class DefaultEnemy extends APolygonEnemy {
 	
 	@Override
 	public void paint(GraphicsContext gc) {
-
+		super.paint(gc);
 		gc.drawImage(img, getX(), getY());
 	}
 

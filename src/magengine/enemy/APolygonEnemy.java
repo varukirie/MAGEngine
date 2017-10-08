@@ -2,6 +2,9 @@ package magengine.enemy;
 
 import com.badlogic.gdx.math.Polygon;
 
+import application.Main;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import magengine.element.PolygonCollision;
 import magengine.util.CollisionTeam;
 import magengine.util.CollisionUtil;
@@ -35,6 +38,7 @@ public abstract class APolygonEnemy extends AEnemy implements PolygonCollision{
 		return polygon;
 	}
 	
+	private double[][] afterDelta=null;
 	@Override
 	public void modify() {
 		super.modify();
@@ -44,12 +48,19 @@ public abstract class APolygonEnemy extends AEnemy implements PolygonCollision{
 			ans[1][i]=getOrigin()[1][i];
 		}
 		Transform.delta(ans, getX(), getY());
+		afterDelta=ans;
 		CollisionUtil.toVertices(ans, vertices);
 		polygon.setVertices(vertices);
 //		System.out.println("vertices "+Arrays.toString(vertices));
 //		System.out.println("polygon's vertices"+Arrays.toString(getPolygon().getVertices()));
 	}
-	
+	@Override
+	public void paint(GraphicsContext gc) {
+		if(Main.DEBUG){
+			gc.setStroke(Color.RED);
+			gc.strokePolygon(afterDelta[0], afterDelta[1],afterDelta[0].length);
+		}
+	}
 	@Override
 	public void onCollision() {
 		if(this.addAndGetHP(-1)<=0){
