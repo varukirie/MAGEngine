@@ -16,6 +16,7 @@ import magengine.chapter.util.QuickDanmuku;
 import magengine.danmuku.StarDanmuku;
 import magengine.danmuku.TriArcDanmuku;
 import magengine.enemy.DefaultEnemy;
+import magengine.helper.Helper;
 import magengine.helper.OvalHelper;
 import magengine.paint.MyCanvas;
 import magengine.util.DI;
@@ -65,20 +66,25 @@ public class TestChapter extends AChapter {
 //			quick.moveTo(enemy, 3000, 275, 195.5);
 //		}, 11000, TimeUnit.MILLISECONDS);
 		
-int bulletCount=16;
-for(int i=0;i<bulletCount;i++){
-	Bullet bullet =new DefaultBullet(midX, midY);
-	OvalHelper helper = new OvalHelper(midX, midY,100, 20, Math.PI*2/bulletCount*i);
-	bullet.getxProperty().bind(helper.getxProperty());
-	bullet.getyProperty().bind(helper.getyProperty());
-	bullet.setVelocityX(1);
-	bullet.setLambdaModify((x)->{
-		quick.VToByDirection(x, helper.getDirection()+Math.PI/2);
-	});
-	Random r= new Random();
-	mEU.add("bullet"+r.nextInt(), bullet);
-	mEU.add("helper"+r.nextInt(), helper);
-}
+		Helper midHelper  = new Helper(midX, midY);
+		midHelper.setVelocityY(30);
+		int bulletCount = 32;
+		for (int i = 0; i < bulletCount; i++) {
+			Bullet bullet = new DefaultBullet(midX, midY);
+			OvalHelper helper = new OvalHelper(midX, midY, 100, 30, Math.PI * 2 / bulletCount * i);
+			helper.getOvalMidXProperty().bind(midHelper.getxProperty());
+			helper.getOvalMidYProperty().bind(midHelper.getyProperty());
+			bullet.getxProperty().bind(helper.getxProperty());
+			bullet.getyProperty().bind(helper.getyProperty());
+			bullet.setVelocityX(1);
+			bullet.setLambdaModify((x) -> {
+				quick.VToByDirection(x, helper.getDirection() + Math.PI / 2);
+			});
+			Random r = new Random();
+			mEU.add("bullet" + r.nextInt(), bullet);
+			mEU.add("helper" + r.nextInt(), helper);
+			mEU.add("midHelper", midHelper);
+		}
 //		for(int i=1;i<=1000;i++){
 //			new StarDanmuku().setDelay(700*i).delayExecute();
 //		}
