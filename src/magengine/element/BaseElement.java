@@ -1,5 +1,7 @@
 package magengine.element;
 
+import java.util.function.Consumer;
+
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
@@ -13,7 +15,7 @@ public abstract class BaseElement implements Moveable, Paintable,Accelerated{
 	protected double accY = 0;
 	protected boolean deleted = false;
 	public boolean wantBeRemoved = false;
-	
+	private Consumer<BaseElement> lambdaModify = null;
 	public BaseElement(double x, double y) {
 			this(x,y,0,0);
 	}
@@ -88,5 +90,11 @@ public abstract class BaseElement implements Moveable, Paintable,Accelerated{
 		return yProperty;
 	}
 	
+	public void setLambdaModify(Consumer<BaseElement> lambdaModify) {
+		this.lambdaModify = lambdaModify;
+	}
 	
+	public Consumer<BaseElement> getLambdaModify() {
+		return lambdaModify;
+	}
 }
