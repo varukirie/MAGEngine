@@ -72,6 +72,9 @@ public class MoveHandler implements Runnable {
 				m = entry.getValue();
 				m.modify();
 				if(m instanceof BaseElement){
+					if(((BaseElement) m).getLambdaModify()!=null){
+						((BaseElement) m).getLambdaModify().accept((BaseElement) m);
+					}
 					if(((BaseElement) m).wantBeRemoved==true){
 						removeElement(entry.getKey());
 						continue;

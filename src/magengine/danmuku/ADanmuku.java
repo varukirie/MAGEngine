@@ -60,7 +60,9 @@ public abstract class ADanmuku {
 	 */
 	public void delayExecute(){
 		sES.schedule(() -> {
-			this.executeDanmuku();
+			if(getSourceElement()==null||getSourceElement().getDeleted()==false){
+				this.executeDanmuku();
+			}
 		}, getDelay(), TimeUnit.MILLISECONDS);
 	}
 
