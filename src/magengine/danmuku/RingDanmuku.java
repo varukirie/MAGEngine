@@ -81,9 +81,9 @@ public class RingDanmuku extends ADanmuku {
 				}, 1000, TimeUnit.MILLISECONDS);
 			});
 		};
-		ArcLauncherGroup alg = new ArcLauncherGroup(getSourceElement().getX(), getSourceElement().getY(), Math.PI/2, PI/2, 5);
+		ArcLauncherGroup alg = new ArcLauncherGroup(getSourceElement().getX(), getSourceElement().getY(), Math.PI/2*3, PI/2, 5);
 		alg.setLauncherConfig(config);
-		long startTime = 7000;
+		long startTime = 4000;
 		ses.schedule(() -> {
 			alg.setMidX(getSourceElement().getX());
 			alg.setMidY(getSourceElement().getY());
