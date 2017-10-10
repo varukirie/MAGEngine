@@ -18,7 +18,8 @@ public class ArcLauncherGroup extends ALauncherGroup {
 	private int amount = 10;
 	private double midX = 200;
 	private double midY = 200;
-
+	
+	
 	
 	public ArcLauncherGroup(double midX, double midY) {
 		super();
@@ -53,6 +54,56 @@ public class ArcLauncherGroup extends ALauncherGroup {
 			configLauncher(launcher);
 			mEU.add(UUID.randomUUID().toString(), launcher);
 		}
+	}
+
+
+	public double getDirection() {
+		return direction;
+	}
+
+
+	public void setDirection(double direction) {
+		this.direction = direction;
+	}
+
+
+	public double getAngle() {
+		return angle;
+	}
+
+
+	public void setAngle(double angle) {
+		this.angle = angle;
+	}
+
+
+	public int getAmount() {
+		return amount;
+	}
+
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
+
+	public double getMidX() {
+		return midX;
+	}
+
+
+	public void setMidX(double midX) {
+		this.midX = midX;
+	}
+
+
+	public double getMidY() {
+		return midY;
+	}
+
+
+	public void setMidY(double midY) {
+		this.midY = midY;
 	}
 	
 }
