@@ -54,11 +54,11 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 		super(x, y);
 		Image img=null;
 		try {
-			img = new Image(this.getClass().getResourceAsStream("/img/player.bmp"));
+			img = new Image(this.getClass().getResourceAsStream("/img/playerUpdated.png"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		spritePainter=new SpritePainter(img, 50, 50);
+		spritePainter=new SpritePainter(img, 80, 175);
 		setX(x);
 		setY(y);
 	}
@@ -70,40 +70,34 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 	private int currentSpriteIndex=0;
 	@Override
 	public void paint(GraphicsContext gc) {
-		if(this.velocityX<0)
-			spritePainter.paintSprite(0, getX(),getY(), gc);
+		if(this.velocityX<0){
+			spritePainter.paintSprite(8+(currentSpriteIndex), getX(),getY(), gc);
+			currentSpriteIndex=(currentSpriteIndex+1)%(4);
+		}
 		
 		if(this.velocityX==0){
-			if(this.velocityY<0)
-				spritePainter.paintSprite(1, getX(), getY(), gc);
-			
-			if(this.velocityY==0){
-				int delayF = 10;
-				spritePainter.paintSprite(4+(currentSpriteIndex)/delayF, getX(), getY(), gc);
-				currentSpriteIndex=(currentSpriteIndex+1)%(5*delayF);
-			}
-				
-			if(this.velocityY>0)
-				spritePainter.paintSprite(3, getX(), getY(), gc);
+			spritePainter.paintSprite(0+(currentSpriteIndex), getX(), getY(), gc);
+			currentSpriteIndex=(currentSpriteIndex+1)%(4);
 		}
 			
-	
-		if(this.velocityX>0)
-			spritePainter.paintSprite(2, getX(), getY(), gc);
+		if(this.velocityX>0){
+			spritePainter.paintSprite(4+(currentSpriteIndex), getX(), getY(), gc);
+			currentSpriteIndex=(currentSpriteIndex+1)%(4);
+		}
 	}
 	public float[] vertices = new float[4*2];
 	private Polygon polygon=new Polygon(vertices);
 	
 	@Override
 	public Polygon getPolygon() {
-		vertices[0]=(float) getX();
-		vertices[1]=(float) getY();
+		vertices[0]=(float) (getX()+30);
+		vertices[1]=(float) (getY()+80);
 		vertices[2]=(float) (getX()+50);
-		vertices[3]=(float) getY();
+		vertices[3]=(float) (getY()+80);
 		vertices[4]=(float) (getX()+50);
-		vertices[5]=(float) (getY()+50);
-		vertices[6]=(float) getX();
-		vertices[7]=(float) (getY()+50);
+		vertices[5]=(float) (getY()+95);
+		vertices[6]=(float) (getX()+30);
+		vertices[7]=(float) (getY()+95);
 		polygon.setVertices(vertices);
 		return polygon;
 	}
