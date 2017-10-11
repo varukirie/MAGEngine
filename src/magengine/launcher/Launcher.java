@@ -2,6 +2,7 @@ package magengine.launcher;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 import application.Main;
 import javafx.beans.property.DoubleProperty;
@@ -15,49 +16,63 @@ import magengine.element.Initializable;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
 
-public class Launcher extends BaseElement implements Initializable ,DurationManage {
+public class Launcher extends BaseElement implements Initializable, DurationManage {
 
 	private BulletEvent bulletEvent;
-	private DoubleProperty directionProperty =new SimpleDoubleProperty(0);
+	private DoubleProperty directionProperty = new SimpleDoubleProperty(0);
 	private long interval = 400;
-	private long startTime=0;
+	private long startTime = 0;
 	private long lastLaunchTime = 0;
 	private Class<?> bulletType = DefaultBullet.class;
 	private double bulletSpeed = 80;
-	private long duration=10000;
-	private ModifyEvent modifyEvent=null;
-
+	private long duration = 10000;
+	private ModifyEvent modifyEvent = null;
+	private Consumer<BaseElement> bulletConfig = null;
 
 	public Launcher(double x, double y) {
 		super(x, y);
 	}
-/**
- * 
- * @param x
- * @param y
- * @param direction	发射方向
- * @param interval	发射间隔
- * @param duration	存活时间
- */
-	public Launcher(double x, double y, double direction, long interval,long duration) {
+
+	public Launcher(double x, double y, double velocityX, double velocityY, double ax, double ay) {
+		super(x, y, velocityX, velocityY, ax, ay);
+	}
+
+	public Launcher(double x, double y, double velocityX, double velocityY) {
+		super(x, y, velocityX, velocityY);
+	}
+
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param direction
+	 *            发射方向
+	 * @param interval
+	 *            发射间隔
+	 * @param duration
+	 *            存活时间
+	 */
+	public Launcher(double x, double y, double direction, long interval, long duration) {
 		super(x, y);
 		this.directionProperty.set(direction);
 		this.interval = interval;
-		this.duration=duration;
+		this.duration = duration;
 	}
-	
 
 	@Override
 	public void paint(GraphicsContext gc) {
-		if(Main.DEBUG) gc.fillText("launcher", getX(), getY());
+		if (Main.DEBUG)
+			gc.fillText("launcher", getX(), getY());
 	}
 
 	public void launch() {
 		try {
-			((ElementUtils) (DI.di().get("mEU"))).addEventBullet(UUID.randomUUID().toString(), this.bulletEvent,
-					(Bullet) bulletType.getConstructor(double.class, double.class, double.class, double.class)
-							.newInstance(getX(), getY(), Math.cos(getDirection()) * bulletSpeed,
-									Math.sin(getDirection()) * bulletSpeed));
+			BaseElement elem = (BaseElement) bulletType
+					.getConstructor(double.class, double.class, double.class, double.class).newInstance(getX(), getY(),
+							Math.cos(getDirection()) * bulletSpeed, Math.sin(getDirection()) * bulletSpeed);
+			if(bulletConfig!=null)
+				bulletConfig.accept(elem);
+			((ElementUtils) (DI.di().get("mEU"))).addEventBullet(UUID.randomUUID().toString(), this.bulletEvent, elem);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
 			System.out.println("错误的子弹类型");
@@ -68,8 +83,10 @@ public class Launcher extends BaseElement implements Initializable ,DurationMana
 	@Override
 	public void modify() {
 		super.modify();
-		if(modifyEvent!=null) modifyEvent.modify();
+		if (modifyEvent != null)
+			modifyEvent.modify();
 	}
+
 	public void setBulletEvent(BulletEvent bulletEvent) {
 		this.bulletEvent = bulletEvent;
 	}
@@ -78,7 +95,6 @@ public class Launcher extends BaseElement implements Initializable ,DurationMana
 	public void initWhenAdd() {
 		this.lastLaunchTime = System.currentTimeMillis();
 	}
-
 
 	public double getDirection() {
 		return directionProperty.get();
@@ -154,6 +170,14 @@ public class Launcher extends BaseElement implements Initializable ,DurationMana
 
 	public void setStartTime(long startTime) {
 		this.startTime = startTime;
+	}
+
+	public Consumer<BaseElement> getBulletConfig() {
+		return bulletConfig;
+	}
+
+	public void setBulletConfig(Consumer<BaseElement> bulletConfig) {
+		this.bulletConfig = bulletConfig;
 	}
 
 }

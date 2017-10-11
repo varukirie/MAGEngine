@@ -114,7 +114,7 @@ public class ElementUtils {
 		this.myCanvas = myCanvas;
 	}
 	
-	public void addEventBullet(String name,BulletEvent be,Bullet bullet){
+	public void addEventBullet(String name,BulletEvent be,BaseElement bullet){
 		add(name, bullet);
 		if(be!=null){
 			be.event((ScheduledExecutorService) DI.di().get("sES"), bullet);

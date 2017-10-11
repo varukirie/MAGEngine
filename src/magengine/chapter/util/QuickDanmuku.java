@@ -12,6 +12,7 @@ import magengine.bullet.DefaultBullet;
 import magengine.element.BaseElement;
 import magengine.element.impl.Player;
 import magengine.helper.MoveToHelper;
+import magengine.launcher.Launcher;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
 import magengine.util.Transform;
@@ -62,6 +63,10 @@ public class QuickDanmuku {
 		element.setAccY((targetY - element.getY()) * (originS / targetS));
 	}
 
+	public long getSyncDelayAfterLaunch(Launcher launcher,long delay){
+		return launcher.getStartTime()+delay-System.currentTimeMillis();
+	}
+	
 	/**
 	 * 
 	 * @param element
@@ -120,21 +125,21 @@ public class QuickDanmuku {
 		element.setVelocityY(element.getVelocityY() * (speed / originS));
 	}
 
-	public void stopBullet(Bullet bullet) {
+	public void stopBullet(BaseElement bullet) {
 		bullet.setVelocityX(bullet.getVelocityX() * 0.001);
 		bullet.setVelocityY(bullet.getVelocityY() * 0.001);
 	}
 
-	public void runBullet(Bullet bullet) {
+	public void runBullet(BaseElement bullet) {
 		bullet.setVelocityX(bullet.getVelocityX() * 1000);
 		bullet.setVelocityY(bullet.getVelocityY() * 1000);
 	}
 
-	public void snipePlayer(Bullet bullet) {
+	public void snipePlayer(BaseElement bullet) {
 		snipe(bullet, Player.getPlayer().getX(), Player.getPlayer().getY());
 	}
 
-	public void snipe(Bullet bullet, double x, double y) {
+	public void snipe(BaseElement bullet, double x, double y) {
 		double v = Math
 				.sqrt(bullet.getVelocityX() * bullet.getVelocityX() + bullet.getVelocityY() * bullet.getVelocityY());
 		double dx = bullet.getX() - x;

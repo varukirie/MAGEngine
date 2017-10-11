@@ -19,6 +19,7 @@ import magengine.danmuku.TriArcDanmuku;
 import magengine.enemy.DefaultEnemy;
 import magengine.helper.Helper;
 import magengine.helper.OvalHelper;
+import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
 import magengine.paint.MyCanvas;
 import magengine.util.DI;
@@ -53,7 +54,7 @@ public class TestChapter extends AChapter {
 		DefaultEnemy enemy = new DefaultEnemy(500, 100);
 		enemy.setHP(30);
 //		enemy.setVelocityX(-50);
-		enemy.addDanmuku(new RingDanmuku().setDelay(1000));
+//		enemy.addDanmuku(new RingDanmuku().setDelay(1000));
 //		enemy.addDanmuku(new TriArcDanmuku().setDelay(3000));
 //		enemy.addDanmuku(new TriArcDanmuku().setDelay(6500));
 		mEU.add("enemy", enemy);
@@ -67,7 +68,25 @@ public class TestChapter extends AChapter {
 		sES.schedule(() -> {
 			quick.moveTo(enemy, 3000, 275, 195.5);
 		}, 11000, TimeUnit.MILLISECONDS);
-		
+		Launcher launcher  = new Launcher(1, midY, 0, 400, 4000);
+		launcher.setBulletType(Launcher.class);
+		launcher.setVelocityX(120);
+		launcher.setBulletSpeed(0);
+		launcher.setBulletConfig((launcherN)->{
+			Launcher ln = (Launcher) launcherN;
+			ln.setDuration(quick.getSyncDelayAfterLaunch(launcher, 10000));
+			ln.setDirection(Math.PI/2);
+			ln.setBulletSpeed(100);
+			ln.setInterval(1000000);
+			ln.setVelocityX(10);
+		});
+		launcher.setBulletEvent((sesx,launcherN)->{
+			Launcher ln = (Launcher) launcherN;
+			sesx.schedule(() -> {
+				ln.setInterval(1000);
+			}, quick.getSyncDelayAfterLaunch(launcher, 5000), TimeUnit.MILLISECONDS);
+		});
+		mEU.add("l", launcher);
 //		new RingDanmuku().setDelay(1000).delayExecute();
 
 		

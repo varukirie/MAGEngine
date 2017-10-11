@@ -35,7 +35,7 @@ public class SeqDanmuku {
 		launcher.getDirectionProperty().bindBidirectional(tHelper.getDirectionProperty());
 		launcher.getxProperty().bindBidirectional(tHelper.getxProperty());
 		launcher.getyProperty().bindBidirectional(tHelper.getyProperty());
-		launcher.setBulletEvent((ScheduledExecutorService timer, Bullet bullet) -> {
+		launcher.setBulletEvent((timer, bullet) -> {
 			timer.schedule(() -> {
 				bullet.setVelocityX(bullet.getVelocityX()*0.01);
 				bullet.setVelocityY(bullet.getVelocityY()*0.01);
@@ -76,7 +76,7 @@ public class SeqDanmuku {
 		});
 		launcher.getxProperty().bindBidirectional(tHelper.getxProperty());
 		launcher.getyProperty().bindBidirectional(tHelper.getyProperty());
-		launcher.setBulletEvent((ScheduledExecutorService timer, Bullet bullet) -> {
+		launcher.setBulletEvent((timer,  bullet) -> {
 			timer.schedule(() -> {
 				bullet.setVelocityX(bullet.getVelocityX()*0.01);
 				bullet.setVelocityY(bullet.getVelocityY()*0.01);
