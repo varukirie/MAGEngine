@@ -71,7 +71,7 @@ public class SeqDanmuku {
 		OvalHelper tHelper = new OvalHelper(midX, midY, helperLenght, 20, helperDelta);
 		tHelper.setPositive(helperPositive);
 		Launcher launcher = new Launcher(100, 100, 1/2.0*Math.PI, 200, duration);
-		launcher.setModifyEvent(()->{
+		launcher.setLambdaModify((l)->{
 			launcher.setDirection(tHelper.getDirection());
 		});
 		launcher.getxProperty().bindBidirectional(tHelper.getxProperty());

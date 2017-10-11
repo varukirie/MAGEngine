@@ -26,7 +26,6 @@ public class Launcher extends BaseElement implements Initializable, DurationMana
 	private Class<?> bulletType = DefaultBullet.class;
 	private double bulletSpeed = 80;
 	private long duration = 10000;
-	private ModifyEvent modifyEvent = null;
 	private Consumer<BaseElement> bulletConfig = null;
 
 	public Launcher(double x, double y) {
@@ -80,12 +79,6 @@ public class Launcher extends BaseElement implements Initializable, DurationMana
 		}
 	}
 
-	@Override
-	public void modify() {
-		super.modify();
-		if (modifyEvent != null)
-			modifyEvent.modify();
-	}
 
 	public void setBulletEvent(BulletEvent bulletEvent) {
 		this.bulletEvent = bulletEvent;
@@ -152,13 +145,6 @@ public class Launcher extends BaseElement implements Initializable, DurationMana
 		this.duration = duration;
 	}
 
-	public ModifyEvent getModifyEvent() {
-		return modifyEvent;
-	}
-
-	public void setModifyEvent(ModifyEvent modifyEvent) {
-		this.modifyEvent = modifyEvent;
-	}
 
 	public DoubleProperty getDirectionProperty() {
 		return directionProperty;
