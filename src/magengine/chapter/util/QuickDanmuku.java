@@ -116,9 +116,14 @@ public class QuickDanmuku {
 
 	}
 
-	@Deprecated
-	public void VRotate(BaseElement element, double angle) {
-		// TODO VRotate
+	public void VRotate(BaseElement elem, double angle) {
+		double theta = angle;
+		Transform t= new Transform(new double[][] {
+			{Math.cos(theta) ,Math.sin(theta) }, 
+			{-Math.sin(theta),Math.cos(theta) } });
+		double[] ans = t.transform(elem.getVelocityX(),elem.getVelocityY());
+		elem.setVelocityX(ans[0]);
+		elem.setVelocityY(ans[1]);
 	}
 
 	public void setSpeed(BaseElement element, double speed) {
@@ -193,5 +198,18 @@ public class QuickDanmuku {
 	public void unbindXY(BaseElement elem){
 		elem.getxProperty().unbind();
 		elem.getyProperty().unbind();
+	}
+	/**
+	 * 在angle的范围内随机让速度变化方向 单位弧度
+	 * @param angle
+	 */
+	public void VRotateRandom(BaseElement elem,double angle){
+		double theta = angle*r.nextDouble()-(angle/2);
+		Transform t= new Transform(new double[][] {
+			{Math.cos(theta) ,Math.sin(theta) }, 
+			{-Math.sin(theta),Math.cos(theta) } });
+		double[] ans = t.transform(elem.getVelocityX(),elem.getVelocityY());
+		elem.setVelocityX(ans[0]);
+		elem.setVelocityY(ans[1]);
 	}
 }
