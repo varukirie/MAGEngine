@@ -80,7 +80,9 @@ public class QuickDanmuku {
 		element.setVelocityY(Math.sin(direction) * originS);
 	}
 
-	
+	public void moveTo(BaseElement element, long timeCost, double targetX, double targetY){
+		moveTo(element,timeCost, targetX,targetY,true);
+	}
 	/**
 	 * 让元素在指定时间内运动到目的地
 	 * 线程不安全，两次调用应该有足够间隔
@@ -90,8 +92,9 @@ public class QuickDanmuku {
 	 * @param targetY
 	 */
 
-	public void moveTo(BaseElement element, long timeCost, double targetX, double targetY) {
+	public void moveTo(BaseElement element, long timeCost, double targetX, double targetY,boolean accMode) {
 		MoveToHelper helper = new MoveToHelper(element.getX(), element.getY(), targetX, targetY, timeCost);
+		helper.setAccMode(accMode);
 		element.setVelocityX(0);
 		element.setVelocityY(0);
 		element.setAccX(0);

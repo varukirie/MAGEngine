@@ -99,7 +99,7 @@ public class SceneManager {
 		
 //		ChapterLoader.loadChapter(new ChapterDemo());
 		new Thread(new PlayerLaunchHandler()).start();
-		ChapterLoader.loadChapter(new TestChapter());
+		ChapterLoader.loadChapter(new TestChapter1());
 	}
 	public static void shutdownGame(){
 //		ChapterLoader.getScheduledExecutorService().shutdownNow();
