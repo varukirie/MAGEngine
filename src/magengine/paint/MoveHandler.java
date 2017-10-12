@@ -64,6 +64,7 @@ public class MoveHandler implements Runnable {
 
 	private long benchMax=0;
 	public void run() {
+		Thread.currentThread().setName("moveHandlerThread");
 		while (keepRun) {
 			long currentTime = System.currentTimeMillis();
 			Iterator<Entry<String, Moveable>> iter = wantMoveMap.entrySet().iterator();
