@@ -26,7 +26,7 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 	public final int width = 10;
 	public final int height = 10;
 	private SpritePainter spritePainter = null;
-	
+	int imgwidth = 60, imgheight = 131;
 
 	/**
 	 * 获取Player对象
@@ -54,11 +54,11 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 		super(x, y);
 		Image img=null;
 		try {
-			img = new Image(this.getClass().getResourceAsStream("/img/playerUpdated.png"));
+			img = new Image(this.getClass().getResourceAsStream("/img/playerUpdatedSmallver.png"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		spritePainter=new SpritePainter(img, 80, 175);
+		spritePainter=new SpritePainter(img, imgwidth, imgheight);
 		setX(x);
 		setY(y);
 	}
@@ -90,14 +90,14 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 	
 	@Override
 	public Polygon getPolygon() {
-		vertices[0]=(float) (getX()+30);
-		vertices[1]=(float) (getY()+80);
-		vertices[2]=(float) (getX()+50);
-		vertices[3]=(float) (getY()+80);
-		vertices[4]=(float) (getX()+50);
-		vertices[5]=(float) (getY()+95);
-		vertices[6]=(float) (getX()+30);
-		vertices[7]=(float) (getY()+95);
+		vertices[0]=(float) (getX()+imgwidth/3);
+		vertices[1]=(float) (getY()+5*imgheight/13);
+		vertices[2]=(float) (getX()+2*imgwidth/3);
+		vertices[3]=(float) (getY()+5*imgheight/13);
+		vertices[4]=(float) (getX()+2*imgwidth/3);
+		vertices[5]=(float) (getY()+6*imgheight/13);
+		vertices[6]=(float) (getX()+imgwidth/3);
+		vertices[7]=(float) (getY()+6*imgheight/13);
 		polygon.setVertices(vertices);
 		return polygon;
 	}
