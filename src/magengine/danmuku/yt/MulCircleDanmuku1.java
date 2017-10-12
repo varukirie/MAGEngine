@@ -1,4 +1,4 @@
-package magengine.danmuku;
+package magengine.danmuku.yt;
 
 import static java.lang.Math.PI;
 
@@ -16,6 +16,7 @@ import magengine.bullet.EllipseBullet;
 import magengine.bullet.StarBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.chapter.util.SeqDanmuku;
+import magengine.danmuku.ADanmuku;
 import magengine.helper.Helper;
 import magengine.helper.OvalHelper;
 import magengine.launcher.ALauncherGroup;
