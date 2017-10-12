@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+import magengine.game.Level;
 import magengine.ui.SceneManager;
 import magengine.util.DI;
 
@@ -16,6 +17,8 @@ public class Main extends Application {
 	public static final boolean DEBUG_BENCH=false;
 	public static final boolean DEBUG_COLLISION=true;
 	public static final boolean ACC_ENABLE=true;
+	//难度指示 
+	public static Level level = Level.NORMAL;
 	@Override
 	public void start(Stage primaryStage) {
 		try {

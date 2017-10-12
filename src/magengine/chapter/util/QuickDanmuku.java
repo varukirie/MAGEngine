@@ -184,4 +184,14 @@ public class QuickDanmuku {
 		mEU.add("snipe" + r.nextInt(), bullet);
 	}
 
+	
+	public void bindToXY(BaseElement elem1,BaseElement elem2){
+		elem1.getxProperty().bind(elem2.getxProperty());
+		elem1.getyProperty().bind(elem2.getyProperty());
+	}
+	
+	public void unbindXY(BaseElement elem){
+		elem.getxProperty().unbind();
+		elem.getyProperty().unbind();
+	}
 }
