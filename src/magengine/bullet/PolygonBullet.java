@@ -68,14 +68,18 @@ public abstract class PolygonBullet extends Bullet implements PolygonCollision{
 	public Polygon getPolygon() {
 		return polygon;
 	}
-	@Override
-	public void paint(GraphicsContext gc){
+	
+	protected double[][] handleCollision(){
 		double[][] ans=transformVAndDelta(getOrigin());
-		gc.fillPolygon(ans[0],ans[1], getOrigin()[0].length);
 		toVertices(ans, vertices);
 		polygon.setVertices(vertices);
+		return ans;
 	}
-	
+	@Override
+	public void paint(GraphicsContext gc){
+		double[][] ans=handleCollision();
+		gc.fillPolygon(ans[0],ans[1], getOrigin()[0].length);
+	}
 	@Override
 	public void onCollision() {
 		this.wantBeRemoved=true;

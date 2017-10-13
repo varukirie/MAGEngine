@@ -9,12 +9,14 @@ import javafx.application.Platform;
 import javafx.scene.effect.Bloom;
 import magengine.bullet.ArrowBullet;
 import magengine.bullet.Bullet;
+import magengine.bullet.CircleBullet;
 import magengine.bullet.DefaultBullet;
 import magengine.bullet.StarBullet;
 import magengine.chapter.util.AChapter;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.danmuku.ReisenNonSpellCardDanmuku;
 import magengine.danmuku.RingDanmuku;
+import magengine.danmuku.RunAwayNuclearDanmuku;
 import magengine.danmuku.StarDanmuku;
 import magengine.danmuku.TriArcDanmuku;
 import magengine.danmuku.yt.MulCircleDanmuku1;
@@ -53,13 +55,14 @@ public class TestChapter extends AChapter {
 			staticCanvas.getGraphicsContext2D().fillRect(0, 0, MyCanvas.CANVAS_WIDTH, MyCanvas.CANVAS_HEIGHT);
 		});
 		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
-		
+		Random r=new Random();
 		
 		Enemy1 enemy = new Enemy1(300, 100);
 		enemy.setHP(30);
+		enemy.addDanmuku(new RunAwayNuclearDanmuku().setDelay(1000));
 //		enemy.addDanmuku(new MulCircleDanmuku2().setDelay(1000));
 //		enemy.setVelocityX(-50);
-		enemy.addDanmuku(new ReisenNonSpellCardDanmuku().setDelay(1000));
+//		enemy.addDanmuku(new ReisenNonSpellCardDanmuku().setDelay(1000));
 //		enemy.addDanmuku(new TriArcDanmuku().setDelay(3000));
 //		enemy.addDanmuku(new TriArcDanmuku().setDelay(6500));
 		mEU.add("enemy", enemy);

@@ -8,7 +8,12 @@ public class Transform {
 		result[1]=in[0]*t[0][1]+in[1]*t[1][1];
 		return result;
 	}
-	
+	public static double[] transform(double[][] t,double... in){
+		double[] result=new double[2];	
+		result[0]=in[0]*t[0][0]+in[1]*t[1][0];
+		result[1]=in[0]*t[0][1]+in[1]*t[1][1];
+		return result;
+	}
 	double[][] transformMartix=null;
 	
 	public Transform(double[][] t){
@@ -37,4 +42,5 @@ public class Transform {
 			in[1][i]=in[1][i]+y;
 		}
 	}
+	
 }
