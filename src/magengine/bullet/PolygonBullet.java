@@ -81,7 +81,7 @@ public abstract class PolygonBullet extends Bullet implements PolygonCollision{
 		gc.fillPolygon(ans[0],ans[1], getOrigin()[0].length);
 	}
 	@Override
-	public void onCollision() {
+	public void onCollision(PolygonCollision m) {
 		this.wantBeRemoved=true;
 	}
 	

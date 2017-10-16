@@ -62,7 +62,7 @@ public abstract class APolygonEnemy extends AEnemy implements PolygonCollision{
 		}
 	}
 	@Override
-	public void onCollision() {
+	public void onCollision(PolygonCollision m) {
 		if(this.addAndGetHP(-1)<=0){
 			this.wantBeRemoved=true;
 		}
