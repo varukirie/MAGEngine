@@ -48,7 +48,9 @@ public class MoveHandler implements Runnable {
 	public Map<String, Moveable> getWantMoveMap() {
 		return wantMoveMap;
 	}
-
+	public void clear(){
+		getWantMoveMap().clear();
+	}
 	private long lastTime;
 	private MyCanvas myCanvas = null;
 	private MyCanvas sCanvas = null;// 辅助画布
@@ -59,7 +61,7 @@ public class MoveHandler implements Runnable {
 	private double nextX;
 	private double nextY;
 	int switchCount = 0;
-
+	
 	public MoveHandler(MyCanvas myCanvas, MyCanvas sCanvas) {
 		this.lastTime = System.currentTimeMillis();
 		this.myCanvas = myCanvas;
@@ -255,4 +257,6 @@ public class MoveHandler implements Runnable {
 		if (m.getVelocityY() != 0)
 			m.setY(nextY);
 	}
+	
+
 }

@@ -27,7 +27,11 @@ public class QuickDanmuku {
 		}
 		return quick;
 	}
-
+	
+	public static void clear(){
+		quick=null;
+	}
+	
 	private ElementUtils mEU;
 	private ScheduledExecutorService sES = (ScheduledExecutorService) DI.di().get("sES");
 	private final double sqrt2d2 = 0.7071;

@@ -28,6 +28,10 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 	private SpritePainter spritePainter = null;
 	int imgwidth = 60, imgheight = 131;
 
+	public static void clear() {
+		player=null;
+	}
+	
 	/**
 	 * 获取Player对象
 	 * @param x 设定坐标x

@@ -28,6 +28,7 @@ import magengine.helper.OvalHelper;
 import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
 import magengine.paint.MyCanvas;
+import magengine.ui.SceneManager;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
 import magengine.util.MyCanvasSwitcher;
@@ -66,16 +67,16 @@ public class TestChapter extends AChapter {
 //		enemy.addDanmuku(new TriArcDanmuku().setDelay(3000));
 //		enemy.addDanmuku(new TriArcDanmuku().setDelay(6500));
 		mEU.add("enemy", enemy);
-//		quick.moveTo(enemy, 1500, 100, 100);
-//		sES.schedule(() -> {
-//			quick.moveTo(enemy, 4000, 275, 500);
-//		}, 1700, TimeUnit.MILLISECONDS);
-//		sES.schedule(() -> {
-//			quick.moveTo(enemy, 4000, 500, 100);
-//		}, 6000, TimeUnit.MILLISECONDS);
-//		sES.schedule(() -> {
-//			quick.moveTo(enemy, 3000, 275, 195.5);
-//		}, 11000, TimeUnit.MILLISECONDS);
+		quick.moveTo(enemy, 1500, 100, 100);
+		sES.schedule(() -> {
+			quick.moveTo(enemy, 4000, 275, 500);
+		}, 1700, TimeUnit.MILLISECONDS);
+		sES.schedule(() -> {
+			quick.moveTo(enemy, 4000, 500, 100);
+		}, 6000, TimeUnit.MILLISECONDS);
+		sES.schedule(() -> {
+			quick.moveTo(enemy, 3000, 275, 195.5);
+		}, 11000, TimeUnit.MILLISECONDS);
 		
 //		Launcher launcher  = new Launcher(1, midY, 0, 400, 4000);
 //		launcher.setBulletType(Launcher.class);

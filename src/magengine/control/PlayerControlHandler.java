@@ -7,6 +7,7 @@ import magengine.bullet.DefaultBullet;
 import magengine.bullet.PlayerBullet;
 import magengine.element.impl.Player;
 import magengine.paint.MoveHandler;
+import magengine.ui.SceneManager;
 import magengine.util.ElementUtils;
 
 /**
@@ -28,7 +29,9 @@ public class PlayerControlHandler {
 	public static double PLAYER_V = 200;//用于设置按键导致的player移动速度
 	private Player player = null;
 	private ElementUtils elementUtils = null;
-	
+	public static void clear() {
+		pch=null;
+	}
 	public static PlayerControlHandler getPlayerControlHandler(ElementUtils eu, Player player){
 		if(pch==null){
 			if(eu==null||player==null)
@@ -143,6 +146,10 @@ public class PlayerControlHandler {
 			break;
 		case X:
 			playerLauncher=false;
+			break;
+		case ENTER:
+			SceneManager.getInstance().shutdownGame();
+			SceneManager.getInstance().loadSceneTest();
 			break;
 		}
 		changeV();

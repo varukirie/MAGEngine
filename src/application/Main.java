@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import magengine.game.Level;
 import magengine.ui.SceneManager;
@@ -22,7 +23,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			SceneManager.startGame(primaryStage);
+			SceneManager.init(primaryStage);
+			SceneManager.getInstance().startGame();
 //			SceneManager.shutdownGame();
 //			SceneManager.startGame(primaryStage);	
 //			ScheduledExecutorService ses = (ScheduledExecutorService) DI.di().get("sES");

@@ -4,6 +4,8 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -11,6 +13,7 @@ import magengine.chapter.ChapterDemo;
 import magengine.chapter.TestChapter;
 import magengine.chapter.TestChapter1;
 import magengine.chapter.util.ChapterLoader;
+import magengine.chapter.util.QuickDanmuku;
 import magengine.control.PlayerControlHandler;
 import magengine.control.PlayerLaunchHandler;
 import magengine.element.impl.DisplayTime;
@@ -25,7 +28,19 @@ import magengine.util.ElementUtils;
  *
  */
 public class SceneManager {
-	public static void startGame(Stage primaryStage){
+	public static void init(Stage primaryStage){
+		instance.setPrimaryStage(primaryStage);
+	}
+	public static SceneManager getInstance(){
+		return instance;
+	}
+	private static SceneManager instance = new SceneManager();
+	private Stage primaryStage;
+	public void setPrimaryStage(Stage primaryStage) {
+		this.primaryStage = primaryStage;
+	}
+	public void startGame(){
+		
 		StackPane root = new StackPane();
 		MyCanvas moveableCanvas = new MyCanvas();
 		MyCanvas staticCanvas = new MyCanvas();
@@ -101,12 +116,36 @@ public class SceneManager {
 		new Thread(new PlayerLaunchHandler()).start();
 		ChapterLoader.loadChapter(new TestChapter());
 	}
-	public static void shutdownGame(){
+	public void shutdownGame(){
 //		ChapterLoader.getScheduledExecutorService().shutdownNow();
-		((MoveHandler)(DI.di().get("mh"))).keepRun=false;//关闭MoveHandler
+		MoveHandler mh=((MoveHandler)(DI.di().get("mh")));
+		if(mh!=null){
+			mh.keepRun=false;//关闭MoveHandler
+			mh.clear();
+		}
 		ChapterLoader.getScheduledExecutorService().shutdownNow();//关闭关卡计划任务线程
-		((AnimationTimer)(DI.di().get("animationTimer"))).stop();
+		AnimationTimer timer = ((AnimationTimer)(DI.di().get("animationTimer")));
+		if(timer!=null){
+			timer.stop();
+		}
 		DI.di().clear();
+		QuickDanmuku.clear();
+		Player.clear();
+		PlayerControlHandler.clear();
+	}
+	
+	public void loadSceneTest(){
+		StackPane root = new StackPane();
+		Canvas canvas = new Canvas(200,300);
+		canvas.getGraphicsContext2D().fillOval(10, 10, 20, 20);
+		root.getChildren().add(canvas);
+		Scene scene = new Scene(root);
+		scene.setOnKeyReleased((e)->{
+			if(KeyCode.ENTER.equals(e.getCode())){
+				SceneManager.getInstance().startGame();
+			}
+		});
+		primaryStage.setScene(scene);
 	}
 	
 }
