@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import magengine.chapter.util.QuickDanmuku;
 import magengine.element.Initializable;
+import magengine.game.LogicExecutor;
 import magengine.util.DI;
 
 public class MoveToHelper extends Helper implements Initializable{
@@ -31,11 +32,11 @@ public class MoveToHelper extends Helper implements Initializable{
 			double accRate = s/((timeCost/1000.0/2)*(timeCost/1000.0/2));
 			this.setAccX(accRate);
 			QuickDanmuku.getQuickDanmuku().AccTo(this, targetX, targetY);
-			ses.schedule(() -> {
+			LogicExecutor.getLogicExecutor().schedule(() -> {
 				this.setAccX(-this.getAccX());
 				this.setAccY(-this.getAccY());
 			}, timeCost/2, TimeUnit.MILLISECONDS);
-			ses.schedule(() -> {
+			LogicExecutor.getLogicExecutor().schedule(() -> {
 				this.setAccX(0);
 				this.setAccY(0);
 				this.setVelocityX(0);
@@ -47,7 +48,7 @@ public class MoveToHelper extends Helper implements Initializable{
 			double vRate = s/(timeCost/1000.0);
 			this.setVelocityX(vRate);
 			QuickDanmuku.getQuickDanmuku().VTo(this, targetX, targetY);
-			ses.schedule(() -> {
+			LogicExecutor.getLogicExecutor().schedule(() -> {
 				this.setAccX(0);
 				this.setAccY(0);
 				this.setVelocityX(0);

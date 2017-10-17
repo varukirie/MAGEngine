@@ -7,7 +7,8 @@ import java.util.function.Supplier;
 
 import magengine.chapter.util.QuickDanmuku;
 import magengine.element.Initializable;
-import magengine.paint.MoveHandler;
+import magengine.game.LogicExecutor;
+import magengine.game.MoveHandler;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
 /**
@@ -49,14 +50,14 @@ public class PolygonalLineHelper extends Helper implements Initializable{
 						(this.ploygon[1][i]-this.ploygon[1][i-1])*(this.ploygon[1][i]-this.ploygon[1][i-1]));
 			long duration = (long) ((s/this.speed)*(1/MoveHandler.timeSpeed)*1000);
 //			System.out.println("i="+i+" s="+s+" duration="+duration);
-			ses.schedule(()->{
+			LogicExecutor.getLogicExecutor().schedule(()->{
 				quick.VTo(this, ploygon[0][curI], ploygon[1][curI]);
 //				System.out.println("call "+curI+" this.x="+this.getX()+" this.y="+this.getY());
 			}, nextChangeTime, TimeUnit.MILLISECONDS);
 			nextChangeTime+=duration;
 		}
 		this.setDuration(nextChangeTime);
-		ses.schedule(()->{
+		LogicExecutor.getLogicExecutor().schedule(()->{
 			if(getEndEvent()!=null){
 				getEndEvent().accept(this);
 			}

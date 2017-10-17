@@ -5,12 +5,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 import magengine.bullet.HiddenBullet;
+import magengine.game.LogicExecutor;
 import magengine.launcher.Launcher;
 import magengine.paint.MyCanvas;
 import magengine.ui.SceneManager;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
-import magengine.util.LogicExecutor;
 /**
  * 此类负责装载游戏关卡
  * 此类不可实例化

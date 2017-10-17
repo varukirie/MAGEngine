@@ -1,8 +1,8 @@
 package magengine.enemy;
 
-import magengine.util.SpritePainter;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import magengine.paint.SpritePainter;
 
 public class Enemy1 extends APolygonEnemy {
 	private static SpritePainter spritePainter = null;

@@ -6,7 +6,7 @@ import javafx.scene.input.MouseEvent;
 import magengine.bullet.DefaultBullet;
 import magengine.bullet.PlayerBullet;
 import magengine.element.impl.Player;
-import magengine.paint.MoveHandler;
+import magengine.game.MoveHandler;
 import magengine.ui.SceneManager;
 import magengine.util.ElementUtils;
 

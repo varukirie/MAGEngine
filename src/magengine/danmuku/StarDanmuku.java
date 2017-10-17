@@ -9,12 +9,12 @@ import magengine.bullet.StarBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.chapter.util.SeqDanmuku;
 import magengine.element.BaseElement;
+import magengine.game.LogicExecutor;
 import magengine.helper.PolygonalLineHelper;
 import magengine.launcher.BulletEvent;
 import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
 import magengine.util.ElementUtils;
-import magengine.util.LogicExecutor;
 
 public class StarDanmuku extends ADanmuku {
 
@@ -29,7 +29,7 @@ public class StarDanmuku extends ADanmuku {
 
 		long targetTime = 6000;
 		BulletEvent be = (sesx,b)->{
-			sesx.schedule(() -> {
+			LogicExecutor.getLogicExecutor().schedule(() -> {
 				quick.runBullet(b);
 				quick.VToByDirection(b, r.nextDouble()*Math.PI*2);
 			}, 6000, TimeUnit.MILLISECONDS);
@@ -46,16 +46,16 @@ public class StarDanmuku extends ADanmuku {
 		launcher.setBulletType(StarBullet.class);
 		
 		launcher.setBulletEvent((sesx,b)->{
-			sesx.schedule(() -> {
+			LogicExecutor.getLogicExecutor().schedule(() -> {
 				quick.runBullet(b);
 //				quick.VToByDirection(b, Math.PI/2);
 				quick.VToByDirection(b, r.nextDouble()*Math.PI*2);
 			}, 5000+launcher.getStartTime()-LogicExecutor.gameTime(), TimeUnit.MILLISECONDS);
 		});
-		helper.getxProperty().bindBidirectional(launcher.getxProperty());
-		helper.getyProperty().bindBidirectional(launcher.getyProperty());
+		launcher.getxProperty().bind(helper.getxProperty());
+		launcher.getyProperty().bind(helper.getyProperty());
 
-		sES.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			mEU.add(r.nextLong() + "", helper);
 			launcher.setDuration(helper.getDuration());
 			mEU.add(r.nextLong() + "", launcher);
@@ -66,9 +66,9 @@ public class StarDanmuku extends ADanmuku {
 		lc2.setBulletSpeed(0.12);
 		lc2.setBulletType(StarBullet.class);
 		lc2.setBulletEvent(be);
-		helper2.getxProperty().bindBidirectional(lc2.getxProperty());
-		helper2.getyProperty().bindBidirectional(lc2.getyProperty());
-		sES.schedule(() -> {
+		lc2.getxProperty().bind(helper2.getxProperty());
+		lc2.getyProperty().bind(helper2.getyProperty());
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			mEU.add(r.nextLong() + "", helper2);
 			lc2.setDuration(helper2.getDuration());
 			mEU.add(r.nextLong() + "", lc2);
@@ -79,10 +79,10 @@ public class StarDanmuku extends ADanmuku {
 		oG.setLauncherConfig((launcherx) -> {
 			launcherx.setBulletType(DefaultBullet.class);
 			launcherx.setBulletEvent((sESx, bullet) -> {
-				sESx.schedule(() -> {
+				LogicExecutor.getLogicExecutor().schedule(() -> {
 					quick.stopBullet(bullet);
 				}, 1800, TimeUnit.MILLISECONDS);
-				sESx.schedule(() -> {
+				LogicExecutor.getLogicExecutor().schedule(() -> {
 					quick.runBullet(bullet);
 					bullet.setVelocityX(-bullet.getVelocityX());
 					bullet.setVelocityY(-bullet.getVelocityY());

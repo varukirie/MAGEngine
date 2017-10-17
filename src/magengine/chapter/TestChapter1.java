@@ -13,11 +13,13 @@ import magengine.element.BaseElement;
 import magengine.element.impl.Player;
 import magengine.enemy.DefaultEnemy;
 import magengine.enemy.Enemy1;
+import magengine.game.LogicExecutor;
 import magengine.launcher.Launcher;
 import magengine.paint.MyCanvas;
+import magengine.paint.MyCanvasSwitcher;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
-import magengine.util.MyCanvasSwitcher;
+
 import java.util.concurrent.*;
 public class TestChapter1 extends AChapter {
 	int midX = MyCanvas.CANVAS_WIDTH / 2;
@@ -52,7 +54,7 @@ public class TestChapter1 extends AChapter {
 		launcher.setBulletSpeed(1);
 		launcher.setInterval(10);
 		launcher.setBulletType(StarBullet.class);
-		sES.schedule(()->{
+		LogicExecutor.getLogicExecutor().schedule(()->{
 			mEU.add("enemy", enemy);
 			mEU.add("testlauncher", launcher);
 		}, 1000, TimeUnit.MILLISECONDS);
@@ -64,19 +66,19 @@ public class TestChapter1 extends AChapter {
 				quick.VTo(bullet, p.getX() , p.getY());
 			}, delay+5*(runningtime+interval), TimeUnit.MILLISECONDS);
 		});
-		sES.schedule(()->{
+		LogicExecutor.getLogicExecutor().schedule(()->{
 			quick.moveTo(enemy, runningtime, -starlength*triFunc(36,2)+x,-starlength*triFunc(36,2)*triFunc(18,3)+starlength*triFunc(18,2)+y );
 		},delay,TimeUnit.MILLISECONDS);
-		sES.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			quick.moveTo(enemy, runningtime, starlength+starlength*triFunc(18,1)+x, 0+y);
 		}, delay+(runningtime+interval), TimeUnit.MILLISECONDS);
-		sES.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			quick.moveTo(enemy, runningtime, -starlength-starlength*triFunc(18,1)+x, 0+y);
 		}, delay+2*(runningtime+interval), TimeUnit.MILLISECONDS);
-		sES.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			quick.moveTo(enemy, runningtime, starlength*triFunc(36,2)+x, -starlength*triFunc(36,2)*triFunc(18,3)+starlength*triFunc(18,2)+y);
 		}, delay+3*(runningtime+interval), TimeUnit.MILLISECONDS);
-		sES.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			quick.moveTo(enemy, runningtime, 0+x, starlength*triFunc(18,2)+y);
 		}, delay+4*(runningtime+interval), TimeUnit.MILLISECONDS);
 	
@@ -110,16 +112,16 @@ public class TestChapter1 extends AChapter {
 //	public void starRun(BaseElement enemy,double starlength,double x,double y){
 //		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 //		quick.moveTo(enemy, 1500, -starlength*triFunc(36,2)+x,-starlength*triFunc(36,2)*triFunc(18,3)+starlength*triFunc(18,2)+y );
-//		sES.schedule(() -> {
+//		LogicExecutor.getLogicExecutor().schedule(() -> {
 //			quick.moveTo(enemy, 1500, starlength+starlength*triFunc(18,1)+x, 0+y);
 //		}, 1700, TimeUnit.MILLISECONDS);
-//		sES.schedule(() -> {
+//		LogicExecutor.getLogicExecutor().schedule(() -> {
 //			quick.moveTo(enemy, 1500, -starlength-starlength*triFunc(18,1)+x, 0+y);
 //		}, 3500, TimeUnit.MILLISECONDS);
-//		sES.schedule(() -> {
+//		LogicExecutor.getLogicExecutor().schedule(() -> {
 //			quick.moveTo(enemy, 1500, starlength*triFunc(36,2)+x, -starlength*triFunc(36,2)*triFunc(18,3)+starlength*triFunc(18,2)+y);
 //		}, 5200, TimeUnit.MILLISECONDS);
-//		sES.schedule(() -> {
+//		LogicExecutor.getLogicExecutor().schedule(() -> {
 //			quick.moveTo(enemy, 1500, 0+x, starlength*triFunc(18,2)+y);
 //		}, 6900, TimeUnit.MILLISECONDS);
 //	}

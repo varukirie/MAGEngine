@@ -8,6 +8,7 @@ import java.util.function.Consumer;
 import magengine.bullet.Bullet;
 import magengine.bullet.DefaultBullet;
 import magengine.chapter.util.QuickDanmuku;
+import magengine.game.LogicExecutor;
 import magengine.helper.Helper;
 import magengine.helper.OvalHelper;
 import magengine.launcher.ArcLauncherGroup;
@@ -34,19 +35,19 @@ public class RingDanmuku extends ADanmuku {
 		int bulletCount = 8;
 		for (int j = 0; j < midArray[0].length; j++) {
 			int i = j;
-			ses.schedule(() -> {
+			LogicExecutor.getLogicExecutor().schedule(() -> {
 				OvalLauncherGroup olg = new OvalLauncherGroup(midArray[0][i], midArray[1][i]);
 				olg.setAmount(bulletCount);
 				olg.setLauncherConfig((launcher) -> {
 					launcher.setBulletSpeed(rArray[i]);
 					launcher.setBulletEvent((sesx, b) -> {
-						sesx.schedule(() -> {
+						LogicExecutor.getLogicExecutor().schedule(() -> {
 							b.wantBeRemoved = true;
 						}, 999, TimeUnit.MILLISECONDS);
 					});
 				});
 				olg.execute();
-				ses.schedule(() -> {
+				LogicExecutor.getLogicExecutor().schedule(() -> {
 					Helper midHelper = new Helper(midArray[0][i], midArray[1][i]);
 					midHelper.setVelocityY(downSpeedArray[i]);
 					for (int k = 0; k < bulletCount; k++) {
@@ -74,7 +75,7 @@ public class RingDanmuku extends ADanmuku {
 		Consumer<Launcher> config = (Launcher launcher)->{
 			launcher.setBulletSpeed(200);
 			launcher.setBulletEvent((sesx,bullet)->{
-				sesx.schedule(() -> {
+				LogicExecutor.getLogicExecutor().schedule(() -> {
 					bullet.setVelocityX(70);
 					bullet.setVelocityY(0);
 					quick.snipePlayer(bullet);
@@ -84,17 +85,17 @@ public class RingDanmuku extends ADanmuku {
 		ArcLauncherGroup alg = new ArcLauncherGroup(getSourceElement().getX(), getSourceElement().getY(), Math.PI/2*3, PI/2, 5);
 		alg.setLauncherConfig(config);
 		long startTime = 4000;
-		ses.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			alg.setMidX(getSourceElement().getX());
 			alg.setMidY(getSourceElement().getY());
 			alg.execute();
 		}, startTime , TimeUnit.MILLISECONDS);
-		ses.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			alg.setMidX(getSourceElement().getX());
 			alg.setMidY(getSourceElement().getY());
 			alg.execute();
 		}, startTime+400 , TimeUnit.MILLISECONDS);
-		ses.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			alg.setMidX(getSourceElement().getX());
 			alg.setMidY(getSourceElement().getY());
 			alg.execute();

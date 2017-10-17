@@ -6,10 +6,12 @@ import java.util.concurrent.TimeUnit;
 import application.Main;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.element.BaseElement;
+import magengine.game.LogicExecutor;
 import magengine.helper.OvalHelper;
 import magengine.helper.RelativeAnchorHelper;
 import magengine.launcher.Launcher;
 import magengine.util.ElementUtils;
+
 import static application.Main.*;
 
 public class ReisenNonSpellCardDanmuku extends ADanmuku{
@@ -51,7 +53,7 @@ public class ReisenNonSpellCardDanmuku extends ADanmuku{
 		Launcher l = new Launcher(target.getX(), target.getY(), 0, interval, duration);
 		l.setBulletSpeed(startBulletSpeed);
 		l.setBulletEvent((sesx,b)->{
-			sesx.schedule(() -> {
+			LogicExecutor.getLogicExecutor().schedule(() -> {
 				quick.setSpeed(b, changedBulletSpeed);
 			}, speedChangeTime, TimeUnit.MILLISECONDS);
 		});

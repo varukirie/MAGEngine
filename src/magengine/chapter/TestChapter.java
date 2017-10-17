@@ -23,16 +23,16 @@ import magengine.danmuku.yt.MulCircleDanmuku1;
 import magengine.danmuku.yt.MulCircleDanmuku2;
 import magengine.enemy.DefaultEnemy;
 import magengine.enemy.Enemy1;
+import magengine.game.LogicExecutor;
 import magengine.helper.Helper;
 import magengine.helper.OvalHelper;
 import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
 import magengine.paint.MyCanvas;
+import magengine.paint.MyCanvasSwitcher;
 import magengine.ui.SceneManager;
 import magengine.util.DI;
-import magengine.util.LogicExecutor;
 import magengine.util.ElementUtils;
-import magengine.util.MyCanvasSwitcher;
 import magengine.bullet.PlayerBullet;
 public class TestChapter extends AChapter {
 	int midX = MyCanvas.CANVAS_WIDTH / 2;
@@ -61,7 +61,7 @@ public class TestChapter extends AChapter {
 		
 		Enemy1 enemy = new Enemy1(300, 100);
 		enemy.setHP(30);
-		enemy.addDanmuku(new RunAwayNuclearDanmuku().setDelay(1000));
+		enemy.addDanmuku(new ReisenNonSpellCardDanmuku().setDelay(1000));
 //		enemy.addDanmuku(new MulCircleDanmuku2().setDelay(1000));
 //		enemy.setVelocityX(-50);
 //		enemy.addDanmuku(new ReisenNonSpellCardDanmuku().setDelay(1000));
@@ -82,13 +82,13 @@ public class TestChapter extends AChapter {
 		}, 11000);
 		
 //		quick.moveTo(enemy, 1500, 100, 100);
-//		sES.schedule(() -> {
+//		LogicExecutor.getLogicExecutor().schedule(() -> {
 //			quick.moveTo(enemy, 4000, 275, 500);
 //		}, 1700, TimeUnit.MILLISECONDS);
-//		sES.schedule(() -> {
+//		LogicExecutor.getLogicExecutor().schedule(() -> {
 //			quick.moveTo(enemy, 4000, 500, 100);
 //		}, 6000, TimeUnit.MILLISECONDS);
-//		sES.schedule(() -> {
+//		LogicExecutor.getLogicExecutor().schedule(() -> {
 //			quick.moveTo(enemy, 3000, 275, 195.5);
 //		}, 11000, TimeUnit.MILLISECONDS);
 		//		Launcher launcher  = new Launcher(1, midY, 0, 400, 4000);
@@ -105,7 +105,7 @@ public class TestChapter extends AChapter {
 //		});
 //		launcher.setBulletEvent((sesx,launcherN)->{
 //			Launcher ln = (Launcher) launcherN;
-//			sesx.schedule(() -> {
+//			LogicExecutor.getLogicExecutor().schedule(() -> {
 //				ln.setInterval(1000);
 //			}, quick.getSyncDelayAfterLaunch(launcher, 5000), TimeUnit.MILLISECONDS);
 //		});

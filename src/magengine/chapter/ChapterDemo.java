@@ -15,13 +15,14 @@ import magengine.chapter.util.AChapter;
 import magengine.chapter.util.ChapterLoader;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.chapter.util.SeqDanmuku;
+import magengine.game.LogicExecutor;
 import magengine.launcher.ArcLauncherGroup;
 import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
 import magengine.paint.MyCanvas;
+import magengine.paint.MyCanvasSwitcher;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
-import magengine.util.MyCanvasSwitcher;
 
 public class ChapterDemo extends AChapter {
 
@@ -45,7 +46,7 @@ public class ChapterDemo extends AChapter {
 //		Launcher launcherx = new Launcher(midX-100, midY-100, Math.PI/2,100, 1000);
 //		launcherx.setBulletSpeed(0.001);
 //		launcherx.setBulletEvent((sesx,bullet)->{
-//			sesx.schedule(()->{
+//			LogicExecutor.getLogicExecutor().schedule(()->{
 //				bullet.setAccY(0.2);
 //			}, 2000, TimeUnit.MILLISECONDS);
 //		});
@@ -55,7 +56,7 @@ public class ChapterDemo extends AChapter {
 //		launcherx = new Launcher(midX+100, midY-100, Math.PI/2,100, 1000);
 //		launcherx.setBulletSpeed(0.001);
 //		launcherx.setBulletEvent((sesx,bullet)->{
-//			sesx.schedule(()->{
+//			LogicExecutor.getLogicExecutor().schedule(()->{
 //				bullet.setAccY(0.2);
 //			}, 2000, TimeUnit.MILLISECONDS);
 //		});
@@ -80,10 +81,10 @@ public class ChapterDemo extends AChapter {
 		oG.setLauncherConfig((launcher) -> {
 			launcher.setBulletType(ArrowBullet.class);
 			launcher.setBulletEvent((sESx, bullet) -> {
-				sESx.schedule(() -> {
+				LogicExecutor.getLogicExecutor().schedule(() -> {
 					quick.stopBullet(bullet);
 				}, 1000, TimeUnit.MILLISECONDS);
-				sESx.schedule(() -> {
+				LogicExecutor.getLogicExecutor().schedule(() -> {
 					quick.runBullet(bullet);
 					bullet.setVelocityY(1.0);
 					bullet.setVelocityX(0);
@@ -96,10 +97,10 @@ public class ChapterDemo extends AChapter {
 		OvalLauncherGroup oG2 = new OvalLauncherGroup(midX, midY);
 		oG2.setLauncherConfig((launcher) -> {
 			launcher.setBulletEvent((sESx, bullet) -> {
-				sESx.schedule(() -> {
+				LogicExecutor.getLogicExecutor().schedule(() -> {
 					quick.stopBullet(bullet);
 				}, 1700, TimeUnit.MILLISECONDS);
-				sESx.schedule(() -> {
+				LogicExecutor.getLogicExecutor().schedule(() -> {
 					quick.runBullet(bullet);
 					quick.VTransform(bullet,new double[][]{
 						{0,-1},{1,0}
@@ -113,10 +114,10 @@ public class ChapterDemo extends AChapter {
 		oG3.setLauncherConfig((launcher) -> {
 			
 			launcher.setBulletEvent((sESx, bullet) -> {
-				sESx.schedule(() -> {
+				LogicExecutor.getLogicExecutor().schedule(() -> {
 					quick.stopBullet(bullet);
 				}, 1700, TimeUnit.MILLISECONDS);
-				sESx.schedule(() -> {
+				LogicExecutor.getLogicExecutor().schedule(() -> {
 					quick.runBullet(bullet);
 					quick.VTransform(bullet,new double[][]{
 						{0,1},{-1,0}
@@ -130,10 +131,10 @@ public class ChapterDemo extends AChapter {
 		oG4.setLauncherConfig((launcher) -> {
 			launcher.setBulletType(magengine.bullet.StarBullet.class);
 			launcher.setBulletEvent((sESx, bullet) -> {
-				sESx.schedule(() -> {
+				LogicExecutor.getLogicExecutor().schedule(() -> {
 					quick.stopBullet(bullet);
 				}, 1700, TimeUnit.MILLISECONDS);
-				sESx.schedule(() -> {
+				LogicExecutor.getLogicExecutor().schedule(() -> {
 					quick.runBullet(bullet);
 					quick.VTransform(bullet,new double[][]{
 						{0,1},{1,0}
@@ -146,10 +147,10 @@ public class ChapterDemo extends AChapter {
 		OvalLauncherGroup oG5 = new OvalLauncherGroup(midX, midY);
 		oG5.setLauncherConfig((launcher) -> {
 			launcher.setBulletEvent((sESx, bullet) -> {
-				sESx.schedule(() -> {
+				LogicExecutor.getLogicExecutor().schedule(() -> {
 					quick.stopBullet(bullet);
 				}, 1000, TimeUnit.MILLISECONDS);
-				sESx.schedule(() -> {
+				LogicExecutor.getLogicExecutor().schedule(() -> {
 					quick.runBullet(bullet);
 					bullet.setVelocityX(-bullet.getVelocityX());
 					bullet.setVelocityY(-bullet.getVelocityY());
@@ -180,7 +181,7 @@ public class ChapterDemo extends AChapter {
 			seq.rotate(x, y, interval * i + startTime2 + 7000, Math.PI * 6 / 3 + i, StarBullet.class, false);
 		}
 		
-		sES.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			ChapterLoader.loadChapter(new ChapterDemo());
 		}, 35000, TimeUnit.MILLISECONDS);
 		

@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import magengine.bullet.Bullet;
 import magengine.bullet.DefaultBullet;
 import magengine.element.impl.Player;
+import magengine.game.LogicExecutor;
 import magengine.helper.Helper;
 import magengine.helper.OvalHelper;
 import magengine.launcher.Launcher;
@@ -48,13 +49,13 @@ public class SeqDanmuku {
 			}, 3000, TimeUnit.MILLISECONDS);
 			
 		});
-		sES.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			mEU.add("tHelper" + currentHelperCount, tHelper);
 		}, startTime, TimeUnit.MILLISECONDS);
-		sES.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			mEU.add("launcher"+callCount++, launcher);
 		}, startTime+1, TimeUnit.MILLISECONDS);
-		sES.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			mEU.removeBoth("tHelper" + currentHelperCount);
 		}, startTime+duration+2, TimeUnit.MILLISECONDS);
 	}
@@ -87,13 +88,13 @@ public class SeqDanmuku {
 			}, 5000, TimeUnit.MILLISECONDS);
 			
 		});
-		sES.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			mEU.add("tHelper" + currentHelperCount, tHelper);
 		}, startTime, TimeUnit.MILLISECONDS);
-		sES.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			mEU.add("launcher"+callCount++, launcher);
 		}, startTime+1, TimeUnit.MILLISECONDS);
-		sES.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			mEU.removeBoth("tHelper" + currentHelperCount);
 		}, startTime+duration+2, TimeUnit.MILLISECONDS);
 	}
@@ -116,17 +117,17 @@ public class SeqDanmuku {
 		long interval = 100;
 		OvalHelper tHelper = new OvalHelper(midX, midY, helperLenght, 20, helperDelta);
 		tHelper.setPositive(helperPositive);
-		sES.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			mEU.add("tHelper" + currentHelperCount, tHelper);
 		}, startTime, TimeUnit.MILLISECONDS);
 
 		for (i = 1; i <= count; i++) {
-			sES.schedule(() -> {
+			LogicExecutor.getLogicExecutor().schedule(() -> {
 				quick.snipe((midX + tHelper.getX()) / 2, (midY + tHelper.getY()) / 2, tHelper.getX(), tHelper.getY(),
 						0.4, bulletClass);
 			}, startTime + i * interval, TimeUnit.MILLISECONDS);
 		}
-		sES.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			mEU.removeBoth("tHelper" + currentHelperCount);
 		}, startTime + count * interval + 1, TimeUnit.MILLISECONDS);
 	}
@@ -140,17 +141,17 @@ public class SeqDanmuku {
 		int currentHelperCount = callCount++;
 		long interval = 100;
 		Helper tHelper = new OvalHelper(midX, midY, helperLenght, 20, startAngle);
-		sES.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			mEU.add("tHelper" + currentHelperCount, tHelper);
 		}, startTime, TimeUnit.MILLISECONDS);
 
 		for (i = 1; i <= count; i++) {
-			sES.schedule(() -> {
+			LogicExecutor.getLogicExecutor().schedule(() -> {
 				quick.snipe((midX + tHelper.getX()) / 2, (midY + tHelper.getY()) / 2, tHelper.getX(), tHelper.getY(),
 						0.4, bulletClass);
 			}, startTime + i * interval, TimeUnit.MILLISECONDS);
 		}
-		sES.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			mEU.removeBoth("tHelper" + currentHelperCount);
 		}, startTime + count * interval + 1, TimeUnit.MILLISECONDS);
 	}
@@ -161,19 +162,19 @@ public class SeqDanmuku {
 		int count = 100;
 		Helper tHelper = new Helper(startX, startY, vx, vy);
 		int currentHelperCount = callCount++;
-		sES.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			// 让Helper动起来
 			mEU.add("tHelper" + currentHelperCount, tHelper);
 		}, startTime, TimeUnit.MILLISECONDS);
 		for (i = 1; i <= count; i++) {
-			sES.schedule(() -> {
+			LogicExecutor.getLogicExecutor().schedule(() -> {
 				if (!tHelper.getDeleted()) {
 					quick.snipe(tHelper.getX(), tHelper.getY(), Player.getPlayer().getX(), Player.getPlayer().getY(), 1,
 							Bullet.class);
 				}
 			}, startTime + i * 100, TimeUnit.MILLISECONDS);
 		}
-		sES.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			mEU.removeBoth("tHelper" + currentHelperCount);
 		}, startTime + count * 100 + 1, TimeUnit.MILLISECONDS);
 	}

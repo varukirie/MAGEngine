@@ -2,7 +2,7 @@ package magengine.bullet;
 
 import magengine.element.BaseElement;
 import magengine.element.Initializable;
-import magengine.util.LogicExecutor;
+import magengine.game.LogicExecutor;
 /**
  * 
  * @author MegaAstronic

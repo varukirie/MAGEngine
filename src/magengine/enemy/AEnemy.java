@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 import magengine.danmuku.ADanmuku;
 import magengine.element.BaseElement;
 import magengine.element.Initializable;
-import magengine.util.SpritePainter;
+import magengine.paint.SpritePainter;
 
 public abstract class AEnemy extends BaseElement implements Initializable{
 	public AEnemy(double x, double y, double velocityX, double velocityY, double ax, double ay) {

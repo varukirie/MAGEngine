@@ -1,4 +1,4 @@
-package magengine.paint;
+package magengine.game;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -20,9 +20,9 @@ import magengine.element.impl.Player;
 import magengine.enemy.AEnemy;
 import magengine.helper.Helper;
 import magengine.launcher.Launcher;
+import magengine.paint.MyCanvas;
 import magengine.util.CollisionUtil;
 import magengine.util.DI;
-import magengine.util.LogicExecutor;
 import magengine.util.ElementUtils;
 
 /**

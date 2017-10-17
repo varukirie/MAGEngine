@@ -12,8 +12,8 @@ import magengine.element.LimitedByCanvas;
 import magengine.element.Moveable;
 import magengine.element.Paintable;
 import magengine.element.PolygonCollision;
+import magengine.paint.SpritePainter;
 import magengine.util.CollisionTeam;
-import magengine.util.SpritePainter;
 /**
  * 玩家控制的物体
  * 单例设计模式

@@ -18,10 +18,10 @@ import magengine.control.PlayerControlHandler;
 import magengine.control.PlayerLaunchHandler;
 import magengine.element.impl.DisplayTime;
 import magengine.element.impl.Player;
-import magengine.paint.MoveHandler;
+import magengine.game.LogicExecutor;
+import magengine.game.MoveHandler;
 import magengine.paint.MyCanvas;
 import magengine.util.DI;
-import magengine.util.LogicExecutor;
 import magengine.util.ElementUtils;
 /**
  * 负责Scene切换

@@ -4,6 +4,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
+import magengine.game.LogicExecutor;
 import magengine.paint.MyCanvas;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
@@ -38,7 +39,7 @@ public abstract class ALauncherGroup {
 	
 	
 	public void delayExecute(long delay){
-		sES.schedule(()->{
+		LogicExecutor.getLogicExecutor().schedule(()->{
 			execute();
 		}, delay, TimeUnit.MILLISECONDS);
 	}

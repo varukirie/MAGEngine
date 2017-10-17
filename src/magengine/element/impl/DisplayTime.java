@@ -4,9 +4,9 @@ import application.Main;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import magengine.element.BaseElement;
-import magengine.paint.MoveHandler;
+import magengine.game.LogicExecutor;
+import magengine.game.MoveHandler;
 import magengine.util.DI;
-import magengine.util.LogicExecutor;
 
 public class DisplayTime extends BaseElement {
 

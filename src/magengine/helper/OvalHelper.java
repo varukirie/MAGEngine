@@ -3,7 +3,7 @@ package magengine.helper;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import magengine.element.Initializable;
-import magengine.util.LogicExecutor;
+import magengine.game.LogicExecutor;
 
 /**
  * 圆形轨迹运动的Helper

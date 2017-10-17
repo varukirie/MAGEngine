@@ -11,11 +11,11 @@ import magengine.bullet.Bullet;
 import magengine.bullet.DefaultBullet;
 import magengine.element.BaseElement;
 import magengine.element.impl.Player;
+import magengine.game.LogicExecutor;
 import magengine.helper.MoveToHelper;
 import magengine.launcher.Launcher;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
-import magengine.util.LogicExecutor;
 import magengine.util.Transform;
 
 public class QuickDanmuku {
@@ -110,7 +110,7 @@ public class QuickDanmuku {
 //		element.getyProperty().bind(helper.getyProperty());
 		mEU.add(r.nextInt() + "", helper);
 //		System.out.println(timeCost);
-		sES.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 //			System.out.println("execute unbind");
 			// element.getxProperty().unbindBidirectional(helper.getxProperty());
 			// element.getyProperty().unbindBidirectional(helper.getyProperty());

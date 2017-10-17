@@ -4,6 +4,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import magengine.element.BaseElement;
+import magengine.game.LogicExecutor;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
 
@@ -52,14 +53,14 @@ public abstract class ADanmuku {
 	public long getDanmukuDuration() {
 		return danmukuDuration;
 	}
-	public void setDanmukuDuration(long danmukuDuration) {
+	protected void setDanmukuDuration(long danmukuDuration) {
 		this.danmukuDuration = danmukuDuration;
 	}
 	/**
 	 * 在delay毫秒后 调用executeDanmuku()
 	 */
 	public void delayExecute(){
-		sES.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			if(getSourceElement()==null||getSourceElement().getDeleted()==false){
 				this.executeDanmuku();
 			}

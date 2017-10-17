@@ -17,6 +17,7 @@ import magengine.bullet.StarBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.chapter.util.SeqDanmuku;
 import magengine.danmuku.ADanmuku;
+import magengine.game.LogicExecutor;
 import magengine.helper.Helper;
 import magengine.helper.OvalHelper;
 import magengine.launcher.ALauncherGroup;
@@ -55,7 +56,7 @@ public void executeDanmuku() {
 	
 	for (int j = 0; j < midArray[0].length; j++) {
 		int i = j;
-		ses.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			OvalLauncherGroup olg = new OvalLauncherGroup(midArray[0][i], midArray[1][i]);
 			
 			olg.setAmount(bulletCount);
@@ -63,7 +64,7 @@ public void executeDanmuku() {
 			olg.setLauncherConfig((launcher) -> {
 				launcher.setBulletSpeed(rArray[i]);
 				launcher.setBulletEvent((sesx, b) -> {
-					sesx.schedule(() -> {
+					LogicExecutor.getLogicExecutor().schedule(() -> {
 						b.wantBeRemoved = true;
 					}, 600, TimeUnit.MILLISECONDS);
 				});
@@ -78,7 +79,7 @@ public void executeDanmuku() {
 		   
 			}
 		
-			ses.schedule(() -> {
+			LogicExecutor.getLogicExecutor().schedule(() -> {
 			 //进行绑定事件，新建中心helper
 				Helper midHelper = new Helper(midArray[0][i], midArray[1][i]);		
 				
@@ -175,10 +176,10 @@ public void executeDanmuku() {
 	OvalLauncherGroup oG5 = new OvalLauncherGroup(midX, midY);
 	oG5.setLauncherConfig((launcher) -> {
 		launcher.setBulletEvent((sESx, bullet) -> {
-			sESx.schedule(() -> {
+			LogicExecutor.getLogicExecutor().schedule(() -> {
 				quick.stopBullet(bullet);
 			}, 1000, TimeUnit.MILLISECONDS);
-			sESx.schedule(() -> {
+			LogicExecutor.getLogicExecutor().schedule(() -> {
 				quick.runBullet(bullet);
 				bullet.setVelocityX(-bullet.getVelocityX());
 				bullet.setVelocityY(-bullet.getVelocityY());
@@ -221,13 +222,13 @@ public void executeDanmuku() {
 	
 
 	
-	ses.schedule(() -> {
+	LogicExecutor.getLogicExecutor().schedule(() -> {
 		mEU.add("tHelper" + currentHelperCount, tHelper);
 	}, startTime, TimeUnit.MILLISECONDS);
-	ses.schedule(() -> {
+	LogicExecutor.getLogicExecutor().schedule(() -> {
 		mEU.add("launcher"+callCount++, launcher);
 	}, startTime+1, TimeUnit.MILLISECONDS);
-	ses.schedule(() -> {
+	LogicExecutor.getLogicExecutor().schedule(() -> {
 		mEU.removeBoth("tHelper" + currentHelperCount);
 	}, startTime+duration+2, TimeUnit.MILLISECONDS);
 	

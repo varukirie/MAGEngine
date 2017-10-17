@@ -13,9 +13,9 @@ import magengine.bullet.DefaultBullet;
 import magengine.element.BaseElement;
 import magengine.element.DurationManage;
 import magengine.element.Initializable;
+import magengine.game.LogicExecutor;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
-import magengine.util.LogicExecutor;
 
 public class Launcher extends BaseElement implements Initializable, DurationManage {
 

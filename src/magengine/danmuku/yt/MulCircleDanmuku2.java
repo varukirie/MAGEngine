@@ -13,6 +13,7 @@ import magengine.bullet.StarBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.chapter.util.SeqDanmuku;
 import magengine.danmuku.ADanmuku;
+import magengine.game.LogicExecutor;
 import magengine.helper.Helper;
 import magengine.helper.OvalHelper;
 import magengine.launcher.ALauncherGroup;
@@ -43,7 +44,7 @@ public void executeDanmuku() {
 	 */
 	/*
 	BulletEvent be1 = (sesx, b) -> {
-		sesx.schedule(() -> {
+		LogicExecutor.getLogicExecutor().schedule(() -> {
 			quick.runBullet(b);
 			quick.VToByDirection(b, r.nextDouble() * Math.PI * 2);
 		}, 2000, TimeUnit.MILLISECONDS);
@@ -80,7 +81,7 @@ public void executeDanmuku() {
 		
 		launcher.setBulletEvent((sESx, bullet) -> {
 		 
-			sESx.schedule(() -> {
+			LogicExecutor.getLogicExecutor().schedule(() -> {
 				quick.stopBullet(bullet);
 				
 			}, 100, TimeUnit.MILLISECONDS);
@@ -96,11 +97,11 @@ public void executeDanmuku() {
 	launcher.setBulletType(EllipseBullet.class);
 		launcher.setBulletEvent((sESx, bullet) -> {
 		 
-			sESx.schedule(() -> {
+			LogicExecutor.getLogicExecutor().schedule(() -> {
 				quick.stopBullet(bullet);
 	
 			}, 500, TimeUnit.MILLISECONDS);
-			sESx.schedule(() -> {
+			LogicExecutor.getLogicExecutor().schedule(() -> {
 				quick.runBullet(bullet);
 				
 			}, 2000, TimeUnit.MILLISECONDS);
@@ -121,7 +122,7 @@ public void executeDanmuku() {
 		
 		launcher.setBulletEvent((sESx, bullet) -> {
 		 
-			sESx.schedule(() -> {
+			LogicExecutor.getLogicExecutor().schedule(() -> {
 				quick.stopBullet(bullet);
 				
 			}, 800, TimeUnit.MILLISECONDS);
@@ -131,7 +132,7 @@ public void executeDanmuku() {
 		
 		launcher.setBulletEvent((sESx, bullet) -> {
 			 
-			sESx.schedule(() -> {
+			LogicExecutor.getLogicExecutor().schedule(() -> {
 				quick.runBullet(bullet);
 				
 			}, 1800, TimeUnit.MILLISECONDS);
@@ -149,12 +150,12 @@ public void executeDanmuku() {
 		
 		launcher.setBulletType(EllipseBullet.class);
 		launcher.setBulletEvent((sESx, bullet) -> {
-			sESx.schedule(() -> {
+			LogicExecutor.getLogicExecutor().schedule(() -> {
 				quick.stopBullet(bullet);
 			}, 1100, TimeUnit.MILLISECONDS);
 		   
 			
-				sESx.schedule(() -> {
+				LogicExecutor.getLogicExecutor().schedule(() -> {
 					quick.runBullet(bullet);
 					
 				}, 1500, TimeUnit.MILLISECONDS);

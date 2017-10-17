@@ -15,9 +15,11 @@ import magengine.element.Moveable;
 import magengine.element.Paintable;
 import magengine.element.PolygonCollision;
 import magengine.enemy.APolygonEnemy;
+import magengine.game.LogicExecutor;
+import magengine.game.MoveHandler;
 import magengine.launcher.BulletEvent;
-import magengine.paint.MoveHandler;
 import magengine.paint.MyCanvas;
+import magengine.paint.MyCanvasSwitcher;
 /**
  * 统一处理元素的运动与绘画
  * @author Astronic

@@ -1,6 +1,6 @@
 package magengine.control;
 
-import magengine.paint.MoveHandler;
+import magengine.game.MoveHandler;
 import magengine.util.DI;
 
 public class PlayerLaunchHandler implements Runnable {

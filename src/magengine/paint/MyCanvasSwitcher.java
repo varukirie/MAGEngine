@@ -1,4 +1,4 @@
-package magengine.util;
+package magengine.paint;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
@@ -7,8 +7,7 @@ import javafx.application.Platform;
 import javafx.scene.effect.Effect;
 import javafx.scene.layout.StackPane;
 import magengine.element.BaseElement;
-import magengine.paint.MoveHandler;
-import magengine.paint.MyCanvas;
+import magengine.game.MoveHandler;
 
 public class MyCanvasSwitcher {
 	private MoveHandler mh=null;
