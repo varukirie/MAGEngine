@@ -21,6 +21,8 @@ import magengine.enemy.AEnemy;
 import magengine.helper.Helper;
 import magengine.launcher.Launcher;
 import magengine.util.CollisionUtil;
+import magengine.util.DI;
+import magengine.util.DeltaTimeScheduledExecutor;
 import magengine.util.ElementUtils;
 
 /**
@@ -61,6 +63,9 @@ public class MoveHandler implements Runnable {
 	private double nextX;
 	private double nextY;
 	int switchCount = 0;
+	private long deltaTime = 0;
+	private long current4Delta = System.currentTimeMillis();
+	private DeltaTimeScheduledExecutor deltaExecutor= (DeltaTimeScheduledExecutor) DI.di().get("deltaExecutor");
 	
 	public MoveHandler(MyCanvas myCanvas, MyCanvas sCanvas) {
 		this.lastTime = System.currentTimeMillis();
@@ -74,6 +79,9 @@ public class MoveHandler implements Runnable {
 		Thread.currentThread().setName("moveHandlerThread");
 		while (keepRun) {
 			long currentTime = System.currentTimeMillis();
+			deltaTime=currentTime-current4Delta;
+			current4Delta = currentTime;
+			deltaExecutor.update(deltaTime);
 			Iterator<Entry<String, Moveable>> iter = wantMoveMap.entrySet().iterator();
 			while (iter.hasNext()) {
 				entry = iter.next();
