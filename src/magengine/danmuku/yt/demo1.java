@@ -19,6 +19,7 @@ import magengine.chapter.util.QuickDanmuku;
 import magengine.chapter.util.SeqDanmuku;
 import magengine.danmuku.ADanmuku;
 import magengine.element.BaseElement;
+import magengine.game.LogicExecutor;
 import magengine.helper.Helper;
 import magengine.helper.OvalHelper;
 import magengine.helper.PolygonalLineHelper;
@@ -36,7 +37,7 @@ import magengine.util.ElementUtils;
 public class demo1 extends ADanmuku  {
 
 
-	ScheduledExecutorService ses = getsES();
+	LogicExecutor ses = LogicExecutor.getLogicExecutor();
 	private int midX = 250;
 	private int midY =300;
 	private double bulletSpeed=100;
