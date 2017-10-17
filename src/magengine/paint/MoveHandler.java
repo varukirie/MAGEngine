@@ -53,7 +53,6 @@ public class MoveHandler implements Runnable {
 	public void clear(){
 		getWantMoveMap().clear();
 	}
-	private long lastTime;
 	private MyCanvas myCanvas = null;
 	private MyCanvas sCanvas = null;// 辅助画布
 	public boolean keepRun = true;
@@ -68,7 +67,6 @@ public class MoveHandler implements Runnable {
 	private LogicExecutor deltaExecutor= (LogicExecutor) DI.di().get("deltaExecutor");
 	
 	public MoveHandler(MyCanvas myCanvas, MyCanvas sCanvas) {
-		this.lastTime = System.currentTimeMillis();
 		this.myCanvas = myCanvas;
 		this.sCanvas = sCanvas;
 	}
@@ -81,75 +79,9 @@ public class MoveHandler implements Runnable {
 			long currentTime = System.currentTimeMillis();
 			deltaTime=currentTime-current4Delta;
 			current4Delta = currentTime;
+			deltaTime*=1;
 			deltaExecutor.update(deltaTime);
-			Iterator<Entry<String, Moveable>> iter = wantMoveMap.entrySet().iterator();
-			while (iter.hasNext()) {
-				entry = iter.next();
-				m = entry.getValue();
-				m.modify();
-				if (m instanceof BaseElement) {
-					if (((BaseElement) m).getLambdaModify() != null) {
-						((BaseElement) m).getLambdaModify().accept((BaseElement) m);
-					}
-					if (((BaseElement) m).wantBeRemoved == true) {
-						removeElement(entry.getKey());
-						continue;
-					}
-				}
-				if (m instanceof Launcher) {
-					Launcher l = (Launcher) m;
-					if (System.currentTimeMillis() - l.getLastLaunchTime() > l.getInterval()) {
-						l.setLastLaunchTime(System.currentTimeMillis());
-						l.launch();
-					}
-				}
-
-				if (m instanceof DurationManage) {
-					DurationManage dm = (DurationManage) m;
-					if (System.currentTimeMillis() - dm.getStartTime() > dm.getDuration()) {
-						removeElement(entry.getKey());
-						continue;
-					}
-				}
-
-				if (Main.ACC_ENABLE) {
-					// 使用加速度计算速度
-					if (m instanceof Accelerated) {
-						if (((Accelerated) m).getAccX() != 0) {
-							m.setVelocityX(m.getVelocityX() + (currentTime - this.lastTime) * 1.0
-									* ((Accelerated) m).getAccX() * timeSpeed * (1 / DEFAULT_TIME_SPEED) / BLANK);
-						}
-						if (((Accelerated) m).getAccY() != 0) {
-							m.setVelocityY(m.getVelocityY() + (currentTime - this.lastTime) * 1.0
-									* ((Accelerated) m).getAccY() * timeSpeed * (1 / DEFAULT_TIME_SPEED) / BLANK);
-						}
-					}
-				}
-
-				nextX = m.getX() + m.getVelocityX() * ((currentTime - this.lastTime) * 1.0 / BLANK) * timeSpeed;
-				nextY = m.getY() + m.getVelocityY() * ((currentTime - this.lastTime) * 1.0 / BLANK) * timeSpeed;
-
-				if (m instanceof Player) {
-
-					// Player不受speed减速影响
-					nextX = m.getX()
-							+ m.getVelocityX() * ((currentTime - this.lastTime) * 1.0 / BLANK) * DEFAULT_TIME_SPEED;
-					nextY = m.getY()
-							+ m.getVelocityY() * ((currentTime - this.lastTime) * 1.0 / BLANK) * DEFAULT_TIME_SPEED;
-				}
-				if (checkAndMove(m, nextX, nextY)) {
-					continue;
-				}
-				collisionCheck(m);
-			}
-
-			if (Main.DEBUG_BENCH) {
-				if ((System.currentTimeMillis() - lastTime) > benchMax)
-					benchMax = (System.currentTimeMillis() - lastTime);
-				System.out
-						.println("1.游戏逻辑 " + (System.currentTimeMillis() - lastTime) + "ms" + " benchMax=" + benchMax);
-			}
-			this.lastTime = currentTime;
+			gameLogic();
 
 			try {
 				Thread.sleep(SLEEP_TIME);
@@ -161,6 +93,76 @@ public class MoveHandler implements Runnable {
 
 	}
 
+	private void gameLogic(){
+		Iterator<Entry<String, Moveable>> iter = wantMoveMap.entrySet().iterator();
+		while (iter.hasNext()) {
+			entry = iter.next();
+			m = entry.getValue();
+			m.modify();
+			if (m instanceof BaseElement) {
+				if (((BaseElement) m).getLambdaModify() != null) {
+					((BaseElement) m).getLambdaModify().accept((BaseElement) m);
+				}
+				if (((BaseElement) m).wantBeRemoved == true) {
+					removeElement(entry.getKey());
+					continue;
+				}
+			}
+			if (m instanceof Launcher) {
+				Launcher l = (Launcher) m;
+				if (LogicExecutor.gameTime() - l.getLastLaunchTime() > l.getInterval()) {
+					l.setLastLaunchTime(LogicExecutor.gameTime());
+					l.launch();
+				}
+			}
+
+			if (m instanceof DurationManage) {
+				DurationManage dm = (DurationManage) m;
+				if (LogicExecutor.gameTime() - dm.getStartTime() > dm.getDuration()) {
+					removeElement(entry.getKey());
+					continue;
+				}
+			}
+
+			if (Main.ACC_ENABLE) {
+				// 使用加速度计算速度
+				if (m instanceof Accelerated) {
+					if (((Accelerated) m).getAccX() != 0) {
+						m.setVelocityX(m.getVelocityX() + (deltaTime) * 1.0
+								* ((Accelerated) m).getAccX() * timeSpeed * (1 / DEFAULT_TIME_SPEED) / BLANK);
+					}
+					if (((Accelerated) m).getAccY() != 0) {
+						m.setVelocityY(m.getVelocityY() + (deltaTime) * 1.0
+								* ((Accelerated) m).getAccY() * timeSpeed * (1 / DEFAULT_TIME_SPEED) / BLANK);
+					}
+				}
+			}
+
+			nextX = m.getX() + m.getVelocityX() * ((deltaTime) * 1.0 / BLANK) * timeSpeed;
+			nextY = m.getY() + m.getVelocityY() * ((deltaTime) * 1.0 / BLANK) * timeSpeed;
+
+			if (m instanceof Player) {
+
+				// Player不受speed减速影响
+				nextX = m.getX()
+						+ m.getVelocityX() * ((deltaTime) * 1.0 / BLANK) * DEFAULT_TIME_SPEED;
+				nextY = m.getY()
+						+ m.getVelocityY() * ((deltaTime) * 1.0 / BLANK) * DEFAULT_TIME_SPEED;
+			}
+			if (checkAndMove(m, nextX, nextY)) {
+				continue;
+			}
+			collisionCheck(m);
+		}
+
+		if (Main.DEBUG_BENCH) {
+			if ((deltaTime) > benchMax)
+				benchMax = (deltaTime);
+			System.out
+					.println("1.游戏逻辑 " + (deltaTime) + "ms" + " benchMax=" + benchMax);
+		}
+	}
+	
 	/**
 	 * 交替调用MyCanvas的repaint
 	 */

@@ -48,7 +48,7 @@ public class ElementUtils {
 				((Initializable) value).initWhenAdd();
 		}
 		if(value instanceof DurationManage){
-			((DurationManage) value).setStartTime(System.currentTimeMillis());
+			((DurationManage) value).setStartTime(LogicExecutor.gameTime());
 		}
 		if(value instanceof APolygonEnemy){
 			((MoveHandler) DI.di().get("mh")).addCollisionElement(name, (PolygonCollision) value);

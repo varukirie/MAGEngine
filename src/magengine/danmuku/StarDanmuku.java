@@ -14,6 +14,7 @@ import magengine.launcher.BulletEvent;
 import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
 import magengine.util.ElementUtils;
+import magengine.util.LogicExecutor;
 
 public class StarDanmuku extends ADanmuku {
 
@@ -49,7 +50,7 @@ public class StarDanmuku extends ADanmuku {
 				quick.runBullet(b);
 //				quick.VToByDirection(b, Math.PI/2);
 				quick.VToByDirection(b, r.nextDouble()*Math.PI*2);
-			}, 5000+launcher.getStartTime()-System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+			}, 5000+launcher.getStartTime()-LogicExecutor.gameTime(), TimeUnit.MILLISECONDS);
 		});
 		helper.getxProperty().bindBidirectional(launcher.getxProperty());
 		helper.getyProperty().bindBidirectional(launcher.getyProperty());

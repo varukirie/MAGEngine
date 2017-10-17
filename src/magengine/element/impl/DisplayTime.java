@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 import magengine.element.BaseElement;
 import magengine.paint.MoveHandler;
 import magengine.util.DI;
+import magengine.util.LogicExecutor;
 
 public class DisplayTime extends BaseElement {
 
@@ -14,7 +15,7 @@ public class DisplayTime extends BaseElement {
 	public DisplayTime(double x, double y) {
 		super(x, y);
 		// TODO Auto-generated constructor stub
-		startTime = System.currentTimeMillis();
+		startTime = LogicExecutor.gameTime();
 	}
 
 	String msg="";
@@ -26,7 +27,7 @@ public class DisplayTime extends BaseElement {
 			msg=" Element count="+mh.getSize();
 		}
 		gc.setFill(Color.WHITE);
-		gc.fillText("Time = "+(System.currentTimeMillis()-this.startTime)/1000+msg, getX(), getY());
+		gc.fillText("Time = "+(LogicExecutor.gameTime()-this.startTime)/1000+msg, getX(), getY());
 
 	}
 

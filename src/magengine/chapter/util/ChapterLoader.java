@@ -10,6 +10,7 @@ import magengine.paint.MyCanvas;
 import magengine.ui.SceneManager;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
+import magengine.util.LogicExecutor;
 /**
  * 此类负责装载游戏关卡
  * 此类不可实例化
@@ -32,12 +33,12 @@ public class ChapterLoader {
 		DI.di().put("sES", scheduleES);
 	}
 	public static void loadChapter(AChapter c){
-		long start = System.currentTimeMillis();
+		long start = LogicExecutor.gameTime();
 		Launcher l = new Launcher(1, 1, Math.PI/2, 70, 800);
 		l.setBulletType(HiddenBullet.class);
 		mEU.add(new Random().nextLong()+"", l);
 		c.design(scheduleES,staticCanvas,mEU);
-		long end = System.currentTimeMillis();
+		long end = LogicExecutor.gameTime();
 		System.gc();
 		System.out.println("装载关卡使用 "+(end-start)+" 毫秒");
 	}

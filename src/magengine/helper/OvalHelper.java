@@ -3,6 +3,7 @@ package magengine.helper;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import magengine.element.Initializable;
+import magengine.util.LogicExecutor;
 
 /**
  * 圆形轨迹运动的Helper
@@ -69,9 +70,9 @@ public class OvalHelper extends Helper implements Initializable {
 		super.modify();
 		if (rotate) {
 			if (positive) {
-				this.directionProperty.set((System.currentTimeMillis() - ovalStartTime) * speed / BLANK);
+				this.directionProperty.set((LogicExecutor.gameTime() - ovalStartTime) * speed / BLANK);
 			} else {
-				this.directionProperty.set(-(System.currentTimeMillis() - ovalStartTime) * speed / BLANK);
+				this.directionProperty.set(-(LogicExecutor.gameTime() - ovalStartTime) * speed / BLANK);
 			}
 			setX(this.ovalMidX.get() + r * Math.cos(getDirection()));
 			setY(this.ovalMidY.get() + r * Math.sin(getDirection()));
@@ -88,7 +89,7 @@ public class OvalHelper extends Helper implements Initializable {
 
 	@Override
 	public void initWhenAdd() {
-		this.ovalStartTime = (long) (System.currentTimeMillis() + (delta * BLANK / speed));
+		this.ovalStartTime = (long) (LogicExecutor.gameTime() + (delta * BLANK / speed));
 	}
 
 	public void setDirection(double direction){

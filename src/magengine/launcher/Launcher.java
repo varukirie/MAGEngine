@@ -15,6 +15,7 @@ import magengine.element.DurationManage;
 import magengine.element.Initializable;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
+import magengine.util.LogicExecutor;
 
 public class Launcher extends BaseElement implements Initializable, DurationManage {
 
@@ -86,7 +87,7 @@ public class Launcher extends BaseElement implements Initializable, DurationMana
 
 	@Override
 	public void initWhenAdd() {
-		this.lastLaunchTime = System.currentTimeMillis();
+		this.lastLaunchTime = LogicExecutor.gameTime();
 	}
 
 	public double getDirection() {

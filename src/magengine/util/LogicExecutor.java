@@ -3,6 +3,7 @@ package magengine.util;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class LogicExecutor {
 
@@ -54,6 +55,12 @@ public class LogicExecutor {
 	public void schedule(Runnable task,long delay){
 		taskList.add(task);
 		timeList.add(delay+curTime);
+	}
+	
+	public void schedule(Runnable task,long delay,TimeUnit timeUnit){
+		if(!timeUnit.equals(TimeUnit.MILLISECONDS))
+			throw new RuntimeException("LogicExecutor:请使用TimeUnit.MILLISECONDS");
+		schedule(task, delay);
 	}
 	
 	public void shutdownNow(){

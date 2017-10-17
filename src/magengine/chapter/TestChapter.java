@@ -68,16 +68,16 @@ public class TestChapter extends AChapter {
 //		enemy.addDanmuku(new TriArcDanmuku().setDelay(3000));
 //		enemy.addDanmuku(new TriArcDanmuku().setDelay(6500));
 		mEU.add("enemy", enemy);
-		LogicExecutor deltaExecutor= (LogicExecutor) DI.di().get("deltaExecutor");
+		LogicExecutor executor= (LogicExecutor) DI.di().get("deltaExecutor");
 		
 		quick.moveTo(enemy, 1500, 100, 100);
-		deltaExecutor.schedule(() -> {
+		executor.schedule(() -> {
 			quick.moveTo(enemy, 4000, 275, 500);
 		}, 1700);
-		deltaExecutor.schedule(() -> {
+		executor.schedule(() -> {
 			quick.moveTo(enemy, 4000, 500, 100);
 		}, 6000);
-		deltaExecutor.schedule(() -> {
+		executor.schedule(() -> {
 			quick.moveTo(enemy, 3000, 275, 195.5);
 		}, 11000);
 		

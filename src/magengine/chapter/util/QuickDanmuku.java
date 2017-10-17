@@ -15,6 +15,7 @@ import magengine.helper.MoveToHelper;
 import magengine.launcher.Launcher;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
+import magengine.util.LogicExecutor;
 import magengine.util.Transform;
 
 public class QuickDanmuku {
@@ -68,7 +69,7 @@ public class QuickDanmuku {
 	}
 
 	public long getSyncDelayAfterLaunch(Launcher launcher,long delay){
-		return launcher.getStartTime()+delay-System.currentTimeMillis();
+		return launcher.getStartTime()+delay-LogicExecutor.gameTime();
 	}
 	
 	/**

@@ -2,6 +2,7 @@ package magengine.bullet;
 
 import magengine.element.BaseElement;
 import magengine.element.Initializable;
+import magengine.util.LogicExecutor;
 /**
  * 
  * @author MegaAstronic
@@ -43,7 +44,7 @@ public abstract class Bullet extends BaseElement implements Initializable{
 	
 	@Override
 	public void initWhenAdd() {
-		setLauncherTime(System.currentTimeMillis());
+		setLauncherTime(LogicExecutor.gameTime());
 	}
 
 
