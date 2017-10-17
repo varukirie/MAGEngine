@@ -22,7 +22,7 @@ import magengine.helper.Helper;
 import magengine.launcher.Launcher;
 import magengine.util.CollisionUtil;
 import magengine.util.DI;
-import magengine.util.DeltaTimeScheduledExecutor;
+import magengine.util.LogicExecutor;
 import magengine.util.ElementUtils;
 
 /**
@@ -65,7 +65,7 @@ public class MoveHandler implements Runnable {
 	int switchCount = 0;
 	private long deltaTime = 0;
 	private long current4Delta = System.currentTimeMillis();
-	private DeltaTimeScheduledExecutor deltaExecutor= (DeltaTimeScheduledExecutor) DI.di().get("deltaExecutor");
+	private LogicExecutor deltaExecutor= (LogicExecutor) DI.di().get("deltaExecutor");
 	
 	public MoveHandler(MyCanvas myCanvas, MyCanvas sCanvas) {
 		this.lastTime = System.currentTimeMillis();

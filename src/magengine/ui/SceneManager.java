@@ -21,7 +21,7 @@ import magengine.element.impl.Player;
 import magengine.paint.MoveHandler;
 import magengine.paint.MyCanvas;
 import magengine.util.DI;
-import magengine.util.DeltaTimeScheduledExecutor;
+import magengine.util.LogicExecutor;
 import magengine.util.ElementUtils;
 /**
  * 负责Scene切换
@@ -59,12 +59,13 @@ public class SceneManager {
 		primaryStage.setTitle("MAGEngine!");
 		primaryStage.show();
 	
-		DeltaTimeScheduledExecutor deltaExecutor=new DeltaTimeScheduledExecutor();
+		LogicExecutor deltaExecutor=LogicExecutor.getLogicExecutor();
 		DI.di().put("deltaExecutor",deltaExecutor);
 		//运行 线程MoveHandle
 		MoveHandler mh = new MoveHandler(moveableCanvas,secondaryMCanvas);
 		DI.di().put("mh", mh);
 		
+
 		
 		Thread mhThread = new Thread(mh);
 		mhThread.setPriority(Thread.MAX_PRIORITY);
@@ -130,10 +131,11 @@ public class SceneManager {
 		if(timer!=null){
 			timer.stop();
 		}
-		DeltaTimeScheduledExecutor deltaExecutor= (DeltaTimeScheduledExecutor) DI.di().get("deltaExecutor");
+		LogicExecutor deltaExecutor= (LogicExecutor) DI.di().get("deltaExecutor");
 		if(deltaExecutor!=null){
 			deltaExecutor.shutdownNow();
 		}
+		LogicExecutor.clear();
 		
 		DI.di().clear();
 		QuickDanmuku.clear();

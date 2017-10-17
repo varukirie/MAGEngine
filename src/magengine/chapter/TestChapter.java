@@ -30,7 +30,7 @@ import magengine.launcher.OvalLauncherGroup;
 import magengine.paint.MyCanvas;
 import magengine.ui.SceneManager;
 import magengine.util.DI;
-import magengine.util.DeltaTimeScheduledExecutor;
+import magengine.util.LogicExecutor;
 import magengine.util.ElementUtils;
 import magengine.util.MyCanvasSwitcher;
 import magengine.bullet.PlayerBullet;
@@ -68,7 +68,7 @@ public class TestChapter extends AChapter {
 //		enemy.addDanmuku(new TriArcDanmuku().setDelay(3000));
 //		enemy.addDanmuku(new TriArcDanmuku().setDelay(6500));
 		mEU.add("enemy", enemy);
-		DeltaTimeScheduledExecutor deltaExecutor= (DeltaTimeScheduledExecutor) DI.di().get("deltaExecutor");
+		LogicExecutor deltaExecutor= (LogicExecutor) DI.di().get("deltaExecutor");
 		
 		quick.moveTo(enemy, 1500, 100, 100);
 		deltaExecutor.schedule(() -> {

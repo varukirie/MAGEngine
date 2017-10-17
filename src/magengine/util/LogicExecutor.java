@@ -4,8 +4,28 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class DeltaTimeScheduledExecutor {
+public class LogicExecutor {
 
+	
+	private static LogicExecutor instance ;
+	
+	public static LogicExecutor getLogicExecutor(){
+		if(instance==null){
+			instance=new LogicExecutor();
+		}
+		return instance;
+	}
+	
+	public static long gameTime(){
+		return instance.curTime;
+	}
+	
+	public static void clear(){
+		instance=null;
+	}
+	
+	private LogicExecutor(){}
+	
 	private ExecutorService executor = Executors.newSingleThreadExecutor();
 	
 	private long curTime = 0;
