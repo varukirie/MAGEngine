@@ -41,7 +41,7 @@ public class SceneManager {
 		this.primaryStage = primaryStage;
 	}
 	public void startGame(){
-		
+		primaryStage.setResizable(false);
 		StackPane root = new StackPane();
 		MyCanvas moveableCanvas = new MyCanvas();
 		MyCanvas staticCanvas = new MyCanvas();
@@ -58,7 +58,7 @@ public class SceneManager {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("MAGEngine!");
 		primaryStage.show();
-	
+		
 		LogicExecutor deltaExecutor=LogicExecutor.getLogicExecutor();
 		DI.di().put("deltaExecutor",deltaExecutor);
 		//运行 线程MoveHandle
