@@ -27,25 +27,19 @@ public class LogicExecutor {
 	private LogicExecutor() {
 	}
 
-	private ExecutorService executor = Executors.newFixedThreadPool(4);
+	private ExecutorService executor = Executors.newFixedThreadPool(2);
 
 	private double curTime = 0;
 	private ArrayList<GameTask> taskList = new ArrayList<>();
 
 	public void update(double deltaTime) {
 		curTime += deltaTime;
-		// System.out.println(curTime);
-
 		synchronized (taskList) {
-			taskList.forEach((task)->{
-				if(task.delay<curTime){
-//					System.out.println("task executor delay"+task.delay+" curTime="+curTime);
-					executor.submit(task.task);
-					task.finished=true;
-				}
-			});
-			for(int i=0,j=taskList.size();i<j;i++){
-				if(taskList.get(i).finished){
+			for (int i = 0, j = taskList.size(); i < j; i++) {
+				if (taskList.get(i).delay < curTime) {
+					// System.out.println("task executor delay"+task.delay+"
+					// curTime="+curTime);
+					executor.submit(taskList.get(i).task);
 					taskList.remove(i);
 					i--;
 					j--;
@@ -56,7 +50,7 @@ public class LogicExecutor {
 
 	public void schedule(Runnable task, long delay) {
 		synchronized (taskList) {
-			taskList.add(new GameTask(task,(long) (delay+curTime)));
+			taskList.add(new GameTask(task, (long) (delay + curTime)));
 		}
 	}
 
@@ -71,5 +65,16 @@ public class LogicExecutor {
 		synchronized (taskList) {
 			taskList.clear();
 		}
+	}
+
+	private class GameTask {
+		public GameTask(Runnable task, long delay) {
+			super();
+			this.task = task;
+			this.delay = delay;
+		}
+
+		Runnable task;
+		long delay;
 	}
 }

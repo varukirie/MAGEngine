@@ -51,8 +51,8 @@ public class SceneManager {
 		root.getChildren().add(secondaryMCanvas);
 		DI.di().put("staticCanvas", staticCanvas);
 		//
-		staticCanvas.getWantPaintMap().put("indicator", Player.getPlayer());
-		staticCanvas.repaint();
+//		staticCanvas.getWantPaintMap().put("indicator", Player.getPlayer());
+//		staticCanvas.repaint();
 		
 		Scene scene=new Scene(root);
 		primaryStage.setScene(scene);
