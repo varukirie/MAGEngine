@@ -28,6 +28,7 @@ import magengine.launcher.BulletEvent;
 import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
 import magengine.launcher.yt.RayLauncher;
+import magengine.launcher.yt.Arc3;
 import magengine.launcher.yt.LineLauncherGroup;
 import magengine.paint.MyCanvas;
 import magengine.util.ElementUtils;
@@ -132,6 +133,27 @@ public void executeDanmuku() {
 		setRandomRotateLauncher(getSourceElement(), true, duration, Math.PI/3*2);
 		setRandomRotateLauncher(getSourceElement(), true, duration, Math.PI/3*4);
 	
+		
+		new Arc3(200,150,CircleBullet.class).delayExecute(2500);
+		new Arc3(200,150, Math.PI/2).delayExecute(2500);
+		
+		new Arc3(200,150, Math.PI/2, Math.PI/3, 5).delayExecute(35000);
+		new Arc3(200,150, Math.PI/2, Math.PI/3, 5, 6).delayExecute(45000);
+		new Arc3(200,150, Math.PI/2, Math.PI/3, 5, 6,CircleBullet.class).delayExecute(50000);
+		new Arc3(200,150, Math.PI/2, Math.PI/3, 15, 12,CircleBullet.class).delayExecute(50000);
+		
+		callOLG(duration/4*10);
+		callOLG(duration/4*11);
+		callOLG(duration/4*12);
+
+		
+		 callOLG(midX,midY,20,30000);
+		 callOLG(midX,midY,20,31000);
+		 callOLG(midX,midY,20,32000);
+				
+		 
+		 
+		
 	
 }
 
@@ -141,19 +163,42 @@ public void executeDanmuku() {
 			olg.setLauncherConfig((l)->{
 				l.setBulletType(CircleBullet.class);
 				l.setBulletSpeed(200);
-				l.setBulletConfig((b)->{
-					((CircleBullet)b).setR(20);
-					((CircleBullet)b).setColorSupplier(CircleBullet.PresetColor.blueOpacity.get());
-				});
+			
 			});
 			olg.delayExecute(delay);
 		}
+		
+		
+	public void callOLG(double x,double y ,int amount,long delay) {
+		
+		OvalLauncherGroup olg = new OvalLauncherGroup(x, y,amount);
+		olg.setLauncherConfig((launcher) -> {
+			launcher.setBulletType(DiamondBullet.class);
+			launcher.setBulletEvent((sESx, bullet) -> {
+				sESx.schedule(() -> {
+					quick.stopBullet(bullet);
+				}, 1800, TimeUnit.MILLISECONDS);
+				sESx.schedule(() -> {
+					quick.runBullet(bullet);
+					bullet.setVelocityX(-bullet.getVelocityX());
+					bullet.setVelocityY(-bullet.getVelocityY());
+				}, 5000, TimeUnit.MILLISECONDS);
+			});
+		});
+		olg.delayExecute(delay);
+
+		
+		
+	}
+
+
+
 		
 		private void setRandomRotateLauncher(BaseElement target,boolean positive,long duration,double startAngle){
 			OvalHelper helper = new OvalHelper(target.getX(),target.getY() , 1,rotateSpeed , startAngle, duration);
 			helper.setPositive(positive);
 			mEU.add("circle "+r.nextInt(), helper);
-			Launcher l = new Launcher(target.getX()-300, target.getY()-200, 0, interval+100, duration);
+			Launcher l = new Launcher(target.getX()-300, target.getY()-100, 0, interval+100, duration);
 			l.setBulletSpeed(bulletSpeed);
 			l.setBulletType(CircleBullet.class);
 			l.getDirectionProperty().bind(helper.getDirectionProperty());
