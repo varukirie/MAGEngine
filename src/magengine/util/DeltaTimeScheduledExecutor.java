@@ -16,7 +16,7 @@ public class DeltaTimeScheduledExecutor {
 	
 	public void update(long deltaTime){
 		curTime+=deltaTime;
-		System.out.println(curTime);
+//		System.out.println(curTime);
 		for(int i=0,j=taskList.size();i<j;i++){
 			if(timeList.get(i)<curTime){
 				executor.submit(taskList.get(i));
