@@ -62,7 +62,7 @@ public class MoveHandler implements Runnable {
 	private double nextX;
 	private double nextY;
 	int switchCount = 0;
-	private long deltaTime = 0;
+	private double deltaTime = 0;
 	private long current4Delta = System.currentTimeMillis();
 	private LogicExecutor deltaExecutor= (LogicExecutor) DI.di().get("deltaExecutor");
 	
@@ -157,7 +157,7 @@ public class MoveHandler implements Runnable {
 
 		if (Main.DEBUG_BENCH) {
 			if ((deltaTime) > benchMax)
-				benchMax = (deltaTime);
+				benchMax = (long) (deltaTime);
 			System.out
 					.println("1.游戏逻辑 " + (deltaTime) + "ms" + " benchMax=" + benchMax);
 		}

@@ -62,13 +62,14 @@ public class TestChapter extends AChapter {
 		Enemy1 enemy = new Enemy1(300, 100);
 		enemy.setHP(30);
 		enemy.addDanmuku(new ReisenNonSpellCardDanmuku().setDelay(1000));
+		enemy.addDanmuku(new RunAwayNuclearDanmuku().setDelay(1000));
 //		enemy.addDanmuku(new MulCircleDanmuku2().setDelay(1000));
 //		enemy.setVelocityX(-50);
 //		enemy.addDanmuku(new ReisenNonSpellCardDanmuku().setDelay(1000));
 //		enemy.addDanmuku(new TriArcDanmuku().setDelay(3000));
 //		enemy.addDanmuku(new TriArcDanmuku().setDelay(6500));
 		mEU.add("enemy", enemy);
-		LogicExecutor executor= (LogicExecutor) DI.di().get("deltaExecutor");
+		LogicExecutor executor= LogicExecutor.getLogicExecutor();
 		
 		quick.moveTo(enemy, 1500, 100, 100);
 		executor.schedule(() -> {
@@ -138,8 +139,8 @@ public class TestChapter extends AChapter {
 //			mEU.add("helper" + r.nextInt(), helper);
 //			mEU.add("midHelper", midHelper);
 //		}
-//		for(int i=1;i<=1000;i++){
-//			new StarDanmuku().setDelay(700*i).delayExecute();
-//		}
+		for(int i=1;i<=1000;i++){
+			new StarDanmuku().setDelay(700*i).delayExecute();
+		}
 	}
 }
