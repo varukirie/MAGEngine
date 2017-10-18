@@ -37,10 +37,12 @@ public class MoveHandler implements Runnable {
 	public static final double BULLET_EX_AREA_LENGTH = 100;
 	public static final double ENEMY_EX_AREA_LENGTH = 100;
 	public static final double DEFAULT_TIME_SPEED = 1;
+
 	/**
 	 * 全局速度
 	 */
-	public static double timeSpeed = DEFAULT_TIME_SPEED;
+	public static double absoluteTimeSpeed = DEFAULT_TIME_SPEED;
+	public static volatile double DeltaTimeFactor = 1;
 	public static final long SLEEP_TIME = 2;
 	public static final long BLANK = 1000;
 
@@ -55,7 +57,7 @@ public class MoveHandler implements Runnable {
 	}
 	private MyCanvas myCanvas = null;
 	private MyCanvas sCanvas = null;// 辅助画布
-	public boolean keepRun = true;
+	public volatile boolean keepRun = true;
 
 	private Moveable m;
 	private Entry<String, Moveable> entry;
@@ -79,7 +81,7 @@ public class MoveHandler implements Runnable {
 			long currentTime = System.currentTimeMillis();
 			deltaTime=currentTime-current4Delta;
 			current4Delta = currentTime;
-			deltaTime*=1;
+			deltaTime*=DeltaTimeFactor;
 			deltaExecutor.update(deltaTime);
 			gameLogic();
 
@@ -129,17 +131,17 @@ public class MoveHandler implements Runnable {
 				if (m instanceof Accelerated) {
 					if (((Accelerated) m).getAccX() != 0) {
 						m.setVelocityX(m.getVelocityX() + (deltaTime) * 1.0
-								* ((Accelerated) m).getAccX() * timeSpeed * (1 / DEFAULT_TIME_SPEED) / BLANK);
+								* ((Accelerated) m).getAccX() * absoluteTimeSpeed * (1 / DEFAULT_TIME_SPEED) / BLANK);
 					}
 					if (((Accelerated) m).getAccY() != 0) {
 						m.setVelocityY(m.getVelocityY() + (deltaTime) * 1.0
-								* ((Accelerated) m).getAccY() * timeSpeed * (1 / DEFAULT_TIME_SPEED) / BLANK);
+								* ((Accelerated) m).getAccY() * absoluteTimeSpeed * (1 / DEFAULT_TIME_SPEED) / BLANK);
 					}
 				}
 			}
 
-			nextX = m.getX() + m.getVelocityX() * ((deltaTime) * 1.0 / BLANK) * timeSpeed;
-			nextY = m.getY() + m.getVelocityY() * ((deltaTime) * 1.0 / BLANK) * timeSpeed;
+			nextX = m.getX() + m.getVelocityX() * ((deltaTime) * 1.0 / BLANK) * absoluteTimeSpeed;
+			nextY = m.getY() + m.getVelocityY() * ((deltaTime) * 1.0 / BLANK) * absoluteTimeSpeed;
 
 			if (m instanceof Player) {
 

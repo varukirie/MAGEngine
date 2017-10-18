@@ -68,7 +68,7 @@ public class SceneManager {
 
 		
 		Thread mhThread = new Thread(mh);
-		mhThread.setPriority(Thread.MAX_PRIORITY);
+//		mhThread.setPriority(Thread.MAX_PRIORITY);
 		mhThread.start();
 		
 		ElementUtils moveableElementUtils = new ElementUtils(mh, moveableCanvas,root);
