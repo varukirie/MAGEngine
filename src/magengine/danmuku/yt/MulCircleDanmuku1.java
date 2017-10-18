@@ -65,7 +65,7 @@ public void executeDanmuku() {
 				launcher.setBulletSpeed(rArray[i]);
 				launcher.setBulletEvent((sesx, b) -> {
 					LogicExecutor.getLogicExecutor().schedule(() -> {
-						b.wantBeRemoved = true;
+						b.setWantBeRemoved(true);
 					}, 600, TimeUnit.MILLISECONDS);
 				});
 			});

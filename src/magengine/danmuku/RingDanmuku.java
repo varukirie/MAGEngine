@@ -42,7 +42,7 @@ public class RingDanmuku extends ADanmuku {
 					launcher.setBulletSpeed(rArray[i]);
 					launcher.setBulletEvent((sesx, b) -> {
 						LogicExecutor.getLogicExecutor().schedule(() -> {
-							b.wantBeRemoved = true;
+							b.setWantBeRemoved(true);
 						}, 999, TimeUnit.MILLISECONDS);
 					});
 				});

@@ -82,7 +82,7 @@ public abstract class PolygonBullet extends Bullet implements PolygonCollision{
 	}
 	@Override
 	public void onCollision(PolygonCollision m) {
-		this.wantBeRemoved=true;
+		this.setWantBeRemoved(true);
 	}
 	
 }

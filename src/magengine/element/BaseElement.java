@@ -2,7 +2,9 @@ package magengine.element;
 
 import java.util.function.Consumer;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
 public abstract class BaseElement implements Moveable, Paintable, Accelerated {
@@ -14,7 +16,7 @@ public abstract class BaseElement implements Moveable, Paintable, Accelerated {
 	protected double accX = 0;
 	protected double accY = 0;
 	protected boolean deleted = false;
-	public boolean wantBeRemoved = false;
+	private BooleanProperty wantBeRemoved = new SimpleBooleanProperty(false);
 	private Consumer<BaseElement> lambdaModify = null;
 
 	public BaseElement(double x, double y) {
@@ -108,4 +110,21 @@ public abstract class BaseElement implements Moveable, Paintable, Accelerated {
 	public Consumer<BaseElement> getLambdaModify() {
 		return lambdaModify;
 	}
+
+	public BooleanProperty getWantBeRemovedProperty() {
+		return wantBeRemoved;
+	}
+
+	public void setWantBeRemovedProperty(BooleanProperty wantBeRemoved) {
+		this.wantBeRemoved = wantBeRemoved;
+	}
+
+	public boolean getWantBeRemoved() {
+		return wantBeRemoved.get();
+	}
+
+	public void setWantBeRemoved(boolean wantBeRemoved) {
+		this.wantBeRemoved.set(wantBeRemoved);
+	}
+
 }

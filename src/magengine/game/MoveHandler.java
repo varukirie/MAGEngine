@@ -105,7 +105,7 @@ public class MoveHandler implements Runnable {
 				if (((BaseElement) m).getLambdaModify() != null) {
 					((BaseElement) m).getLambdaModify().accept((BaseElement) m);
 				}
-				if (((BaseElement) m).wantBeRemoved == true) {
+				if (((BaseElement) m).getWantBeRemoved() == true) {
 					removeElement(entry.getKey());
 					continue;
 				}
