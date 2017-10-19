@@ -62,8 +62,8 @@ public class SceneManager {
 		primaryStage.setTitle("MAGEngine!");
 		primaryStage.show();
 		
-		LogicExecutor deltaExecutor=LogicExecutor.getLogicExecutor();
-		DI.di().put("deltaExecutor",deltaExecutor);
+		LogicExecutor logicExecutor=LogicExecutor.getLogicExecutor();
+		DI.di().put("logicExecutor",logicExecutor);
 		//运行 线程MoveHandle
 		MoveHandler mh = new MoveHandler(moveableCanvas,secondaryMCanvas);
 		DI.di().put("mh", mh);
@@ -134,9 +134,9 @@ public class SceneManager {
 		if(timer!=null){
 			timer.stop();
 		}
-		LogicExecutor deltaExecutor= (LogicExecutor) DI.di().get("deltaExecutor");
-		if(deltaExecutor!=null){
-			deltaExecutor.shutdownNow();
+		LogicExecutor logicExecutor= (LogicExecutor) DI.di().get("logicExecutor");
+		if(logicExecutor!=null){
+			logicExecutor.shutdownNow();
 		}
 		LogicExecutor.clear();
 		

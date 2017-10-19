@@ -26,7 +26,7 @@ public class TestChapter1 extends AChapter {
 	int midY = 200;
 
 	@Override
-	public void design(ScheduledExecutorService sES, MyCanvas staticCanvas, ElementUtils mEU) {
+	public void design(LogicExecutor sES, MyCanvas staticCanvas, ElementUtils mEU) {
 
 		Platform.runLater(() -> {
 			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(DefaultBullet.class, (canvas) -> {

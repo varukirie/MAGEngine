@@ -66,7 +66,7 @@ public class MoveHandler implements Runnable {
 	int switchCount = 0;
 	private double deltaTime = 0;
 	private long current4Delta = System.currentTimeMillis();
-	private LogicExecutor deltaExecutor= (LogicExecutor) DI.di().get("deltaExecutor");
+	private LogicExecutor logicExecutor= (LogicExecutor) DI.di().get("logicExecutor");
 	
 	public MoveHandler(MyCanvas myCanvas, MyCanvas sCanvas) {
 		this.myCanvas = myCanvas;
@@ -82,7 +82,7 @@ public class MoveHandler implements Runnable {
 			deltaTime=currentTime-current4Delta;
 			current4Delta = currentTime;
 			deltaTime*=DeltaTimeFactor;
-			deltaExecutor.update(deltaTime);
+			logicExecutor.update(deltaTime);
 			gameLogic();
 
 			try {

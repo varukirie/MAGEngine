@@ -34,7 +34,6 @@ public class MulCircleDanmuku2 extends ADanmuku  {
 @Override
 public void executeDanmuku() {
 
-	ScheduledExecutorService sES = getsES();
 	ElementUtils mEU =  getmEU();
 	QuickDanmuku quick = new QuickDanmuku(mEU);
 	Random r = new Random();

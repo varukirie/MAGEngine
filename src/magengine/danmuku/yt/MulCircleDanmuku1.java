@@ -36,7 +36,6 @@ public void executeDanmuku() {
 	
 	
 	ElementUtils mEU = getmEU();
-	ScheduledExecutorService ses = getsES();
 	QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 	int midX = 300 ;
 	int midY = 250;

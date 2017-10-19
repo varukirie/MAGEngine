@@ -23,7 +23,6 @@ public class RingDanmuku extends ADanmuku {
 	@Override
 	public void executeDanmuku() {
 		ElementUtils mEU = getmEU();
-		ScheduledExecutorService ses = getsES();
 		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 		
 		

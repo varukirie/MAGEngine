@@ -119,7 +119,7 @@ public class ElementUtils {
 	public void addEventBullet(String name,BulletEvent be,BaseElement bullet){
 		add(name, bullet);
 		if(be!=null){
-			be.event((ScheduledExecutorService) DI.di().get("sES"), bullet);
+			be.event((LogicExecutor) DI.di().get("logicExecutor"), bullet);
 		}
 	}
 	

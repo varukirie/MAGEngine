@@ -31,7 +31,7 @@ public class ChapterDemo extends AChapter {
 	int midY = 200;
 
 	@Override
-	public void design(ScheduledExecutorService sES, MyCanvas staticCanvas, ElementUtils mEU) {
+	public void design(LogicExecutor sES, MyCanvas staticCanvas, ElementUtils mEU) {
 		Platform.runLater(()->{
 			((MyCanvasSwitcher)DI.di().get("switcher")).setEffectByClass(DefaultBullet.class, new Bloom());
 			((MyCanvasSwitcher)DI.di().get("switcher")).setEffectByClass(ArrowBullet.class, new Bloom());
@@ -39,7 +39,7 @@ public class ChapterDemo extends AChapter {
 			
 			staticCanvas.getGraphicsContext2D().fillRect(0, 0, MyCanvas.CANVAS_WIDTH, MyCanvas.CANVAS_HEIGHT);
 		});
-		SeqDanmuku seq = new SeqDanmuku(sES, mEU);
+		SeqDanmuku seq = new SeqDanmuku(mEU);
 		QuickDanmuku quick = new QuickDanmuku(mEU);
 		Random r = new Random();
 

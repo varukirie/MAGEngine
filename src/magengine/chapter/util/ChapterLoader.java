@@ -37,7 +37,7 @@ public class ChapterLoader {
 		Launcher l = new Launcher(1, 1, Math.PI/2, 70, 800);
 		l.setBulletType(HiddenBullet.class);
 		mEU.add(new Random().nextLong()+"", l);
-		c.design(scheduleES,staticCanvas,mEU);
+		c.design(LogicExecutor.getLogicExecutor(),staticCanvas,mEU);
 		long end = LogicExecutor.gameTime();
 		System.gc();
 		System.out.println("装载关卡使用 "+(end-start)+" 毫秒");

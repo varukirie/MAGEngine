@@ -14,13 +14,11 @@ import magengine.launcher.Launcher;
 import magengine.util.ElementUtils;
 
 public class SeqDanmuku {
-	private ScheduledExecutorService sES;
 	private ElementUtils mEU;
 	private QuickDanmuku quick;
 	private int callCount = 0;
 
-	public SeqDanmuku(ScheduledExecutorService sES, ElementUtils mEU) {
-		this.sES = sES;
+	public SeqDanmuku(ElementUtils mEU) {
 		this.mEU = mEU;
 		quick = new QuickDanmuku(mEU);
 	}

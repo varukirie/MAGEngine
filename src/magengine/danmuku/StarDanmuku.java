@@ -22,8 +22,7 @@ public class StarDanmuku extends ADanmuku {
 	@Override
 	public void executeDanmuku() {
 		ElementUtils mEU=getmEU();
-		ScheduledExecutorService sES=getsES();
-		SeqDanmuku seq = new SeqDanmuku(sES, mEU);
+		SeqDanmuku seq = new SeqDanmuku(mEU);
 		QuickDanmuku quick = new QuickDanmuku(mEU);
 		Random r = new Random();
 

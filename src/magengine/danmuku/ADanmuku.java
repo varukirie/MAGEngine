@@ -1,6 +1,5 @@
 package magengine.danmuku;
 
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import magengine.element.BaseElement;
@@ -27,7 +26,6 @@ public abstract class ADanmuku {
 	 */
 	public abstract void executeDanmuku() ;
 	private ElementUtils mEU = (ElementUtils) DI.di().get("mEU");
-	private ScheduledExecutorService sES = (ScheduledExecutorService) DI.di().get("sES");
 
 	public void setSourceElement(BaseElement sourceElement) {
 		this.sourceElement = sourceElement;
@@ -39,9 +37,6 @@ public abstract class ADanmuku {
 	
 	protected  ElementUtils getmEU(){
 		return this.mEU;
-	}
-	protected  ScheduledExecutorService getsES(){
-		return this.sES;
 	}
 	public long getDelay() {
 		return delay;

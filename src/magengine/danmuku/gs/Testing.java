@@ -41,7 +41,6 @@ final Player p = Player.getPlayer();
 public void executeDanmuku(){
 	
 	ElementUtils mEU = getmEU();
-	ScheduledExecutorService ses = getsES();
 	QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 	
 	

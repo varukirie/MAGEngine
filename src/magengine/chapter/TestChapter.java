@@ -19,8 +19,10 @@ import magengine.danmuku.RingDanmuku;
 import magengine.danmuku.RunAwayNuclearDanmuku;
 import magengine.danmuku.StarDanmuku;
 import magengine.danmuku.TriArcDanmuku;
+import magengine.danmuku.gs.Testing;
 import magengine.danmuku.yt.MulCircleDanmuku1;
 import magengine.danmuku.yt.MulCircleDanmuku2;
+import magengine.danmuku.yt.demo1;
 import magengine.enemy.DefaultEnemy;
 import magengine.enemy.Enemy1;
 import magengine.game.LogicExecutor;
@@ -39,7 +41,7 @@ public class TestChapter extends AChapter {
 	int midY = 200;
 
 	@Override
-	public void design(ScheduledExecutorService sES, MyCanvas staticCanvas, ElementUtils mEU) {
+	public void design(LogicExecutor exec, MyCanvas staticCanvas, ElementUtils mEU) {
 
 		Platform.runLater(() -> {
 			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(DefaultBullet.class, (canvas) -> {
@@ -61,9 +63,9 @@ public class TestChapter extends AChapter {
 		
 		Enemy1 enemy = new Enemy1(300, 100);
 		enemy.setHP(30);
-		enemy.addDanmuku(new ReisenNonSpellCardDanmuku().setDelay(1000));
-		enemy.addDanmuku(new RunAwayNuclearDanmuku().setDelay(1000));
-//		enemy.addDanmuku(new MulCircleDanmuku2().setDelay(1000));
+		enemy.addDanmuku(new Testing().setDelay(1000));
+//		enemy.addDanmuku(new RunAwayNuclearDanmuku().setDelay(1000));
+//		enemy.addDanmuku(new demo1().setDelay(1000));
 //		enemy.setVelocityX(-50);
 //		enemy.addDanmuku(new ReisenNonSpellCardDanmuku().setDelay(1000));
 //		enemy.addDanmuku(new TriArcDanmuku().setDelay(3000));
@@ -139,8 +141,9 @@ public class TestChapter extends AChapter {
 //			mEU.add("helper" + r.nextInt(), helper);
 //			mEU.add("midHelper", midHelper);
 //		}
-		for(int i=1;i<=1000;i++){
-			new StarDanmuku().setDelay(700*i).delayExecute();
-		}
+//		for(int i=1;i<=1000;i++){
+//			new StarDanmuku().setDelay(10*i).delayExecute();
+//		}
+		
 	}
 }
