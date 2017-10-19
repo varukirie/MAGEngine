@@ -8,11 +8,11 @@ import magengine.game.LogicExecutor;
 import magengine.game.MoveHandler;
 import magengine.util.DI;
 
-public class DisplayTime extends BaseElement {
+public class DisplayMessage extends BaseElement {
 
 	
 	private long startTime;
-	public DisplayTime(double x, double y) {
+	public DisplayMessage(double x, double y) {
 		super(x, y);
 		// TODO Auto-generated constructor stub
 		startTime = LogicExecutor.gameTime();
@@ -24,7 +24,7 @@ public class DisplayTime extends BaseElement {
 	public void paint(GraphicsContext gc) {
 		if(Main.DEBUG){
 			MoveHandler mh = (MoveHandler) DI.di().get("mh");
-			msg=" Element count="+mh.getSize();
+			msg=" Element count="+mh.getSize()+" Executor　Task Count:"+LogicExecutor.getLogicExecutor().getTaskCount();
 		}
 		gc.setFill(Color.WHITE);
 		gc.fillText("Time = "+(LogicExecutor.gameTime()-this.startTime)/1000+msg, getX(), getY());

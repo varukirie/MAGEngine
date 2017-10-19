@@ -77,4 +77,8 @@ public class LogicExecutor {
 		Runnable task;
 		long delay;
 	}
+	
+	public int getTaskCount(){
+		return taskList.size();
+	}
 }

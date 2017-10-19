@@ -16,7 +16,7 @@ import magengine.chapter.util.ChapterLoader;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.control.PlayerControlHandler;
 import magengine.control.PlayerLaunchHandler;
-import magengine.element.impl.DisplayTime;
+import magengine.element.impl.DisplayMessage;
 import magengine.element.impl.Player;
 import magengine.game.LogicExecutor;
 import magengine.game.MoveHandler;
@@ -41,6 +41,9 @@ public class SceneManager {
 		this.primaryStage = primaryStage;
 	}
 	public void startGame(){
+		//初始化
+		LogicExecutor.getLogicExecutor();
+		
 		primaryStage.setResizable(false);
 		StackPane root = new StackPane();
 		MyCanvas moveableCanvas = new MyCanvas();
@@ -111,7 +114,7 @@ public class SceneManager {
 		moveableElementUtils.add("player", player);
 		
 		
-		moveableElementUtils.add("displayTime", new DisplayTime(1, MyCanvas.CANVAS_HEIGHT-7));
+		moveableElementUtils.add("displayTime", new DisplayMessage(1, MyCanvas.CANVAS_HEIGHT-7));
 		ChapterLoader.init(staticCanvas);
 		
 		
