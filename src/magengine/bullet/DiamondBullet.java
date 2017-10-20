@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
  * 
  * 
  */
-public class DiamondBullet extends PolygonBullet {
+public class DiamondBullet extends APolygonBullet {
 	
 	public DiamondBullet(double x, double y, double vx, double vy, double ax, double ay) {
 		super(x, y, vx, vy, ax, ay);

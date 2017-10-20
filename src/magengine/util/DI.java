@@ -13,6 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * <tr><td>staticCanvas</td><td>staticCanvas</td><td>MyCanvas</td></tr>
  * <tr><td>switcher</td><td>switcher</td><td>MyCanvasSwitcher</td></tr>
  * <tr><td>animationTimer</td><td>animationTimer</td><td>AnimationTimer</td></tr>
+ * <tr><td>logicExecutor</td><td>logicExecutor</td><td>LogicExecutor</td></tr>
  * </table>
  * @author Astronic
  *

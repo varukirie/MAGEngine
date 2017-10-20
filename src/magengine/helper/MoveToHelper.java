@@ -26,7 +26,6 @@ public class MoveToHelper extends Helper implements Initializable{
 
 	@Override
 	public void initWhenAdd() {
-		ScheduledExecutorService ses=(ScheduledExecutorService) DI.di().get("sES");
 		if(accMode){
 			double s = Math.sqrt((targetX-sourceX)*(targetX-sourceX)+(targetY-sourceY)*(targetY-sourceY));
 			double accRate = s/((timeCost/1000.0/2)*(timeCost/1000.0/2));

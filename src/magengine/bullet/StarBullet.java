@@ -3,7 +3,7 @@ package magengine.bullet;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class StarBullet extends PolygonBullet {
+public class StarBullet extends APolygonBullet {
 
 	public StarBullet(double x, double y, double vx, double vy, double ax, double ay) {
 		super(x, y, vx, vy, ax, ay);

@@ -16,7 +16,7 @@ import magengine.util.Transform;
  * 
  * 
  */
-public class CircleBullet extends PolygonBullet {
+public class CircleBullet extends APolygonBullet {
 	public static enum PresetColor{
 		redOpacity((cirb)->{
 			return new RadialGradient(0,

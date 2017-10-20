@@ -69,10 +69,10 @@ public class PolygonalLineHelper extends Helper implements Initializable{
 	public void setPloygon(double[][] ploygon) {
 		//TODO  ploygon验证数据正确性
 		if(ploygon.length!=2){
-			throw new RuntimeException("PolygonalLineHelper:点集数据不正确");
+			throw new IllegalArgumentException("PolygonalLineHelper:点集数据不正确");
 		}
 		if(ploygon[0].length!=ploygon[1].length){
-			throw new RuntimeException("PolygonalLineHelper:点集数据不正确");
+			throw new IllegalArgumentException("PolygonalLineHelper:点集数据不正确");
 		}
 		this.ploygon = ploygon;
 	}

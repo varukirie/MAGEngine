@@ -7,34 +7,34 @@ import magengine.element.PolygonCollision;
 import magengine.util.CollisionTeam;
 import magengine.util.Transform;
 
-public abstract class PolygonBullet extends Bullet implements PolygonCollision{
+public abstract class APolygonBullet extends Bullet implements PolygonCollision{
 
-	public PolygonBullet(double x, double y, double vx, double vy, double ax, double ay) {
+	public APolygonBullet(double x, double y, double vx, double vy, double ax, double ay) {
 		super(x, y, vx, vy, ax, ay);
 		// TODO Auto-generated constructor stub
 	}
 
-	public PolygonBullet(double x, double y, double vx, double vy, double[] ACoodinate) {
+	public APolygonBullet(double x, double y, double vx, double vy, double[] ACoodinate) {
 		super(x, y, vx, vy, ACoodinate);
 		// TODO Auto-generated constructor stub
 	}
 
-	public PolygonBullet(double x, double y, double vx, double vy) {
+	public APolygonBullet(double x, double y, double vx, double vy) {
 		super(x, y, vx, vy);
 		// TODO Auto-generated constructor stub
 	}
 
-	public PolygonBullet(double x, double y, double[] VCoodinate, double ax, double ay) {
+	public APolygonBullet(double x, double y, double[] VCoodinate, double ax, double ay) {
 		super(x, y, VCoodinate, ax, ay);
 		// TODO Auto-generated constructor stub
 	}
 
-	public PolygonBullet(double x, double y, double[] VCoodinate) {
+	public APolygonBullet(double x, double y, double[] VCoodinate) {
 		super(x, y, VCoodinate);
 		// TODO Auto-generated constructor stub
 	}
 
-	public PolygonBullet(double x, double y) {
+	public APolygonBullet(double x, double y) {
 		super(x, y);
 		// TODO Auto-generated constructor stub
 	}

@@ -56,7 +56,7 @@ public class LogicExecutor {
 
 	public void schedule(Runnable task, long delay, TimeUnit timeUnit) {
 		if (!timeUnit.equals(TimeUnit.MILLISECONDS))
-			throw new RuntimeException("LogicExecutor:请使用TimeUnit.MILLISECONDS");
+			throw new IllegalArgumentException("LogicExecutor:请使用TimeUnit.MILLISECONDS");
 		schedule(task, delay);
 	}
 

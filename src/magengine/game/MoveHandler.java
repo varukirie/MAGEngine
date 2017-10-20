@@ -42,7 +42,7 @@ public class MoveHandler implements Runnable {
 	 * 全局速度
 	 */
 	public static double absoluteTimeSpeed = DEFAULT_TIME_SPEED;
-	public static volatile double DeltaTimeFactor = 1;
+	public static volatile double deltaTimeFactor = 1;
 	public static final long SLEEP_TIME = 2;
 	public static final long BLANK = 1000;
 
@@ -81,7 +81,7 @@ public class MoveHandler implements Runnable {
 			long currentTime = System.currentTimeMillis();
 			deltaTime=currentTime-current4Delta;
 			current4Delta = currentTime;
-			deltaTime*=DeltaTimeFactor;
+			deltaTime*=deltaTimeFactor;
 			logicExecutor.update(deltaTime);
 			gameLogic();
 

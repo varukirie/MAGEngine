@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
  * 
  * 
  */
-public class EllipseBullet extends PolygonBullet {
+public class EllipseBullet extends APolygonBullet {
 
 	public EllipseBullet(double x, double y, double vx, double vy, double ax, double ay) {
 		super(x, y, vx, vy, ax, ay);

@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
  * @author Astronic
  *
  */
-public class ArrowBullet extends PolygonBullet {
+public class ArrowBullet extends APolygonBullet {
 
 	public ArrowBullet(double x, double y) {
 		super(x, y);
