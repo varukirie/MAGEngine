@@ -11,9 +11,9 @@ import javafx.scene.paint.Stop;
 import magengine.util.Transform;
 
 /**
- * 画菱形子弹
+ * 画六边形子弹
  * 继承多边形
- * 
+ * 增加颜色绘制
  * 
  */
 public class HexagonBullet extends APolygonBullet {
