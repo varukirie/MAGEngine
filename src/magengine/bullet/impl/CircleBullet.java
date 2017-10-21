@@ -10,16 +10,12 @@ import javafx.scene.paint.Paint;
 import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
 import magengine.bullet.APolygonBullet;
+import magengine.bullet.RadiusSupplier;
 import magengine.util.Transform;
 
-/**
- * 画菱形子弹 继承多边形
- * 
- * 
- */
-public class CircleBullet extends APolygonBullet {
+public class CircleBullet extends APolygonBullet implements RadiusSupplier{
 	
-	private Function<CircleBullet,Paint> colorSupplier = (cirb)->{
+	private Function<RadiusSupplier,Paint> colorSupplier = (cirb)->{
 		return Color.WHITESMOKE;
 	};
 	private double r = 10;
@@ -94,11 +90,11 @@ public class CircleBullet extends APolygonBullet {
 		gc.fillOval(getX()-getR(), getY()-getR(), getR()*2, getR()*2);
 	}
 
-	public void setColorSupplier(Function<CircleBullet, Paint> colorSupplier) {
+	public void setColorSupplier(Function<RadiusSupplier, Paint> colorSupplier) {
 		this.colorSupplier = colorSupplier;
 	}
 	
-	public Function<CircleBullet, Paint> getColorSupplier() {
+	public Function<RadiusSupplier, Paint> getColorSupplier() {
 		return colorSupplier;
 	}
 }

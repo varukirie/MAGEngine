@@ -21,13 +21,13 @@ public enum PresetColor {
 		return new RadialGradient(0, .1, cirb.getX(), cirb.getY(), cirb.getR(), false, CycleMethod.NO_CYCLE,
 				new Stop(0, Color.BLUE), new Stop(0.5, Color.rgb(245, 245, 245, 0.0)), new Stop(1, Color.WHITESMOKE));
 	});
-	private PresetColor(Function<CircleBullet, Paint> colorSP) {
+	private PresetColor(Function<RadiusSupplier, Paint> colorSP) {
 		this.colorSupplier = colorSP;
 	}
+	
+	private Function<RadiusSupplier, Paint> colorSupplier;
 
-	private Function<CircleBullet, Paint> colorSupplier;
-
-	public Function<CircleBullet, Paint> get() {
+	public Function<RadiusSupplier, Paint> get() {
 		return this.colorSupplier;
 	}
 }

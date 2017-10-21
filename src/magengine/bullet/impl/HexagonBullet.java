@@ -9,6 +9,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
 import magengine.bullet.APolygonBullet;
+import magengine.bullet.RadiusSupplier;
 import magengine.util.Transform;
 
 /**
@@ -17,7 +18,7 @@ import magengine.util.Transform;
  * 增加颜色绘制
  * 
  */
-public class HexagonBullet extends APolygonBullet {
+public class HexagonBullet extends APolygonBullet implements RadiusSupplier{
 	
 	
 	private double r = 10;
@@ -160,16 +161,15 @@ public class HexagonBullet extends APolygonBullet {
 	//   gc.setFill(Color.LIGHTGOLDENRODYELLOW);
 		super.paint(gc);
 	}
-	private Function<HexagonBullet,Paint> colorSupplier = (cirb)->{
+	private Function<RadiusSupplier,Paint> colorSupplier = (cirb)->{
 		return Color.WHITESMOKE;
 	};
 
-	public void setColorSupplier(Function<HexagonBullet, Paint> function) {
-		this.colorSupplier = function;
+	public void setColorSupplier(Function<RadiusSupplier, Paint> colorSupplier) {
+		this.colorSupplier = colorSupplier;
 	}
 	
-	public Function<HexagonBullet, Paint> getColorSupplier() {
+	public Function<RadiusSupplier, Paint> getColorSupplier() {
 		return colorSupplier;
 	}
-
 }

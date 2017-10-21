@@ -38,7 +38,7 @@ public abstract class APolygonEnemy extends AEnemy implements PolygonCollision{
 		return polygon;
 	}
 	
-	private double[][] afterDelta=null;
+	private double[][] afterDelta=new double[0][0];
 	@Override
 	public void modify() {
 		super.modify();
