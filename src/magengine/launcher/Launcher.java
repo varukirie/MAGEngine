@@ -8,6 +8,7 @@ import application.Main;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import magengine.bullet.Bullet;
 import magengine.bullet.impl.DefaultBullet;
 import magengine.element.BaseElement;
@@ -62,6 +63,7 @@ public class Launcher extends BaseElement implements Initializable, DurationMana
 	@Override
 	public void paint(GraphicsContext gc) {
 		if (Main.DEBUG)
+			gc.setFill(Color.WHITESMOKE);
 			gc.fillText("launcher", getX(), getY());
 	}
 

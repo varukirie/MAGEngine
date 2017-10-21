@@ -5,8 +5,10 @@ import java.io.FileNotFoundException;
 
 import com.badlogic.gdx.math.Polygon;
 
+import application.Main;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import magengine.element.BaseElement;
 import magengine.element.LimitedByCanvas;
 import magengine.element.Moveable;
@@ -89,6 +91,12 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 			spritePainter.paintSprite(4+(currentSpriteIndex), getX()-imgwidth/2, getY()-imgheight/2, gc);
 			currentSpriteIndex=(currentSpriteIndex+1)%(4);
 		}
+		if(Main.DEBUG_COLLISION){
+			getPolygon();
+			gc.setFill(Color.INDIANRED);
+			paintPolygon(vertices, gc);
+			gc.setFill(Color.WHITESMOKE);
+		}
 	}
 	public float[] vertices = new float[8*2];
 	private Polygon polygon=new Polygon(vertices);
@@ -119,6 +127,18 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 		return CollisionTeam.PLAYER;
 	}
 	
-	
+	private void paintPolygon(float[] origin,GraphicsContext gc){
+		double[] xpoint = new double[origin.length/2];
+		double[] ypoint = new double[origin.length/2];
+		for(int i=0;i<origin.length;i++){
+			if(i%2==0){
+				xpoint[i/2]=origin[i];
+			}else{
+				ypoint[i/2]=origin[i];
+			}
+		}
+		gc.fillPolygon(xpoint, ypoint, origin.length/2);
+		
+	}
 
 }

@@ -1,7 +1,11 @@
 package magengine.helper;
 
 import application.Main;
+import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.Bloom;
+import javafx.scene.paint.Color;
+import magengine.bullet.impl.DefaultBullet;
 import magengine.element.BaseElement;
 import magengine.element.DurationManage;
 /**
@@ -15,7 +19,10 @@ import magengine.element.DurationManage;
  * @author MegaAstronic
  *
  */
-public class Helper extends BaseElement implements DurationManage{
+import magengine.element.Initializable;
+import magengine.paint.MyCanvasSwitcher;
+import magengine.util.DI;
+public class Helper extends BaseElement implements DurationManage {
 	private long duration=10000000;
 	private long startTime = 0;
 	public Helper(double x, double y) {
@@ -44,6 +51,7 @@ public class Helper extends BaseElement implements DurationManage{
 	@Override
 	public void paint(GraphicsContext gc) {
 		if(Main.DEBUG){
+			gc.setFill(Color.WHITESMOKE);
 			gc.fillText(".Helper x="+this.getX()+" y="+this.getY(), getX(), getY());
 		}
 	}
@@ -53,5 +61,6 @@ public class Helper extends BaseElement implements DurationManage{
 	public void setStartTime(long startTime) {
 		this.startTime = startTime;
 	}
+
 
 }
