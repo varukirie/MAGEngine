@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
-import magengine.bullet.HiddenBullet;
+import magengine.bullet.impl.HiddenBullet;
 import magengine.game.LogicExecutor;
 import magengine.launcher.Launcher;
 import magengine.paint.MyCanvas;

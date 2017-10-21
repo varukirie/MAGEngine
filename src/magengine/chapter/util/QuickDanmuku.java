@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import javafx.scene.shape.MoveTo;
 import magengine.bullet.Bullet;
-import magengine.bullet.DefaultBullet;
+import magengine.bullet.impl.DefaultBullet;
 import magengine.element.BaseElement;
 import magengine.element.impl.Player;
 import magengine.game.LogicExecutor;

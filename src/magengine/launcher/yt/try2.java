@@ -4,7 +4,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-import magengine.bullet.DefaultBullet;
+import magengine.bullet.impl.DefaultBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.launcher.ALauncherGroup;
 import magengine.launcher.Launcher;

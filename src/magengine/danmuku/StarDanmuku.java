@@ -4,8 +4,8 @@ import java.util.Random;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import magengine.bullet.DefaultBullet;
-import magengine.bullet.StarBullet;
+import magengine.bullet.impl.DefaultBullet;
+import magengine.bullet.impl.StarBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.chapter.util.SeqDanmuku;
 import magengine.element.BaseElement;

@@ -3,8 +3,8 @@ package magengine.launcher.yt;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-import magengine.bullet.CircleBullet;
-import magengine.bullet.DefaultBullet;
+import magengine.bullet.impl.CircleBullet;
+import magengine.bullet.impl.DefaultBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.launcher.ALauncherGroup;
 

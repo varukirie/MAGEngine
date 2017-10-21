@@ -1,6 +1,7 @@
-package magengine.bullet;
+package magengine.bullet.impl;
 
 import javafx.scene.canvas.GraphicsContext;
+import magengine.bullet.Bullet;
 
 public class HiddenBullet extends Bullet {
 	

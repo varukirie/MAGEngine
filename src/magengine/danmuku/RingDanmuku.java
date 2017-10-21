@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 import magengine.bullet.Bullet;
-import magengine.bullet.DefaultBullet;
+import magengine.bullet.impl.DefaultBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.game.LogicExecutor;
 import magengine.helper.Helper;

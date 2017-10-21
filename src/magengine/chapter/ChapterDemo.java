@@ -7,10 +7,10 @@ import java.util.concurrent.TimeUnit;
 
 import javafx.application.Platform;
 import javafx.scene.effect.Bloom;
-import magengine.bullet.ArrowBullet;
 import magengine.bullet.Bullet;
-import magengine.bullet.DefaultBullet;
-import magengine.bullet.StarBullet;
+import magengine.bullet.impl.ArrowBullet;
+import magengine.bullet.impl.DefaultBullet;
+import magengine.bullet.impl.StarBullet;
 import magengine.chapter.util.AChapter;
 import magengine.chapter.util.ChapterLoader;
 import magengine.chapter.util.QuickDanmuku;
@@ -129,7 +129,7 @@ public class ChapterDemo extends AChapter {
 		
 		OvalLauncherGroup oG4 = new OvalLauncherGroup(midX, midY);
 		oG4.setLauncherConfig((launcher) -> {
-			launcher.setBulletType(magengine.bullet.StarBullet.class);
+			launcher.setBulletType(magengine.bullet.impl.StarBullet.class);
 			launcher.setBulletEvent((sESx, bullet) -> {
 				LogicExecutor.getLogicExecutor().schedule(() -> {
 					quick.stopBullet(bullet);

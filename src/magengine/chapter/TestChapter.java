@@ -7,11 +7,12 @@ import java.util.concurrent.TimeUnit;
 
 import javafx.application.Platform;
 import javafx.scene.effect.Bloom;
-import magengine.bullet.ArrowBullet;
 import magengine.bullet.Bullet;
-import magengine.bullet.CircleBullet;
-import magengine.bullet.DefaultBullet;
-import magengine.bullet.StarBullet;
+import magengine.bullet.impl.ArrowBullet;
+import magengine.bullet.impl.CircleBullet;
+import magengine.bullet.impl.DefaultBullet;
+import magengine.bullet.impl.PlayerBullet;
+import magengine.bullet.impl.StarBullet;
 import magengine.chapter.util.AChapter;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.danmuku.ReisenNonSpellCardDanmuku;
@@ -35,7 +36,6 @@ import magengine.paint.MyCanvasSwitcher;
 import magengine.ui.SceneManager;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
-import magengine.bullet.PlayerBullet;
 public class TestChapter extends AChapter {
 	int midX = MyCanvas.CANVAS_WIDTH / 2;
 	int midY = 200;

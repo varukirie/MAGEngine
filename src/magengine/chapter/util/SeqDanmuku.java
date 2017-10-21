@@ -5,7 +5,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import magengine.bullet.Bullet;
-import magengine.bullet.DefaultBullet;
+import magengine.bullet.impl.DefaultBullet;
 import magengine.element.impl.Player;
 import magengine.game.LogicExecutor;
 import magengine.helper.Helper;

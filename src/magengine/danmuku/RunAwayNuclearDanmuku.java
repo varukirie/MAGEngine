@@ -5,7 +5,8 @@ import java.util.concurrent.TimeUnit;
 
 import application.Main;
 import javafx.scene.paint.Color;
-import magengine.bullet.CircleBullet;
+import magengine.bullet.PresetColor;
+import magengine.bullet.impl.CircleBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.element.BaseElement;
 import magengine.helper.OvalHelper;
@@ -41,7 +42,7 @@ public class RunAwayNuclearDanmuku extends ADanmuku {
 			l.setBulletSpeed(200);
 			l.setBulletConfig((b)->{
 				((CircleBullet)b).setR(20);
-				((CircleBullet)b).setColorSupplier(CircleBullet.PresetColor.blueOpacity.get());
+				((CircleBullet)b).setColorSupplier(PresetColor.blueOpacity.get());
 			});
 		});
 		olg.delayExecute(delay);
@@ -57,7 +58,7 @@ public class RunAwayNuclearDanmuku extends ADanmuku {
 		l.getDirectionProperty().bind(helper.getDirectionProperty());
 		l.setBulletConfig((b)->{
 			((CircleBullet)b).setR(10);
-			((CircleBullet)b).setColorSupplier(CircleBullet.PresetColor.redOpacity.get());
+			((CircleBullet)b).setColorSupplier(PresetColor.redOpacity.get());
 			quick.VRotateRandom(b, Math.PI/7);
 		});
 		mEU.add("launcher "+r.nextInt(), l);

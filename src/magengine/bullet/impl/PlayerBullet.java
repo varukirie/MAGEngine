@@ -1,4 +1,4 @@
-package magengine.bullet;
+package magengine.bullet.impl;
 
 import magengine.util.CollisionTeam;
 

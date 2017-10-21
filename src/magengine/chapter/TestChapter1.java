@@ -2,11 +2,11 @@ package magengine.chapter;
 
 import javafx.application.Platform;
 import javafx.scene.effect.Bloom;
-import magengine.bullet.ArrowBullet;
 import magengine.bullet.Bullet;
-import magengine.bullet.DefaultBullet;
-import magengine.bullet.PlayerBullet;
-import magengine.bullet.StarBullet;
+import magengine.bullet.impl.ArrowBullet;
+import magengine.bullet.impl.DefaultBullet;
+import magengine.bullet.impl.PlayerBullet;
+import magengine.bullet.impl.StarBullet;
 import magengine.chapter.util.AChapter;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.element.BaseElement;

@@ -1,7 +1,8 @@
-package magengine.bullet;
+package magengine.bullet.impl;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import magengine.bullet.APolygonBullet;
 
 public class DefaultBullet extends APolygonBullet {
 

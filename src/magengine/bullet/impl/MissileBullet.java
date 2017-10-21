@@ -1,6 +1,7 @@
-package magengine.bullet;
+package magengine.bullet.impl;
 
 import javafx.scene.canvas.GraphicsContext;
+import magengine.bullet.Bullet;
 import magengine.element.BaseElement;
 import magengine.element.Moveable;
 import magengine.element.impl.Player;
