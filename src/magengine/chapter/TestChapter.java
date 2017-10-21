@@ -44,18 +44,6 @@ public class TestChapter extends AChapter {
 	public void design(LogicExecutor exec, MyCanvas staticCanvas, ElementUtils mEU) {
 
 		Platform.runLater(() -> {
-			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(DefaultBullet.class, (canvas) -> {
-				canvas.setEffect(new Bloom());
-			});
-			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(StarBullet.class, (canvas) -> {
-				canvas.setEffect(new Bloom());
-			});
-			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(ArrowBullet.class, (canvas) -> {
-				canvas.setEffect(new Bloom());
-			});
-			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(PlayerBullet.class, (canvas) -> {
-				canvas.setEffect(new Bloom());
-			});
 			staticCanvas.getGraphicsContext2D().fillRect(0, 0, MyCanvas.CANVAS_WIDTH, MyCanvas.CANVAS_HEIGHT);
 		});
 		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
@@ -63,11 +51,11 @@ public class TestChapter extends AChapter {
 		
 		Enemy1 enemy = new Enemy1(300, 100);
 		enemy.setHP(30);
-		enemy.addDanmuku(new Testing().setDelay(1000));
+//		enemy.addDanmuku(new Testing().setDelay(1000));
 //		enemy.addDanmuku(new RunAwayNuclearDanmuku().setDelay(1000));
 //		enemy.addDanmuku(new demo1().setDelay(1000));
 //		enemy.setVelocityX(-50);
-//		enemy.addDanmuku(new ReisenNonSpellCardDanmuku().setDelay(1000));
+		enemy.addDanmuku(new ReisenNonSpellCardDanmuku().setDelay(1000));
 //		enemy.addDanmuku(new TriArcDanmuku().setDelay(3000));
 //		enemy.addDanmuku(new TriArcDanmuku().setDelay(6500));
 		mEU.add("enemy", enemy);
@@ -142,7 +130,7 @@ public class TestChapter extends AChapter {
 //			mEU.add("midHelper", midHelper);
 //		}
 //		for(int i=1;i<=1000;i++){
-//			new StarDanmuku().setDelay(10*i).delayExecute();
+//			new StarDanmuku().setDelay(700*i).delayExecute();
 //		}
 		
 	}

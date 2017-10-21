@@ -1,8 +1,12 @@
 package magengine.bullet.impl;
 
+import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.Bloom;
 import javafx.scene.paint.Color;
 import magengine.bullet.APolygonBullet;
+import magengine.paint.MyCanvasSwitcher;
+import magengine.util.DI;
 
 public class StarBullet extends APolygonBullet {
 
@@ -49,5 +53,13 @@ public class StarBullet extends APolygonBullet {
 		gc.setFill(Color.LIGHTGOLDENRODYELLOW);
 		super.paint(gc);
 	}
-
+	@Override
+	public void initWhenAdd() {
+		super.initWhenAdd();
+		Platform.runLater(()->{
+			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(StarBullet.class, (canvas) -> {
+				canvas.setEffect(new Bloom());
+			});
+		});
+	}
 }

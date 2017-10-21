@@ -1,8 +1,12 @@
 package magengine.bullet.impl;
 
+import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.Bloom;
 import javafx.scene.paint.Color;
 import magengine.bullet.APolygonBullet;
+import magengine.paint.MyCanvasSwitcher;
+import magengine.util.DI;
 
 /**
  * 另一种子弹
@@ -52,5 +56,15 @@ public void paint(GraphicsContext gc) {
 	protected double[][] getOrigin() {
 		return origin;
 	}
-
+	@Override
+	public void initWhenAdd() {
+		super.initWhenAdd();
+		Platform.runLater(()->{
+			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(ArrowBullet.class, (canvas) -> {
+				canvas.setEffect(new Bloom());
+			});
+		});
+	}
 }
+
+

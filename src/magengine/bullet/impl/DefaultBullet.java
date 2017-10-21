@@ -1,8 +1,12 @@
 package magengine.bullet.impl;
 
+import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.Bloom;
 import javafx.scene.paint.Color;
 import magengine.bullet.APolygonBullet;
+import magengine.paint.MyCanvasSwitcher;
+import magengine.util.DI;
 
 public class DefaultBullet extends APolygonBullet {
 
@@ -47,6 +51,16 @@ public class DefaultBullet extends APolygonBullet {
 	public void paint(GraphicsContext gc) {
 		gc.setFill(Color.WHITESMOKE);
 		super.paint(gc);
+	}
+	
+	@Override
+	public void initWhenAdd() {
+		super.initWhenAdd();
+		Platform.runLater(()->{
+			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(DefaultBullet.class, (canvas) -> {
+				canvas.setEffect(new Bloom());
+			});
+		});
 	}
 
 }

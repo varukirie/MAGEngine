@@ -6,16 +6,22 @@ import java.io.FileNotFoundException;
 import com.badlogic.gdx.math.Polygon;
 
 import application.Main;
+import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.Bloom;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import magengine.bullet.impl.DefaultBullet;
 import magengine.element.BaseElement;
+import magengine.element.Initializable;
 import magengine.element.LimitedByCanvas;
 import magengine.element.Moveable;
 import magengine.element.Paintable;
 import magengine.element.PolygonCollision;
+import magengine.paint.MyCanvasSwitcher;
 import magengine.paint.SpritePainter;
 import magengine.util.CollisionTeam;
+import magengine.util.DI;
 /**
  * 玩家控制的物体
  * 单例设计模式
@@ -140,5 +146,6 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 		gc.fillPolygon(xpoint, ypoint, origin.length/2);
 		
 	}
+
 
 }
