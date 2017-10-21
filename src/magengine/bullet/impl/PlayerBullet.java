@@ -16,12 +16,4 @@ public class PlayerBullet extends DefaultBullet {
 	public CollisionTeam getTeam() {
 		return CollisionTeam.PLAYER_BULLET;
 	}
-	@Override
-	public void initWhenAdd() {
-		Platform.runLater(()->{
-			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(PlayerBullet.class, (canvas) -> {
-				canvas.setEffect(new Bloom());
-			});
-		});
-	}
 }

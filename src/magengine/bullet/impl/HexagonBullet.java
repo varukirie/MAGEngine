@@ -115,13 +115,4 @@ public class HexagonBullet extends APolygonBullet implements RadiusSupplier{
 	public Function<RadiusSupplier, Paint> getColorSupplier() {
 		return colorSupplier;
 	}
-	@Override
-	public void initWhenAdd() {
-		super.initWhenAdd();
-		Platform.runLater(()->{
-			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(HexagonBullet.class, (canvas) -> {
-				canvas.setEffect(new Bloom());
-			});
-		});
-	}
 }

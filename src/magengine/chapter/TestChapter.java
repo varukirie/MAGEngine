@@ -11,6 +11,7 @@ import magengine.bullet.Bullet;
 import magengine.bullet.impl.ArrowBullet;
 import magengine.bullet.impl.CircleBullet;
 import magengine.bullet.impl.DefaultBullet;
+import magengine.bullet.impl.HexagonBullet;
 import magengine.bullet.impl.PlayerBullet;
 import magengine.bullet.impl.StarBullet;
 import magengine.chapter.util.AChapter;
@@ -44,6 +45,21 @@ public class TestChapter extends AChapter {
 	public void design(LogicExecutor exec, MyCanvas staticCanvas, ElementUtils mEU) {
 
 		Platform.runLater(() -> {
+			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(DefaultBullet.class, (canvas) -> {
+				canvas.setEffect(new Bloom());
+			});
+			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(StarBullet.class, (canvas) -> {
+				canvas.setEffect(new Bloom());
+			});
+			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(ArrowBullet.class, (canvas) -> {
+				canvas.setEffect(new Bloom());
+			});
+			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(PlayerBullet.class, (canvas) -> {
+				canvas.setEffect(new Bloom());
+			});
+			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(HexagonBullet.class, (canvas) -> {
+				canvas.setEffect(new Bloom());
+			});
 			staticCanvas.getGraphicsContext2D().fillRect(0, 0, MyCanvas.CANVAS_WIDTH, MyCanvas.CANVAS_HEIGHT);
 		});
 		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();

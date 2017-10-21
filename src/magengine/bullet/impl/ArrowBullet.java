@@ -56,15 +56,6 @@ public void paint(GraphicsContext gc) {
 	protected double[][] getOrigin() {
 		return origin;
 	}
-	@Override
-	public void initWhenAdd() {
-		super.initWhenAdd();
-		Platform.runLater(()->{
-			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(ArrowBullet.class, (canvas) -> {
-				canvas.setEffect(new Bloom());
-			});
-		});
-	}
 }
 
 

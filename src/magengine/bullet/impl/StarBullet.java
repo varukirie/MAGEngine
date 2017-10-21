@@ -53,13 +53,4 @@ public class StarBullet extends APolygonBullet {
 		gc.setFill(Color.LIGHTGOLDENRODYELLOW);
 		super.paint(gc);
 	}
-	@Override
-	public void initWhenAdd() {
-		super.initWhenAdd();
-		Platform.runLater(()->{
-			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(StarBullet.class, (canvas) -> {
-				canvas.setEffect(new Bloom());
-			});
-		});
-	}
 }

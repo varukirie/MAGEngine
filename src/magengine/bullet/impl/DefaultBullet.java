@@ -53,14 +53,4 @@ public class DefaultBullet extends APolygonBullet {
 		super.paint(gc);
 	}
 	
-	@Override
-	public void initWhenAdd() {
-		super.initWhenAdd();
-		Platform.runLater(()->{
-			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(DefaultBullet.class, (canvas) -> {
-				canvas.setEffect(new Bloom());
-			});
-		});
-	}
-
 }
