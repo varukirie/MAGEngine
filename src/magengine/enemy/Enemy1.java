@@ -33,6 +33,7 @@ public class Enemy1 extends APolygonEnemy {
 	private int currentSpriteIndex=0;
 	@Override
 	public void paint(GraphicsContext gc) {
+		super.paint(gc);
 		//每隔interval帧换一张图
 		int interval = 5;
 		spritePainter.paintSprite((0+(currentSpriteIndex))/interval, getX()-halfWidth, getY()-halfHeight, gc);

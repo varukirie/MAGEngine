@@ -56,7 +56,7 @@ public abstract class APolygonEnemy extends AEnemy implements PolygonCollision{
 	}
 	@Override
 	public void paint(GraphicsContext gc) {
-		if(Main.DEBUG){
+		if(Main.DEBUG_COLLISION){
 			gc.setStroke(Color.RED);
 			gc.strokePolygon(afterDelta[0], afterDelta[1],afterDelta[0].length);
 		}
