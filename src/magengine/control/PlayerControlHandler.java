@@ -154,20 +154,7 @@ public class PlayerControlHandler {
 		}
 		changeV();
 	}
-	public void playerShooting() {
-		{
-			DefaultBullet bullet = new PlayerBullet(player.getX()-10, player.getY());
-			bullet.setVelocityY(-600);
-			bullet.setVelocityX(0);
-			elementUtils.add("playerBullet" + ballCount++, bullet);
-		}
-		
-		DefaultBullet bullet = new PlayerBullet(player.getX()+10, player.getY());
-		bullet.setVelocityY(-600);
-		bullet.setVelocityX(0);
-		elementUtils.add("playerBullet" + ballCount++, bullet);
-		
-	}
+
 	private void playerShootToMouse() {
 		DefaultBullet ball = new DefaultBullet(player.getX(), player.getY());
 		double dx = PlayerControlHandler.mouseX - player.getX();
