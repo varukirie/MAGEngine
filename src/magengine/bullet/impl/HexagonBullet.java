@@ -34,67 +34,6 @@ public class HexagonBullet extends APolygonBullet implements RadiusSupplier{
 		return r;
 	}
 	
-	public static enum PresetColor{
-		redOpacity((cirb)->{
-			return new RadialGradient(0,
-		            .1,
-		            cirb.getX(),
-		            cirb.getY(),
-		            cirb.getR(),
-		            false,
-		            CycleMethod.NO_CYCLE,
-		            new Stop(0, Color.rgb(255, 99, 71,0.4)),
-		            new Stop(1, Color.rgb(245, 245, 245, 0.9)));
-		}),
-		blueOpacity((cirb)->{
-			return new RadialGradient(0,
-		            .1,
-		            cirb.getX(),
-		            cirb.getY(),
-		            cirb.getR(),
-		            false,
-		            CycleMethod.NO_CYCLE,
-		            new Stop(0, Color.rgb(67, 110, 238,0.4)),
-		            new Stop(1, Color.rgb(245, 245, 245, 0.7)));
-		}),
-		blueOpacityWhite((cirb)->{
-			return new RadialGradient(0,
-		            .1,
-		            cirb.getX(),
-		            cirb.getY(),
-		            cirb.getR(),
-		            false,
-		            CycleMethod.NO_CYCLE,
-		            new Stop(0, Color.BLUE),
-		            new Stop(0.5, Color.rgb(245, 245, 245, 0.0)),
-		            new Stop(1, Color.WHITESMOKE));
-		}),
-	   pinkOpacity((cirb)->{
-			return new RadialGradient(0,
-		            .1,
-		            cirb.getX(),
-		            cirb.getY(),
-		            cirb.getR(),
-		            false,
-		            CycleMethod.NO_CYCLE,
-		            new Stop(0, Color.PINK),
-		            new Stop(0, Color.rgb(241, 158, 194,0.0)),
-		            new Stop(1, Color.rgb(242, 156, 177, 0.9))
-		            );
-		}),
-		;
-		private PresetColor(Function<HexagonBullet,Paint> colorSP){
-			this.colorSupplier=colorSP;
-		}
-		
-		private Function<HexagonBullet,Paint> colorSupplier ;
-		public Function<HexagonBullet,Paint> get(){
-			return this.colorSupplier;
-		}
-	}
-	
-	
-
 	
 	public HexagonBullet(double x, double y, double vx, double vy, double ax, double ay) {
 		super(x, y, vx, vy, ax, ay);
