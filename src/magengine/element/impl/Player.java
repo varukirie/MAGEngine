@@ -26,7 +26,8 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 	public final int width = 10;
 	public final int height = 10;
 	private SpritePainter spritePainter = null;
-	int imgwidth = 60, imgheight = 131;
+	private int imgwidth = 60, imgheight = 131;
+	private int checkPointLine = imgwidth/10;
 
 	public static void clear() {
 		player=null;
@@ -75,33 +76,41 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 	@Override
 	public void paint(GraphicsContext gc) {
 		if(this.velocityX<0){
-			spritePainter.paintSprite(8+(currentSpriteIndex), getX(),getY(), gc);
+			spritePainter.paintSprite(8+(currentSpriteIndex), getX()-imgwidth/2,getY()-imgheight/2, gc);
 			currentSpriteIndex=(currentSpriteIndex+1)%(4);
 		}
 		
 		if(this.velocityX==0){
-			spritePainter.paintSprite(0+(currentSpriteIndex), getX(), getY(), gc);
+			spritePainter.paintSprite(0+(currentSpriteIndex), getX()-imgwidth/2, getY()-imgheight/2, gc);
 			currentSpriteIndex=(currentSpriteIndex+1)%(4);
 		}
 			
 		if(this.velocityX>0){
-			spritePainter.paintSprite(4+(currentSpriteIndex), getX(), getY(), gc);
+			spritePainter.paintSprite(4+(currentSpriteIndex), getX()-imgwidth/2, getY()-imgheight/2, gc);
 			currentSpriteIndex=(currentSpriteIndex+1)%(4);
 		}
 	}
-	public float[] vertices = new float[4*2];
+	public float[] vertices = new float[8*2];
 	private Polygon polygon=new Polygon(vertices);
 	
 	@Override
 	public Polygon getPolygon() {
-		vertices[0]=(float) (getX()+imgwidth/3);
-		vertices[1]=(float) (getY()+5*imgheight/13);
-		vertices[2]=(float) (getX()+2*imgwidth/3);
-		vertices[3]=(float) (getY()+5*imgheight/13);
-		vertices[4]=(float) (getX()+2*imgwidth/3);
-		vertices[5]=(float) (getY()+6*imgheight/13);
-		vertices[6]=(float) (getX()+imgwidth/3);
-		vertices[7]=(float) (getY()+6*imgheight/13);
+		vertices[0]=(float) (getX()-checkPointLine/2);
+		vertices[1]=(float) (getY()-checkPointLine/2/Math.tan(Math.PI/8));
+		vertices[2]=(float) (getX()-checkPointLine/2/Math.tan(Math.PI/8));
+		vertices[3]=(float) (getY()-checkPointLine/2);
+		vertices[4]=(float) (getX()-checkPointLine/2/Math.tan(Math.PI/8));
+		vertices[5]=(float) (getY()+checkPointLine/2);
+		vertices[6]=(float) (getX()-checkPointLine/2);
+		vertices[7]=(float) (getY()+checkPointLine/2/Math.tan(Math.PI/8));
+		vertices[8]=(float) (getX()+checkPointLine/2);
+		vertices[9]=(float) (getY()+checkPointLine/2/Math.tan(Math.PI/8));
+		vertices[10]=(float) (getX()+checkPointLine/2/Math.tan(Math.PI/8));
+		vertices[11]=(float) (getY()+checkPointLine/2);
+		vertices[12]=(float) (getX()+checkPointLine/2/Math.tan(Math.PI/8));
+		vertices[13]=(float) (getY()-checkPointLine/2);
+		vertices[14]=(float) (getX()+checkPointLine/2);
+		vertices[15]=(float) (getY()-checkPointLine/2/Math.tan(Math.PI/8));
 		polygon.setVertices(vertices);
 		return polygon;
 	}
