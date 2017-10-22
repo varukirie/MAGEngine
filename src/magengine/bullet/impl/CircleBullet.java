@@ -21,32 +21,33 @@ public class CircleBullet extends APolygonBullet implements RadiusSupplier{
 	private double r = 10;
 	private double[][] martix ;
 	
-	@Override
-	public void setScale(double scale) {
-		setR(scale);
-	}
-	
-	@Override
-	public double getScale() {
-		return getR();
-	}
-	
 	public void setR(double r) {
 		this.r = r;
 		martix[0][0]=r;
 		martix[1][1]=r;
 	}
+	/**
+	 * 取得缩放后的半径
+	 * @return
+	 */
+	@Override
 	public double getR() {
+		return r*super.getScale();
+	}
+	/**
+	 * 取得缩放后前的半径
+	 * @return
+	 */
+	public double getRealR() {
 		return r;
 	}
+	
 	public CircleBullet(double x, double y, double vx, double vy, double ax, double ay) {
 		super(x, y, vx, vy, ax, ay);
-		// TODO Auto-generated constructor stub
 	}
 
 	public CircleBullet(double x, double y, double vx, double vy, double[] ACoodinate) {
 		super(x, y, vx, vy, ACoodinate);
-		// TODO Auto-generated constructor stub
 	}
 
 	public CircleBullet(double x, double y, double[] VCoodinate, double ax, double ay) {

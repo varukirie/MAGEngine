@@ -21,23 +21,23 @@ public class EllipseBullet extends APolygonBullet {
     private double rY = 75;
 	private double[][] martix ;
 	
-	@Override
-	public void setScale(double scale) {
-		setR(scale);
-	}
-	
-	@Override
-	public double getScale() {
-		return getR();
-	}
-	
 	public void setR(double r) {
 		this.r = r;
 		martix[0][0]=r;
 		martix[1][1]=r;
 	}
-	
+	/**
+	 * 取得缩放后的半径
+	 * @return
+	 */
 	public double getR() {
+		return r*super.getScale();
+	}
+	/**
+	 * 取得缩放后前的半径
+	 * @return
+	 */
+	public double getRealR() {
 		return r;
 	}
 	
