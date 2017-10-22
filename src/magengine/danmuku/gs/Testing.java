@@ -28,8 +28,6 @@ import magengine.launcher.ArcLauncherGroup;
 import magengine.launcher.BulletEvent;
 import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
-import magengine.launcher.yt.RayLauncher;
-import magengine.launcher.yt.Arc3;
 import magengine.launcher.yt.LineLauncherGroup;
 import magengine.paint.MyCanvas;
 import magengine.util.ElementUtils;

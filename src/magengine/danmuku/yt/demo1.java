@@ -7,6 +7,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
+import com.badlogic.gdx.math.Ellipse;
+
 import application.Main;
 import magengine.bullet.Bullet;
 import magengine.bullet.impl.ArrowBullet;
@@ -28,8 +30,7 @@ import magengine.launcher.ArcLauncherGroup;
 import magengine.launcher.BulletEvent;
 import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
-import magengine.launcher.yt.RayLauncher;
-import magengine.launcher.yt.Arc3;
+import magengine.launcher.yt.Arc3LauncherGroup;
 import magengine.launcher.yt.LineLauncherGroup;
 import magengine.paint.MyCanvas;
 import magengine.util.ElementUtils;
@@ -68,19 +69,7 @@ public void executeDanmuku() {
 		new ArcLauncherGroup(midX+100, midY, Math.PI/2-Math.PI/7, Math.PI/3, 6).delayExecute(3500);
 		new ArcLauncherGroup(midX+100, midY, Math.PI/2-Math.PI/7, Math.PI/3, 6).delayExecute(4500);
 		
-		/**
-		 * 射线组
-		 * 
-		 */
-		new RayLauncher(0,0,20).delayExecute(100);;
-		new RayLauncher(midX-150,midY,20).delayExecute(100);
-		new RayLauncher(1,midY-100,20).delayExecute(100);;
 
-		
-		new RayLauncher(0,0,20).delayExecute(1000);;
-		new RayLauncher(midX+350,midY-200,100).delayExecute(50000);
-		new RayLauncher(1,midY-100,20).delayExecute(15000);
-		
 		
 		/**
 		 * 折角四周散开
@@ -121,7 +110,23 @@ public void executeDanmuku() {
 		new LineLauncherGroup(5*Math.PI/4).delayExecute(25500);
 		new LineLauncherGroup(7*Math.PI/4).delayExecute(25500);
 		
+		/**
+		 * 
+		 * 
+		 */
 		
+		
+		Launcher launcher1 = new Launcher(200,250,Math.PI/2,500,1000);
+        launcher1.setBulletType(Ellipse.class);		
+		launcher1.setBulletEvent((ses,b) ->{
+			ses.schedule(()->{
+				
+			}, 5000, TimeUnit.MILLISECONDS);
+		});
+		Launcher launcher2 = new Launcher(200,250,Math.PI/2,500,1000);
+		Launcher launcher3 = new Launcher(200,250,Math.PI/2,500,1000);
+		Launcher launcher4 = new Launcher(200,250,Math.PI/2,500,1000);
+		Launcher launcher5 = new Launcher(200,250,Math.PI/2,500,1000);
 		/**
 		 * 
 		 * 旋转发射组
@@ -135,13 +140,13 @@ public void executeDanmuku() {
 		setRandomRotateLauncher(getSourceElement(), true, duration, Math.PI/3*4);
 	
 		
-		new Arc3(200,150,CircleBullet.class).delayExecute(2500);
-		new Arc3(200,150, Math.PI/2).delayExecute(2500);
+		new Arc3LauncherGroup(200,150,CircleBullet.class).delayExecute(2500);
+		new Arc3LauncherGroup(200,150, Math.PI/2).delayExecute(2500);
 		
-		new Arc3(200,150, Math.PI/2, Math.PI/3, 5).delayExecute(35000);
-		new Arc3(200,150, Math.PI/2, Math.PI/3, 5, 6).delayExecute(45000);
-		new Arc3(200,150, Math.PI/2, Math.PI/3, 5, 6,CircleBullet.class).delayExecute(50000);
-		new Arc3(200,150, Math.PI/2, Math.PI/3, 15, 12,CircleBullet.class).delayExecute(50000);
+		new Arc3LauncherGroup(200,150, Math.PI/2, Math.PI/3, 5).delayExecute(35000);
+		new Arc3LauncherGroup(200,150, Math.PI/2, Math.PI/3, 5, 6).delayExecute(45000);
+		new Arc3LauncherGroup(200,150, Math.PI/2, Math.PI/3, 5, 6,CircleBullet.class).delayExecute(50000);
+		new Arc3LauncherGroup(200,150, Math.PI/2, Math.PI/3, 15, 12,CircleBullet.class).delayExecute(50000);
 		
 		callOLG(duration/4*10);
 		callOLG(duration/4*11);

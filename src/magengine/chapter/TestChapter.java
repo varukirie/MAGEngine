@@ -22,7 +22,6 @@ import magengine.danmuku.RunAwayNuclearDanmuku;
 import magengine.danmuku.StarDanmuku;
 import magengine.danmuku.TriArcDanmuku;
 import magengine.danmuku.gs.Testing;
-import magengine.danmuku.yt.MulCircleDanmuku1;
 import magengine.danmuku.yt.MulCircleDanmuku2;
 import magengine.danmuku.yt.demo1;
 import magengine.enemy.ALoopDanmukuEnemy;
