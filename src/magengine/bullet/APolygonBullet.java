@@ -3,6 +3,8 @@ package magengine.bullet;
 import com.badlogic.gdx.math.Polygon;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import magengine.element.PolygonCollision;
 import magengine.util.CollisionTeam;
 import magengine.util.Transform;
@@ -42,14 +44,22 @@ public abstract class APolygonBullet extends Bullet implements PolygonCollision{
 	protected abstract double[][] getOrigin();
 	protected volatile float[] vertices=new float[getOrigin()[0].length*2];
 	protected volatile Polygon polygon = new Polygon(vertices);
-	
-	
-	protected double[][] transformVAndDelta(double[][] origin){
+	private double scale = 1.0;
+	private double[][] scaleMartix = new double[][]{{scale,0},{0,scale}} ;
+	public void setScale(double scale) {
+		this.scale = scale;
+		scaleMartix[0][0]=scale;
+		scaleMartix[1][1]=scale;
+	}
+	public double getScale() {
+		return scale;
+	}
+	protected double[][] transformVAndScaleAndDelta(double[][] origin){
 		double s = Math.sqrt(velocityX*velocityX+velocityY*velocityY);
 		Transform t= new Transform(new double[][] {
 			{-velocityY/s , velocityX/s }, 
 			{-velocityX/s,-velocityY/s } });
-		double[][] ans= t.transform(origin);
+		double[][] ans= Transform.martixInTransform(scaleMartix, t.transform(origin));
 		Transform.delta(ans, getX(), getY());
 		return ans;
 	}
@@ -70,19 +80,43 @@ public abstract class APolygonBullet extends Bullet implements PolygonCollision{
 	}
 	
 	protected double[][] handleCollision(){
-		double[][] ans=transformVAndDelta(getOrigin());
+		double[][] ans=transformVAndScaleAndDelta(getOrigin());
 		toVertices(ans, vertices);
 		polygon.setVertices(vertices);
 		return ans;
 	}
+	private Paint outlineColor = Color.FLORALWHITE;
+	private boolean needPaintOutline=false;
+	
 	@Override
 	public void paint(GraphicsContext gc){
 		double[][] ans=handleCollision();
 		gc.fillPolygon(ans[0],ans[1], getOrigin()[0].length);
+		if(needPaintOutline){
+			gc.setStroke(outlineColor);
+			gc.strokePolygon(ans[0],ans[1], getOrigin()[0].length);
+		}
 	}
 	@Override
 	public void onCollision(PolygonCollision m) {
 		this.setWantBeRemoved(true);
 	}
+
+	public boolean getNeedPaintOutline() {
+		return needPaintOutline;
+	}
+
+	public void setNeedPaintOutline(boolean needPaintOutline) {
+		this.needPaintOutline = needPaintOutline;
+	}
+
+	public Paint getOutlineColor() {
+		return outlineColor;
+	}
+
+	public void setOutlineColor(Paint outlineColor) {
+		this.outlineColor = outlineColor;
+	}
+
 	
 }

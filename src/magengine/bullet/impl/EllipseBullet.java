@@ -20,6 +20,17 @@ public class EllipseBullet extends APolygonBullet {
     private double rX = 5;
     private double rY = 75;
 	private double[][] martix ;
+	
+	@Override
+	public void setScale(double scale) {
+		setR(scale);
+	}
+	
+	@Override
+	public double getScale() {
+		return getR();
+	}
+	
 	public void setR(double r) {
 		this.r = r;
 		martix[0][0]=r;

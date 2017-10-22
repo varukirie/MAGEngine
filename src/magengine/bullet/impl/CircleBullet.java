@@ -20,6 +20,17 @@ public class CircleBullet extends APolygonBullet implements RadiusSupplier{
 	};
 	private double r = 10;
 	private double[][] martix ;
+	
+	@Override
+	public void setScale(double scale) {
+		setR(scale);
+	}
+	
+	@Override
+	public double getScale() {
+		return getR();
+	}
+	
 	public void setR(double r) {
 		this.r = r;
 		martix[0][0]=r;
@@ -88,6 +99,11 @@ public class CircleBullet extends APolygonBullet implements RadiusSupplier{
 		super.handleCollision();
 		gc.setFill(colorSupplier.apply(this));
 		gc.fillOval(getX()-getR(), getY()-getR(), getR()*2, getR()*2);
+		if(super.getNeedPaintOutline()){
+			gc.setStroke(super.getOutlineColor());
+			gc.strokeOval(getX()-getR(), getY()-getR(), getR()*2, getR()*2);
+		}
+			
 	}
 
 	public void setColorSupplier(Function<RadiusSupplier, Paint> colorSupplier) {

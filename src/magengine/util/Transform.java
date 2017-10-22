@@ -14,6 +14,16 @@ public class Transform {
 		result[1]=in[0]*t[0][1]+in[1]*t[1][1];
 		return result;
 	}
+	
+	public static double[][] martixInTransform(double[][] transformMartix,double[][] in){
+		double[][] result = new double[2][in[0].length];
+		for(int i=0;i<in[0].length;i++){
+			result[0][i]=in[0][i]*transformMartix[0][0]+in[1][i]*transformMartix[1][0];
+			result[1][i]=in[0][i]*transformMartix[0][1]+in[1][i]*transformMartix[1][1];
+		}
+		return result;
+	}
+	
 	double[][] transformMartix=null;
 	
 	public Transform(double[][] t){
