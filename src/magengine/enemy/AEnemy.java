@@ -25,7 +25,7 @@ public abstract class AEnemy extends BaseElement implements Initializable{
 	}
 	
 	private AtomicInteger HP=new AtomicInteger(10);
-	private List<ADanmuku> danmukuList = new ArrayList<ADanmuku>();
+
 	
 	
 	public void setHP(int HP){
@@ -40,16 +40,5 @@ public abstract class AEnemy extends BaseElement implements Initializable{
 		return HP.addAndGet(delta);
 	}
 
-	public void addDanmuku(ADanmuku danmuku){
-		danmukuList.add(danmuku);
-	}
-	
-	@Override
-	public void initWhenAdd() {
-		danmukuList.forEach(x->{
-			x.setSourceElement(this);
-			x.delayExecute();
-		});
-	}
 	
 }

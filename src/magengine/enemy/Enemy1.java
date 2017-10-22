@@ -4,7 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import magengine.paint.SpritePainter;
 
-public class Enemy1 extends APolygonEnemy {
+public class Enemy1 extends ALoopDanmukuEnemy {
 	private static SpritePainter spritePainter = null;
 	
 	public Enemy1(double x, double y) {

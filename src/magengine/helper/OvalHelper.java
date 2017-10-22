@@ -54,7 +54,7 @@ public class OvalHelper extends Helper implements Initializable {
 	 * @param speed 单位    0.1rad/s
 	 * @param startAngle
 	 *            单位 弧度，起始角度
-	 * @param duration 存活时间
+	 * @param DURATION 存活时间
 	 */
 	public OvalHelper(double midx, double midy, double r, double speed, double startAngle,long duration) {
 		super(midx, midy);

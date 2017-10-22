@@ -22,19 +22,19 @@ public class RunAwayNuclearDanmuku extends ADanmuku {
 	private QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 	private static final long interval = (long) (100*(1.0/Main.level.getFactor()));
 	private static final double rotateSpeed = 10;
-	private static final long duration = 15000;
+	public static final long DURATION = 15000;
 	
 	
 	@Override
 	public void executeDanmuku() {
-		setRandomRotateLauncher(getSourceElement(), true, duration, 0);
-		setRandomRotateLauncher(getSourceElement(), true, duration, Math.PI/3*2);
-		setRandomRotateLauncher(getSourceElement(), true, duration, Math.PI/3*4);
+		setRandomRotateLauncher(getSourceElement(), true, DURATION, 0);
+		setRandomRotateLauncher(getSourceElement(), true, DURATION, Math.PI/3*2);
+		setRandomRotateLauncher(getSourceElement(), true, DURATION, Math.PI/3*4);
 		callOLG(0);
-		callOLG(duration/4);
-		callOLG(duration/4*2);
-		callOLG(duration/4*3);
-		callOLG(duration/4*4);
+		callOLG(DURATION/4);
+		callOLG(DURATION/4*2);
+		callOLG(DURATION/4*3);
+		callOLG(DURATION/4*4);
 	}
 	public void callOLG(long delay){
 		OvalLauncherGroup olg = new OvalLauncherGroup(sourceElement.getX(), sourceElement.getY(), 16);

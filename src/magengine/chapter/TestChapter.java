@@ -25,6 +25,7 @@ import magengine.danmuku.gs.Testing;
 import magengine.danmuku.yt.MulCircleDanmuku1;
 import magengine.danmuku.yt.MulCircleDanmuku2;
 import magengine.danmuku.yt.demo1;
+import magengine.enemy.ALoopDanmukuEnemy;
 import magengine.enemy.DefaultEnemy;
 import magengine.enemy.Enemy1;
 import magengine.game.LogicExecutor;
@@ -65,28 +66,25 @@ public class TestChapter extends AChapter {
 		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 		Random r=new Random();
 		
-		Enemy1 enemy = new Enemy1(300, 100);
-		enemy.setHP(30);
-//		enemy.addDanmuku(new Testing().setDelay(1000));
-//		enemy.addDanmuku(new RunAwayNuclearDanmuku().setDelay(1000));
-//		enemy.addDanmuku(new demo1().setDelay(1000));
-//		enemy.setVelocityX(-50);
-		enemy.addDanmuku(new ReisenNonSpellCardDanmuku().setDelay(1000));
-//		enemy.addDanmuku(new TriArcDanmuku().setDelay(3000));
-//		enemy.addDanmuku(new TriArcDanmuku().setDelay(6500));
-		mEU.add("enemy", enemy);
+		ALoopDanmukuEnemy boss = new Enemy1(300, 100);
+		boss.setHP(30);
+		boss.setDanmukuStartDelay(1000);
+		boss.addDanmuku(new TriArcDanmuku(),3000);
+		boss.addDanmuku(new ReisenNonSpellCardDanmuku(),ReisenNonSpellCardDanmuku.DURATION+1000);//1秒间隔
+		boss.addDanmuku(new RunAwayNuclearDanmuku(), RunAwayNuclearDanmuku.DURATION+2000);//2秒间隔
+		mEU.add("enemy", boss);
 		LogicExecutor executor= LogicExecutor.getLogicExecutor();
 		
-		quick.moveTo(enemy, 1500, 100, 100);
-		executor.schedule(() -> {
-			quick.moveTo(enemy, 4000, 275, 500);
-		}, 1700);
-		executor.schedule(() -> {
-			quick.moveTo(enemy, 4000, 500, 100);
-		}, 6000);
-		executor.schedule(() -> {
-			quick.moveTo(enemy, 3000, 275, 195.5);
-		}, 11000);
+//		quick.moveTo(enemy, 1500, 100, 100);
+//		executor.schedule(() -> {
+//			quick.moveTo(enemy, 4000, 275, 500);
+//		}, 1700);
+//		executor.schedule(() -> {
+//			quick.moveTo(enemy, 4000, 500, 100);
+//		}, 6000);
+//		executor.schedule(() -> {
+//			quick.moveTo(enemy, 3000, 275, 195.5);
+//		}, 11000);
 		
 //		quick.moveTo(enemy, 1500, 100, 100);
 //		LogicExecutor.getLogicExecutor().schedule(() -> {

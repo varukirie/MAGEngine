@@ -50,7 +50,7 @@ public class Launcher extends BaseElement implements Initializable, DurationMana
 	 *            发射方向
 	 * @param interval
 	 *            发射间隔
-	 * @param duration
+	 * @param DURATION
 	 *            存活时间
 	 */
 	public Launcher(double x, double y, double direction, long interval, long duration) {

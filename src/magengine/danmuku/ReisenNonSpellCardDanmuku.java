@@ -25,7 +25,7 @@ public class ReisenNonSpellCardDanmuku extends ADanmuku{
 	private static final double anchorR = 70;
 	private static final long interval = (long) (230*(1.0/Main.level.getFactor()));
 	private static final double rotateSpeed = 9;
-	private static final long duration = 10000;
+	public static final long DURATION = 10000;
 	private ElementUtils mEU = getmEU();
 	private Random r = new Random();
 	private QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
@@ -42,12 +42,12 @@ public class ReisenNonSpellCardDanmuku extends ADanmuku{
 	private void anchor(BaseElement enemy,double deltaX,double deltaY,boolean positive){
 		RelativeAnchorHelper helper = new RelativeAnchorHelper(enemy, deltaX, deltaY);
 		quick.bindToWantBeRemoved(helper, getSourceElement());
-		helper.setDuration(duration);
+		helper.setDuration(DURATION);
 		mEU.add("AnchorHelper "+r.nextInt(), helper);
-		setRandomRotateLauncher(helper, positive, duration, 0);
-		setRandomRotateLauncher(helper, positive, duration, Math.PI/2);
-		setRandomRotateLauncher(helper, positive, duration, Math.PI);
-		setRandomRotateLauncher(helper, positive, duration, Math.PI/2*3);
+		setRandomRotateLauncher(helper, positive, DURATION, 0);
+		setRandomRotateLauncher(helper, positive, DURATION, Math.PI/2);
+		setRandomRotateLauncher(helper, positive, DURATION, Math.PI);
+		setRandomRotateLauncher(helper, positive, DURATION, Math.PI/2*3);
 	}
 	
 	private void setRandomRotateLauncher(BaseElement target,boolean positive,long duration,double startAngle){

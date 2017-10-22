@@ -165,7 +165,7 @@ public void executeDanmuku() {
 	double helperLenght = 70;
 	//int currentHelperCount = callCount++;
 	
-	long duration=8000;
+	long DURATION=8000;
 	// int callCount = 0;
 	
 
@@ -200,7 +200,7 @@ public void executeDanmuku() {
 	
 	OvalHelper tHelper = new OvalHelper(midX, midY, helperLenght, 40,helperDelta);
 	tHelper.setPositive(true);
-	Launcher launcher = new Launcher(100, 100, 1/2.0*Math.PI, 400, duration);
+	Launcher launcher = new Launcher(100, 100, 1/2.0*Math.PI, 400, DURATION);
 	
 	launcher.getDirectionProperty().bindBidirectional(tHelper.getDirectionProperty());
 	launcher.getxProperty().bindBidirectional(tHelper.getxProperty());
@@ -229,7 +229,7 @@ public void executeDanmuku() {
 	}, startTime+1, TimeUnit.MILLISECONDS);
 	LogicExecutor.getLogicExecutor().schedule(() -> {
 		mEU.removeBoth("tHelper" + currentHelperCount);
-	}, startTime+duration+2, TimeUnit.MILLISECONDS);
+	}, startTime+DURATION+2, TimeUnit.MILLISECONDS);
 	
 	
 	

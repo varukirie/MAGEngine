@@ -43,7 +43,7 @@ public class Helper extends BaseElement implements DurationManage {
 	}
 	/**
 	 * 设置存活时间
-	 * @param duration
+	 * @param DURATION
 	 */
 	public void setDuration(long duration) {
 		this.duration = duration;

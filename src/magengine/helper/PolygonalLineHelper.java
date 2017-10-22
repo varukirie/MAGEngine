@@ -49,7 +49,7 @@ public class PolygonalLineHelper extends Helper implements Initializable{
 			double s = Math.sqrt((this.ploygon[0][i]-this.ploygon[0][i-1])*(this.ploygon[0][i]-this.ploygon[0][i-1])+
 						(this.ploygon[1][i]-this.ploygon[1][i-1])*(this.ploygon[1][i]-this.ploygon[1][i-1]));
 			long duration = (long) ((s/this.speed)*(1/MoveHandler.absoluteTimeSpeed)*1000);
-//			System.out.println("i="+i+" s="+s+" duration="+duration);
+//			System.out.println("i="+i+" s="+s+" DURATION="+DURATION);
 			LogicExecutor.getLogicExecutor().schedule(()->{
 				quick.VTo(this, ploygon[0][curI], ploygon[1][curI]);
 //				System.out.println("call "+curI+" this.x="+this.getX()+" this.y="+this.getY());

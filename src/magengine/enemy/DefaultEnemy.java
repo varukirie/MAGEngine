@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
  * @author MegaAstronic
  *
  */
-public class DefaultEnemy extends APolygonEnemy {
+public class DefaultEnemy extends ADelayDanmukuEnemy {
 
 	
 
