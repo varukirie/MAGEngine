@@ -7,8 +7,9 @@ import magengine.bullet.impl.CircleBullet;
 import magengine.bullet.impl.DefaultBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.launcher.ALauncherGroup;
+import magengine.launcher.ArcLauncherGroup;
 
-public class Arc3 extends ALauncherGroup {
+public class Arc3LauncherGroup extends ALauncherGroup {
 /**
  * 发射组行数
  */
@@ -35,7 +36,7 @@ public class Arc3 extends ALauncherGroup {
 
 	
 	
-	public Arc3(double midX, double midY) {
+	public Arc3LauncherGroup(double midX, double midY) {
 		super();
 		this.midX = midX;
 		this.midY = midY;
@@ -52,7 +53,7 @@ public class Arc3 extends ALauncherGroup {
  * @param columnAmount 发射组行数
  * @param lineAmount 发射组列数
  */
-	public Arc3(double midX, double midY,double direction, double angle, int lineAmount,int columnAmount,Class<?> bulletType ) {
+	public Arc3LauncherGroup(double midX, double midY,double direction, double angle, int lineAmount,int columnAmount,Class<?> bulletType ) {
 		super();
 		this.direction = direction;
 		this.angle = angle;
@@ -72,7 +73,7 @@ public class Arc3 extends ALauncherGroup {
  * @param lineAmount 发射组列数
  * @param columnAmount 发射组行数
  */
-	public Arc3(double midX, double midY,double direction, int lineAmount, int columnAmount) {
+	public Arc3LauncherGroup(double midX, double midY,double direction, int lineAmount, int columnAmount) {
 		
 		super();
 		this.direction = direction;
@@ -89,7 +90,7 @@ public class Arc3 extends ALauncherGroup {
  * @param direction 方向
  */
 
-	public Arc3(double midX, double midY,double direction) {
+	public Arc3LauncherGroup(double midX, double midY,double direction) {
 		super();
 		this.direction = direction;
 		this.midX = midX;
@@ -109,7 +110,7 @@ public class Arc3 extends ALauncherGroup {
 
 	
 
-	public Arc3(double midX, double midY,double direction, double angle, int lineAmount) {
+	public Arc3LauncherGroup(double midX, double midY,double direction, double angle, int lineAmount) {
 		super();
 		this.direction = direction;
 		this.angle = angle;
@@ -128,7 +129,7 @@ public class Arc3 extends ALauncherGroup {
  * @param lineAmount 发射组列数
  * @param columnAmount 发涉组行数
  */
-	public Arc3(double midX, double midY,double direction, double angle, int lineAmount,int columnAmount) {
+	public Arc3LauncherGroup(double midX, double midY,double direction, double angle, int lineAmount,int columnAmount) {
 		super();
 		this.direction = direction;
 		this.angle = angle;
@@ -140,7 +141,7 @@ public class Arc3 extends ALauncherGroup {
 	}
 
 
-	public Arc3(double midX, double midY, Class<?> bulletType) {
+	public Arc3LauncherGroup(double midX, double midY, Class<?> bulletType) {
 		super();
 		this.midX = midX;
 		this.midY = midY;
@@ -154,7 +155,7 @@ public class Arc3 extends ALauncherGroup {
 		 QuickDanmuku quick =QuickDanmuku.getQuickDanmuku();
 		for (int i = 0; i < columnAmount; i++) {
 
-		try2 l = new try2(midX,midY, direction, angle, lineAmount,bulletType);
+			ArcLauncherGroup l = new ArcLauncherGroup(midX,midY, direction, angle, lineAmount);
 		 
 			l.setLauncherConfig((launcher) -> {
 			
