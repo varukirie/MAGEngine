@@ -71,6 +71,9 @@ public class TestChapter extends AChapter {
 		boss.addDanmuku(new TriArcDanmuku(),3000);
 		boss.addDanmuku(new ReisenNonSpellCardDanmuku(),ReisenNonSpellCardDanmuku.DURATION+1000);//1秒间隔
 		boss.addDanmuku(new RunAwayNuclearDanmuku(), RunAwayNuclearDanmuku.DURATION+2000);//2秒间隔
+		boss.setOnRemoveEvent((bs)->{
+			new OvalLauncherGroup(bs.getX(), bs.getY(), 32).execute();
+		});
 		mEU.add("enemy", boss);
 		LogicExecutor executor= LogicExecutor.getLogicExecutor();
 		
