@@ -3,6 +3,7 @@ package magengine.util;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.function.Consumer;
 
 import application.Main;
 import javafx.application.Platform;
@@ -81,6 +82,8 @@ public class ElementUtils {
 		}
 		if(obj instanceof BaseElement){
 			((BaseElement)obj).setDeleted(true);
+			Consumer<BaseElement> event = ((BaseElement)obj).getOnRemoveEvent();
+			if(event!=null) event.accept((BaseElement) obj);
 		}
 		if(obj instanceof APolygonEnemy){
 			((MoveHandler) DI.di().get("mh")).removeCollisionElement(key);

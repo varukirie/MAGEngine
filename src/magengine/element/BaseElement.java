@@ -18,7 +18,8 @@ public abstract class BaseElement implements Moveable, Paintable, Accelerated {
 	protected boolean deleted = false;
 	private BooleanProperty wantBeRemoved = new SimpleBooleanProperty(false);
 	private Consumer<BaseElement> lambdaModify = null;
-
+	private Consumer<BaseElement> onRemoveEvent=null;
+	
 	public BaseElement(double x, double y) {
 		this(x, y, 0, 0);
 	}
@@ -126,5 +127,11 @@ public abstract class BaseElement implements Moveable, Paintable, Accelerated {
 	public void setWantBeRemoved(boolean wantBeRemoved) {
 		this.wantBeRemoved.set(wantBeRemoved);
 	}
-
+	
+	public void setOnRemoveEvent(Consumer<BaseElement> onRemoveEvent) {
+		this.onRemoveEvent = onRemoveEvent;
+	}
+	public Consumer<BaseElement> getOnRemoveEvent() {
+		return onRemoveEvent;
+	}
 }
