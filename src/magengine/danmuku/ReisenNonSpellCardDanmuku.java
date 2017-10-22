@@ -4,6 +4,9 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import application.Main;
+import javafx.scene.paint.Color;
+import magengine.bullet.PresetColor;
+import magengine.bullet.impl.HexagonBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.element.BaseElement;
 import magengine.game.LogicExecutor;
@@ -21,7 +24,7 @@ public class ReisenNonSpellCardDanmuku extends ADanmuku{
 	private static final double changedBulletSpeed= 85;
 	private static final double anchorR = 70;
 	private static final long interval = (long) (230*(1.0/Main.level.getFactor()));
-	private static final double rotateSpeed = 15;
+	private static final double rotateSpeed = 9;
 	private static final long duration = 10000;
 	private ElementUtils mEU = getmEU();
 	private Random r = new Random();
@@ -38,6 +41,7 @@ public class ReisenNonSpellCardDanmuku extends ADanmuku{
 	
 	private void anchor(BaseElement enemy,double deltaX,double deltaY,boolean positive){
 		RelativeAnchorHelper helper = new RelativeAnchorHelper(enemy, deltaX, deltaY);
+		quick.bindToWantBeRemoved(helper, getSourceElement());
 		helper.setDuration(duration);
 		mEU.add("AnchorHelper "+r.nextInt(), helper);
 		setRandomRotateLauncher(helper, positive, duration, 0);
@@ -49,9 +53,16 @@ public class ReisenNonSpellCardDanmuku extends ADanmuku{
 	private void setRandomRotateLauncher(BaseElement target,boolean positive,long duration,double startAngle){
 		OvalHelper helper = new OvalHelper(target.getX(),target.getY() , 1,rotateSpeed , startAngle, duration);
 		helper.setPositive(positive);
+		quick.bindToWantBeRemoved(helper, getSourceElement());
 		mEU.add("circle "+r.nextInt(), helper);
 		Launcher l = new Launcher(target.getX(), target.getY(), 0, interval, duration);
 		l.setBulletSpeed(startBulletSpeed);
+		l.setBulletType(HexagonBullet.class);
+		quick.bindToWantBeRemoved(l, getSourceElement());
+		l.setBulletConfig((b)->{
+			((HexagonBullet)b).setR(5);
+			((HexagonBullet)b).setColorSupplier((x)->{return Color.rgb(245, 245, 245,0.8);});
+		});
 		l.setBulletEvent((sesx,b)->{
 			LogicExecutor.getLogicExecutor().schedule(() -> {
 				quick.setSpeed(b, changedBulletSpeed);
