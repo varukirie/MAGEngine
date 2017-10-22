@@ -7,6 +7,7 @@ import application.Main;
 import javafx.scene.paint.Color;
 import magengine.bullet.PresetColor;
 import magengine.bullet.impl.CircleBullet;
+import magengine.bullet.impl.HexagonBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.element.BaseElement;
 import magengine.helper.OvalHelper;
@@ -42,14 +43,16 @@ public class RunAwayNuclearDanmuku extends ADanmuku {
 			l.setBulletSpeed(200);
 			l.setBulletConfig((b)->{
 				((CircleBullet)b).setR(20);
-				((CircleBullet)b).setColorSupplier(PresetColor.blueOpacity.get());
+				((CircleBullet)b).setColorSupplier(PresetColor.whiteOpacity.get());
 			});
+			quick.bindToWantBeRemoved(l, getSourceElement());
 		});
 		olg.delayExecute(delay);
 	}
 	private void setRandomRotateLauncher(BaseElement target,boolean positive,long duration,double startAngle){
 		OvalHelper helper = new OvalHelper(target.getX(),target.getY() , 1,rotateSpeed , startAngle, duration);
 		helper.setPositive(positive);
+		quick.bindToWantBeRemoved(helper, getSourceElement());
 		mEU.add("circle "+r.nextInt(), helper);
 		Launcher l = new Launcher(target.getX(), target.getY(), 0, interval, duration);
 		l.setBulletSpeed(bulletSpeed);
@@ -59,8 +62,11 @@ public class RunAwayNuclearDanmuku extends ADanmuku {
 		l.setBulletConfig((b)->{
 			((CircleBullet)b).setR(10);
 			((CircleBullet)b).setColorSupplier(PresetColor.redOpacity.get());
+//			((HexagonBullet)b).setR(10);
+//			((HexagonBullet)b).setColorSupplier(PresetColor.whiteOpacity.get());
 			quick.VRotateRandom(b, Math.PI/7);
 		});
+		quick.bindToWantBeRemoved(l, getSourceElement());
 		mEU.add("launcher "+r.nextInt(), l);
 	}
 }

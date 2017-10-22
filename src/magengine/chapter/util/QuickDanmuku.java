@@ -194,16 +194,6 @@ public class QuickDanmuku {
 		mEU.add("snipe" + r.nextInt(), bullet);
 	}
 
-	
-	public void bindToXY(BaseElement elem1,BaseElement elem2){
-		elem1.getxProperty().bind(elem2.getxProperty());
-		elem1.getyProperty().bind(elem2.getyProperty());
-	}
-	
-	public void unbindXY(BaseElement elem){
-		elem.getxProperty().unbind();
-		elem.getyProperty().unbind();
-	}
 	/**
 	 * 在angle的范围内随机让速度变化方向 单位弧度
 	 * @param angle
@@ -216,5 +206,18 @@ public class QuickDanmuku {
 		double[] ans = t.transform(elem.getVelocityX(),elem.getVelocityY());
 		elem.setVelocityX(ans[0]);
 		elem.setVelocityY(ans[1]);
+	}
+	
+	public void bindToXY(BaseElement elem1,BaseElement elem2){
+		elem1.getxProperty().bind(elem2.getxProperty());
+		elem1.getyProperty().bind(elem2.getyProperty());
+	}
+	
+	public void unbindXY(BaseElement elem){
+		elem.getxProperty().unbind();
+		elem.getyProperty().unbind();
+	}
+	public void bindToWantBeRemoved(BaseElement elem1,BaseElement elem2){
+		elem1.getWantBeRemovedProperty().bind(elem2.getWantBeRemovedProperty());
 	}
 }
