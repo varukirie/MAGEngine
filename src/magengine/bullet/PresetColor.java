@@ -1,5 +1,6 @@
 package magengine.bullet;
 
+import java.util.Random;
 import java.util.function.Function;
 
 import javafx.scene.paint.Color;
@@ -38,8 +39,33 @@ public enum PresetColor {
 		this.colorSupplier = colorSP;
 	}
 	
+	public static Function<RadiusSupplier, Paint> getByStops(Stop[] stops){
+		return (cirb) -> {
+			return new RadialGradient(0, .1, cirb.getX(), cirb.getY(), cirb.getR(), false, CycleMethod.NO_CYCLE,stops);
+		};
+	}
+	
+	public static Function<RadiusSupplier, Paint> getOpacityByColor(Color color){
+		return (cirb) -> {
+			return new RadialGradient(0, .1, cirb.getX(), cirb.getY(), cirb.getR(), false, CycleMethod.NO_CYCLE,
+					new Stop(0, Color.rgb(245, 245, 245,0)),
+					new Stop(0.3, Color.rgb(245, 245, 245,0)),
+					new Stop(0.7, color),
+					new Stop(1, Color.WHITE));
+		};
+	}
+	public static Function<RadiusSupplier, Paint> getRandomColorOpacityIn(Color[] colors){
+		int random = new Random().nextInt(colors.length);
+		return (cirb) -> {
+			return new RadialGradient(0, .1, cirb.getX(), cirb.getY(), cirb.getR(), false, CycleMethod.NO_CYCLE,
+					new Stop(0, Color.rgb(245, 245, 245,0)),
+					new Stop(0.3, Color.rgb(245, 245, 245,0)),
+					new Stop(0.7, colors[random]),
+					new Stop(1, Color.WHITE));
+		};
+	}
 	private Function<RadiusSupplier, Paint> colorSupplier;
-
+	
 	public Function<RadiusSupplier, Paint> get() {
 		return this.colorSupplier;
 	}

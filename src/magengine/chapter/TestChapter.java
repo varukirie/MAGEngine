@@ -3,10 +3,13 @@ package magengine.chapter;
 import java.util.Random;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 import javafx.application.Platform;
 import javafx.scene.effect.Bloom;
+import javafx.scene.paint.Color;
 import magengine.bullet.Bullet;
+import magengine.bullet.PresetColor;
 import magengine.bullet.impl.ArrowBullet;
 import magengine.bullet.impl.CircleBullet;
 import magengine.bullet.impl.DefaultBullet;
@@ -23,6 +26,7 @@ import magengine.danmuku.TriArcDanmuku;
 import magengine.danmuku.gs.Testing;
 import magengine.danmuku.yt.MulCircleDanmuku2;
 import magengine.danmuku.yt.demo1;
+import magengine.element.BaseElement;
 import magengine.enemy.ALoopDanmukuEnemy;
 import magengine.enemy.DefaultEnemy;
 import magengine.enemy.Enemy1;
@@ -82,22 +86,35 @@ public class TestChapter extends AChapter {
 
 		double blSpeed = 100;
 		double blbulletSpeed = 110;
+		Consumer<BaseElement> circleBulletConfig = (bullet) -> {
+			((CircleBullet) bullet).setColorSupplier(PresetColor
+					.getRandomColorOpacityIn(new Color[] { Color.ORANGE, Color.WHITE, Color.AQUA,Color.CADETBLUE,Color.LIGHTCORAL,Color.MISTYROSE }));
+			((CircleBullet) bullet).setR(12);
+		};
 		BurstLauncher Lblc = new BurstLauncher(50, 200, Math.PI / 2, 600, 10000);
 		Lblc.setVelocityX(blSpeed);
 		Lblc.setBulletSpeed(blbulletSpeed);
+		Lblc.setBulletType(CircleBullet.class);
+		Lblc.setBulletConfig(circleBulletConfig);
 		mEU.add(r.nextInt() + "", Lblc);
 		BurstLauncher Lblc2 = new BurstLauncher(50, 200, Math.PI / 2 * 3, 600, 10000);
 		Lblc2.setVelocityX(blSpeed);
 		Lblc2.setBulletSpeed(blbulletSpeed);
+		Lblc2.setBulletType(CircleBullet.class);
+		Lblc2.setBulletConfig(circleBulletConfig);
 		mEU.add(r.nextInt() + "", Lblc2);
 
 		BurstLauncher Rblc = new BurstLauncher(550, 200, Math.PI / 2, 600, 10000);
 		Rblc.setVelocityX(-blSpeed);
 		Rblc.setBulletSpeed(blbulletSpeed);
+		Rblc.setBulletType(CircleBullet.class);
+		Rblc.setBulletConfig(circleBulletConfig);
 		mEU.add(r.nextInt() + "", Rblc);
 		BurstLauncher Rblc2 = new BurstLauncher(550, 200, Math.PI / 2 * 3, 600, 10000);
 		Rblc2.setVelocityX(-blSpeed);
 		Rblc2.setBulletSpeed(blbulletSpeed);
+		Rblc2.setBulletType(CircleBullet.class);
+		Rblc2.setBulletConfig(circleBulletConfig);
 		mEU.add(r.nextInt() + "", Rblc2);
 
 		// quick.moveTo(enemy, 1500, 100, 100);

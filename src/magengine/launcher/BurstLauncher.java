@@ -11,8 +11,8 @@ import magengine.util.ElementUtils;
 
 public class BurstLauncher extends Launcher {
 
-	private int burstAmount = 7;
-	private double burstRange = 200;
+	private int burstAmount = 5;
+	private double burstRange = 100;
 	private long burstDuration = 500;
 
 	public BurstLauncher(double x, double y) {
