@@ -16,7 +16,7 @@ import magengine.util.Transform;
  * 
  */
 public class EllipseBullet extends APolygonBullet {
-	private double r = 10;
+	private double r = 1;
     private double rX = 5;
     private double rY = 75;
 	private double[][] martix ;

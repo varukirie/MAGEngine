@@ -72,7 +72,7 @@ public class SquareBullet extends APolygonBullet implements RadiusSupplier {
 		return colorSupplier;
 	}
 	
-	private double r = 10;
+	private double r = 1;
 
 	private double[][] martix ;
 	public void setR(double r) {
@@ -80,8 +80,19 @@ public class SquareBullet extends APolygonBullet implements RadiusSupplier {
 		martix[0][0]=r;
 		martix[1][1]=r;
 	}
-	
+	/**
+	 * 取得缩放后的半径
+	 * @return
+	 */
+	@Override
 	public double getR() {
+		return r*super.getScale();
+	}
+	/**
+	 * 取得缩放后前的半径
+	 * @return
+	 */
+	public double getRealR() {
 		return r;
 	}
 	

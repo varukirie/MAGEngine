@@ -18,7 +18,7 @@ public class CircleBullet extends APolygonBullet implements RadiusSupplier{
 	private Function<RadiusSupplier,Paint> colorSupplier = (cirb)->{
 		return Color.WHITESMOKE;
 	};
-	private double r = 10;
+	private double r = 1;
 	private double[][] martix ;
 	
 	public void setR(double r) {
