@@ -4,7 +4,6 @@ import java.util.Random;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-
 import javafx.application.Platform;
 import javafx.scene.effect.Bloom;
 import magengine.bullet.Bullet;
@@ -30,6 +29,7 @@ import magengine.enemy.Enemy1;
 import magengine.game.LogicExecutor;
 import magengine.helper.Helper;
 import magengine.helper.OvalHelper;
+import magengine.launcher.BurstLauncher;
 import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
 import magengine.paint.MyCanvas;
@@ -37,6 +37,7 @@ import magengine.paint.MyCanvasSwitcher;
 import magengine.ui.SceneManager;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
+
 public class TestChapter extends AChapter {
 	int midX = MyCanvas.CANVAS_WIDTH / 2;
 	int midY = 200;
@@ -63,91 +64,109 @@ public class TestChapter extends AChapter {
 			staticCanvas.getGraphicsContext2D().fillRect(0, 0, MyCanvas.CANVAS_WIDTH, MyCanvas.CANVAS_HEIGHT);
 		});
 		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
-		Random r=new Random();
-		
-		ALoopDanmukuEnemy boss = new Enemy1(300, 100);
-		boss.setHP(30);
-		boss.setDanmukuStartDelay(1000);
-		boss.addDanmuku(new TriArcDanmuku(),3000);
-		boss.addDanmuku(new ReisenNonSpellCardDanmuku(),ReisenNonSpellCardDanmuku.DURATION+1000);//1秒间隔
-		boss.addDanmuku(new RunAwayNuclearDanmuku(), RunAwayNuclearDanmuku.DURATION+2000);//2秒间隔
-		boss.setOnRemoveEvent((bs)->{
-			new OvalLauncherGroup(bs.getX(), bs.getY(), 32).execute();
-		});
-		mEU.add("enemy", boss);
-		LogicExecutor executor= LogicExecutor.getLogicExecutor();
-		
-//		quick.moveTo(enemy, 1500, 100, 100);
-//		executor.schedule(() -> {
-//			quick.moveTo(enemy, 4000, 275, 500);
-//		}, 1700);
-//		executor.schedule(() -> {
-//			quick.moveTo(enemy, 4000, 500, 100);
-//		}, 6000);
-//		executor.schedule(() -> {
-//			quick.moveTo(enemy, 3000, 275, 195.5);
-//		}, 11000);
-		
-//		quick.moveTo(enemy, 1500, 100, 100);
-//		LogicExecutor.getLogicExecutor().schedule(() -> {
-//			quick.moveTo(enemy, 4000, 275, 500);
-//		}, 1700, TimeUnit.MILLISECONDS);
-//		LogicExecutor.getLogicExecutor().schedule(() -> {
-//			quick.moveTo(enemy, 4000, 500, 100);
-//		}, 6000, TimeUnit.MILLISECONDS);
-//		LogicExecutor.getLogicExecutor().schedule(() -> {
-//			quick.moveTo(enemy, 3000, 275, 195.5);
-//		}, 11000, TimeUnit.MILLISECONDS);
-		//		Launcher launcher  = new Launcher(1, midY, 0, 400, 4000);
-//		launcher.setBulletType(Launcher.class);
-//		launcher.setVelocityX(120);
-//		launcher.setBulletSpeed(0);
-//		launcher.setBulletConfig((launcherN)->{
-//			Launcher ln = (Launcher) launcherN;
-//			ln.setDuration(quick.getSyncDelayAfterLaunch(launcher, 10000));
-//			ln.setDirection(Math.PI/2);
-//			ln.setBulletSpeed(100);
-//			ln.setInterval(1000000);
-//			ln.setVelocityX(10);
-//		});
-//		launcher.setBulletEvent((sesx,launcherN)->{
-//			Launcher ln = (Launcher) launcherN;
-//			LogicExecutor.getLogicExecutor().schedule(() -> {
-//				ln.setInterval(1000);
-//			}, quick.getSyncDelayAfterLaunch(launcher, 5000), TimeUnit.MILLISECONDS);
-//		});
-//		mEU.add("l", launcher);
-		
-		
-		
-		
-		
-//		new RingDanmuku().setDelay(1000).delayExecute();
+		Random r = new Random();
 
-		
-		
-//		Helper midHelper  = new Helper(midX, midY);
-//		midHelper.setVelocityY(30);
-//		int bulletCount = 32;
-//		for (int i = 0; i < bulletCount; i++) {
-//			Bullet bullet = new DefaultBullet(midX, midY);
-//			OvalHelper helper = new OvalHelper(midX, midY, 100, 30, Math.PI * 2 / bulletCount * i);
-//			helper.getOvalMidXProperty().bind(midHelper.getxProperty());
-//			helper.getOvalMidYProperty().bind(midHelper.getyProperty());
-//			bullet.getxProperty().bind(helper.getxProperty());
-//			bullet.getyProperty().bind(helper.getyProperty());
-//			bullet.setVelocityX(1);
-//			bullet.setLambdaModify((x) -> {
-//				quick.VToByDirection(x, helper.getDirection() + Math.PI / 2);
-//			});
-//			Random r = new Random();
-//			mEU.add("bullet" + r.nextInt(), bullet);
-//			mEU.add("helper" + r.nextInt(), helper);
-//			mEU.add("midHelper", midHelper);
-//		}
-//		for(int i=1;i<=1000;i++){
-//			new StarDanmuku().setDelay(700*i).delayExecute();
-//		}
-		
+		// ALoopDanmukuEnemy boss = new Enemy1(300, 100);
+		// boss.setHP(30);
+		// boss.setDanmukuStartDelay(1000);
+		// boss.addDanmuku(new TriArcDanmuku(),3000);
+		// boss.addDanmuku(new
+		// ReisenNonSpellCardDanmuku(),ReisenNonSpellCardDanmuku.DURATION+1000);//1秒间隔
+		// boss.addDanmuku(new RunAwayNuclearDanmuku(),
+		// RunAwayNuclearDanmuku.DURATION+2000);//2秒间隔
+		// boss.setOnRemoveEvent((bs)->{
+		// new OvalLauncherGroup(bs.getX(), bs.getY(), 32).execute();
+		// });
+		// mEU.add("enemy", boss);
+		LogicExecutor executor = LogicExecutor.getLogicExecutor();
+
+		double blSpeed = 100;
+		double blbulletSpeed = 110;
+		BurstLauncher Lblc = new BurstLauncher(50, 200, Math.PI / 2, 600, 10000);
+		Lblc.setVelocityX(blSpeed);
+		Lblc.setBulletSpeed(blbulletSpeed);
+		mEU.add(r.nextInt() + "", Lblc);
+		BurstLauncher Lblc2 = new BurstLauncher(50, 200, Math.PI / 2 * 3, 600, 10000);
+		Lblc2.setVelocityX(blSpeed);
+		Lblc2.setBulletSpeed(blbulletSpeed);
+		mEU.add(r.nextInt() + "", Lblc2);
+
+		BurstLauncher Rblc = new BurstLauncher(550, 200, Math.PI / 2, 600, 10000);
+		Rblc.setVelocityX(-blSpeed);
+		Rblc.setBulletSpeed(blbulletSpeed);
+		mEU.add(r.nextInt() + "", Rblc);
+		BurstLauncher Rblc2 = new BurstLauncher(550, 200, Math.PI / 2 * 3, 600, 10000);
+		Rblc2.setVelocityX(-blSpeed);
+		Rblc2.setBulletSpeed(blbulletSpeed);
+		mEU.add(r.nextInt() + "", Rblc2);
+
+		// quick.moveTo(enemy, 1500, 100, 100);
+		// executor.schedule(() -> {
+		// quick.moveTo(enemy, 4000, 275, 500);
+		// }, 1700);
+		// executor.schedule(() -> {
+		// quick.moveTo(enemy, 4000, 500, 100);
+		// }, 6000);
+		// executor.schedule(() -> {
+		// quick.moveTo(enemy, 3000, 275, 195.5);
+		// }, 11000);
+
+		// quick.moveTo(enemy, 1500, 100, 100);
+		// LogicExecutor.getLogicExecutor().schedule(() -> {
+		// quick.moveTo(enemy, 4000, 275, 500);
+		// }, 1700, TimeUnit.MILLISECONDS);
+		// LogicExecutor.getLogicExecutor().schedule(() -> {
+		// quick.moveTo(enemy, 4000, 500, 100);
+		// }, 6000, TimeUnit.MILLISECONDS);
+		// LogicExecutor.getLogicExecutor().schedule(() -> {
+		// quick.moveTo(enemy, 3000, 275, 195.5);
+		// }, 11000, TimeUnit.MILLISECONDS);
+		// Launcher launcher = new Launcher(1, midY, 0, 400, 4000);
+		// launcher.setBulletType(Launcher.class);
+		// launcher.setVelocityX(120);
+		// launcher.setBulletSpeed(0);
+		// launcher.setBulletConfig((launcherN)->{
+		// Launcher ln = (Launcher) launcherN;
+		// ln.setDuration(quick.getSyncDelayAfterLaunch(launcher, 10000));
+		// ln.setDirection(Math.PI/2);
+		// ln.setBulletSpeed(100);
+		// ln.setInterval(1000000);
+		// ln.setVelocityX(10);
+		// });
+		// launcher.setBulletEvent((sesx,launcherN)->{
+		// Launcher ln = (Launcher) launcherN;
+		// LogicExecutor.getLogicExecutor().schedule(() -> {
+		// ln.setInterval(1000);
+		// }, quick.getSyncDelayAfterLaunch(launcher, 5000),
+		// TimeUnit.MILLISECONDS);
+		// });
+		// mEU.add("l", launcher);
+
+		// new RingDanmuku().setDelay(1000).delayExecute();
+
+		// Helper midHelper = new Helper(midX, midY);
+		// midHelper.setVelocityY(30);
+		// int bulletCount = 32;
+		// for (int i = 0; i < bulletCount; i++) {
+		// Bullet bullet = new DefaultBullet(midX, midY);
+		// OvalHelper helper = new OvalHelper(midX, midY, 100, 30, Math.PI * 2 /
+		// bulletCount * i);
+		// helper.getOvalMidXProperty().bind(midHelper.getxProperty());
+		// helper.getOvalMidYProperty().bind(midHelper.getyProperty());
+		// bullet.getxProperty().bind(helper.getxProperty());
+		// bullet.getyProperty().bind(helper.getyProperty());
+		// bullet.setVelocityX(1);
+		// bullet.setLambdaModify((x) -> {
+		// quick.VToByDirection(x, helper.getDirection() + Math.PI / 2);
+		// });
+		// Random r = new Random();
+		// mEU.add("bullet" + r.nextInt(), bullet);
+		// mEU.add("helper" + r.nextInt(), helper);
+		// mEU.add("midHelper", midHelper);
+		// }
+		// for(int i=1;i<=1000;i++){
+		// new StarDanmuku().setDelay(700*i).delayExecute();
+		// }
+
 	}
 }

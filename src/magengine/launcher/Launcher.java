@@ -20,15 +20,15 @@ import magengine.util.ElementUtils;
 
 public class Launcher extends BaseElement implements Initializable, DurationManage {
 
-	private BulletEvent bulletEvent;
-	private DoubleProperty directionProperty = new SimpleDoubleProperty(0);
-	private long interval = 400;
-	private long startTime = 0;
-	private long lastLaunchTime = 0;
-	private Class<?> bulletType = DefaultBullet.class;
-	private double bulletSpeed = 80;
-	private long duration = 10000;
-	private Consumer<BaseElement> bulletConfig = null;
+	protected BulletEvent bulletEvent;
+	protected DoubleProperty directionProperty = new SimpleDoubleProperty(0);
+	protected long interval = 400;
+	protected long startTime = 0;
+	protected long lastLaunchTime = 0;
+	protected Class<?> bulletType = DefaultBullet.class;
+	protected double bulletSpeed = 80;
+	protected long duration = 10000;
+	protected Consumer<BaseElement> bulletConfig = null;
 
 	public Launcher(double x, double y) {
 		super(x, y);
