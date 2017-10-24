@@ -30,7 +30,6 @@ import magengine.launcher.ArcLauncherGroup;
 import magengine.launcher.BulletEvent;
 import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
-import magengine.launcher.yt.Arc3LauncherGroup;
 import magengine.launcher.yt.LineLauncherGroup;
 import magengine.paint.MyCanvas;
 import magengine.util.ElementUtils;
@@ -140,14 +139,7 @@ public void executeDanmuku() {
 		setRandomRotateLauncher(getSourceElement(), true, duration, Math.PI/3*4);
 	
 		
-		new Arc3LauncherGroup(200,150,CircleBullet.class).delayExecute(2500);
-		new Arc3LauncherGroup(200,150, Math.PI/2).delayExecute(2500);
-		
-		new Arc3LauncherGroup(200,150, Math.PI/2, Math.PI/3, 5).delayExecute(35000);
-		new Arc3LauncherGroup(200,150, Math.PI/2, Math.PI/3, 5, 6).delayExecute(45000);
-		new Arc3LauncherGroup(200,150, Math.PI/2, Math.PI/3, 5, 6,CircleBullet.class).delayExecute(50000);
-		new Arc3LauncherGroup(200,150, Math.PI/2, Math.PI/3, 15, 12,CircleBullet.class).delayExecute(50000);
-		
+
 		callOLG(duration/4*10);
 		callOLG(duration/4*11);
 		callOLG(duration/4*12);

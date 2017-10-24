@@ -25,6 +25,7 @@ import magengine.danmuku.StarDanmuku;
 import magengine.danmuku.TriArcDanmuku;
 import magengine.danmuku.gs.Testing;
 import magengine.danmuku.yt.MulCircleDanmuku2;
+import magengine.danmuku.yt.RotateDanmuku;
 import magengine.danmuku.yt.demo1;
 import magengine.element.BaseElement;
 import magengine.enemy.ALoopDanmukuEnemy;
@@ -82,6 +83,8 @@ public class TestChapter extends AChapter {
 		// new OvalLauncherGroup(bs.getX(), bs.getY(), 32).execute();
 		// });
 		// mEU.add("enemy", boss);
+		
+		new RotateDanmuku().delayExecute();
 		LogicExecutor executor = LogicExecutor.getLogicExecutor();
 
 		double blSpeed = 100;
