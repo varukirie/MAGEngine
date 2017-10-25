@@ -38,8 +38,8 @@ public class LogicExecutor {
 		for (int i = 0, j = taskList.size(); i < j; i++) {
 			if (taskList.get(i).delay < curTime) {
 				taskList.get(i).task.run();
-				taskList.set(i, taskList.get(taskList.size()-1));
-				taskList.remove(taskList.size()-1);
+				taskList.set(i, taskList.get(j-1));
+				taskList.remove(j-1);
 				i--;
 				j--;
 			}
