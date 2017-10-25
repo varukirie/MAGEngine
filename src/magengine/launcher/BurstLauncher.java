@@ -29,23 +29,25 @@ public class BurstLauncher extends Launcher {
 		double eachRange = burstRange / (burstAmount - 1);
 		for (int i = 0; i < burstAmount; i++) {
 			double burstBulletSpeed = 1.0*i * (eachRange / (burstDuration / 1000.0))+1;
-			try {
-				BaseElement elem = (BaseElement) bulletType
-						.getConstructor(double.class, double.class, double.class, double.class).newInstance(getX(),
-								getY(), Math.cos(getDirection()) * burstBulletSpeed,
-								Math.sin(getDirection()) * burstBulletSpeed);
-				if (bulletConfig != null)
-					bulletConfig.accept(elem);
-				((ElementUtils) (DI.di().get("mEU"))).addEventBullet(UUID.randomUUID().toString(),  this.getBulletEvent(),
-						elem);
-				LogicExecutor.getLogicExecutor().schedule(() -> {
-					QuickDanmuku.getQuickDanmuku().setSpeed(elem, bulletSpeed);
-				}, burstDuration);
-			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-					| InvocationTargetException | NoSuchMethodException | SecurityException e) {
-				System.out.println("错误的子弹类型");
-				e.printStackTrace();
-			}
+			LogicExecutor.getLogicExecutor().schedule(()->{
+				try {
+					BaseElement elem = (BaseElement) bulletType
+							.getConstructor(double.class, double.class, double.class, double.class).newInstance(getX(),
+									getY(), Math.cos(getDirection()) * burstBulletSpeed,
+									Math.sin(getDirection()) * burstBulletSpeed);
+					if (bulletConfig != null)
+						bulletConfig.accept(elem);
+					((ElementUtils) (DI.di().get("mEU"))).addEventBullet(UUID.randomUUID().toString(),  this.getBulletEvent(),
+							elem);
+					LogicExecutor.getLogicExecutor().schedule(() -> {
+						QuickDanmuku.getQuickDanmuku().setSpeed(elem, bulletSpeed);
+					}, burstDuration);
+				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+						| InvocationTargetException | NoSuchMethodException | SecurityException e) {
+					System.out.println("错误的子弹类型");
+					e.printStackTrace();
+				}
+			}, 0);
 		}
 	}
 

@@ -68,18 +68,20 @@ public class Launcher extends BaseElement implements Initializable, DurationMana
 	}
 
 	public void launch() {
-		try {
-			BaseElement elem = (BaseElement) bulletType
-					.getConstructor(double.class, double.class, double.class, double.class).newInstance(getX(), getY(),
-							Math.cos(getDirection()) * bulletSpeed, Math.sin(getDirection()) * bulletSpeed);
-			if(bulletConfig!=null)
-				bulletConfig.accept(elem);
-			((ElementUtils) (DI.di().get("mEU"))).addEventBullet(UUID.randomUUID().toString(), this.bulletEvent, elem);
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-				| NoSuchMethodException | SecurityException e) {
-			System.out.println("错误的子弹类型");
-			e.printStackTrace();
-		}
+		LogicExecutor.getLogicExecutor().schedule(()->{
+			try {
+				BaseElement elem = (BaseElement) bulletType
+						.getConstructor(double.class, double.class, double.class, double.class).newInstance(getX(), getY(),
+								Math.cos(getDirection()) * bulletSpeed, Math.sin(getDirection()) * bulletSpeed);
+				if(bulletConfig!=null)
+					bulletConfig.accept(elem);
+				((ElementUtils) (DI.di().get("mEU"))).addEventBullet(UUID.randomUUID().toString(), this.bulletEvent, elem);
+			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException e) {
+				System.out.println("错误的子弹类型");
+				e.printStackTrace();
+			}
+		}, 0);
 	}
 
 

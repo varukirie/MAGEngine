@@ -1,6 +1,7 @@
 package magengine.game;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -31,27 +32,27 @@ public class LogicExecutor {
 
 	private double curTime = 0;
 	private ArrayList<GameTask> taskList = new ArrayList<>();
-
+	
 	public void update(double deltaTime) {
 		curTime += deltaTime;
-		synchronized (taskList) {
-			for (int i = 0, j = taskList.size(); i < j; i++) {
-				if (taskList.get(i).delay < curTime) {
-					// System.out.println("task executor delay"+task.delay+"
-					// curTime="+curTime);
-					executor.submit(taskList.get(i).task);
-					taskList.remove(i);
-					i--;
-					j--;
-				}
+		for (int i = 0, j = taskList.size(); i < j; i++) {
+			if (taskList.get(i).delay < curTime) {
+				taskList.get(i).task.run();
+				taskList.set(i, taskList.get(taskList.size()-1));
+				taskList.remove(taskList.size()-1);
+				i--;
+				j--;
 			}
 		}
 	}
-
+/**
+ * 计划任务
+ * 如果你需要同步操作，那么可以将delay填0 ，task会在下一次update执行
+ * @param task
+ * @param delay
+ */
 	public void schedule(Runnable task, long delay) {
-		synchronized (taskList) {
-			taskList.add(new GameTask(task, (long) (delay + curTime)));
-		}
+		taskList.add(new GameTask(task, (long) (delay + curTime)));
 	}
 
 	public void schedule(Runnable task, long delay, TimeUnit timeUnit) {
@@ -77,8 +78,8 @@ public class LogicExecutor {
 		Runnable task;
 		long delay;
 	}
-	
-	public int getTaskCount(){
+
+	public int getTaskCount() {
 		return taskList.size();
 	}
 }

@@ -3,6 +3,8 @@ package magengine.launcher;
 import java.lang.reflect.InvocationTargetException;
 import java.util.UUID;
 
+import magengine.game.LogicExecutor;
+
 public class ArcLauncherGroup extends ALauncherGroup {
 
 	/**
@@ -52,18 +54,21 @@ public class ArcLauncherGroup extends ALauncherGroup {
 	@Override
 	public void execute() {
 		for (int i = 0; i < amount; i++) {
-			Launcher launcher;
-			try {
-				launcher = launcherType.getConstructor(double.class, double.class, double.class, long.class, long.class)
-						.newInstance(midX, midY, (direction - angle / 2) + i * (angle / (amount - 1)), interval,
-								duration);
-				configLauncher(launcher);
-				mEU.add(UUID.randomUUID().toString(), launcher);
-			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-					| InvocationTargetException | NoSuchMethodException | SecurityException e) {
-				e.printStackTrace();
-				System.out.println("ArcLauncherGroup:错误的launcherType");
-			}
+			final int j=i;
+			LogicExecutor.getLogicExecutor().schedule(()->{
+				Launcher launcher;
+				try {
+					launcher = launcherType.getConstructor(double.class, double.class, double.class, long.class, long.class)
+							.newInstance(midX, midY, (direction - angle / 2) + j * (angle / (amount - 1)), interval,
+									duration);
+					configLauncher(launcher);
+					mEU.add(UUID.randomUUID().toString(), launcher);
+				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+						| InvocationTargetException | NoSuchMethodException | SecurityException e) {
+					e.printStackTrace();
+					System.out.println("ArcLauncherGroup:错误的launcherType");
+				}
+			}, 0);
 
 		}
 	}

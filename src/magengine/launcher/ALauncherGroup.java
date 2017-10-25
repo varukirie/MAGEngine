@@ -13,11 +13,11 @@ public abstract class ALauncherGroup {
 	/**
 	 * 两次发射之间间隔
 	 */
-	protected long interval = 50;
+	protected long interval = 20;
 	/**
 	 * 发射器的存在时间
 	 */
-	protected long duration = 70;
+	protected long duration = 20;
 
 	protected ScheduledExecutorService sES = (ScheduledExecutorService) DI.di().get("sES");
 	protected MyCanvas staticCanvas = (MyCanvas) DI.di().get("staticCanvas");
