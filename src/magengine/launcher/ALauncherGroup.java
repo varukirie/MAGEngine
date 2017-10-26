@@ -4,6 +4,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
+import magengine.element.BaseElement;
 import magengine.game.LogicExecutor;
 import magengine.paint.MyCanvas;
 import magengine.util.DI;
@@ -41,6 +42,23 @@ public abstract class ALauncherGroup {
 	public void delayExecute(long delay){
 		LogicExecutor.getLogicExecutor().schedule(()->{
 			execute();
+		}, delay, TimeUnit.MILLISECONDS);
+	}
+	public void delayExecuteCheck(long delay,BaseElement sourceElement){
+		LogicExecutor.getLogicExecutor().schedule(()->{
+			if(sourceElement.getDeleted()==false){
+				execute();
+			}
+		}, delay, TimeUnit.MILLISECONDS);
+	}
+	
+	public void delayExecuteCheckAndWith(long delay,BaseElement sourceElement,Runnable task){
+		LogicExecutor.getLogicExecutor().schedule(()->{
+			if(sourceElement.getDeleted()==false){
+				if(task!=null)
+					task.run();
+				execute();
+			}
 		}, delay, TimeUnit.MILLISECONDS);
 	}
 

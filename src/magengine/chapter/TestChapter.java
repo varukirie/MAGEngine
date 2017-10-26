@@ -23,6 +23,7 @@ import magengine.danmuku.RingDanmuku;
 import magengine.danmuku.RunAwayNuclearDanmuku;
 import magengine.danmuku.StarDanmuku;
 import magengine.danmuku.TriArcDanmuku;
+import magengine.danmuku.UtsuhoNonSpellCard1;
 import magengine.danmuku.gs.Testing;
 import magengine.danmuku.yt.MulCircleDanmuku2;
 import magengine.danmuku.yt.RotateDanmuku;
@@ -34,6 +35,7 @@ import magengine.enemy.Enemy1;
 import magengine.game.LogicExecutor;
 import magengine.helper.Helper;
 import magengine.helper.OvalHelper;
+import magengine.launcher.ArcLauncherGroup;
 import magengine.launcher.BurstLauncher;
 import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
@@ -71,10 +73,10 @@ public class TestChapter extends AChapter {
 		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 		Random r = new Random();
 
-		// ALoopDanmukuEnemy boss = new Enemy1(300, 100);
-		// boss.setHP(30);
-		// boss.setDanmukuStartDelay(1000);
-		// boss.addDanmuku(new TriArcDanmuku(),3000);
+		 ALoopDanmukuEnemy boss = new Enemy1(300, 100);
+		 boss.setHP(30);
+		 boss.setDanmukuStartDelay(1);
+		 boss.addDanmuku(new UtsuhoNonSpellCard1(),UtsuhoNonSpellCard1.DURATION);
 		// boss.addDanmuku(new
 		// ReisenNonSpellCardDanmuku(),ReisenNonSpellCardDanmuku.DURATION+1000);//1秒间隔
 		// boss.addDanmuku(new RunAwayNuclearDanmuku(),
@@ -82,43 +84,26 @@ public class TestChapter extends AChapter {
 		// boss.setOnRemoveEvent((bs)->{
 		// new OvalLauncherGroup(bs.getX(), bs.getY(), 32).execute();
 		// });
-		// mEU.add("enemy", boss);
-		
-		new RotateDanmuku().delayExecute();
+		 mEU.add("enemy", boss);
+
+		// new RotateDanmuku().delayExecute();
 		LogicExecutor executor = LogicExecutor.getLogicExecutor();
+		
 
-		double blSpeed = 100;
-		double blbulletSpeed = 110;
-		Consumer<BaseElement> circleBulletConfig = (bullet) -> {
-			((CircleBullet) bullet).setColorSupplier(PresetColor
-					.getRandomColorOpacityIn(new Color[] { Color.ORANGE, Color.WHITE, Color.AQUA,Color.CADETBLUE,Color.LIGHTCORAL,Color.MISTYROSE }));
-			((CircleBullet) bullet).setR(12);
-		};
-		BurstLauncher Lblc = new BurstLauncher(50, 200, Math.PI / 2, 600, 10000);
-		Lblc.setVelocityX(blSpeed);
-		Lblc.setBulletSpeed(blbulletSpeed);
-		Lblc.setBulletType(CircleBullet.class);
-		Lblc.setBulletConfig(circleBulletConfig);
-		mEU.add(r.nextInt() + "", Lblc);
-		BurstLauncher Lblc2 = new BurstLauncher(50, 200, Math.PI / 2 * 3, 600, 10000);
-		Lblc2.setVelocityX(blSpeed);
-		Lblc2.setBulletSpeed(blbulletSpeed);
-		Lblc2.setBulletType(CircleBullet.class);
-		Lblc2.setBulletConfig(circleBulletConfig);
-		mEU.add(r.nextInt() + "", Lblc2);
-
-		BurstLauncher Rblc = new BurstLauncher(550, 200, Math.PI / 2, 600, 10000);
-		Rblc.setVelocityX(-blSpeed);
-		Rblc.setBulletSpeed(blbulletSpeed);
-		Rblc.setBulletType(CircleBullet.class);
-		Rblc.setBulletConfig(circleBulletConfig);
-		mEU.add(r.nextInt() + "", Rblc);
-		BurstLauncher Rblc2 = new BurstLauncher(550, 200, Math.PI / 2 * 3, 600, 10000);
-		Rblc2.setVelocityX(-blSpeed);
-		Rblc2.setBulletSpeed(blbulletSpeed);
-		Rblc2.setBulletType(CircleBullet.class);
-		Rblc2.setBulletConfig(circleBulletConfig);
-		mEU.add(r.nextInt() + "", Rblc2);
+		// ArcLauncherGroup alg= new ArcLauncherGroup(300, 200, Math.PI/3,
+		// Math.PI/3,128);
+		// alg.setLauncherConfig((l)->{
+		// l.setBulletSpeed(100);
+		// ((BurstLauncher)l).setBurstAmount(5);
+		// ((BurstLauncher)l).setBurstRange(500);
+		// ((BurstLauncher)l).setBurstDuration(2000);
+		// l.setBulletType(CircleBullet.class);
+		// l.setBulletConfig(circleBulletConfig);
+		// l.setBulletEvent((sesx,b)->{
+		// });
+		// });
+		// alg.setLauncherType(BurstLauncher.class);
+		// alg.execute();
 
 		// quick.moveTo(enemy, 1500, 100, 100);
 		// executor.schedule(() -> {

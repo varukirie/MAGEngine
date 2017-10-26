@@ -28,11 +28,11 @@ public class QuickDanmuku {
 		}
 		return quick;
 	}
-	
-	public static void clear(){
-		quick=null;
+
+	public static void clear() {
+		quick = null;
 	}
-	
+
 	private ElementUtils mEU;
 	private ScheduledExecutorService sES = (ScheduledExecutorService) DI.di().get("sES");
 	private final double sqrt2d2 = 0.7071;
@@ -68,10 +68,10 @@ public class QuickDanmuku {
 		element.setAccY((targetY - element.getY()) * (originS / targetS));
 	}
 
-	public long getSyncDelayAfterLaunch(Launcher launcher,long delay){
-		return launcher.getStartTime()+delay-LogicExecutor.gameTime();
+	public long getSyncDelayAfterLaunch(Launcher launcher, long delay) {
+		return launcher.getStartTime() + delay - LogicExecutor.gameTime();
 	}
-	
+
 	/**
 	 * 
 	 * @param element
@@ -85,19 +85,20 @@ public class QuickDanmuku {
 		element.setVelocityY(Math.sin(direction) * originS);
 	}
 
-	public void moveTo(BaseElement element, long timeCost, double targetX, double targetY){
-		moveTo(element,timeCost, targetX,targetY,true);
+	public void moveTo(BaseElement element, long timeCost, double targetX, double targetY) {
+		moveTo(element, timeCost, targetX, targetY, true);
 	}
+
 	/**
-	 * 让元素在指定时间内运动到目的地
-	 * 线程不安全，两次调用应该有足够间隔
+	 * 让元素在指定时间内运动到目的地 线程不安全，两次调用应该有足够间隔
+	 * 
 	 * @param element
 	 * @param timeCost
 	 * @param targetX
 	 * @param targetY
 	 */
 
-	public void moveTo(BaseElement element, long timeCost, double targetX, double targetY,boolean accMode) {
+	public void moveTo(BaseElement element, long timeCost, double targetX, double targetY, boolean accMode) {
 		MoveToHelper helper = new MoveToHelper(element.getX(), element.getY(), targetX, targetY, timeCost);
 		helper.setAccMode(accMode);
 		element.setVelocityX(0);
@@ -106,27 +107,26 @@ public class QuickDanmuku {
 		element.setAccY(0);
 		element.getxProperty().bind(helper.getxProperty());
 		element.getyProperty().bind(helper.getyProperty());
-//		element.getxProperty().bind(helper.getxProperty());
-//		element.getyProperty().bind(helper.getyProperty());
+		// element.getxProperty().bind(helper.getxProperty());
+		// element.getyProperty().bind(helper.getyProperty());
 		mEU.add(r.nextInt() + "", helper);
-//		System.out.println(timeCost);
+		// System.out.println(timeCost);
 		LogicExecutor.getLogicExecutor().schedule(() -> {
-//			System.out.println("execute unbind");
+			// System.out.println("execute unbind");
 			// element.getxProperty().unbindBidirectional(helper.getxProperty());
 			// element.getyProperty().unbindBidirectional(helper.getyProperty());
 			element.getxProperty().unbind();
 			element.getyProperty().unbind();
-//			element.getxProperty().set(150);
+			// element.getxProperty().set(150);
 		}, timeCost + 1, TimeUnit.MILLISECONDS);
 
 	}
 
 	public void VRotate(BaseElement elem, double angle) {
 		double theta = angle;
-		Transform t= new Transform(new double[][] {
-			{Math.cos(theta) ,Math.sin(theta) }, 
-			{-Math.sin(theta),Math.cos(theta) } });
-		double[] ans = t.transform(elem.getVelocityX(),elem.getVelocityY());
+		Transform t = new Transform(
+				new double[][] { { Math.cos(theta), Math.sin(theta) }, { -Math.sin(theta), Math.cos(theta) } });
+		double[] ans = t.transform(elem.getVelocityX(), elem.getVelocityY());
 		elem.setVelocityX(ans[0]);
 		elem.setVelocityY(ans[1]);
 	}
@@ -196,28 +196,41 @@ public class QuickDanmuku {
 
 	/**
 	 * 在angle的范围内随机让速度变化方向 单位弧度
+	 * 
 	 * @param angle
 	 */
-	public void VRotateRandom(BaseElement elem,double angle){
-		double theta = angle*r.nextDouble()-(angle/2);
-		Transform t= new Transform(new double[][] {
-			{Math.cos(theta) ,Math.sin(theta) }, 
-			{-Math.sin(theta),Math.cos(theta) } });
-		double[] ans = t.transform(elem.getVelocityX(),elem.getVelocityY());
+	public void VRotateRandom(BaseElement elem, double angle) {
+		double theta = angle * r.nextDouble() - (angle / 2);
+		Transform t = new Transform(
+				new double[][] { { Math.cos(theta), Math.sin(theta) }, { -Math.sin(theta), Math.cos(theta) } });
+		double[] ans = t.transform(elem.getVelocityX(), elem.getVelocityY());
 		elem.setVelocityX(ans[0]);
 		elem.setVelocityY(ans[1]);
 	}
-	
-	public void bindToXY(BaseElement elem1,BaseElement elem2){
+
+	public void bindToXY(BaseElement elem1, BaseElement elem2) {
 		elem1.getxProperty().bind(elem2.getxProperty());
 		elem1.getyProperty().bind(elem2.getyProperty());
 	}
-	
-	public void unbindXY(BaseElement elem){
+
+	public void unbindXY(BaseElement elem) {
 		elem.getxProperty().unbind();
 		elem.getyProperty().unbind();
 	}
-	public void bindToWantBeRemoved(BaseElement elem1,BaseElement elem2){
+
+	public void bindToWantBeRemoved(BaseElement elem1, BaseElement elem2) {
 		elem1.getWantBeRemovedProperty().bind(elem2.getWantBeRemovedProperty());
+	}
+/*
+ * 取得向量(targetX-sourceX,targetY-sourceY)的正角
+ */
+	public double getDirectionAngle(double sourceX, double sourceY, double targetX, double targetY) {
+		return Math.atan2(targetY-sourceY, targetX-sourceX);
+	}
+	public double getDirectionAngle(BaseElement elem,double targetX,double targetY) {
+		return getDirectionAngle(elem.getX(), elem.getY(), targetX, targetY);
+	}
+	public double getPlayerDirectionAngle(BaseElement elem) {
+		return getDirectionAngle(elem, Player.getPlayer().getX(), Player.getPlayer().getY());
 	}
 }

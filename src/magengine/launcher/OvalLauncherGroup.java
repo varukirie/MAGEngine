@@ -28,7 +28,9 @@ public class OvalLauncherGroup extends ALauncherGroup {
 
 	@Override
 	public void execute() {
-		new ArcLauncherGroup(midX, midY, startAngle, Math.PI*2-(Math.PI*2/amount), amount).execute();
+		ArcLauncherGroup alg=new ArcLauncherGroup(midX, midY, startAngle, Math.PI*2-(Math.PI*2/amount), amount);
+		alg.setLauncherConfig(this.getLauncherConfig());
+		alg.execute();
 	}
 
 
