@@ -79,9 +79,10 @@ public class RotateDanmuku extends ADanmuku {
 		
 		Launcher launcher = new Launcher(100, 100, 0.5*Math.PI, 220, duration);
 		
-		launcher.getDirectionProperty().bindBidirectional(helper.getDirectionProperty());
-		launcher.getxProperty().bindBidirectional(helper.getxProperty());
-		launcher.getyProperty().bindBidirectional(helper.getyProperty());
+		launcher.getDirectionProperty().bind(helper.getDirectionProperty());
+		launcher.getxProperty().bind(helper.getxProperty());
+		launcher.getyProperty().bind(helper.getyProperty());
+		
 		
 		launcher.setBulletEvent((sEX, bullet) -> {
 			sEX.schedule(() -> {
