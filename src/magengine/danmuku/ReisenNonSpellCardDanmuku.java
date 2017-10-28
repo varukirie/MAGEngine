@@ -23,7 +23,7 @@ public class ReisenNonSpellCardDanmuku extends ADanmuku{
 	private static final double startBulletSpeed = 800;
 	private static final double changedBulletSpeed= 85;
 	private static final double anchorR = 70;
-	private static final long interval = (long) (230*(1.0/Main.level.getFactor()));
+	private static final long interval = (long) (230);
 	private static final double rotateSpeed = 9;
 	public static final long DURATION = 10000;
 	private ElementUtils mEU = getmEU();

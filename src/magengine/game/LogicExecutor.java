@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 public class LogicExecutor {
 
-	private static LogicExecutor instance;
+	private static LogicExecutor instance=new LogicExecutor();
 
 	public static LogicExecutor getLogicExecutor() {
 		if (instance == null) {

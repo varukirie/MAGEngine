@@ -20,7 +20,7 @@ public class RunAwayNuclearDanmuku extends ADanmuku {
 	private ElementUtils mEU = getmEU();
 	private Random r = new Random();
 	private QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
-	private static final long interval = (long) (100*(1.0/Main.level.getFactor()));
+	private static final long interval = (long) (100);
 	private static final double rotateSpeed = 10;
 	public static final long DURATION = 15000;
 	

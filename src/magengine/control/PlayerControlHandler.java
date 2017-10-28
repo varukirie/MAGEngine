@@ -6,6 +6,7 @@ import javafx.scene.input.MouseEvent;
 import magengine.bullet.impl.DefaultBullet;
 import magengine.bullet.impl.PlayerBullet;
 import magengine.element.impl.Player;
+import magengine.game.GameSession;
 import magengine.game.MoveHandler;
 import magengine.ui.SceneManager;
 import magengine.util.ElementUtils;
@@ -148,7 +149,7 @@ public class PlayerControlHandler {
 			playerLauncher=false;
 			break;
 		case ENTER:
-			SceneManager.getInstance().shutdownGame();
+			GameSession.closeGameSession();
 			SceneManager.getInstance().loadSceneTest();
 			break;
 		}

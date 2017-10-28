@@ -44,7 +44,7 @@ public class demo1 extends ADanmuku  {
 	private ElementUtils mEU = getmEU();
 	private Random r = new Random();
 	private QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
-	private static final long interval = (long) (50*(1.0/Main.level.getFactor()));
+	private static final long interval = (long) (50);
 	private static final double rotateSpeed = 10;
 	private static final long duration = 15000;
 	
