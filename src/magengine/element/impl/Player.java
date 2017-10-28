@@ -11,6 +11,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.Bloom;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import magengine.bullet.Bullet;
 import magengine.bullet.impl.DefaultBullet;
 import magengine.element.BaseElement;
 import magengine.element.Initializable;
@@ -18,6 +19,8 @@ import magengine.element.LimitedByCanvas;
 import magengine.element.Moveable;
 import magengine.element.Paintable;
 import magengine.element.PolygonCollision;
+import magengine.game.GameSession;
+import magengine.game.LogicExecutor;
 import magengine.paint.MyCanvasSwitcher;
 import magengine.paint.SpritePainter;
 import magengine.util.CollisionTeam;
@@ -36,7 +39,10 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 	private SpritePainter spritePainter = null;
 	private int imgwidth = 60, imgheight = 131;
 	private int checkPointLine = imgwidth/10;
-
+	
+	private boolean noHurtMode = false;
+	public static final long NO_HURT_TIME = 3000;
+	
 	public static void clear() {
 		player=null;
 	}
@@ -78,30 +84,35 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 	
 
 
-
-
+	private int noHurtCountMax = 16;
+	private int noHurtCount4Paint = 0;
 	private int currentSpriteIndex=0;
 	@Override
 	public void paint(GraphicsContext gc) {
-		if(this.velocityX<0){
-			spritePainter.paintSprite(8+(currentSpriteIndex), getX()-imgwidth/2,getY()-imgheight/2, gc);
-			currentSpriteIndex=(currentSpriteIndex+1)%(4);
-		}
-		
-		if(this.velocityX==0){
-			spritePainter.paintSprite(0+(currentSpriteIndex), getX()-imgwidth/2, getY()-imgheight/2, gc);
-			currentSpriteIndex=(currentSpriteIndex+1)%(4);
-		}
+		noHurtCount4Paint=(noHurtCount4Paint+1)%noHurtCountMax;
+		if(noHurtMode&&(noHurtCount4Paint<noHurtCountMax/2)){
+			//do nothing
+		}else{
+			if(this.velocityX<0){
+				spritePainter.paintSprite(8+(currentSpriteIndex), getX()-imgwidth/2,getY()-imgheight/2, gc);
+				currentSpriteIndex=(currentSpriteIndex+1)%(4);
+			}
 			
-		if(this.velocityX>0){
-			spritePainter.paintSprite(4+(currentSpriteIndex), getX()-imgwidth/2, getY()-imgheight/2, gc);
-			currentSpriteIndex=(currentSpriteIndex+1)%(4);
-		}
-		if(Main.DEBUG_COLLISION){
-			getPolygon();
-			gc.setFill(Color.INDIANRED);
-			paintPolygon(vertices, gc);
-			gc.setFill(Color.WHITESMOKE);
+			if(this.velocityX==0){
+				spritePainter.paintSprite(0+(currentSpriteIndex), getX()-imgwidth/2, getY()-imgheight/2, gc);
+				currentSpriteIndex=(currentSpriteIndex+1)%(4);
+			}
+				
+			if(this.velocityX>0){
+				spritePainter.paintSprite(4+(currentSpriteIndex), getX()-imgwidth/2, getY()-imgheight/2, gc);
+				currentSpriteIndex=(currentSpriteIndex+1)%(4);
+			}
+			if(Main.DEBUG_COLLISION){
+				getPolygon();
+				gc.setFill(Color.INDIANRED);
+				paintPolygon(vertices, gc);
+				gc.setFill(Color.WHITESMOKE);
+			}
 		}
 	}
 	public float[] vertices = new float[8*2];
@@ -146,6 +157,24 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 		gc.fillPolygon(xpoint, ypoint, origin.length/2);
 		
 	}
-
+	
+	@Override
+	public void onCollision(PolygonCollision m) {
+		if(m instanceof Bullet){
+			if(noHurtMode==false){
+				if(GameSession.getGameSession().decHealthAndCheck())
+					GameSession.getGameSession().failure();
+				else{
+					noHurtMode=true;
+					LogicExecutor.getLogicExecutor().schedule(()->{
+						noHurtMode=false;
+					}, NO_HURT_TIME);
+				}
+					
+			}else{
+				//do nothing
+			}
+		}
+	}
 
 }

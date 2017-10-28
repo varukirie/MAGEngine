@@ -63,6 +63,7 @@ public class UtsuhoNonSpellCard1 extends ADanmuku {
 				((CircleBullet)b).setColorSupplier(PresetColor.getOpacityByColor(javafx.scene.paint.Color.RED));
 				((CircleBullet)b).setR(15);
 			});
+			quick.bindToXY(l, getSourceElement());
 		});
 		olg.execute();
 

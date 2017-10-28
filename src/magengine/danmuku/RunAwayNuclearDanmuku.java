@@ -46,8 +46,9 @@ public class RunAwayNuclearDanmuku extends ADanmuku {
 				((CircleBullet)b).setColorSupplier(PresetColor.whiteOpacity.get());
 			});
 			quick.bindToWantBeRemoved(l, getSourceElement());
+			quick.bindToXY(l, getSourceElement());
 		});
-		olg.delayExecute(delay);
+		olg.delayExecuteCheck(delay, getSourceElement());
 	}
 	private void setRandomRotateLauncher(BaseElement target,boolean positive,long duration,double startAngle){
 		OvalHelper helper = new OvalHelper(target.getX(),target.getY() , 1,rotateSpeed , startAngle, duration);

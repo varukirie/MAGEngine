@@ -72,23 +72,30 @@ public class TestChapter extends AChapter {
 		});
 		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 		Random r = new Random();
-
-		 ALoopDanmukuEnemy boss = new Enemy1(300, 100);
-		 boss.setHP(30);
-		 boss.setDanmukuStartDelay(1);
-		 boss.addDanmuku(new UtsuhoNonSpellCard1(),UtsuhoNonSpellCard1.DURATION);
-		// boss.addDanmuku(new
-		// ReisenNonSpellCardDanmuku(),ReisenNonSpellCardDanmuku.DURATION+1000);//1秒间隔
-		// boss.addDanmuku(new RunAwayNuclearDanmuku(),
-		// RunAwayNuclearDanmuku.DURATION+2000);//2秒间隔
+		LogicExecutor executor = LogicExecutor.getLogicExecutor();
+		ALoopDanmukuEnemy boss = new Enemy1(300, 100);
+		boss.setHP(1000);
+		boss.setDanmukuStartDelay(1);
+		boss.addDanmuku(new UtsuhoNonSpellCard1(), UtsuhoNonSpellCard1.DURATION);
+		boss.addDanmuku(new ReisenNonSpellCardDanmuku(), ReisenNonSpellCardDanmuku.DURATION + 1000);// 1秒间隔
+		boss.addDanmuku(new RunAwayNuclearDanmuku(), RunAwayNuclearDanmuku.DURATION + 2000);// 2秒间隔
 		// boss.setOnRemoveEvent((bs)->{
 		// new OvalLauncherGroup(bs.getX(), bs.getY(), 32).execute();
 		// });
-		 mEU.add("enemy", boss);
+		mEU.add("enemy", boss);
 
-		// new RotateDanmuku().delayExecute();
-		LogicExecutor executor = LogicExecutor.getLogicExecutor();
+		for(int i=0;i<100;i++){
+			long sum = 6000+1000+6000+1000;
+			executor.schedule(() -> {
+				 quick.moveTo(boss, 6000,100, 120);
+				 },i*sum);
+			executor.schedule(() -> {
+				 quick.moveTo(boss, 6000, 500, 100);
+				 },i*sum+6000+1000);
+		}
 		
+		// new RotateDanmuku().delayExecute();
+
 
 		// ArcLauncherGroup alg= new ArcLauncherGroup(300, 200, Math.PI/3,
 		// Math.PI/3,128);
@@ -105,16 +112,16 @@ public class TestChapter extends AChapter {
 		// alg.setLauncherType(BurstLauncher.class);
 		// alg.execute();
 
-		// quick.moveTo(enemy, 1500, 100, 100);
-		// executor.schedule(() -> {
-		// quick.moveTo(enemy, 4000, 275, 500);
-		// }, 1700);
-		// executor.schedule(() -> {
-		// quick.moveTo(enemy, 4000, 500, 100);
-		// }, 6000);
-		// executor.schedule(() -> {
-		// quick.moveTo(enemy, 3000, 275, 195.5);
-		// }, 11000);
+//		 quick.moveTo(boss, 1500, 100, 100);
+//		 executor.schedule(() -> {
+//		 quick.moveTo(boss, 4000, 275, 500);
+//		 }, 1700);
+//		 executor.schedule(() -> {
+//		 quick.moveTo(boss, 4000, 500, 100);
+//		 }, 6000);
+//		 executor.schedule(() -> {
+//		 quick.moveTo(boss, 3000, 275, 195.5);
+//		 }, 11000);
 
 		// quick.moveTo(enemy, 1500, 100, 100);
 		// LogicExecutor.getLogicExecutor().schedule(() -> {

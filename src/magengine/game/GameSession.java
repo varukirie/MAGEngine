@@ -164,7 +164,7 @@ public class GameSession {
 		moveableElementUtils.add("player", player);
 		
 		
-		moveableElementUtils.add("displayTime", new DisplayMessage(1, MyCanvas.CANVAS_HEIGHT-7));
+		moveableElementUtils.add("displayMessage", new DisplayMessage(1, MyCanvas.CANVAS_HEIGHT-20));
 		ChapterLoader.init(staticCanvas);
 		
 		
@@ -245,6 +245,22 @@ public class GameSession {
 		} else {
 			this.health = HEALTH_LIMIT;
 		}
+	}
+	private Runnable failureEvent = ()->{};
+	public void failure(){
+		System.out.println("failure!");
+		getFailureEvent().run();
+	}
+	public void setFailureEvent(Runnable failureEvent) {
+		this.failureEvent = failureEvent;
+	}
+	
+	public Runnable getFailureEvent() {
+		return failureEvent;
+	}
+	@Override
+	public String toString() {
+		return "GameSession [level=" + level + ", bomb=" + bomb + ", health=" + health + ", power=" + power + "]";
 	}
 	
 }
