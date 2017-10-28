@@ -51,16 +51,21 @@ public class SceneManager {
 		GameSession session = GameSession.startGameSession();
 		session.loadGameScene();
 		session.loadChapter(new TestChapter());
+		session.setFailureEvent(()->{
+			GameSession.closeGameSession();
+			loadSceneTest();
+		});
 	}
 
 	public void loadSceneTest() {
 		StackPane root = new StackPane();
 		Canvas canvas = new Canvas(200, 300);
-		canvas.getGraphicsContext2D().fillOval(10, 10, 20, 20);
+//		canvas.getGraphicsContext2D().fillOval(10, 10, 20, 20);
+		canvas.getGraphicsContext2D().fillText("Failure!  push\"r\" to reset", 10, 100);
 		root.getChildren().add(canvas);
 		Scene scene = new Scene(root);
 		scene.setOnKeyReleased((e) -> {
-			if (KeyCode.ENTER.equals(e.getCode())) {
+			if (KeyCode.R.equals(e.getCode())) {
 				SceneManager.getInstance().startGame();
 			}
 		});

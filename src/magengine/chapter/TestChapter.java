@@ -74,7 +74,7 @@ public class TestChapter extends AChapter {
 		Random r = new Random();
 		LogicExecutor executor = LogicExecutor.getLogicExecutor();
 		ALoopDanmukuEnemy boss = new Enemy1(300, 100);
-		boss.setHP(1000);
+		boss.setHP(500);
 		boss.setDanmukuStartDelay(1);
 		boss.addDanmuku(new UtsuhoNonSpellCard1(), UtsuhoNonSpellCard1.DURATION);
 		boss.addDanmuku(new ReisenNonSpellCardDanmuku(), ReisenNonSpellCardDanmuku.DURATION + 1000);// 1秒间隔

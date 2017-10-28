@@ -162,9 +162,9 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 	public void onCollision(PolygonCollision m) {
 		if(m instanceof Bullet){
 			if(noHurtMode==false){
-				if(GameSession.getGameSession().decHealthAndCheck())
-					GameSession.getGameSession().failure();
-				else{
+				if(GameSession.getGameSession().decHealthAndCheck()&&!Main.DEBUG_NO_FAILURE){
+						GameSession.getGameSession().failure();
+				}else{
 					noHurtMode=true;
 					LogicExecutor.getLogicExecutor().schedule(()->{
 						noHurtMode=false;

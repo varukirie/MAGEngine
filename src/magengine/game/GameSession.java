@@ -2,6 +2,7 @@ package magengine.game;
 
 
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
@@ -248,8 +249,11 @@ public class GameSession {
 	}
 	private Runnable failureEvent = ()->{};
 	public void failure(){
-		System.out.println("failure!");
-		getFailureEvent().run();
+		Platform.runLater(()->{
+			System.out.println("failure!");
+			getFailureEvent().run();
+		});
+		
 	}
 	public void setFailureEvent(Runnable failureEvent) {
 		this.failureEvent = failureEvent;

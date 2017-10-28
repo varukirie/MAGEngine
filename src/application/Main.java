@@ -14,6 +14,7 @@ import magengine.util.DI;
 
 public class Main extends Application {
 	public static final boolean DEBUG = true;
+	public static boolean DEBUG_NO_FAILURE = true;
 	public static final boolean DEBUG_ElementCreate = false;
 	public static final boolean DEBUG_BENCH=false;
 	public static final boolean DEBUG_COLLISION=true;
