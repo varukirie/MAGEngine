@@ -51,8 +51,8 @@ public class SquareBullet extends APolygonBullet implements RadiusSupplier {
 
 
 	public static final double[][] origin = new double[][] { 
-		{ -1, -1, 1,  1,  -1},
-		{ -1.3,  1.3, 1.3, -1.3,  -1.3} 
+		{ -7, -7, 7,  7,  -7},
+		{ -5.3,  5.3, 5.3, -5.3,  -5.3} 
 	};
 
 	@Override
