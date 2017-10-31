@@ -1,6 +1,14 @@
 package magengine.game;
 
 
+import java.io.Closeable;
+import java.io.IOException;
+import java.util.Date;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import io.netty.buffer.Unpooled;
+import io.netty.util.CharsetUtil;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -15,12 +23,15 @@ import magengine.control.PlayerControlHandler;
 import magengine.control.PlayerLaunchHandler;
 import magengine.element.impl.DisplayMessage;
 import magengine.element.impl.Player;
+import magengine.mulplay.Client;
+import magengine.mulplay.Server;
 import magengine.paint.MyCanvas;
 import magengine.ui.SceneManager;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
 
 public class GameSession {
+
 	public static GameSession instance = null;
 	
 	private Level level = Level.NORMAL;
@@ -35,7 +46,11 @@ public class GameSession {
 	private int health = PRESET_HEALTH;
 	private int power = PRESET_POWER;
 
-
+	public boolean mulplay = false;
+	public boolean mulplayServer=false;
+	public static final int PORT = 10231;
+	public static String remoteHost = "127.0.0.1";
+	
 	public static GameSession startGameSession(){
 		if(instance!=null)
 			throw new IllegalStateException("GameSession已经存在 需要先调用closeGameSession");
@@ -94,7 +109,7 @@ public class GameSession {
 	}
 
 
-	
+	private Closeable clientOrServer ;
 	public void loadGameScene() {
 		Stage primaryStage=SceneManager.getInstance().getPrimaryStage();
 		StackPane root = new StackPane();
@@ -154,24 +169,37 @@ public class GameSession {
 		
 		
 		//创建玩家
-		Player player = Player.getPlayer(210,600);
-		mh.addCollisionElement("player", player);
-		
+		Player player1 = Player.getPlayer1(200,600);
+		mh.addCollisionElement("player1", player1);
+
 
 		//绑定玩家与键盘控制
-		PlayerControlHandler PCH= PlayerControlHandler.getPlayerControlHandler(moveableElementUtils, player);
+		PlayerControlHandler PCH= PlayerControlHandler.getPlayerControlHandler(moveableElementUtils, player1);
 		PCH.bindEvent(scene);
 		//
-		moveableElementUtils.add("player", player);
+		moveableElementUtils.add("player1", player1);
 		
 		
 		moveableElementUtils.add("displayMessage", new DisplayMessage(1, MyCanvas.CANVAS_HEIGHT-20));
 		ChapterLoader.init(staticCanvas);
-		
+		if(this.mulplay){
+			Player player2 = Player.getPlayer2(400, 600);
+			moveableElementUtils.add("player2", player2);
+			if(this.mulplayServer){
+				Server server = new Server(PORT);
+				clientOrServer=server;
+				server.start();
+			}else{
+				Client client = new Client(remoteHost, PORT);
+				clientOrServer=client;
+				client.start();
+			}
+		}
 		
 //		ChapterLoader.loadChapter(new ChapterDemo());
 		new Thread(new PlayerLaunchHandler()).start();
 	}
+	
 	private void shutdownGame(){
 		MoveHandler mh=((MoveHandler)(DI.di().get("mh")));
 		if(mh!=null){
@@ -193,6 +221,11 @@ public class GameSession {
 		QuickDanmuku.clear();
 		Player.clear();
 		PlayerControlHandler.clear();
+		try {
+			clientOrServer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void loadChapter(AChapter chapter){
@@ -265,6 +298,13 @@ public class GameSession {
 	@Override
 	public String toString() {
 		return "GameSession [level=" + level + ", bomb=" + bomb + ", health=" + health + ", power=" + power + "]";
+	}
+	
+	public void setMulplay(boolean mulplay) {
+		this.mulplay = mulplay;
+	}
+	public void setMulplayServer(boolean mulplayServer) {
+		this.mulplayServer = mulplayServer;
 	}
 	
 }

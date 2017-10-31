@@ -37,7 +37,7 @@ import magengine.util.ElementUtils;
 import static java.lang.Math.PI;
 
 public class BulletShootDanmuku extends ADanmuku{
-	final Player p = Player.getPlayer();
+	final Player p = Player.getPlayer1();
 	int bulletSpeed = 1;
 	int starlength = 5;
 	ElementUtils mEU = getmEU();

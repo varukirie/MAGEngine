@@ -1,30 +1,19 @@
 package magengine.element.impl;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 import com.badlogic.gdx.math.Polygon;
 
 import application.Main;
-import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.effect.Bloom;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import magengine.bullet.Bullet;
-import magengine.bullet.impl.DefaultBullet;
 import magengine.element.BaseElement;
-import magengine.element.Initializable;
 import magengine.element.LimitedByCanvas;
-import magengine.element.Moveable;
-import magengine.element.Paintable;
 import magengine.element.PolygonCollision;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
-import magengine.paint.MyCanvasSwitcher;
 import magengine.paint.SpritePainter;
 import magengine.util.CollisionTeam;
-import magengine.util.DI;
 /**
  * 玩家控制的物体
  * 单例设计模式
@@ -33,7 +22,8 @@ import magengine.util.DI;
  *
  */
 public class Player extends BaseElement implements LimitedByCanvas ,PolygonCollision {
-	private static Player player = null;
+	private static volatile Player player1 = null;
+	private static volatile Player player2 = null;
 	public final int width = 10;
 	public final int height = 10;
 	private SpritePainter spritePainter = null;
@@ -44,7 +34,8 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 	public static final long NO_HURT_TIME = 3000;
 	
 	public static void clear() {
-		player=null;
+		player1=null;
+		player2=null;
 	}
 	
 	/**
@@ -53,22 +44,36 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 	 * @param y 设定坐标y
 	 * @return 返回Player对象
 	 */
-	public static Player getPlayer(double x,double y){
-		if(player==null){
-			player=new Player(x,y);
-			return player;
+	public static Player getPlayer1(double x,double y){
+		if(player1==null){
+			player1=new Player(x,y);
+			return player1;
 		}else{
 			if(!(x==-1&&y==-1)){
-				player.setX(x);
-				player.setY(y);
+				player1.setX(x);
+				player1.setY(y);
 			}
-			return player;
+			return player1;
 		}
 	}
-	public static Player getPlayer(){
-		return getPlayer(-1,-1);
+	public static Player getPlayer1(){
+		return getPlayer1(-1,-1);
 	}
-	
+	public static Player getPlayer2(double x,double y){
+		if(player2==null){
+			player2=new Player(x,y);
+			return player2;
+		}else{
+			if(!(x==-1&&y==-1)){
+				player2.setX(x);
+				player2.setY(y);
+			}
+			return player2;
+		}
+	}
+	public static Player getPlayer2(){
+		return getPlayer2(-1,-1);
+	}
 	private Player(double x, double y) {
 		super(x, y);
 		Image img=null;

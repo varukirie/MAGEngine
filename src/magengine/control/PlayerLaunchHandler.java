@@ -10,9 +10,8 @@ import magengine.util.ElementUtils;
 public class PlayerLaunchHandler implements Runnable {
 
 	private  ElementUtils elementUtils = (ElementUtils) DI.di().get("mEU");
-	private Player player = Player.getPlayer();
+	private Player player = Player.getPlayer1();
 	private long count=0;
-	@SuppressWarnings("static-access")
 	@Override
 	public void run() {
 		MoveHandler mh= (MoveHandler) DI.di().get("mh");

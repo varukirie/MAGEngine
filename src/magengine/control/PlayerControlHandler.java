@@ -4,10 +4,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import magengine.bullet.impl.DefaultBullet;
-import magengine.bullet.impl.PlayerBullet;
 import magengine.element.impl.Player;
 import magengine.game.GameSession;
-import magengine.game.MoveHandler;
 import magengine.ui.SceneManager;
 import magengine.util.ElementUtils;
 
@@ -23,7 +21,7 @@ public class PlayerControlHandler {
 	private static double mouseY=0;
 	
 	private static PlayerControlHandler pch = null;
-	public static boolean playerLauncher = false;
+	public boolean playerLauncher = false;
 	// 速度V
 	public static double DEFAULT_BALL_V = 4;
 	public static double BALL_V = DEFAULT_BALL_V;

@@ -167,7 +167,7 @@ public class SeqDanmuku {
 		for (i = 1; i <= count; i++) {
 			LogicExecutor.getLogicExecutor().schedule(() -> {
 				if (!tHelper.getDeleted()) {
-					quick.snipe(tHelper.getX(), tHelper.getY(), Player.getPlayer().getX(), Player.getPlayer().getY(), 1,
+					quick.snipe(tHelper.getX(), tHelper.getY(), Player.getPlayer1().getX(), Player.getPlayer1().getY(), 1,
 							Bullet.class);
 				}
 			}, startTime + i * 100, TimeUnit.MILLISECONDS);

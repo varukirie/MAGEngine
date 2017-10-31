@@ -149,7 +149,7 @@ public class QuickDanmuku {
 	}
 
 	public void snipePlayer(BaseElement bullet) {
-		snipe(bullet, Player.getPlayer().getX(), Player.getPlayer().getY());
+		snipe(bullet, Player.getPlayer1().getX(), Player.getPlayer1().getY());
 	}
 
 	public void snipe(BaseElement bullet, double x, double y) {
@@ -231,6 +231,6 @@ public class QuickDanmuku {
 		return getDirectionAngle(elem.getX(), elem.getY(), targetX, targetY);
 	}
 	public double getPlayerDirectionAngle(BaseElement elem) {
-		return getDirectionAngle(elem, Player.getPlayer().getX(), Player.getPlayer().getY());
+		return getDirectionAngle(elem, Player.getPlayer1().getX(), Player.getPlayer1().getY());
 	}
 }

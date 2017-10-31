@@ -13,7 +13,7 @@ public class MissileBullet extends Bullet {
 	private Moveable target;
 	public MissileBullet(double x,double y){
 		super(x,y);
-		this.target=Player.getPlayer();
+		this.target=Player.getPlayer1();
 		this.v=1;
 	}
 	public MissileBullet(double x, double y,Moveable target,double v) {

@@ -34,7 +34,7 @@ import magengine.util.ElementUtils;
 import static java.lang.Math.PI;
 
 public class Testing extends ADanmuku {
-final Player p = Player.getPlayer();
+final Player p = Player.getPlayer1();
 @Override
 public void executeDanmuku(){
 	

@@ -45,12 +45,16 @@ public class SceneManager {
 	private static SceneManager instance = new SceneManager();
 	private Stage primaryStage;
 
-
 	public void startGame() {
+		startGame(false,false);
+	}
+	public void startGame(boolean mulplay,boolean mulplayServer) {
 		primaryStage.setResizable(false);
 		GameSession session = GameSession.startGameSession();
+		session.setMulplay(mulplay);
+		session.setMulplayServer(mulplayServer);
 		session.loadGameScene();
-		session.loadChapter(new TestChapter());
+//		session.loadChapter(new TestChapter());
 		session.setFailureEvent(()->{
 			GameSession.closeGameSession();
 			loadSceneTest();
@@ -60,13 +64,37 @@ public class SceneManager {
 	public void loadSceneTest() {
 		StackPane root = new StackPane();
 		Canvas canvas = new Canvas(200, 300);
-//		canvas.getGraphicsContext2D().fillOval(10, 10, 20, 20);
 		canvas.getGraphicsContext2D().fillText("Failure!  push\"r\" to reset", 10, 100);
 		root.getChildren().add(canvas);
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(root,200,300);
 		scene.setOnKeyReleased((e) -> {
 			if (KeyCode.R.equals(e.getCode())) {
 				SceneManager.getInstance().startGame();
+			}
+		});
+		primaryStage.setScene(scene);
+	}
+	
+	public void loadMulplaySelectScene() {
+		StackPane root = new StackPane();
+		Canvas canvas = new Canvas(200, 300);
+//		canvas.getGraphicsContext2D().fillOval(10, 10, 20, 20);
+		canvas.getGraphicsContext2D().fillText("press 's' to be server\n press 'c' to be client\n 'n' single", 10, 100);
+		root.getChildren().add(canvas);
+		Scene scene = new Scene(root);
+		scene.setOnKeyReleased((e) -> {
+			switch (e.getCode()) {
+			case S:
+				startGame(true,true);
+				break;
+			case C:
+				startGame(true, false);
+				break;
+			case N:
+				startGame();
+				break;
+			default:
+				break;
 			}
 		});
 		primaryStage.setScene(scene);

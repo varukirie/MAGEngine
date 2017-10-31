@@ -24,7 +24,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			SceneManager.init(primaryStage);
-			SceneManager.getInstance().startGame();
+			SceneManager.getInstance().loadMulplaySelectScene();
+			primaryStage.show();
 //			SceneManager.shutdownGame();
 //			SceneManager.startGame(primaryStage);	
 //			ScheduledExecutorService ses = (ScheduledExecutorService) DI.di().get("sES");

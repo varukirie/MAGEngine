@@ -47,7 +47,7 @@ public class TestChapter1 extends AChapter {
 		double x = 275,y = 195;
 		long delay = 1500 ,interval = 200;
 		long runningtime = 1500;
-		Player p = Player.getPlayer();
+		Player p = Player.getPlayer1();
 		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 		DefaultEnemy enemy = new DefaultEnemy(0+x,starlength*triFunc(18,2)+y);
 		Launcher launcher = new Launcher(0+x, starlength*triFunc(18,2)+y, Math.PI / 2, 100, delay+5*(runningtime+interval));

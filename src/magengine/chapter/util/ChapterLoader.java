@@ -29,7 +29,7 @@ public class ChapterLoader {
 	public static void init(MyCanvas staticCanvas){
 		ChapterLoader.staticCanvas = staticCanvas ;
 		ChapterLoader.mEU = (ElementUtils) DI.di().get("mEU");
-		ChapterLoader.scheduleES=Executors.newScheduledThreadPool(1);
+		ChapterLoader.scheduleES=Executors.newScheduledThreadPool(4);
 		DI.di().put("sES", scheduleES);
 	}
 	public static void loadChapter(AChapter c){
