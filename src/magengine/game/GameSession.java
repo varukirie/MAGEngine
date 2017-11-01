@@ -1,11 +1,36 @@
 package magengine.game;
 
 
+import com.sun.javafx.css.converters.FontConverter.FontSizeConverter;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextBuilder;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import magengine.chapter.util.AChapter;
@@ -97,6 +122,21 @@ public class GameSession {
 	
 	public void loadGameScene() {
 		Stage primaryStage=SceneManager.getInstance().getPrimaryStage();
+		BorderPane gArea = new BorderPane();
+		BackgroundImage bimg = new BackgroundImage(new Image("/img/starbackground.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+//		gArea.setBackground(new Background(new BackgroundFill(Color.GREY,null,null)));
+		gArea.setBackground(new Background(bimg));
+		FlowPane gDataArea = new FlowPane(Orientation.VERTICAL,10,50);//未设置node gap
+//		Label label1 = new Label();
+//		label1.setFont(Font.font("力量"));
+//		power.getChildren().add(label1);字体样式测试
+//		VBox power = new VBox(new Label("力量"));
+//		VBox bomb = new VBox(new Label("炸弹"));
+//		VBox life = new VBox(new Label("生命"));
+		
+		VBox power = new VBox(setTextFont("POWER"));
+		VBox bomb = new VBox(setTextFont("BOMB"));
+		VBox life = new VBox(setTextFont("LIFE"));
 		StackPane root = new StackPane();
 		MyCanvas moveableCanvas = new MyCanvas();
 		MyCanvas staticCanvas = new MyCanvas();
@@ -104,11 +144,15 @@ public class GameSession {
 		root.getChildren().add(staticCanvas);
 		root.getChildren().add(moveableCanvas);
 		root.getChildren().add(secondaryMCanvas);
+		gDataArea.getChildren().addAll(life,power,bomb);
+		gDataArea.setAlignment(Pos.TOP_LEFT);;
+		gArea.setLeft(root);
+		gArea.setRight(gDataArea);
 		DI.di().put("staticCanvas", staticCanvas);
 		//
 //		staticCanvas.getWantPaintMap().put("indicator", Player.getPlayer());
 //		staticCanvas.repaint();
-		Scene scene=new Scene(root);
+		Scene scene=new Scene(gArea,900,700);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("MAGEngine!");
 		primaryStage.show();
@@ -194,7 +238,15 @@ public class GameSession {
 		Player.clear();
 		PlayerControlHandler.clear();
 	}
-	
+	public Text setTextFont(String s){
+		Text text = TextBuilder.create().text(s).font(Font.font("新宋体", 30)).build();
+		text.setFill(new LinearGradient(0, 0, 1, 2, true, CycleMethod.REPEAT, new
+		         Stop[]{new Stop(0, Color.RED), new Stop(0.5f, Color.BLUE)}));
+		text.setFont(Font.font("黑体", FontWeight.BOLD,30));//斜体
+		text.setStrokeWidth(0.5);
+		text.setStroke(Color.WHITE);
+		return text;
+	}
 	public void loadChapter(AChapter chapter){
 		ChapterLoader.loadChapter(chapter);
 	}
