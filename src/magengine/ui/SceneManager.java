@@ -54,7 +54,11 @@ public class SceneManager {
 		session.setMulplay(mulplay);
 		session.setMulplayServer(mulplayServer);
 		session.loadGameScene();
-//		session.loadChapter(new TestChapter());
+		if(mulplay&&mulplayServer||!mulplay){
+			session.loadChapter(new TestChapter());
+		}else{
+			
+		}
 		session.setFailureEvent(()->{
 			GameSession.closeGameSession();
 			loadSceneTest();

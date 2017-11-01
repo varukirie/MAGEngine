@@ -10,6 +10,14 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.LineBasedFrameDecoder;
+import io.netty.handler.codec.compression.Bzip2Decoder;
+import io.netty.handler.codec.compression.Bzip2Encoder;
+import io.netty.handler.codec.compression.JdkZlibDecoder;
+import io.netty.handler.codec.compression.JdkZlibEncoder;
+import io.netty.handler.codec.compression.LzfDecoder;
+import io.netty.handler.codec.compression.LzfEncoder;
+import io.netty.handler.codec.compression.SnappyFrameDecoder;
+import io.netty.handler.codec.compression.SnappyFrameEncoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.handler.logging.LogLevel;
@@ -38,10 +46,16 @@ public class Client implements Closeable{
 			.handler(new ChannelInitializer<Channel>() {
 				@Override
 				protected void initChannel(Channel ch) throws Exception {
-					ch.pipeline().addLast(new LineBasedFrameDecoder(1024))
+					ch.pipeline()
+					//in
+					.addLast(new LineBasedFrameDecoder(102400))
+//					.addLast(new JdkZlibDecoder())
 					.addLast(new StringDecoder())
-					.addLast(new StringEncoder())
-					.addLast(new ClientHandler());
+					.addLast(new InitAndPlayerHandler())
+					
+					//out
+//					.addLast(new JdkZlibEncoder())
+					.addLast(new StringEncoder());
 				}
 			});
 			ChannelFuture cf = boot.connect(this.host,this.port).sync();

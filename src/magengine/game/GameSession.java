@@ -8,6 +8,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import io.netty.buffer.Unpooled;
+import io.netty.channel.Channel;
+import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.util.CharsetUtil;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
@@ -50,6 +52,8 @@ public class GameSession {
 	public boolean mulplayServer=false;
 	public static final int PORT = 10231;
 	public static String remoteHost = "127.0.0.1";
+	private NioEventLoopGroup loopGroup;
+	private Channel mulplayChannel;
 	
 	public static GameSession startGameSession(){
 		if(instance!=null)
@@ -189,13 +193,15 @@ public class GameSession {
 				Server server = new Server(PORT);
 				clientOrServer=server;
 				server.start();
+				setLoopGroup(server.getBossLoop());
 			}else{
 				Client client = new Client(remoteHost, PORT);
 				clientOrServer=client;
 				client.start();
+				setLoopGroup(client.getGroup());
 			}
+			
 		}
-		
 //		ChapterLoader.loadChapter(new ChapterDemo());
 		new Thread(new PlayerLaunchHandler()).start();
 	}
@@ -222,7 +228,9 @@ public class GameSession {
 		Player.clear();
 		PlayerControlHandler.clear();
 		try {
-			clientOrServer.close();
+			if(mulplay){
+				clientOrServer.close();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -306,5 +314,17 @@ public class GameSession {
 	public void setMulplayServer(boolean mulplayServer) {
 		this.mulplayServer = mulplayServer;
 	}
+	public NioEventLoopGroup getLoopGroup() {
+		return loopGroup;
+	}
+	public void setLoopGroup(NioEventLoopGroup loopGroup) {
+		this.loopGroup = loopGroup;
+	}
 	
+	public void setMulplayChannel(Channel mulplayChannel) {
+		this.mulplayChannel = mulplayChannel;
+	}
+	public Channel getMulplayChannel() {
+		return mulplayChannel;
+	}
 }

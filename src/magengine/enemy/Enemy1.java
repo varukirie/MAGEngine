@@ -9,7 +9,6 @@ public class Enemy1 extends ALoopDanmukuEnemy {
 	
 	public Enemy1(double x, double y) {
 		super(x, y);
-
 	}
 	private static double[][] origin = null;
 	private static int enemyWidth = 272;

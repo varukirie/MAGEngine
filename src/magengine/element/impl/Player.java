@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import magengine.bullet.Bullet;
 import magengine.element.BaseElement;
 import magengine.element.LimitedByCanvas;
+import magengine.element.MulSync;
 import magengine.element.PolygonCollision;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
@@ -21,7 +22,7 @@ import magengine.util.CollisionTeam;
  * @author MegaAstronic
  *
  */
-public class Player extends BaseElement implements LimitedByCanvas ,PolygonCollision {
+public class Player extends BaseElement implements LimitedByCanvas ,PolygonCollision,MulSync {
 	private static volatile Player player1 = null;
 	private static volatile Player player2 = null;
 	public final int width = 10;

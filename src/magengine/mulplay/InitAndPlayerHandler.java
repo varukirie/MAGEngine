@@ -7,12 +7,14 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.CharsetUtil;
+import javafx.scene.text.Text;
 import magengine.element.impl.Player;
+import magengine.game.GameSession;
 
-public class ClientHandler extends ChannelInboundHandlerAdapter{
+public class InitAndPlayerHandler extends ChannelInboundHandlerAdapter{
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
-		super.channelActive(ctx);
+		GameSession.getGameSession().setMulplayChannel(ctx.channel());
 		ctx.channel().eventLoop().scheduleWithFixedDelay(()->{
 //			System.out.println("server sended pxy! "+new Date());
 			try {
@@ -24,6 +26,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter{
 				e.printStackTrace();
 			}
 		}, 500, 20, TimeUnit.MILLISECONDS);
+		super.channelActive(ctx);
 	}
 
 	@Override
@@ -45,6 +48,11 @@ public class ClientHandler extends ChannelInboundHandlerAdapter{
 		}else{
 			ctx.fireChannelRead(msg);
 		}		
+	}
+	@Override
+	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+		super.channelInactive(ctx);
+		GameSession.getGameSession().setMulplayChannel(null);
 	}
 	
 }
