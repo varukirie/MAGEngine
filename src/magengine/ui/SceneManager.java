@@ -46,20 +46,17 @@ public class SceneManager {
 	private Stage primaryStage;
 
 	public void startGame() {
-		startGame(false,false);
+		startGame(false, false);
 	}
-	public void startGame(boolean mulplay,boolean mulplayServer) {
+
+	public void startGame(boolean mulplay, boolean mulplayServer) {
 		primaryStage.setResizable(false);
 		GameSession session = GameSession.startGameSession();
 		session.setMulplay(mulplay);
 		session.setMulplayServer(mulplayServer);
 		session.loadGameScene();
-		if(mulplay&&mulplayServer||!mulplay){
-			session.loadChapter(new TestChapter());
-		}else{
-			
-		}
-		session.setFailureEvent(()->{
+		session.loadChapter(new TestChapter());
+		session.setFailureEvent(() -> {
 			GameSession.closeGameSession();
 			loadSceneTest();
 		});
@@ -70,7 +67,7 @@ public class SceneManager {
 		Canvas canvas = new Canvas(200, 300);
 		canvas.getGraphicsContext2D().fillText("Failure!  push\"r\" to reset", 10, 100);
 		root.getChildren().add(canvas);
-		Scene scene = new Scene(root,200,300);
+		Scene scene = new Scene(root, 200, 300);
 		scene.setOnKeyReleased((e) -> {
 			if (KeyCode.R.equals(e.getCode())) {
 				SceneManager.getInstance().startGame();
@@ -78,18 +75,18 @@ public class SceneManager {
 		});
 		primaryStage.setScene(scene);
 	}
-	
+
 	public void loadMulplaySelectScene() {
 		StackPane root = new StackPane();
 		Canvas canvas = new Canvas(200, 300);
-//		canvas.getGraphicsContext2D().fillOval(10, 10, 20, 20);
+		// canvas.getGraphicsContext2D().fillOval(10, 10, 20, 20);
 		canvas.getGraphicsContext2D().fillText("press 's' to be server\n press 'c' to be client\n 'n' single", 10, 100);
 		root.getChildren().add(canvas);
 		Scene scene = new Scene(root);
 		scene.setOnKeyReleased((e) -> {
 			switch (e.getCode()) {
 			case S:
-				startGame(true,true);
+				startGame(true, true);
 				break;
 			case C:
 				startGame(true, false);
@@ -107,6 +104,7 @@ public class SceneManager {
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}
+
 	public void setPrimaryStage(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 	}

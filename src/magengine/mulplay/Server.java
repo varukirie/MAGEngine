@@ -1,7 +1,5 @@
 package magengine.mulplay;
 
-import java.io.Closeable;
-
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -10,22 +8,12 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.LineBasedFrameDecoder;
-import io.netty.handler.codec.compression.Bzip2Decoder;
-import io.netty.handler.codec.compression.Bzip2Encoder;
-import io.netty.handler.codec.compression.JdkZlibDecoder;
-import io.netty.handler.codec.compression.JdkZlibEncoder;
-import io.netty.handler.codec.compression.LzfDecoder;
-import io.netty.handler.codec.compression.LzfEncoder;
-import io.netty.handler.codec.compression.SnappyFrameDecoder;
-import io.netty.handler.codec.compression.SnappyFrameEncoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
-import io.netty.handler.logging.LogLevel;
-import io.netty.handler.logging.LoggingHandler;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 
-public class Server implements Closeable {
+public class Server extends Transport {
 
 	private int port;
 	private NioEventLoopGroup bossLoop;
@@ -34,11 +22,23 @@ public class Server implements Closeable {
 	public Server(int port) {
 		this.port = port;
 	}
-
+	public long getDelay(){
+		DelayTestServerHandler handler = new DelayTestServerHandler();
+		while(this.channel==null){
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		this.channel.pipeline().addAfter("stringDecoder", "delayHandler", handler);
+		return handler.getDelay();
+	}
 	public void start() {
 		ServerBootstrap boot = new ServerBootstrap();
 		NioEventLoopGroup bossLoop = new NioEventLoopGroup(2);
 		this.bossLoop = bossLoop;
+		setGroup(bossLoop);
 		NioEventLoopGroup workerLoop = new NioEventLoopGroup();
 		this.workerLoop = workerLoop;
 		try {
@@ -46,13 +46,13 @@ public class Server implements Closeable {
 					.group(bossLoop, workerLoop).childHandler(new ChannelInitializer<SocketChannel>() {
 						@Override
 						protected void initChannel(SocketChannel ch) throws Exception {
+							setChannel(ch);
 							ch.pipeline()
 							//in
 									.addLast(new LineBasedFrameDecoder(1024))
 //									.addLast(new JdkZlibDecoder())
-									.addLast(new StringDecoder())
-									.addLast(new ServerMoveMapHandler())
-									.addLast(new InitAndPlayerHandler())
+									.addLast("stringDecoder",new StringDecoder())
+									.addLast(new InitAndSyncBaseElementHandler())
 									
 							//out
 							

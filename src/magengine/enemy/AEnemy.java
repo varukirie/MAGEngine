@@ -12,7 +12,7 @@ import magengine.element.Initializable;
 import magengine.element.MulSync;
 import magengine.paint.SpritePainter;
 
-public abstract class AEnemy extends BaseElement implements Initializable,MulSync{
+public abstract class AEnemy extends BaseElement implements Initializable{
 	public AEnemy(double x, double y, double velocityX, double velocityY, double ax, double ay) {
 		super(x, y, velocityX, velocityY, ax, ay);
 	}

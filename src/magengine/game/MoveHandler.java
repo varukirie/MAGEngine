@@ -42,7 +42,7 @@ public class MoveHandler implements Runnable {
 	 * 全局速度
 	 */
 	public static double absoluteTimeSpeed = DEFAULT_TIME_SPEED;
-	public static volatile double deltaTimeFactor = 0;
+	private static volatile double deltaTimeFactor = 1;
 	public static final long SLEEP_TIME = 2;
 	public static final long BLANK = 1000;
 
@@ -268,6 +268,12 @@ public class MoveHandler implements Runnable {
 			m.setX(nextX);
 		if (m.getVelocityY() != 0)
 			m.setY(nextY);
+	}
+	public static double getDeltaTimeFactor() {
+		return deltaTimeFactor;
+	}
+	public static void setDeltaTimeFactor(double deltaTimeFactor) {
+		MoveHandler.deltaTimeFactor = deltaTimeFactor;
 	}
 	
 

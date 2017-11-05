@@ -27,6 +27,7 @@ import magengine.element.impl.DisplayMessage;
 import magengine.element.impl.Player;
 import magengine.mulplay.Client;
 import magengine.mulplay.Server;
+import magengine.mulplay.Transport;
 import magengine.paint.MyCanvas;
 import magengine.ui.SceneManager;
 import magengine.util.DI;
@@ -54,6 +55,9 @@ public class GameSession {
 	public static String remoteHost = "127.0.0.1";
 	private NioEventLoopGroup loopGroup;
 	private Channel mulplayChannel;
+	private Server server;
+	private Client client;
+	private Transport clientOrServer ;
 	
 	public static GameSession startGameSession(){
 		if(instance!=null)
@@ -113,7 +117,7 @@ public class GameSession {
 	}
 
 
-	private Closeable clientOrServer ;
+
 	public void loadGameScene() {
 		Stage primaryStage=SceneManager.getInstance().getPrimaryStage();
 		StackPane root = new StackPane();
@@ -190,15 +194,19 @@ public class GameSession {
 			Player player2 = Player.getPlayer2(400, 600);
 			moveableElementUtils.add("player2", player2);
 			if(this.mulplayServer){
-				Server server = new Server(PORT);
+				server = new Server(PORT);
 				clientOrServer=server;
-				server.start();
+				server.start();//监听端口
 				setLoopGroup(server.getBossLoop());
+				
 			}else{
-				Client client = new Client(remoteHost, PORT);
+				client = new Client(remoteHost, PORT);
 				clientOrServer=client;
-				client.start();
+				client.start();//client完成连接
 				setLoopGroup(client.getGroup());
+				if(client.getChannel()==null){
+					System.out.println("连接失败");
+				}
 			}
 			
 		}
@@ -237,7 +245,22 @@ public class GameSession {
 	}
 	
 	public void loadChapter(AChapter chapter){
-		ChapterLoader.loadChapter(chapter);
+		ChapterLoader.getScheduledExecutorService().schedule(()->{
+			if(mulplay&&(mulplayServer)){
+				long delay=server.getDelay();//server等待连接 并获取延迟
+				try {
+					Thread.sleep(delay/2);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				ChapterLoader.loadChapter(chapter);
+			}else if(mulplay&&(!mulplayServer)){
+				client.waitPing();
+				ChapterLoader.loadChapter(chapter);
+			}else{
+				ChapterLoader.loadChapter(chapter);
+			}
+		}, 0,TimeUnit.MILLISECONDS);
 	}
 	public Level getLevel() {
 		return level;

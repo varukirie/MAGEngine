@@ -33,6 +33,7 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 	
 	private boolean noHurtMode = false;
 	public static final long NO_HURT_TIME = 3000;
+	public boolean isShooting=false;
 	
 	public static void clear() {
 		player1=null;
@@ -181,6 +182,14 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 				//do nothing
 			}
 		}
+	}
+
+	public boolean getNoHurtMode() {
+		return noHurtMode;
+	}
+
+	public void setNoHurtMode(boolean noHurtMode) {
+		this.noHurtMode = noHurtMode;
 	}
 
 }

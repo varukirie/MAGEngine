@@ -1,7 +1,5 @@
 package magengine.mulplay;
 
-import java.io.Closeable;
-
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -10,29 +8,30 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.LineBasedFrameDecoder;
-import io.netty.handler.codec.compression.Bzip2Decoder;
-import io.netty.handler.codec.compression.Bzip2Encoder;
-import io.netty.handler.codec.compression.JdkZlibDecoder;
-import io.netty.handler.codec.compression.JdkZlibEncoder;
-import io.netty.handler.codec.compression.LzfDecoder;
-import io.netty.handler.codec.compression.LzfEncoder;
-import io.netty.handler.codec.compression.SnappyFrameDecoder;
-import io.netty.handler.codec.compression.SnappyFrameEncoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
-import io.netty.handler.logging.LogLevel;
-import io.netty.handler.logging.LoggingHandler;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 
-public class Client implements Closeable{
+public class Client extends Transport {
 	private int port;
 	private String host;
-	private NioEventLoopGroup group;
-	private Channel channel;
+	private ClientHandler clientHandler ;
+	
+	
 	public Client(String host,int port){
 		this.host=host;
 		this.port = port;
+	}
+	
+	
+	
+	public void waitPing(){
+		try {
+			clientHandler.getPingcdl().await();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void start(){
@@ -46,13 +45,14 @@ public class Client implements Closeable{
 			.handler(new ChannelInitializer<Channel>() {
 				@Override
 				protected void initChannel(Channel ch) throws Exception {
+					clientHandler = new ClientHandler();
 					ch.pipeline()
 					//in
 					.addLast(new LineBasedFrameDecoder(102400))
 //					.addLast(new JdkZlibDecoder())
-					.addLast(new StringDecoder())
-					.addLast(new InitAndPlayerHandler())
-					
+					.addLast("stringDecoder",new StringDecoder())
+					.addLast(new InitAndSyncBaseElementHandler())
+					.addLast(clientHandler)
 					//out
 //					.addLast(new JdkZlibEncoder())
 					.addLast(new StringEncoder());
@@ -77,10 +77,5 @@ public class Client implements Closeable{
 		this.group.shutdownGracefully();
 	}
 	
-	public Channel getChannel() {
-		return channel;
-	}
-	public NioEventLoopGroup getGroup() {
-		return group;
-	}
+
 }

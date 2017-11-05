@@ -21,7 +21,6 @@ public class PlayerControlHandler {
 	private static double mouseY=0;
 	
 	private static PlayerControlHandler pch = null;
-	public boolean playerLauncher = false;
 	// 速度V
 	public static double DEFAULT_BALL_V = 4;
 	public static double BALL_V = DEFAULT_BALL_V;
@@ -122,7 +121,7 @@ public class PlayerControlHandler {
 			pressed[3] = true;
 			break;
 		case X:
-			playerLauncher=true;
+			Player.getPlayer1().isShooting=true;
 			break;
 		}
 		changeV();
@@ -144,7 +143,7 @@ public class PlayerControlHandler {
 			pressed[3] = false;
 			break;
 		case X:
-			playerLauncher=false;
+			Player.getPlayer1().isShooting=false;
 			break;
 		case ENTER:
 			GameSession.closeGameSession();
