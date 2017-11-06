@@ -4,10 +4,19 @@ import org.ietf.jgss.GSSContext;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -77,27 +86,41 @@ public class SceneManager {
 	}
 
 	public void loadMulplaySelectScene() {
-		StackPane root = new StackPane();
-		Canvas canvas = new Canvas(200, 300);
-		// canvas.getGraphicsContext2D().fillOval(10, 10, 20, 20);
-		canvas.getGraphicsContext2D().fillText("press 's' to be server\n press 'c' to be client\n 'n' single", 10, 100);
-		root.getChildren().add(canvas);
-		Scene scene = new Scene(root);
-		scene.setOnKeyReleased((e) -> {
-			switch (e.getCode()) {
-			case S:
-				startGame(true, true);
-				break;
-			case C:
-				startGame(true, false);
-				break;
-			case N:
-				startGame();
-				break;
-			default:
-				break;
-			}
+
+		TextField ipTextField = new TextField("127.0.0.1");
+		Button singlebtn = new Button("Single");
+		Button serverbtn = new Button("multiplay-Server");
+		Button clientbtn = new Button("multiplay-Client");
+		Button setIPbtn = new Button("set remote IP");
+		final StringProperty ipProps = new SimpleStringProperty();
+		ipProps.bind(ipTextField.textProperty());
+		singlebtn.setOnAction((e)->{
+			startGame();
 		});
+		serverbtn.setOnAction((e)->{
+			startGame(true, true);
+		});
+		clientbtn.setOnAction((e)->{
+			GameSession.remoteHost=ipProps.get();
+			startGame(true, false);
+		});
+		
+		GridPane grid = new GridPane();
+		grid.setAlignment(Pos.CENTER);
+		grid.setVgap(5);
+		grid.setHgap(10);
+		grid.setPadding(new Insets(5, 5, 5, 5));
+		grid.add(new Label("ip:"), 0, 2);
+		grid.add(ipTextField, 1, 2);
+		grid.add(singlebtn, 3, 0);
+		grid.add(serverbtn, 3, 1);
+		grid.add(clientbtn, 3, 2);
+		grid.add(setIPbtn, 2, 2);
+		
+		StackPane root = new StackPane();
+		root.getChildren().add(grid);
+		Scene scene = new Scene(root, 600, 300);
+		primaryStage.setTitle("MAGEngine");
 		primaryStage.setScene(scene);
 	}
 

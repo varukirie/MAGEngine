@@ -43,6 +43,10 @@ public class GameSession {
 	private int health = PRESET_HEALTH;
 	private int power = PRESET_POWER;
 
+	public final double PRESET_PLAYER_POSITION_X=MyCanvas.CANVAS_WIDTH/2;
+	public final double PRESET_PLAYER_POSITION_Y=MyCanvas.CANVAS_HEIGHT-100;
+	public final double MULPLAY_PLAYER_POSITION_DELTA_X=100;
+	
 	public boolean mulplay = false;
 	public boolean mulplayServer=false;
 	public static final int PORT = 10231;
@@ -171,7 +175,7 @@ public class GameSession {
 		
 		
 		//创建玩家
-		Player player1 = Player.getPlayer1(200,600);
+		Player player1 = Player.getPlayer1(PRESET_PLAYER_POSITION_X,PRESET_PLAYER_POSITION_Y);
 		mh.addCollisionElement("player1", player1);
 
 
@@ -185,13 +189,15 @@ public class GameSession {
 		moveableElementUtils.add("displayMessage", new DisplayMessage(1, MyCanvas.CANVAS_HEIGHT-20));
 		ChapterLoader.init(staticCanvas);
 		if(this.mulplay){
-			Player player2 = Player.getPlayer2(400, 600);
-			moveableElementUtils.add("player2", player2);
 			if(this.mulplayServer){
 				server = new Server(PORT);
 				clientOrServer=server;
 				server.start();//监听端口
 				setLoopGroup(server.getBossLoop());
+				player1.setX(PRESET_PLAYER_POSITION_X-MULPLAY_PLAYER_POSITION_DELTA_X);
+				player1.setY(PRESET_PLAYER_POSITION_Y);
+				Player player2 = Player.getPlayer2(PRESET_PLAYER_POSITION_X+MULPLAY_PLAYER_POSITION_DELTA_X,PRESET_PLAYER_POSITION_Y);
+				moveableElementUtils.add("player2", player2);
 				
 			}else{
 				client = new Client(remoteHost, PORT);
@@ -201,6 +207,10 @@ public class GameSession {
 				if(client.getChannel()==null){
 					System.out.println("连接失败");
 				}
+				player1.setX(PRESET_PLAYER_POSITION_X+MULPLAY_PLAYER_POSITION_DELTA_X);
+				player1.setY(PRESET_PLAYER_POSITION_Y);
+				Player player2 = Player.getPlayer2(PRESET_PLAYER_POSITION_X-MULPLAY_PLAYER_POSITION_DELTA_X, PRESET_PLAYER_POSITION_Y);
+				moveableElementUtils.add("player2", player2);
 			}
 			
 		}
