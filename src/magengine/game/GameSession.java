@@ -312,6 +312,7 @@ public class GameSession {
 		loadChapterFuture = ChapterLoader.getScheduledExecutorService()
 				.submit(()->{
 			if(mulplay&&(mulplayServer)){
+				System.out.println("waiting connection...");
 				long delay=server.getDelay();//server等待连接 并获取延迟
 				try {
 					Thread.sleep(delay/2);
@@ -320,6 +321,7 @@ public class GameSession {
 				}
 				ChapterLoader.loadChapter(chapter);
 			}else if(mulplay&&(!mulplayServer)){
+				System.out.println("waiting server pong");
 				client.waitPing();
 				ChapterLoader.loadChapter(chapter);
 			}else{

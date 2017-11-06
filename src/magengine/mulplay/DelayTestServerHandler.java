@@ -15,7 +15,9 @@ public class DelayTestServerHandler extends SimpleChannelInboundHandler<String> 
 	
 	public long getDelay(){
 		try {
+			System.out.println("connected! \n ping testing...");
 			if(cdl.await(10000, TimeUnit.MILLISECONDS)){
+				System.out.println("ping success!");
 				return delay;
 			}else{
 				throw new RuntimeException(this.getClass().getName()+" 同步超时  ");
