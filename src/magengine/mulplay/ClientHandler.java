@@ -17,7 +17,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 		switch(strmsg){
 		case "ping":
 			System.out.println("Client :getPing!");
-			ctx.writeAndFlush(Unpooled.copiedBuffer("pong\n",CharsetUtil.UTF_8));
+			ctx.writeAndFlush(Unpooled.copiedBuffer("pong",CharsetUtil.UTF_8));
 			pingcdl.countDown();
 			break;
 			default:

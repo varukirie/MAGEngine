@@ -34,7 +34,7 @@ public class DelayTestServerHandler extends ChannelInboundHandlerAdapter {
 	public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
 		super.handlerAdded(ctx);
 		System.out.println("delay Handler added");
-		ctx.writeAndFlush(Unpooled.copiedBuffer("ping\n",CharsetUtil.UTF_8)).sync();
+		ctx.writeAndFlush(Unpooled.copiedBuffer("ping",CharsetUtil.UTF_8)).sync();
 		timeRec=System.currentTimeMillis();
 	}
 	

@@ -51,14 +51,9 @@ public class Server extends Transport {
 							setChannel(ch);
 							ch.pipeline()
 							//in
-									.addLast(new LineBasedFrameDecoder(1024))
-//									.addLast(new JdkZlibDecoder())
 									.addLast("stringDecoder",new StringDecoder())
 									.addLast(new InitAndVOTransportHandler())
-									
 							//out
-							
-//									.addLast(new JdkZlibEncoder())
 									.addLast(new StringEncoder());
 						}
 					});

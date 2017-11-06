@@ -50,13 +50,10 @@ public class Client extends Transport {
 					clientHandler = new ClientHandler();
 					ch.pipeline()
 					//in
-					.addLast(new LineBasedFrameDecoder(1024))
-//					.addLast(new JdkZlibDecoder())
 					.addLast("stringDecoder",new StringDecoder())
 					.addLast(new InitAndVOTransportHandler())
 					.addLast(clientHandler)
 					//out
-//					.addLast(new JdkZlibEncoder())
 					.addLast(new StringEncoder());
 				}
 			});
