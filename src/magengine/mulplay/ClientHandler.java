@@ -2,11 +2,8 @@ package magengine.mulplay;
 
 import java.util.concurrent.CountDownLatch;
 
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.util.CharsetUtil;
 
 public class ClientHandler extends SimpleChannelInboundHandler<String> {
 	
