@@ -42,7 +42,7 @@ public class MoveHandler implements Runnable {
 	 * 全局速度
 	 */
 	public static double absoluteTimeSpeed = DEFAULT_TIME_SPEED;
-	private static volatile double deltaTimeFactor = 1;
+	private static volatile double deltaTimeFactor = 0;
 	public static final long SLEEP_TIME = 2;
 	public static final long BLANK = 1000;
 

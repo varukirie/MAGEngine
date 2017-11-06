@@ -325,6 +325,7 @@ public class GameSession {
 			}else{
 				ChapterLoader.loadChapter(chapter);
 			}
+			MoveHandler.setDeltaTimeFactor(1);
 		});
 	}
 	public Level getLevel() {
