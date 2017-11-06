@@ -1,16 +1,14 @@
-package magengine.element;
+package magengine.mulplay;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class BaseElementVO {
+public class PlayerVO {
 	
 	private double x;
 	private double y;
 	private double vx;
 	private double vy;
-	private String keyName;
-	private String className ;
 	private boolean isShooting=false;
 	private boolean noHurtMode = false;
 	
@@ -38,32 +36,19 @@ public class BaseElementVO {
 	public void setVy(double vy) {
 		this.vy = vy;
 	}
-	public String getClassName() {
-		return className;
-	}
-	public void setClassName(String className) {
-		this.className = className;
-	}
 	
-	public BaseElementVO(double x, double y, double vx, double vy, String keyName, String className, boolean isShooting,
+	public PlayerVO(double x, double y, double vx, double vy, boolean isShooting,
 			boolean noHurtMode) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.vx = vx;
 		this.vy = vy;
-		this.keyName = keyName;
-		this.className = className;
 		this.isShooting = isShooting;
 		this.noHurtMode = noHurtMode;
 	}
-	public String getKeyName() {
-		return keyName;
-	}
-	public void setKeyName(String keyName) {
-		this.keyName = keyName;
-	}
-	public BaseElementVO(){
+
+	public PlayerVO(){
 		
 	}
 	
@@ -82,8 +67,8 @@ public class BaseElementVO {
 	}
 	@Override
 	public String toString() {
-		return "BaseElementVO [x=" + x + ", y=" + y + ", vx=" + vx + ", vy=" + vy + ", keyName=" + keyName
-				+ ", className=" + className + ", isShooting=" + isShooting + ", noHurtMode=" + noHurtMode + "]";
+		return "PlayerVO [x=" + x + ", y=" + y + ", vx=" + vx + ", vy=" + vy 
+				+ ", isShooting=" + isShooting + ", noHurtMode=" + noHurtMode + "]";
 	}
 	
 	

@@ -30,7 +30,9 @@ public class Client extends Transport {
 		try {
 			clientHandler.getPingcdl().await();
 		} catch (InterruptedException e) {
+			System.out.println("客户端等待服务器响应 状态:中断");
 			e.printStackTrace();
+			throw new RuntimeException("客户端等待服务器响应 状态:中断");
 		}
 	}
 	
@@ -48,10 +50,10 @@ public class Client extends Transport {
 					clientHandler = new ClientHandler();
 					ch.pipeline()
 					//in
-					.addLast(new LineBasedFrameDecoder(102400))
+					.addLast(new LineBasedFrameDecoder(1024))
 //					.addLast(new JdkZlibDecoder())
 					.addLast("stringDecoder",new StringDecoder())
-					.addLast(new InitAndSyncBaseElementHandler())
+					.addLast(new InitAndVOTransportHandler())
 					.addLast(clientHandler)
 					//out
 //					.addLast(new JdkZlibEncoder())

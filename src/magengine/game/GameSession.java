@@ -4,6 +4,8 @@ package magengine.game;
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -238,14 +240,26 @@ public class GameSession {
 		try {
 			if(mulplay){
 				clientOrServer.close();
+				if(loadChapterFuture!=null){
+					try {
+						loadChapterFuture.get();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					} catch (ExecutionException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		
 	}
-	
+	private Future<?> loadChapterFuture;
 	public void loadChapter(AChapter chapter){
-		ChapterLoader.getScheduledExecutorService().schedule(()->{
+		loadChapterFuture = ChapterLoader.getScheduledExecutorService()
+				.submit(()->{
 			if(mulplay&&(mulplayServer)){
 				long delay=server.getDelay();//server等待连接 并获取延迟
 				try {
@@ -260,7 +274,7 @@ public class GameSession {
 			}else{
 				ChapterLoader.loadChapter(chapter);
 			}
-		}, 0,TimeUnit.MILLISECONDS);
+		});
 	}
 	public Level getLevel() {
 		return level;

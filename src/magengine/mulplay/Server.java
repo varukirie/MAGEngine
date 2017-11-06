@@ -28,7 +28,9 @@ public class Server extends Transport {
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
+				System.out.println("服务器等待连接中断");
 				e.printStackTrace();
+				throw new RuntimeException("服务器等待连接中断");
 			}
 		}
 		this.channel.pipeline().addAfter("stringDecoder", "delayHandler", handler);
@@ -52,7 +54,7 @@ public class Server extends Transport {
 									.addLast(new LineBasedFrameDecoder(1024))
 //									.addLast(new JdkZlibDecoder())
 									.addLast("stringDecoder",new StringDecoder())
-									.addLast(new InitAndSyncBaseElementHandler())
+									.addLast(new InitAndVOTransportHandler())
 									
 							//out
 							
