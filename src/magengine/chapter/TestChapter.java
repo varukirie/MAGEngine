@@ -25,6 +25,7 @@ import magengine.danmuku.StarDanmuku;
 import magengine.danmuku.TriArcDanmuku;
 import magengine.danmuku.UtsuhoNonSpellCard1;
 import magengine.danmuku.gs.Testing;
+import magengine.danmuku.yt.DirectPlayerDanmuku;
 import magengine.danmuku.yt.MulCircleDanmuku2;
 import magengine.danmuku.yt.RotateDanmuku;
 import magengine.danmuku.yt.demo1;
