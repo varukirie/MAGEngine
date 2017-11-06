@@ -1,9 +1,12 @@
 package magengine.mulplay;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
+@SuppressWarnings("serial")
 @XmlRootElement
-public class PlayerVO {
+public class PlayerVO implements Serializable{
 	
 	private double x;
 	private double y;

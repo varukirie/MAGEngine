@@ -16,6 +16,13 @@
 			<artifactId>netty-all</artifactId>
 			<version>4.1.9.Final</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jboss.marshalling/jboss-marshalling -->
+		<dependency>
+			<groupId>org.jboss.marshalling</groupId>
+			<artifactId>jboss-marshalling</artifactId>
+			<version>2.0.2.Final</version>
+		</dependency>
+
 		<!-- 以下3个为 json实现的依赖 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>

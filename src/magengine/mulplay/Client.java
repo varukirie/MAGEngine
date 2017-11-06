@@ -7,9 +7,9 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.LineBasedFrameDecoder;
-import io.netty.handler.codec.string.StringDecoder;
-import io.netty.handler.codec.string.StringEncoder;
+import io.netty.handler.codec.serialization.ClassResolvers;
+import io.netty.handler.codec.serialization.ObjectDecoder;
+import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 
@@ -50,11 +50,13 @@ public class Client extends Transport {
 					clientHandler = new ClientHandler();
 					ch.pipeline()
 					//in
-					.addLast("stringDecoder",new StringDecoder())
-					.addLast(new InitAndVOTransportHandler())
+					.addLast(new ObjectEncoder())
+//					.addLast("stringDecoder",new StringDecoder())
+					.addLast("decoder",new ObjectDecoder(1024*100,ClassResolvers.weakCachingConcurrentResolver(this.getClass().getClassLoader())))
 					.addLast(clientHandler)
-					//out
-					.addLast(new StringEncoder());
+					.addLast(new InitHandler())
+					.addLast(new PlayerVOHandler());
+//					.addLast(new StringEncoder());
 				}
 			});
 			ChannelFuture cf = boot.connect(this.host,this.port).sync();

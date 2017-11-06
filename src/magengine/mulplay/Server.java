@@ -7,9 +7,9 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.LineBasedFrameDecoder;
-import io.netty.handler.codec.string.StringDecoder;
-import io.netty.handler.codec.string.StringEncoder;
+import io.netty.handler.codec.serialization.ClassResolvers;
+import io.netty.handler.codec.serialization.ObjectDecoder;
+import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 
@@ -22,9 +22,10 @@ public class Server extends Transport {
 	public Server(int port) {
 		this.port = port;
 	}
-	public long getDelay(){
+
+	public long getDelay() {
 		DelayTestServerHandler handler = new DelayTestServerHandler();
-		while(this.channel==null){
+		while (this.channel == null) {
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
@@ -33,9 +34,10 @@ public class Server extends Transport {
 				throw new RuntimeException("服务器等待连接中断");
 			}
 		}
-		this.channel.pipeline().addAfter("stringDecoder", "delayHandler", handler);
+		this.channel.pipeline().addAfter("decoder", "delayHandler", handler);
 		return handler.getDelay();
 	}
+
 	public void start() {
 		ServerBootstrap boot = new ServerBootstrap();
 		NioEventLoopGroup bossLoop = new NioEventLoopGroup(2);
@@ -50,11 +52,14 @@ public class Server extends Transport {
 						protected void initChannel(SocketChannel ch) throws Exception {
 							setChannel(ch);
 							ch.pipeline()
-							//in
-									.addLast("stringDecoder",new StringDecoder())
-									.addLast(new InitAndVOTransportHandler())
-							//out
-									.addLast(new StringEncoder());
+									// in
+									// .addLast("stringDecoder",new
+									// StringDecoder())
+									.addLast(new ObjectEncoder())
+									.addLast("decoder",new ObjectDecoder(1024*100,ClassResolvers.weakCachingConcurrentResolver(this.getClass().getClassLoader())))
+									.addLast(new InitHandler())
+									.addLast(new PlayerVOHandler());
+									
 						}
 					});
 			ChannelFuture cf = boot.bind(port).sync();
@@ -76,6 +81,7 @@ public class Server extends Transport {
 		this.workerLoop.shutdownGracefully();
 
 	}
+
 	public NioEventLoopGroup getBossLoop() {
 		return bossLoop;
 	}

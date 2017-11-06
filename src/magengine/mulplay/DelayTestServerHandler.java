@@ -6,9 +6,10 @@ import java.util.concurrent.TimeUnit;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.CharsetUtil;
 
-public class DelayTestServerHandler extends ChannelInboundHandlerAdapter {
+public class DelayTestServerHandler extends SimpleChannelInboundHandler<String> {
 	
 	private CountDownLatch cdl = new CountDownLatch(1);
 	private long timeRec=0;
@@ -34,12 +35,12 @@ public class DelayTestServerHandler extends ChannelInboundHandlerAdapter {
 	public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
 		super.handlerAdded(ctx);
 		System.out.println("delay Handler added");
-		ctx.writeAndFlush(Unpooled.copiedBuffer("ping",CharsetUtil.UTF_8)).sync();
+		ctx.writeAndFlush("ping").sync();
 		timeRec=System.currentTimeMillis();
 	}
 	
 	@Override
-	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+	protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
 		String strmsg = (String) msg;
 		if("pong".equals(strmsg)){
 			delay=System.currentTimeMillis()-timeRec;
