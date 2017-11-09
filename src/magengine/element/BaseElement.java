@@ -8,7 +8,10 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
 public abstract class BaseElement implements Moveable, Paintable, Accelerated {
-
+	/**
+	 * 用于使用时扩展功能
+	 */
+	public volatile int state = 0;
 	protected DoubleProperty xProperty = new SimpleDoubleProperty();
 	protected DoubleProperty yProperty = new SimpleDoubleProperty();
 	protected volatile double velocityX = 0;

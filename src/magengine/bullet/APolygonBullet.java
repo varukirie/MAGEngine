@@ -1,11 +1,14 @@
 package magengine.bullet;
 
+import java.util.Arrays;
+
 import com.badlogic.gdx.math.Polygon;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import magengine.element.PolygonCollision;
+import magengine.element.impl.Player;
 import magengine.util.CollisionTeam;
 import magengine.util.Transform;
 
@@ -45,7 +48,7 @@ public abstract class APolygonBullet extends Bullet implements PolygonCollision{
 	protected volatile float[] vertices=new float[getOrigin()[0].length*2];
 	protected volatile Polygon polygon = new Polygon(vertices);
 	private double scale = 1.0;
-	private double[][] scaleMartix = new double[][]{{scale,0},{0,scale}} ;
+	protected double[][] scaleMartix = new double[][]{{scale,0},{0,scale}} ;
 	public void setScale(double scale) {
 		this.scale = scale;
 		scaleMartix[0][0]=scale;
@@ -81,7 +84,10 @@ public abstract class APolygonBullet extends Bullet implements PolygonCollision{
 	
 	protected double[][] handleCollision(){
 		double[][] ans=transformVAndScaleAndDelta(getOrigin());
+//		System.out.println(this.getClass().getSimpleName()+"x:"+Arrays.toString(getOrigin()[0]));
+//		System.out.println(this.getClass().getSimpleName()+"y:"+Arrays.toString(getOrigin()[1]));
 		toVertices(ans, vertices);
+//		System.out.println("vertices:"+Arrays.toString(vertices));
 		polygon.setVertices(vertices);
 		return ans;
 	}
@@ -99,7 +105,9 @@ public abstract class APolygonBullet extends Bullet implements PolygonCollision{
 	}
 	@Override
 	public void onCollision(PolygonCollision m) {
-		this.setWantBeRemoved(true);
+		if(m instanceof Player){
+			this.setWantBeRemoved(true);
+		}
 	}
 
 	public boolean getNeedPaintOutline() {

@@ -1,15 +1,8 @@
 package application;
 
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import magengine.game.Level;
 import magengine.ui.SceneManager;
-import magengine.util.DI;
 
 
 public class Main extends Application {
@@ -17,8 +10,9 @@ public class Main extends Application {
 	public static boolean DEBUG_NO_FAILURE = true;
 	public static final boolean DEBUG_ElementCreate = false;
 	public static final boolean DEBUG_BENCH=false;
-	public static final boolean DEBUG_COLLISION=false;
+	public static final boolean DEBUG_COLLISION=true;
 	public static final boolean ACC_ENABLE=true;
+	public static final boolean DEBUG_COLLISION_AREA=true;
 
 	@Override
 	public void start(Stage primaryStage) {

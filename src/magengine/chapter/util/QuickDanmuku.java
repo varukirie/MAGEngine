@@ -7,13 +7,17 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import javafx.scene.shape.MoveTo;
+import magengine.bullet.APolygonBullet;
 import magengine.bullet.Bullet;
 import magengine.bullet.impl.DefaultBullet;
+import magengine.bullet.impl.PlayerBullet;
 import magengine.element.BaseElement;
+import magengine.element.PolygonCollision;
 import magengine.element.impl.Player;
 import magengine.game.LogicExecutor;
 import magengine.helper.MoveToHelper;
 import magengine.launcher.Launcher;
+import magengine.util.CollisionTeam;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
 import magengine.util.Transform;
@@ -233,4 +237,5 @@ public class QuickDanmuku {
 	public double getPlayerDirectionAngle(BaseElement elem) {
 		return getDirectionAngle(elem, Player.getPlayer1().getX(), Player.getPlayer1().getY());
 	}
+	
 }

@@ -8,6 +8,7 @@ import java.util.function.Consumer;
 import javafx.application.Platform;
 import javafx.scene.effect.Bloom;
 import javafx.scene.paint.Color;
+import magengine.bullet.APolygonBullet;
 import magengine.bullet.Bullet;
 import magengine.bullet.PresetColor;
 import magengine.bullet.impl.ArrowBullet;
@@ -30,6 +31,7 @@ import magengine.danmuku.yt.MulCircleDanmuku2;
 import magengine.danmuku.yt.RotateDanmuku;
 import magengine.danmuku.yt.demo1;
 import magengine.element.BaseElement;
+import magengine.element.impl.InvertCircleArea;
 import magengine.enemy.ALoopDanmukuEnemy;
 import magengine.enemy.DefaultEnemy;
 import magengine.enemy.Enemy1;
@@ -43,6 +45,7 @@ import magengine.launcher.OvalLauncherGroup;
 import magengine.paint.MyCanvas;
 import magengine.paint.MyCanvasSwitcher;
 import magengine.ui.SceneManager;
+import magengine.util.CollisionTeam;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
 
@@ -85,18 +88,30 @@ public class TestChapter extends AChapter {
 		// });
 		mEU.add("enemy", boss);
 
-		for(int i=0;i<100;i++){
-			long sum = 6000+1000+6000+1000;
+		for (int i = 0; i < 100; i++) {
+			long sum = 6000 + 1000 + 6000 + 1000;
 			executor.schedule(() -> {
-				 quick.moveTo(boss, 6000,100, 120);
-				 },i*sum);
+				quick.moveTo(boss, 6000, 100, 120);
+			}, i * sum);
 			executor.schedule(() -> {
-				 quick.moveTo(boss, 6000, 500, 100);
-				 },i*sum+6000+1000);
+				quick.moveTo(boss, 6000, 500, 100);
+			}, i * sum + 6000 + 1000);
 		}
-		
-		// new RotateDanmuku().delayExecute();
 
+//		InvertCircleArea ica = new InvertCircleArea(300, 100, 300);
+//		ica.setOnCollisionEvent((m) -> {
+//			if (m.getTeam().equals(CollisionTeam.ENEMY_BULLET)) {
+//				Bullet b = (Bullet) m;
+//				System.out.println("caught");
+//				System.out.println(b.state);
+//				if(b.state<1){
+//					b.setWantBeRemoved(true);
+//				}
+//			}
+//		});
+//		mEU.add("ica", ica);
+
+		// new RotateDanmuku().delayExecute();
 
 		// ArcLauncherGroup alg= new ArcLauncherGroup(300, 200, Math.PI/3,
 		// Math.PI/3,128);
@@ -113,16 +128,16 @@ public class TestChapter extends AChapter {
 		// alg.setLauncherType(BurstLauncher.class);
 		// alg.execute();
 
-//		 quick.moveTo(boss, 1500, 100, 100);
-//		 executor.schedule(() -> {
-//		 quick.moveTo(boss, 4000, 275, 500);
-//		 }, 1700);
-//		 executor.schedule(() -> {
-//		 quick.moveTo(boss, 4000, 500, 100);
-//		 }, 6000);
-//		 executor.schedule(() -> {
-//		 quick.moveTo(boss, 3000, 275, 195.5);
-//		 }, 11000);
+		// quick.moveTo(boss, 1500, 100, 100);
+		// executor.schedule(() -> {
+		// quick.moveTo(boss, 4000, 275, 500);
+		// }, 1700);
+		// executor.schedule(() -> {
+		// quick.moveTo(boss, 4000, 500, 100);
+		// }, 6000);
+		// executor.schedule(() -> {
+		// quick.moveTo(boss, 3000, 275, 195.5);
+		// }, 11000);
 
 		// quick.moveTo(enemy, 1500, 100, 100);
 		// LogicExecutor.getLogicExecutor().schedule(() -> {

@@ -1,4 +1,4 @@
-package magengine.element;
+package magengine.mulplay;
 
 public interface MulSync {
 

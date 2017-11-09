@@ -314,6 +314,7 @@ public class GameSession {
 			if(mulplay&&(mulplayServer)){
 				System.out.println("waiting connection...");
 				long delay=server.getDelay();//server等待连接 并获取延迟
+				System.out.println("delay:"+delay+" ms");
 				try {
 					Thread.sleep(delay/2);
 				} catch (InterruptedException e) {

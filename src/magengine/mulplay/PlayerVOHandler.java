@@ -7,7 +7,6 @@ import java.util.concurrent.TimeUnit;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import magengine.element.Moveable;
-import magengine.element.MulSync;
 import magengine.element.impl.Player;
 import magengine.game.MoveHandler;
 import magengine.util.DI;

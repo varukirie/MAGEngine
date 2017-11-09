@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Polygon;
 import application.Main;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import magengine.bullet.impl.PlayerBullet;
 import magengine.element.PolygonCollision;
 import magengine.util.CollisionTeam;
 import magengine.util.CollisionUtil;
@@ -63,8 +64,10 @@ public abstract class APolygonEnemy extends AEnemy implements PolygonCollision{
 	}
 	@Override
 	public void onCollision(PolygonCollision m) {
-		if(this.addAndGetHP(-1)<=0){
-			this.setWantBeRemoved(true);
+		if(m.getTeam().equals(CollisionTeam.PLAYER_BULLET)){
+			if(this.addAndGetHP(-1)<=0){
+				this.setWantBeRemoved(true);
+			}
 		}
 	
 	}

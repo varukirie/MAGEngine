@@ -9,10 +9,10 @@ import javafx.scene.paint.Color;
 import magengine.bullet.Bullet;
 import magengine.element.BaseElement;
 import magengine.element.LimitedByCanvas;
-import magengine.element.MulSync;
 import magengine.element.PolygonCollision;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
+import magengine.mulplay.MulSync;
 import magengine.paint.SpritePainter;
 import magengine.util.CollisionTeam;
 /**
@@ -167,7 +167,7 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 	
 	@Override
 	public void onCollision(PolygonCollision m) {
-		if(m instanceof Bullet){
+		if(m.getTeam().equals(CollisionTeam.ENEMY_BULLET)){
 			if(noHurtMode==false){
 				if(GameSession.getGameSession().decHealthAndCheck()&&!Main.DEBUG_NO_FAILURE){
 						GameSession.getGameSession().failure();

@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public enum CollisionTeam {
-		ENEMY_BULLET,PLAYER,PLAYER_BULLET,ENEMY;	
+		ENEMY_BULLET,PLAYER,PLAYER_BULLET,ENEMY,NO_TEAM;	
 	private static final HashMap<CollisionTeam,ArrayList<CollisionTeam>> rules = new HashMap<>();
 	static{
 		Arrays.asList(CollisionTeam.values()).forEach((e)->{
@@ -16,10 +16,10 @@ public enum CollisionTeam {
 		rules.get(PLAYER_BULLET).add(ENEMY);
 		rules.get(ENEMY).add(PLAYER_BULLET);
 		rules.get(ENEMY).add(PLAYER);
-		rules.get(PLAYER).add(ENEMY);
+////避免双重判定		rules.get(PLAYER).add(ENEMY);
 	}
-	public static boolean shouldCollision(CollisionTeam team1,CollisionTeam team2){
-		return rules.get(team1).contains(team2);
+	public static boolean shouldCollision(CollisionTeam teamFromCheckList,CollisionTeam team2){
+		return rules.get(teamFromCheckList).contains(team2)||teamFromCheckList.equals(NO_TEAM);
 //		return true;
 	}
 }

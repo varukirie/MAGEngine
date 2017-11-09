@@ -15,6 +15,7 @@ import magengine.element.Initializable;
 import magengine.element.Moveable;
 import magengine.element.Paintable;
 import magengine.element.PolygonCollision;
+import magengine.element.impl.Area;
 import magengine.enemy.APolygonEnemy;
 import magengine.game.LogicExecutor;
 import magengine.game.MoveHandler;
@@ -56,7 +57,7 @@ public class ElementUtils {
 		if (value instanceof DurationManage) {
 			((DurationManage) value).setStartTime(LogicExecutor.gameTime());
 		}
-		if (value instanceof APolygonEnemy) {
+		if (value instanceof APolygonEnemy || value instanceof Area) {
 			((MoveHandler) DI.di().get("mh")).addCollisionElement(name, (PolygonCollision) value);
 		}
 		if (mh != null)

@@ -52,5 +52,11 @@ public class Transform {
 			in[1][i]=in[1][i]+y;
 		}
 	}
+	public static void toVertices(double[][] in,float[] target){
+		for(int i=0;i<in[0].length;i++){
+			target[i*2]=(float) in[0][i];
+			target[i*2+1]=(float) in[1][i];
+		}
+	}
 	
 }
