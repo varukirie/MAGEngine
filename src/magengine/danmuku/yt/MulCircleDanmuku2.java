@@ -8,7 +8,7 @@ import magengine.bullet.impl.ArrowBullet;
 import magengine.bullet.impl.CircleBullet;
 import magengine.bullet.impl.DefaultBullet;
 import magengine.bullet.impl.DiamondBullet;
-import magengine.bullet.impl.EllipseBullet;
+import magengine.bullet.impl.LongHexagonBullet;
 import magengine.bullet.impl.StarBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.chapter.util.SeqDanmuku;
@@ -93,7 +93,7 @@ public void executeDanmuku() {
 	OvalLauncherGroup oG1 = new OvalLauncherGroup(275, 200);
 	oG1.setLauncherConfig((launcher) -> {
 		
-	launcher.setBulletType(EllipseBullet.class);
+	launcher.setBulletType(LongHexagonBullet.class);
 		launcher.setBulletEvent((sESx, bullet) -> {
 		 
 			LogicExecutor.getLogicExecutor().schedule(() -> {
@@ -117,7 +117,7 @@ public void executeDanmuku() {
 	OvalLauncherGroup oG2 = new OvalLauncherGroup(275, 200);
 	oG1.setLauncherConfig((launcher) -> {
 		
-	launcher.setBulletType(EllipseBullet.class);
+	launcher.setBulletType(LongHexagonBullet.class);
 		
 		launcher.setBulletEvent((sESx, bullet) -> {
 		 
@@ -147,7 +147,7 @@ public void executeDanmuku() {
 	oG3.setAmount(10);
 	oG3.setLauncherConfig((launcher) -> {
 		
-		launcher.setBulletType(EllipseBullet.class);
+		launcher.setBulletType(LongHexagonBullet.class);
 		launcher.setBulletEvent((sESx, bullet) -> {
 			LogicExecutor.getLogicExecutor().schedule(() -> {
 				quick.stopBullet(bullet);

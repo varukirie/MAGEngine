@@ -11,7 +11,6 @@ import magengine.bullet.impl.ArrowBullet;
 import magengine.bullet.impl.CircleBullet;
 import magengine.bullet.impl.DefaultBullet;
 import magengine.bullet.impl.DiamondBullet;
-import magengine.bullet.impl.EllipseBullet;
 import magengine.bullet.impl.StarBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.chapter.util.SeqDanmuku;
