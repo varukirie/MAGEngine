@@ -20,6 +20,10 @@ public class LogicExecutor {
 	public static long gameTime() {
 		return (long) instance.curTime;
 	}
+	
+	public static double deltaTime(){
+		return instance.curDeltaTime;
+	}
 
 	public static void clear() {
 		instance = null;
@@ -30,8 +34,10 @@ public class LogicExecutor {
 
 	private double curTime = 0;
 	private ArrayList<GameTask> taskList = new ArrayList<>();
-
+	private volatile double curDeltaTime=0;
+	
 	public void update(double deltaTime) {
+		this.curDeltaTime=deltaTime;
 		curTime += deltaTime;
 		for (int i = 0, j = taskList.size(); i < j; i++) {
 			if (taskList.get(i).delay < curTime) {
