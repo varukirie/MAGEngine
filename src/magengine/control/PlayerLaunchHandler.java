@@ -1,5 +1,6 @@
 package magengine.control;
 
+import magengine.bullet.Bullet;
 import magengine.bullet.impl.DefaultBullet;
 import magengine.bullet.impl.PlayerBullet;
 import magengine.element.impl.Player;
@@ -39,15 +40,15 @@ public class PlayerLaunchHandler implements Runnable {
 	
 	private void shooting(double x,double y){
 		{
-			DefaultBullet bullet = new PlayerBullet(x-10, y);
+			Bullet bullet = new PlayerBullet(x-10, y);
 			bullet.setVelocityY(-600);
-			bullet.setVelocityX(0);
+			bullet.setVelocityX(60);
 			elementUtils.add("playerBullet" + count++, bullet);
 		}
 		
-		DefaultBullet bullet = new PlayerBullet(x+10, y);
+		Bullet bullet = new PlayerBullet(x+10, y);
 		bullet.setVelocityY(-600);
-		bullet.setVelocityX(0);
+		bullet.setVelocityX(-60);
 		elementUtils.add("playerBullet" + count++, bullet);
 	}
 }

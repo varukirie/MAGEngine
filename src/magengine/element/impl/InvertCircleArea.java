@@ -22,7 +22,7 @@ public class InvertCircleArea extends CircleArea {
 			ans[0][i] = in[0][i];
 			ans[1][i] = in[1][i];
 		}
-		ans[0][in[0].length - 1] = ans[0][in[0].length - 2] * 0.2;
+		ans[0][in[0].length - 1] = ans[0][in[0].length - 2] * 0.99;
 		int t = in[0].length;
 		ans[0][t] = ans[0][t - 1];
 		ans[1][t] = ans[1][t] - MyCanvas.CANVAS_HEIGHT;
@@ -45,20 +45,11 @@ public class InvertCircleArea extends CircleArea {
 	}
 	
 	
-	@Override
-	protected double[][] transformVAndScaleAndDelta(double[][] origin){
-		//do not transformV
-		double[][] ans= Transform.martixInTransform(scaleMartix, origin);
-		Transform.delta(ans, getX(), getY());
-		return ans;
-	}
+
 	@Override
 	public void paint(GraphicsContext gc) {
-		double[][] ans=handleCollision();
-		if(Main.DEBUG_COLLISION_AREA){
-			gc.setFill(Color.rgb(230, 50, 50, 0.3));
-			gc.fillPolygon(ans[0],ans[1], getOrigin()[0].length);
-		}
-		System.out.println(Arrays.toString(super.getPolygon().getVertices()));
+		super.paint(gc);
+		System.out.println("before last x = "+super.getPolygon().getVertices()[super.getPolygon().getVertices().length-16]);
+		System.out.println("first x="+super.getPolygon().getVertices()[0]+" last x = "+super.getPolygon().getVertices()[super.getPolygon().getVertices().length-14]);
 	}
 }

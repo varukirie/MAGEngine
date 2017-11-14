@@ -7,6 +7,7 @@ import java.util.function.Consumer;
 
 import javafx.application.Platform;
 import javafx.scene.effect.Bloom;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.paint.Color;
 import magengine.bullet.APolygonBullet;
 import magengine.bullet.Bullet;
@@ -32,7 +33,11 @@ import magengine.danmuku.yt.RotateDanmuku;
 import magengine.danmuku.yt.autumnSkyDanmuku;
 import magengine.danmuku.yt.demo1;
 import magengine.element.BaseElement;
+import magengine.element.impl.Area;
+import magengine.element.impl.BombCircleArea;
+import magengine.element.impl.CircleArea;
 import magengine.element.impl.InvertCircleArea;
+import magengine.element.impl.Player;
 import magengine.enemy.ALoopDanmukuEnemy;
 import magengine.enemy.DefaultEnemy;
 import magengine.enemy.Enemy1;
@@ -49,6 +54,8 @@ import magengine.ui.SceneManager;
 import magengine.util.CollisionTeam;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
+
+import static java.lang.Math.*;
 
 public class TestChapter extends AChapter {
 	int midX = MyCanvas.CANVAS_WIDTH / 2;
@@ -73,15 +80,20 @@ public class TestChapter extends AChapter {
 			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(HexagonBullet.class, (canvas) -> {
 				canvas.setEffect(new Bloom());
 			});
+			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(BombCircleArea.class, (canvas) -> {
+				canvas.setEffect(new BoxBlur(2.5, 2.5, 1));
+//				canvas.setEffect(new Bloom(1));
+			});
 			staticCanvas.getGraphicsContext2D().fillRect(0, 0, MyCanvas.CANVAS_WIDTH, MyCanvas.CANVAS_HEIGHT);
 		});
 		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 		Random r = new Random();
+		
 		LogicExecutor executor = LogicExecutor.getLogicExecutor();
 		ALoopDanmukuEnemy boss = new Enemy1(300, 100);
 		boss.setHP(500);
 		boss.setDanmukuStartDelay(1);
-//		boss.addDanmuku(new autumnSkyDanmuku(), UtsuhoNonSpellCard1.DURATION);
+		// boss.addDanmuku(new RotateDanmuku(), DirectPlayerDanmuku.DURATION);
 		boss.addDanmuku(new UtsuhoNonSpellCard1(), UtsuhoNonSpellCard1.DURATION);
 		boss.addDanmuku(new ReisenNonSpellCardDanmuku(), ReisenNonSpellCardDanmuku.DURATION + 1000);// 1秒间隔
 		boss.addDanmuku(new RunAwayNuclearDanmuku(), RunAwayNuclearDanmuku.DURATION + 2000);// 2秒间隔
@@ -100,18 +112,18 @@ public class TestChapter extends AChapter {
 			}, i * sum + 6000 + 1000);
 		}
 
-//		InvertCircleArea ica = new InvertCircleArea(300, 100, 300);
-//		ica.setOnCollisionEvent((m) -> {
-//			if (m.getTeam().equals(CollisionTeam.ENEMY_BULLET)) {
-//				Bullet b = (Bullet) m;
-//				System.out.println("caught");
-//				System.out.println(b.state);
-//				if(b.state<1){
-//					b.setWantBeRemoved(true);
-//				}
-//			}
-//		});
-//		mEU.add("ica", ica);
+		
+//		 InvertCircleArea ica = new InvertCircleArea(300, 100, 200);
+//		 ica.setOnCollisionEvent((m) -> {
+//		 if (m.getTeam().equals(CollisionTeam.ENEMY_BULLET)) {
+//		 Bullet b = (Bullet) m;
+//		 System.out.println("caught");
+//		 if(b.state<1){
+//		 quick.VToByDirection(b, PI/2*3);
+//		 }
+//		 }
+//		 });
+//		 mEU.add("ica", ica);
 
 		// new RotateDanmuku().delayExecute();
 
@@ -194,9 +206,9 @@ public class TestChapter extends AChapter {
 		// mEU.add("helper" + r.nextInt(), helper);
 		// mEU.add("midHelper", midHelper);
 		// }
-		// for(int i=1;i<=1000;i++){
-		// new StarDanmuku().setDelay(700*i).delayExecute();
-		// }
+//		 for(int i=1;i<=1000;i++){
+//		 new StarDanmuku().setDelay(700*i).delayExecute();
+//		 }
 
 	}
 }

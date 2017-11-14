@@ -118,6 +118,10 @@ public class GameSession {
 			return false;
 		}
 	}
+	
+	public boolean haveBomb(){
+		return bomb>0;
+	}
 
 	/**
 	 * 减少生命值 如果生命值不足则死亡

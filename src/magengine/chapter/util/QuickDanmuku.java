@@ -111,6 +111,7 @@ public class QuickDanmuku {
 		element.setAccY(0);
 		element.getxProperty().bind(helper.getxProperty());
 		element.getyProperty().bind(helper.getyProperty());
+		this.bindToWantBeRemoved(helper, element);
 		// element.getxProperty().bind(helper.getxProperty());
 		// element.getyProperty().bind(helper.getyProperty());
 		mEU.add(r.nextInt() + "", helper);

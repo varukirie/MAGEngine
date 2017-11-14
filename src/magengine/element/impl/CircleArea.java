@@ -1,7 +1,5 @@
 package magengine.element.impl;
 
-import magengine.bullet.impl.CircleBullet;
-import magengine.element.PolygonCollision;
 import magengine.util.CollisionTeam;
 import magengine.util.Transform;
 
@@ -65,4 +63,6 @@ public class CircleArea extends Area {
 		}
 		return ans;
 	}
+	
+	
 }

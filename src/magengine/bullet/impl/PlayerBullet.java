@@ -8,7 +8,7 @@ import magengine.paint.MyCanvasSwitcher;
 import magengine.util.CollisionTeam;
 import magengine.util.DI;
 
-public class PlayerBullet extends DefaultBullet {
+public class PlayerBullet extends StarBullet {
 
 	public PlayerBullet(double x, double y) {
 		super(x, y);

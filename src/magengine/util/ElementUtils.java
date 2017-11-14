@@ -87,7 +87,7 @@ public class ElementUtils {
 			((BaseElement) obj).setDeleted(true);
 
 		}
-		if (obj instanceof APolygonEnemy) {
+		if (obj instanceof APolygonEnemy || obj instanceof Area) {
 			((MoveHandler) DI.di().get("mh")).removeCollisionElement(key);
 		}
 		mh.getWantMoveMap().remove(key);

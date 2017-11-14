@@ -12,7 +12,7 @@ public class Main extends Application {
 	public static final boolean DEBUG_BENCH=false;
 	public static final boolean DEBUG_COLLISION=true;
 	public static final boolean ACC_ENABLE=true;
-	public static final boolean DEBUG_COLLISION_AREA=true;
+	public static final boolean DEBUG_COLLISION_AREA=false;
 
 	@Override
 	public void start(Stage primaryStage) {
