@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -56,7 +57,7 @@ public class GameSession {
 	public static final int POWER_LIMIT = 100;
 
 	public static final int PRESET_BOMB = 2;
-	public static final int PRESET_HEALTH = 2;
+	public static final int PRESET_HEALTH = 1;
 	public static final int PRESET_POWER = 0;
 	private int bomb = PRESET_BOMB;
 	private int health = PRESET_HEALTH;
@@ -146,13 +147,15 @@ public class GameSession {
 //		gArea.setBackground(new Background(new BackgroundFill(Color.GREY,null,null)));
 		gArea.setBackground(new Background(bimg));
 		FlowPane gDataArea = new FlowPane(Orientation.VERTICAL,10,50);//未设置node gap
+//		gDataArea.setBackground(new Background(new BackgroundFill(Color.GREY,null,null)));
+		gDataArea.setPrefWrapLength(200);
 //		Label label1 = new Label();
 //		label1.setFont(Font.font("力量"));
 //		power.getChildren().add(label1);字体样式测试
 //		VBox power = new VBox(new Label("力量"));
 //		VBox bomb = new VBox(new Label("炸弹"));
 //		VBox life = new VBox(new Label("生命"));
-		
+		BloodBar bb = new BloodBar();
 		VBox power = new VBox(setTextFont("POWER"));
 		VBox bomb = new VBox(setTextFont("BOMB"));
 		VBox life = new VBox(setTextFont("LIFE"));
@@ -166,11 +169,17 @@ public class GameSession {
 		gDataArea.getChildren().addAll(life,power,bomb);
 		gDataArea.setAlignment(Pos.TOP_LEFT);;
 		gArea.setLeft(root);
-		gArea.setRight(gDataArea);
-		DI.di().put("staticCanvas", staticCanvas);
-		//
+		gArea.setCenter(gDataArea);
+		DI.di().put("staticCanvas", staticCanvas); 
+//		血条测试    javafx没有像awt一样提供单独重载单独组件GraphicsContext的机制  对重载组件没头绪  不会做血条 javafx没提供repaint或update功能
+//	    Canvas canvas = new Canvas(900, 700);  
+//	    GraphicsContext gc = canvas.getGraphicsContext2D();  
+//	    bb.draw(gc);
+	    
+	        
+//	    gArea.getChildren().add(canvas);
 //		staticCanvas.getWantPaintMap().put("indicator", Player.getPlayer());
-//		staticCanvas.repaint();
+		staticCanvas.repaint();
 		Scene scene=new Scene(gArea,900,700);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("MAGEngine!");
@@ -258,6 +267,18 @@ public class GameSession {
 		}
 //		ChapterLoader.loadChapter(new ChapterDemo());
 		new Thread(new PlayerLaunchHandler()).start();
+	}
+	private class BloodBar{
+		public void draw(GraphicsContext g){
+			int x=600,y=40,w,h=30;
+			g.setFill(Color.MAGENTA);
+			g.setStroke(Color.RED);
+			g.fillRect(x, y, 200, h);
+			g.setFill(Color.RED);
+			w=(int)(200*(getHealth()*1.0/10));
+			g.fillRect(x+2, y+2, w-4, h-4);
+			
+		}
 	}
 	
 	private void shutdownGame(){

@@ -6,18 +6,37 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextBuilder;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import magengine.chapter.ChapterDemo;
@@ -53,6 +72,87 @@ public class SceneManager {
 
 	private static SceneManager instance = new SceneManager();
 	private Stage primaryStage;
+	public void startMenu(){
+		primaryStage.setResizable(false);
+		StackPane root = new StackPane();
+		BorderPane btPane = new BorderPane();
+		BackgroundImage bimg = new BackgroundImage(new Image("/img/starbackground.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+		root.setBackground(new Background(bimg));
+		Canvas canvas = new Canvas(900, 700);
+		GraphicsContext gc = canvas.getGraphicsContext2D();
+		VBox paneBt = new VBox(100);
+		String st = "S T A R T";
+		String ex = "E X I T";
+		Button bStart = new Button(st);
+		Button bExit = new Button(ex);
+		bStart.setOnAction((ActionEvent e) -> {
+		    SceneManager.getInstance().startGame();
+		});
+		bExit.setOnAction((ActionEvent e) -> {
+			System.exit(-1);
+		});
+		bStart.addEventHandler(MouseEvent.MOUSE_ENTERED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		        	  bStart.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;");
+		          }
+		        });
+		bStart.addEventHandler(MouseEvent.MOUSE_EXITED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		        	  bStart.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
+		          }
+		        });
+		bExit.addEventHandler(MouseEvent.MOUSE_ENTERED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		        	  bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;");
+		          }
+		        });
+		bExit.addEventHandler(MouseEvent.MOUSE_EXITED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		        	  bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
+		          }
+		        });
+		bStart.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
+		bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
+		paneBt.getChildren().addAll(bStart,bExit);
+		paneBt.setAlignment(Pos.CENTER);
+		btPane.setCenter(paneBt);
+//		GameButton bStart = new GameButton(),bExit = new GameButton();
+//		bStart.draw(gc, 350, 200, 200, 50);
+//		bExit.draw(gc, 350, 400, 200, 50);
+//		bStart.addActionListener(new ActionListener(){
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				SceneManager.getInstance().startGame();
+//			}
+//		});
+		root.getChildren().add(btPane);
+//		root.getChildren().add(canvas);
+		Scene scene = new Scene(root,900,700);
+//		scene.setOnKeyReleased((e) -> {
+//			if (KeyCode.R.equals(e.getCode())) {
+//				SceneManager.getInstance().startGame();
+//			}
+//		});
+//		bStart.addActionListener(new ActionListener(){
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				SceneManager.getInstance().startGame();
+//			}
+//		});
+		
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+		
+	}
 
 	public void startGame() {
 		startGame(false, false);
@@ -72,17 +172,75 @@ public class SceneManager {
 	}
 
 	public void loadSceneTest() {
+		primaryStage.setResizable(false);
 		StackPane root = new StackPane();
-		Canvas canvas = new Canvas(200, 300);
-		canvas.getGraphicsContext2D().fillText("Failure!  push\"r\" to reset", 10, 100);
-		root.getChildren().add(canvas);
-		Scene scene = new Scene(root, 200, 300);
-		scene.setOnKeyReleased((e) -> {
-			if (KeyCode.R.equals(e.getCode())) {
-				SceneManager.getInstance().startGame();
-			}
+		BorderPane btPane = new BorderPane();
+		
+		BackgroundImage bimg = new BackgroundImage(new Image("/img/starbackground.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+		root.setBackground(new Background(bimg));
+		Canvas canvas = new Canvas(900, 200);
+		GraphicsContext gc = canvas.getGraphicsContext2D();
+		VBox pause = new VBox(setTextFont("F A I L !"));
+		VBox paneBt = new VBox(100);
+		String rs = "R E S E T";
+		String ex = "E X I T";
+		Button bReset = new Button(rs);
+		Button bExit = new Button(ex);
+		bReset.setOnAction((ActionEvent e) -> {
+		    SceneManager.getInstance().startGame();
 		});
+		bExit.setOnAction((ActionEvent e) -> {
+			System.exit(-1);
+		});
+		bReset.addEventHandler(MouseEvent.MOUSE_ENTERED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		        	  bReset.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;");
+		          }
+		        });
+		bReset.addEventHandler(MouseEvent.MOUSE_EXITED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		        	  bReset.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
+		          }
+		        });
+		bExit.addEventHandler(MouseEvent.MOUSE_ENTERED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		        	  bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;");
+		          }
+		        });
+		bExit.addEventHandler(MouseEvent.MOUSE_EXITED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		        	  bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
+		          }
+		        });
+		bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
+		bReset.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
+		paneBt.getChildren().addAll(bReset,bExit);
+		paneBt.setAlignment(Pos.TOP_CENTER);
+		pause.setAlignment(Pos.TOP_CENTER);
+		btPane.setMargin(pause, new Insets(100,0,100,0));
+		btPane.setTop(pause);
+		btPane.setCenter(paneBt);
+		root.getChildren().add(btPane);
+		Scene scene = new Scene(root,900,700);
 		primaryStage.setScene(scene);
+//		primaryStage.show();
+	}
+	public static Text setTextFont(String s){
+		Text text = TextBuilder.create().text(s).font(Font.font("新宋体", 50)).build();
+		text.setFill(new LinearGradient(0, 0, 1, 2, true, CycleMethod.REPEAT, new
+		         Stop[]{new Stop(0, Color.YELLOW), new Stop(0.5f, Color.BLUE)}));
+		text.setFont(Font.font("黑体", FontWeight.BOLD,50));//斜体
+		text.setStrokeWidth(2);
+		text.setStroke(Color.WHITE);
+		return text;
 	}
 
 	public void loadMulplaySelectScene() {
@@ -95,7 +253,7 @@ public class SceneManager {
 		final StringProperty ipProps = new SimpleStringProperty();
 		ipProps.bind(ipTextField.textProperty());
 		singlebtn.setOnAction((e)->{
-			startGame();
+			startMenu();
 		});
 		serverbtn.setOnAction((e)->{
 			startGame(true, true);
