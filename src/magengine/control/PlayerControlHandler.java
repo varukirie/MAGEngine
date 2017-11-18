@@ -14,6 +14,7 @@ import magengine.element.impl.CircleArea;
 import magengine.element.impl.Player;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
+import magengine.game.MoveHandler;
 import magengine.paint.MyCanvas;
 import magengine.paint.MyCanvasSwitcher;
 import magengine.ui.SceneManager;
@@ -162,7 +163,7 @@ public class PlayerControlHandler {
 			break;
 		case ENTER:
 			GameSession.closeGameSession();
-			SceneManager.getInstance().loadSceneTest();
+			SceneManager.getInstance().loadFailureScene();
 			break;
 		case C:
 			//TODO 不线程安全
@@ -177,6 +178,10 @@ public class PlayerControlHandler {
 					}
 				}
 			}
+			break;
+		case ESCAPE:
+			MoveHandler.setDeltaTimeFactor(0);
+			SceneManager.getInstance().loadPauseScene();
 			break;
 		}
 		changeV();

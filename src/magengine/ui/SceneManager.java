@@ -167,15 +167,14 @@ public class SceneManager {
 		session.loadChapter(new TestChapter());
 		session.setFailureEvent(() -> {
 			GameSession.closeGameSession();
-			loadSceneTest();
+			loadFailureScene();
 		});
 	}
 
-	public void loadSceneTest() {
+	public void loadFailureScene() {
 		primaryStage.setResizable(false);
 		StackPane root = new StackPane();
 		BorderPane btPane = new BorderPane();
-		
 		BackgroundImage bimg = new BackgroundImage(new Image("/img/starbackground.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 		root.setBackground(new Background(bimg));
 		Canvas canvas = new Canvas(900, 200);
@@ -190,7 +189,8 @@ public class SceneManager {
 		    SceneManager.getInstance().startGame();
 		});
 		bExit.setOnAction((ActionEvent e) -> {
-			System.exit(-1);
+//			System.exit(-1);
+			startMenu();
 		});
 		bReset.addEventHandler(MouseEvent.MOUSE_ENTERED,
 		        new EventHandler<MouseEvent>() {
@@ -233,6 +233,82 @@ public class SceneManager {
 		primaryStage.setScene(scene);
 //		primaryStage.show();
 	}
+	
+	public void loadPauseScene() {
+		Scene gameScene=this.primaryStage.getScene();
+		primaryStage.setResizable(false);
+		StackPane root = new StackPane();
+		BorderPane btPane = new BorderPane();
+		BackgroundImage bimg = new BackgroundImage(new Image("/img/starbackground.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+		root.setBackground(new Background(bimg));
+		Canvas canvas = new Canvas(900, 200);
+		GraphicsContext gc = canvas.getGraphicsContext2D();
+		VBox pause = new VBox(setTextFont("P A U S E"));
+		VBox paneBt = new VBox(100);
+		String rs = "R E S U M E";
+		String ex = "M E N U"; 
+		Button bResume = new Button(rs);
+		Button bExit = new Button(ex);
+		final Runnable resume = ()->{
+			primaryStage.setScene(gameScene);
+			MoveHandler.setDeltaTimeFactor(1);
+		};
+		bResume.setOnAction((ActionEvent e) -> {
+			resume.run();
+		});
+		bExit.setOnAction((ActionEvent e) -> {
+			GameSession.closeGameSession();
+			startMenu();
+		});
+		bResume.addEventHandler(MouseEvent.MOUSE_ENTERED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		        	  bResume.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;");
+		          }
+		        });
+		bResume.addEventHandler(MouseEvent.MOUSE_EXITED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		        	  bResume.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
+		          }
+		        });
+		bExit.addEventHandler(MouseEvent.MOUSE_ENTERED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		        	  bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;");
+		          }
+		        });
+		bExit.addEventHandler(MouseEvent.MOUSE_EXITED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		        	  bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
+		          }
+		        });
+		bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
+		bResume.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
+		paneBt.getChildren().addAll(bResume,bExit);
+		paneBt.setAlignment(Pos.TOP_CENTER);
+		pause.setAlignment(Pos.TOP_CENTER);
+		btPane.setMargin(pause, new Insets(100,0,100,0));
+		btPane.setTop(pause);
+		btPane.setCenter(paneBt);
+		root.getChildren().add(btPane);
+		Scene scene = new Scene(root,900,700);
+		scene.setOnKeyReleased(e->{
+			switch(e.getCode()){
+			case ESCAPE:
+				resume.run();
+				break;
+			}
+		});
+		primaryStage.setScene(scene);
+	}
+	
+	
 	public static Text setTextFont(String s){
 		Text text = TextBuilder.create().text(s).font(Font.font("新宋体", 50)).build();
 		text.setFill(new LinearGradient(0, 0, 1, 2, true, CycleMethod.REPEAT, new
