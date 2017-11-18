@@ -134,7 +134,7 @@ public class ElementUtils {
 		}
 	}
 
-	private Random random = GameSession.rand;
+	private Random random = GameSession.rand();
 
 	public void addAll(BaseElement... value) {
 		for (int i = 0; i < value.length; i++) {

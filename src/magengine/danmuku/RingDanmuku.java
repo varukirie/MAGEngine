@@ -62,7 +62,7 @@ public class RingDanmuku extends ADanmuku {
 						bullet.setLambdaModify((x) -> {
 							quick.VToByDirection(x, helper.getDirection() + Math.PI / 2);
 						});
-						Random r = GameSession.rand;
+						Random r = GameSession.rand();
 						mEU.add("bullet" + r.nextInt(), bullet);
 						mEU.add("helper" + r.nextInt(), helper);
 						mEU.add("midHelper" + i * i * 10007, midHelper);

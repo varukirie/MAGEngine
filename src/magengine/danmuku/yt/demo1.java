@@ -42,7 +42,7 @@ public class demo1 extends ADanmuku  {
 	private int midY =300;
 	private double bulletSpeed=100;
 	private ElementUtils mEU = getmEU();
-	private Random r = GameSession.rand;
+	private Random r = GameSession.rand();
 	private QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 	private static final long interval = (long) (50);
 	private static final double rotateSpeed = 10;

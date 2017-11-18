@@ -25,7 +25,7 @@ public class StarDanmuku extends ADanmuku {
 		ElementUtils mEU=getmEU();
 		SeqDanmuku seq = new SeqDanmuku(mEU);
 		QuickDanmuku quick = new QuickDanmuku(mEU);
-		Random r = GameSession.rand;
+		Random r = GameSession.rand();
 
 		long targetTime = 6000;
 		BulletEvent be = (sesx,b)->{

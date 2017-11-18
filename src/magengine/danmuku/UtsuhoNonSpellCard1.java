@@ -25,7 +25,7 @@ public class UtsuhoNonSpellCard1 extends ADanmuku {
 	
 	@Override
 	public void executeDanmuku() {
-		Random r = GameSession.rand;
+		Random r = GameSession.rand();
 		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 		Platform.runLater(()->{
 			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(CircleBullet.class, (canvas) -> {

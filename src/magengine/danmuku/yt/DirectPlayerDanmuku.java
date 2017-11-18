@@ -30,7 +30,7 @@ public class DirectPlayerDanmuku extends ADanmuku {
 	private int midX = 250;
 	private int midY = 150;
 	private ElementUtils mEU = getmEU();
-	private Random r = GameSession.rand;
+	private Random r = GameSession.rand();
 	public static final long DURATION = 12100;
 	private QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 	@Override

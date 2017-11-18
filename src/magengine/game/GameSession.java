@@ -55,7 +55,10 @@ public class GameSession {
 	
 	private Level level = Level.NORMAL;
 	
-	public static final Random rand=new Random(C.SEED);
+	private static Random rand=null;
+	public static Random rand() {
+		return rand;
+	}
 	
 	public static final int BOMB_LIMIT = 3;
 	public static final int HEALTH_LIMIT = 10;
@@ -85,8 +88,10 @@ public class GameSession {
 	public static GameSession startGameSession(){
 		if(instance!=null)
 			throw new IllegalStateException("GameSession已经存在 需要先调用closeGameSession");
-		else
+		else{
 			instance = new GameSession();
+		}
+			
 		return instance;
 	}
 	public static GameSession getGameSession(){
@@ -100,6 +105,7 @@ public class GameSession {
 			instance.shutdownGame();
 		}
 		instance=null;
+		rand=null;
 	}
 	
 
@@ -356,8 +362,10 @@ public class GameSession {
 				client.waitPing();
 				ChapterLoader.loadChapter(chapter);
 			}else{
+				//single
 				ChapterLoader.loadChapter(chapter);
 			}
+			rand=new Random(C.SEED+chapter.getClass().getSimpleName().charAt(0));
 			MoveHandler.setDeltaTimeFactor(1);
 		});
 	}

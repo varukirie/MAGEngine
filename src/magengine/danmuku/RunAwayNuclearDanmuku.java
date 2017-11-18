@@ -19,7 +19,7 @@ import magengine.util.ElementUtils;
 public class RunAwayNuclearDanmuku extends ADanmuku {
 	private double bulletSpeed=100;
 	private ElementUtils mEU = getmEU();
-	private Random r = GameSession.rand;
+	private Random r = GameSession.rand();
 	private QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 	private static final long interval = (long) (100);
 	private static final double rotateSpeed = 10;

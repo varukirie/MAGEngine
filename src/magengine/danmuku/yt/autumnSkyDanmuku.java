@@ -53,7 +53,7 @@ public class autumnSkyDanmuku extends ADanmuku {
 	
 	private void setOvalLauncher(Stop[] stops,int rRL,int delayTime){
 		
-		Random r = GameSession.rand;
+		Random r = GameSession.rand();
 		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 		OvalLauncherGroup olg = new OvalLauncherGroup(300, 100, 42);
 		
@@ -98,7 +98,7 @@ public class autumnSkyDanmuku extends ADanmuku {
 	
 	private void setLongHexagonLauncher(int rRL,int delayTime) {
 		
-		Random r = GameSession.rand;
+		Random r = GameSession.rand();
 		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 		OvalLauncherGroup olg= new OvalLauncherGroup(300, 100, 42);
 		

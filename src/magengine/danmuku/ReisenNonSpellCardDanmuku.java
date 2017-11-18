@@ -28,7 +28,7 @@ public class ReisenNonSpellCardDanmuku extends ADanmuku{
 	private static final double rotateSpeed = 9;
 	public static final long DURATION = 10000;
 	private ElementUtils mEU = getmEU();
-	private Random r = GameSession.rand;
+	private Random r = GameSession.rand();
 	private QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 	@Override
 	public void executeDanmuku() {
