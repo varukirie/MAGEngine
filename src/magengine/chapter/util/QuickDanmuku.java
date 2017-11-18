@@ -207,7 +207,6 @@ public class QuickDanmuku {
 	 */
 	public void VRotateRandom(BaseElement elem, double angle) {
 		double theta = angle * r.nextDouble() - (angle / 2);
-		System.out.println(r.nextDouble());
 		Transform t = new Transform(
 				new double[][] { { Math.cos(theta), Math.sin(theta) }, { -Math.sin(theta), Math.cos(theta) } });
 		double[] ans = t.transform(elem.getVelocityX(), elem.getVelocityY());
