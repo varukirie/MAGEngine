@@ -21,6 +21,7 @@ import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
 import magengine.paint.MyCanvas;
 import magengine.paint.MyCanvasSwitcher;
+import magengine.util.C;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
 
@@ -41,7 +42,7 @@ public class ChapterDemo extends AChapter {
 		});
 		SeqDanmuku seq = new SeqDanmuku(mEU);
 		QuickDanmuku quick = new QuickDanmuku(mEU);
-		Random r = new Random();
+		Random r = new Random(C.SEED);
 
 //		Launcher launcherx = new Launcher(midX-100, midY-100, Math.PI/2,100, 1000);
 //		launcherx.setBulletSpeed(0.001);

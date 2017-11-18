@@ -11,6 +11,7 @@ import magengine.game.LogicExecutor;
 import magengine.helper.Helper;
 import magengine.helper.OvalHelper;
 import magengine.launcher.Launcher;
+import magengine.util.C;
 import magengine.util.ElementUtils;
 
 public class SeqDanmuku {
@@ -24,7 +25,7 @@ public class SeqDanmuku {
 	}
 	
 	public void rotateDSnipe(double midX, double midY, long startTime,double helperDelta){
-		Random r=new Random();
+		Random r=new Random(C.SEED);
 		double helperLenght = 70;
 		int currentHelperCount = callCount++;
 		long duration=8000;
@@ -63,7 +64,7 @@ public class SeqDanmuku {
 	}
 		
 	public void rotateL(double midX, double midY, long startTime,double helperDelta,boolean helperPositive) {
-		Random r=new Random();
+		Random r=new Random(C.SEED);
 		double helperLenght = 70;
 		int currentHelperCount = callCount++;
 		long duration=10000;

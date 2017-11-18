@@ -16,6 +16,7 @@ import magengine.bullet.impl.StarBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.chapter.util.SeqDanmuku;
 import magengine.danmuku.ADanmuku;
+import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
 import magengine.helper.OvalHelper;
 import magengine.launcher.BurstLauncher;
@@ -29,7 +30,7 @@ public class DirectPlayerDanmuku extends ADanmuku {
 	private int midX = 250;
 	private int midY = 150;
 	private ElementUtils mEU = getmEU();
-	private Random r = new Random();
+	private Random r = GameSession.rand;
 	public static final long DURATION = 12100;
 	private QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 	@Override

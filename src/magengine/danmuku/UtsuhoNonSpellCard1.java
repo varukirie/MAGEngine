@@ -12,6 +12,7 @@ import magengine.bullet.impl.HexagonBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.element.BaseElement;
 import magengine.element.impl.Player;
+import magengine.game.GameSession;
 import magengine.launcher.ArcLauncherGroup;
 import magengine.launcher.BurstLauncher;
 import magengine.launcher.OvalLauncherGroup;
@@ -24,7 +25,7 @@ public class UtsuhoNonSpellCard1 extends ADanmuku {
 	
 	@Override
 	public void executeDanmuku() {
-		Random r = new Random();
+		Random r = GameSession.rand;
 		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 		Platform.runLater(()->{
 			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(CircleBullet.class, (canvas) -> {

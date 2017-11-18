@@ -17,6 +17,7 @@ import magengine.element.impl.Player;
 import magengine.game.LogicExecutor;
 import magengine.helper.MoveToHelper;
 import magengine.launcher.Launcher;
+import magengine.util.C;
 import magengine.util.CollisionTeam;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
@@ -41,7 +42,7 @@ public class QuickDanmuku {
 	private ScheduledExecutorService sES = (ScheduledExecutorService) DI.di().get("sES");
 	private final double sqrt2d2 = 0.7071;
 	private int count = 0;
-	private Random r = new Random();
+	private Random r = new Random(C.SEED);
 
 	public QuickDanmuku(ElementUtils mEU) {
 		super();

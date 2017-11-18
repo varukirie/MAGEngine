@@ -9,6 +9,7 @@ import magengine.bullet.impl.StarBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.chapter.util.SeqDanmuku;
 import magengine.element.BaseElement;
+import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
 import magengine.helper.PolygonalLineHelper;
 import magengine.launcher.BulletEvent;
@@ -24,7 +25,7 @@ public class StarDanmuku extends ADanmuku {
 		ElementUtils mEU=getmEU();
 		SeqDanmuku seq = new SeqDanmuku(mEU);
 		QuickDanmuku quick = new QuickDanmuku(mEU);
-		Random r = new Random();
+		Random r = GameSession.rand;
 
 		long targetTime = 6000;
 		BulletEvent be = (sesx,b)->{

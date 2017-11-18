@@ -51,6 +51,7 @@ import magengine.launcher.OvalLauncherGroup;
 import magengine.paint.MyCanvas;
 import magengine.paint.MyCanvasSwitcher;
 import magengine.ui.SceneManager;
+import magengine.util.C;
 import magengine.util.CollisionTeam;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
@@ -87,7 +88,7 @@ public class TestChapter extends AChapter {
 			staticCanvas.getGraphicsContext2D().fillRect(0, 0, MyCanvas.CANVAS_WIDTH, MyCanvas.CANVAS_HEIGHT);
 		});
 		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
-		Random r = new Random();
+		Random r = new Random(C.SEED);
 		
 		LogicExecutor executor = LogicExecutor.getLogicExecutor();
 		ALoopDanmukuEnemy boss = new Enemy1(300, 100);
@@ -201,7 +202,6 @@ public class TestChapter extends AChapter {
 		// bullet.setLambdaModify((x) -> {
 		// quick.VToByDirection(x, helper.getDirection() + Math.PI / 2);
 		// });
-		// Random r = new Random();
 		// mEU.add("bullet" + r.nextInt(), bullet);
 		// mEU.add("helper" + r.nextInt(), helper);
 		// mEU.add("midHelper", midHelper);

@@ -13,6 +13,7 @@ import magengine.bullet.impl.StarBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.chapter.util.SeqDanmuku;
 import magengine.danmuku.ADanmuku;
+import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
 import magengine.helper.Helper;
 import magengine.helper.OvalHelper;
@@ -36,7 +37,7 @@ public void executeDanmuku() {
 
 	ElementUtils mEU =  getmEU();
 	QuickDanmuku quick = new QuickDanmuku(mEU);
-	Random r = new Random();
+	Random r = GameSession.rand;
 	
 	/**
 	 * 子弹事件1(be1) ：子弹随机散开

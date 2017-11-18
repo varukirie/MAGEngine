@@ -9,6 +9,7 @@ import magengine.bullet.PresetColor;
 import magengine.bullet.impl.HexagonBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.element.BaseElement;
+import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
 import magengine.helper.OvalHelper;
 import magengine.helper.RelativeAnchorHelper;
@@ -27,7 +28,7 @@ public class ReisenNonSpellCardDanmuku extends ADanmuku{
 	private static final double rotateSpeed = 9;
 	public static final long DURATION = 10000;
 	private ElementUtils mEU = getmEU();
-	private Random r = new Random();
+	private Random r = GameSession.rand;
 	private QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 	@Override
 	public void executeDanmuku() {

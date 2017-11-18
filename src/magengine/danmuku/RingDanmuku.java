@@ -8,6 +8,7 @@ import java.util.function.Consumer;
 import magengine.bullet.Bullet;
 import magengine.bullet.impl.DefaultBullet;
 import magengine.chapter.util.QuickDanmuku;
+import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
 import magengine.helper.Helper;
 import magengine.helper.OvalHelper;
@@ -61,7 +62,7 @@ public class RingDanmuku extends ADanmuku {
 						bullet.setLambdaModify((x) -> {
 							quick.VToByDirection(x, helper.getDirection() + Math.PI / 2);
 						});
-						Random r = new Random();
+						Random r = GameSession.rand;
 						mEU.add("bullet" + r.nextInt(), bullet);
 						mEU.add("helper" + r.nextInt(), helper);
 						mEU.add("midHelper" + i * i * 10007, midHelper);

@@ -10,6 +10,7 @@ import magengine.bullet.impl.CircleBullet;
 import magengine.bullet.impl.HexagonBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.element.BaseElement;
+import magengine.game.GameSession;
 import magengine.helper.OvalHelper;
 import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
@@ -18,7 +19,7 @@ import magengine.util.ElementUtils;
 public class RunAwayNuclearDanmuku extends ADanmuku {
 	private double bulletSpeed=100;
 	private ElementUtils mEU = getmEU();
-	private Random r = new Random();
+	private Random r = GameSession.rand;
 	private QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 	private static final long interval = (long) (100);
 	private static final double rotateSpeed = 10;

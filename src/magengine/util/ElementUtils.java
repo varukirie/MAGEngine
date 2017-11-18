@@ -17,6 +17,7 @@ import magengine.element.Paintable;
 import magengine.element.PolygonCollision;
 import magengine.element.impl.Area;
 import magengine.enemy.APolygonEnemy;
+import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
 import magengine.game.MoveHandler;
 import magengine.launcher.BulletEvent;
@@ -133,7 +134,7 @@ public class ElementUtils {
 		}
 	}
 
-	private Random random = new Random();
+	private Random random = GameSession.rand;
 
 	public void addAll(BaseElement... value) {
 		for (int i = 0; i < value.length; i++) {

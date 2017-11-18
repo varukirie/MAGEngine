@@ -10,6 +10,7 @@ import magengine.bullet.impl.LongHexagonBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.danmuku.ADanmuku;
 import magengine.element.BaseElement;
+import magengine.game.GameSession;
 import magengine.launcher.OvalLauncherGroup;
 
 public class autumnSkyDanmuku extends ADanmuku {
@@ -52,7 +53,7 @@ public class autumnSkyDanmuku extends ADanmuku {
 	
 	private void setOvalLauncher(Stop[] stops,int rRL,int delayTime){
 		
-		Random r = new Random();
+		Random r = GameSession.rand;
 		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 		OvalLauncherGroup olg = new OvalLauncherGroup(300, 100, 42);
 		
@@ -97,7 +98,7 @@ public class autumnSkyDanmuku extends ADanmuku {
 	
 	private void setLongHexagonLauncher(int rRL,int delayTime) {
 		
-		Random r = new Random();
+		Random r = GameSession.rand;
 		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 		OvalLauncherGroup olg= new OvalLauncherGroup(300, 100, 42);
 		

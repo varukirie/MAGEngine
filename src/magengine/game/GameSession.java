@@ -1,6 +1,7 @@
 package magengine.game;
 
 
+import java.util.Random;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import io.netty.channel.Channel;
@@ -44,6 +45,7 @@ import magengine.mulplay.Server;
 import magengine.mulplay.Transport;
 import magengine.paint.MyCanvas;
 import magengine.ui.SceneManager;
+import magengine.util.C;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
 
@@ -52,6 +54,9 @@ public class GameSession {
 	public static GameSession instance = null;
 	
 	private Level level = Level.NORMAL;
+	
+	public static final Random rand=new Random(C.SEED);
+	
 	public static final int BOMB_LIMIT = 3;
 	public static final int HEALTH_LIMIT = 10;
 	public static final int POWER_LIMIT = 100;
