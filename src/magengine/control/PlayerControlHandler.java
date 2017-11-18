@@ -226,7 +226,7 @@ public class PlayerControlHandler {
 		ca.setOnPaintEvent((gc)->{
 			gc.setFill(Color.rgb(245, 245, 245,0.3));
 //			gc.setStroke(Color.rgb(245, 245, 90,0.7));
-			gc.setStroke(Color.BLACK);
+			gc.setStroke(Color.GHOSTWHITE);
 			gc.fillOval(ca.getX()-r, ca.getY()-r, r*2, r*2);
 			double angleDelta = sin(LogicExecutor.gameTime()/500.0)*1;
 			

@@ -105,7 +105,6 @@ public class GameSession {
 			instance.shutdownGame();
 		}
 		instance=null;
-		rand=null;
 	}
 	
 
@@ -345,6 +344,7 @@ public class GameSession {
 	}
 	
 	public void loadChapter(AChapter chapter){
+		rand=new Random(C.SEED+chapter.getClass().getSimpleName().hashCode());
 		loadChapterFuture = ChapterLoader.getScheduledExecutorService()
 				.submit(()->{
 			if(mulplay&&(mulplayServer)){
@@ -365,7 +365,6 @@ public class GameSession {
 				//single
 				ChapterLoader.loadChapter(chapter);
 			}
-			rand=new Random(C.SEED+chapter.getClass().getSimpleName().charAt(0));
 			MoveHandler.setDeltaTimeFactor(1);
 		});
 	}
