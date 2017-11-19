@@ -79,7 +79,7 @@ public class DeepSeaDanmuku extends ADanmuku {
 		
 		
 		
-		Launcher launcher = new Launcher(midX,midY,Math.PI/2,1200,12000);
+		Launcher launcher = new Launcher(sourceElement.getX(), sourceElement.getY(),Math.PI/2,1200,12000);
 		launcher.setBulletType(CircleBullet.class);
 		launcher.setBulletSpeed(81);
 		
