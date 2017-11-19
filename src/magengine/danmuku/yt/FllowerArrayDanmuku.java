@@ -5,11 +5,13 @@ import java.util.concurrent.TimeUnit;
 
 import application.Main;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Stop;
 import magengine.bullet.PresetColor;
 import magengine.bullet.impl.ArrowBullet;
 import magengine.bullet.impl.CircleBullet;
 import magengine.bullet.impl.DefaultBullet;
 import magengine.bullet.impl.DiamondBullet;
+import magengine.bullet.impl.FllowerBullet;
 import magengine.bullet.impl.HexagonBullet;
 import magengine.bullet.impl.SquareBullet;
 import magengine.bullet.impl.StarBullet;
@@ -24,52 +26,87 @@ import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
 import magengine.util.ElementUtils;
 
-public class DirectPlayerDanmuku extends ADanmuku {
+public class FllowerArrayDanmuku extends ADanmuku {
 	LogicExecutor ses = LogicExecutor.getLogicExecutor();
 	private int callCount = 0;
 	private int midX = 250;
 	private int midY = 150;
 	private ElementUtils mEU = getmEU();
-	private Random r = GameSession.rand();
-	public static final long DURATION = 12100;
+	public static final long DURATION = 30000;
 	private QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
+	private Random r = GameSession.rand();
+	
+	
+	Stop[] greenStops= {
+			
+			new Stop(0, Color.rgb(50 ,205 ,50,0.0)),
+			new Stop(0.2, Color.rgb(50 ,205, 50, 0.0)), 
+			new Stop(0.4, Color.rgb(0 ,255,0, 0.7)), 
+			new Stop(0.75, Color.rgb(245, 245, 245, 1)),
+			new Stop(1, Color.rgb(245, 245, 245, 1)),
+			
+		};
+	
+	Stop[] redStops= {
+			
+			new Stop(0, Color.rgb(255 ,48 ,48,0.0)),
+			new Stop(0.2, Color.rgb(255, 48, 48, 0.0)), 
+			new Stop(0.4, Color.rgb(255 ,0 ,0,1)), 
+			new Stop(0.75, Color.rgb(245, 245, 245, 1)),
+			new Stop(1, Color.rgb(245, 245, 245, 1)),
+			
+		};
+
+  Stop[] stops1 ={
+		  new Stop(1.0,Color.rgb( 255,255,0,0.8)),
+			
+  };
+
 	@Override
 	public void executeDanmuku() {
 		
 		int lcount = 12;
 		for (int i = 0; i < lcount; i++) {
-			rotateDSnipe(midX, midY, 700, 2 * Math.PI / lcount * i);
+			rotateDSnipe(midX, midY, 700, 2 * Math.PI / lcount * i,stops1);
 		}
 		
-		for (int i = 0; i < lcount; i++) {
-			rotateDSnipe(midX, midY, 14000, 2 * Math.PI / lcount * (lcount-i));
-		}
-		
-	
-		RandomCircleLauncher( midX, midY,  Math.PI/2, 750, DURATION);
 
-	
-	
+		RandomCircleLauncher( midX, midY,  Math.PI/2, 320, 17200,250,redStops);
 	}
 	
 	
 	
-	public void rotateDSnipe(double midX, double midY, long startTime,double angle){
-		Random r=new Random();
+	public void rotateDSnipe(double midX, double midY, long startTime,double angle,Stop[] stops){
 		double R = 30;
-		double speed = 40;
+		double speed = 62;
 		int currentHelperCount = callCount++;
-		long duration=12100;
+		long duration=16700;
+	
 		
 		OvalHelper tHelper = new OvalHelper(midX, midY, R, speed, angle);
 		
-		Launcher launcher = new Launcher(100, 100, 0.5*Math.PI, 220, duration);
+		Launcher launcher = new Launcher(100, 100, 2*Math.PI/3, 520, duration);
+		
 		
 		launcher.getDirectionProperty().bind(tHelper.getDirectionProperty());
 		launcher.getxProperty().bind(tHelper.getxProperty());
 		launcher.getyProperty().bind(tHelper.getyProperty());
 		
 		launcher.setBulletEvent((sEX, bullet) -> {
+			
+			launcher.setBulletType(FllowerBullet.class);
+			launcher.setBulletSpeed(75);
+			
+			sEX.schedule(() -> {
+			launcher.setBulletConfig(b->{
+				((FllowerBullet)b).setColorSupplier(PresetColor.getByStops(stops));
+				((FllowerBullet)b).setR(2.7);
+			});
+			
+		}, 500, TimeUnit.MILLISECONDS);
+			
+			
+			
 			sEX.schedule(() -> {
 			
 
@@ -78,8 +115,8 @@ public class DirectPlayerDanmuku extends ADanmuku {
 			}, 500, TimeUnit.MILLISECONDS);
 			
 			sEX.schedule(() -> {
-				bullet.setVelocityX(-bullet.getVelocityX()*180);
-				bullet.setVelocityY(-bullet.getVelocityY()*180);
+				bullet.setVelocityX(-bullet.getVelocityX()*120);
+				bullet.setVelocityY(-bullet.getVelocityY()*120);
 				quick.VRotate(bullet, Math.PI+ Math.PI);
 				
 			}, 900, TimeUnit.MILLISECONDS);
@@ -95,44 +132,54 @@ public class DirectPlayerDanmuku extends ADanmuku {
 			sEX.schedule(() -> {
 				bullet.setVelocityX(-bullet.getVelocityX()*100);
 				bullet.setVelocityY(-bullet.getVelocityY()*100);
-				quick.VRotate(bullet,Math.PI+Math.PI);
+				quick.VRotate(bullet,2*Math.PI);
 				
-			}, 3200, TimeUnit.MILLISECONDS);
+			}, 4500, TimeUnit.MILLISECONDS);
 			
 			
 			sEX.schedule(() -> {
 				bullet.setVelocityX(-bullet.getVelocityX()*0.01);
 				bullet.setVelocityY(-bullet.getVelocityY()*0.01);
-				quick.VRotate(bullet,Math.PI/2+Math.PI);
-				
-			}, 5200, TimeUnit.MILLISECONDS);
+				quick.VRotate(bullet,Math.PI/2);
+			}, 6700, TimeUnit.MILLISECONDS);
 			
 			
 			sEX.schedule(() -> {
-				bullet.setVelocityX(-bullet.getVelocityX()*100);
-				bullet.setVelocityY(-bullet.getVelocityY()*100);
+				bullet.setVelocityX(-bullet.getVelocityX()*150);
+				bullet.setVelocityY(-bullet.getVelocityY()*150);
+				quick.VRotate(bullet,Math.PI/2);
+				
+			}, 8700, TimeUnit.MILLISECONDS);
+			
+			sEX.schedule(() -> {
+				bullet.setVelocityX(-bullet.getVelocityX()*0.01);
+				bullet.setVelocityY(-bullet.getVelocityY()*0.01);
 				quick.VRotate(bullet,Math.PI);
 				
-			}, 5700, TimeUnit.MILLISECONDS);
+			}, 10000, TimeUnit.MILLISECONDS);
+			
+			sEX.schedule(() -> {
+				bullet.setVelocityX(-bullet.getVelocityX()*120);
+				bullet.setVelocityY(-bullet.getVelocityY()*120);
+				quick.VRotate(bullet,Math.PI/2);
+				
+			}, 12500, TimeUnit.MILLISECONDS);
 			
 			
+		
 			sEX.schedule(() -> {
 				bullet.setVelocityX(-bullet.getVelocityX()*0.01);
 				bullet.setVelocityY(-bullet.getVelocityY()*0.01);
-				quick.VRotate(bullet,Math.PI/3);
+				quick.VRotate(bullet,Math.PI);
 				
-			}, 5200+1200, TimeUnit.MILLISECONDS);
-			
-			
-			
-			
+			}, 37500, TimeUnit.MILLISECONDS);
+		
 			sEX.schedule(() -> {
-				bullet.setVelocityX(-bullet.getVelocityX()*100);
-				bullet.setVelocityY(-bullet.getVelocityY()*100);
-				quick.VRotateRandom(bullet,2*Math.PI);
-			}, 9800+5700, TimeUnit.MILLISECONDS);
+				bullet.setVelocityX(-bullet.getVelocityX()*120);
+				bullet.setVelocityY(-bullet.getVelocityY()*120);
+				quick.VRotateRandom(bullet,Math.PI);
+			}, 26700, TimeUnit.MILLISECONDS);
 
-			
 		});
 		
 		LogicExecutor.getLogicExecutor().schedule(() -> {
@@ -149,26 +196,25 @@ public class DirectPlayerDanmuku extends ADanmuku {
 	}
 	
 	
-	public void RandomCircleLauncher(double midX, double midY, double direction, long interval, long duration){
-		Launcher launcher = new Launcher(midX, midY, direction, interval, duration);
+	public void RandomCircleLauncher(double midX, double midY, double direction, long interval, int duration ,int delayTime,Stop[] stops){
+		Launcher launcher = new Launcher(midX, midY, direction, interval+420, duration);
 	
 		launcher.setBulletType(CircleBullet.class);
-		launcher.setBulletSpeed(300.0);
+		launcher.setBulletSpeed(210.0);
 		launcher.setBulletConfig((b)->{
 			((CircleBullet)b).setR(25);
-			((CircleBullet)b).setColorSupplier(PresetColor.redOpacity.get());
+			((CircleBullet)b).setColorSupplier(PresetColor.getByStops(stops));
 		});
 		
 		launcher.setBulletEvent((sesx,bullet)->{
 			LogicExecutor.getLogicExecutor().schedule(() -> {
-//				quick.VRotateRandom(bullet, Math.PI/2);
 			quick.VToByDirection(bullet, quick.getPlayerDirectionAngle(bullet));
-			}, 500, TimeUnit.MILLISECONDS);
+			}, 500+delayTime, TimeUnit.MILLISECONDS);
 		});
 		
 		LogicExecutor.getLogicExecutor().schedule(() -> {
-			mEU.add("launcher", launcher);
-		}, 300, TimeUnit.MILLISECONDS);
+			mEU.add("launcher"+delayTime, launcher);
+		}, 720+delayTime, TimeUnit.MILLISECONDS);
 		
 	}
 

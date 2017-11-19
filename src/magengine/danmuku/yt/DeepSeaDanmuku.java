@@ -25,7 +25,7 @@ import magengine.launcher.OvalLauncherGroup;
 import magengine.util.ElementUtils;
 
 public class DeepSeaDanmuku extends ADanmuku {
-	public static final long DURATION =25000;
+	public static final long DURATION =30000;
 	LogicExecutor ses = LogicExecutor.getLogicExecutor();
 	private int count = 0;
 	private int midX = 250;
@@ -38,19 +38,14 @@ public class DeepSeaDanmuku extends ADanmuku {
 		
 		int lcount = 5;
 		for (int i = 0; i < lcount; i++) {
-			rotateDSnipe(midX, midY, 700, 2 * Math.PI / lcount * i,1);
+			rotateDSnipe(midX, midY, 700, 2 * Math.PI / lcount * i,1,true);
 		}
 		
 		for (int i = 0; i < lcount; i++) {
-			rotateDSnipe(midX, midY, 9750,2 * Math.PI / lcount * i,-1);
+			rotateDSnipe(midX, midY, 12000, 2 * Math.PI / lcount * i,-1,false);
 		}
 		
-		Stop[] stops= {
-				new Stop(0.8, Color.WHITE),
-				new Stop(1.0,Color.rgb(255 ,105 ,180)),
-				new Stop(0.6, Color.rgb(245, 245, 245,0.8)),
-			};
-		
+	
 		Stop[] blueStops= {
 				new Stop(0.8, Color.WHITE),
 				new Stop(1.0,Color.rgb(0 ,0,255)),
@@ -95,29 +90,29 @@ public class DeepSeaDanmuku extends ADanmuku {
 		
         int num =3;
 		for(int k =0;k<num;k++){
-		BubbleLauncherGroup(0,300+k*100,720,210,blueStops,12);
+		BubbleLauncherGroup(0,300+k*100,1210,210,blueStops,12);
 		}
-		 BubbleLauncherGroup(0,300+250,720,210,blueStops,12);
-		 BubbleLauncherGroup(0,300+400,720,210,blueStops,12);
+		 BubbleLauncherGroup(0,300+250,1210,210,blueStops,12);
+		 BubbleLauncherGroup(0,300+400,1210,210,blueStops,12);
 		
 		 for(int k =0;k<num;k++){
-			BubbleLauncherGroup(0,320+k*150,2100,12000,deepBlueStops,27);
-			}
+		BubbleLauncherGroup(0,320+k*150,2500,12000,deepBlueStops,27);
+		}
 
 
 		
 	}
 	
 
-	public void rotateDSnipe(double midX, double midY, long startTime,double angle,int RL){
-		double R = 30;
-		double speed = 40;
+	public void rotateDSnipe(double midX, double midY, long startTime,double angle,int RL,boolean positive){
+		double R = 50;
+		double speed = 52;
 		int helperCount = count++;
 		long duration=8000;
 		
 		OvalHelper helper = new OvalHelper(midX, midY, R, speed, angle);
-		
-		Launcher launcher = new Launcher(100, 100, 0.5*Math.PI, 220, duration);
+		helper.setPositive(positive);
+		Launcher launcher = new Launcher(100, 100, 0.5*Math.PI, 320, duration);
 		
 		launcher.getDirectionProperty().bind(helper.getDirectionProperty());
 		launcher.getxProperty().bind(helper.getxProperty());
@@ -132,7 +127,7 @@ public class DeepSeaDanmuku extends ADanmuku {
 		
 		
 		launcher.setBulletEvent((sEX, bullet) -> {
-			((PetalBullet)bullet).setR(4.2);
+			((PetalBullet)bullet).setR(4.7);
 
 			((PetalBullet)bullet).setColorSupplier(PresetColor.blueOpacity.getByStops(stops));
 			
@@ -199,10 +194,10 @@ public class DeepSeaDanmuku extends ADanmuku {
 	}
 	
 
-	private void BubbleLauncherGroup(int midX,int midY,int duration,int delayTime,Stop[] stops,int r) {
+	private void BubbleLauncherGroup(int midX,int midY,int interval,int delayTime,Stop[] stops,int r) {
 		
 		LogicExecutor.getLogicExecutor().schedule(()->{
-        	Launcher launcher = new Launcher(midX,midY,0,duration,12000);
+        	Launcher launcher = new Launcher(midX,midY,0,interval,12000);
 			launcher.setBulletType(CircleBullet.class);
 			launcher.setBulletSpeed(75);
 			
@@ -212,7 +207,7 @@ public class DeepSeaDanmuku extends ADanmuku {
 			});
 			
   		    mEU.add("launcher"+midY, launcher);
-		},delayTime+duration);
+		},delayTime+interval);
 		
 	}
 	

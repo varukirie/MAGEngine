@@ -20,7 +20,7 @@ import magengine.util.ElementUtils;
 
 public class PinkBlueRainDanmuku extends ADanmuku {
 
-	public static final long DURATION = 32000;
+	public static final long DURATION = 35000;
 
 	private QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 	
@@ -100,15 +100,15 @@ public class PinkBlueRainDanmuku extends ADanmuku {
 	 
 		 
 		 for(int j=0;j<5;j++){
-			 setLongHexagonLauncher(320+j*9750,9, Color.rgb(255, 255, 0,0.5));
+			 setLongHexagonLauncher(320+j*4250,9, Color.rgb(255, 255, 0,0.5));
 		
 		 }
 		 
 		 
 		 
-		 for(int k=0;k<3;k++){
+		 for(int k=0;k<2;k++){
 			 
-			 setLongHexagonLauncher(2700+k*12000,9, Color.rgb(238, 0, 0,0.5));
+			 setLongHexagonLauncher(2700+k*4200,15, Color.rgb(238, 0, 0,0.5));
 		
 		 }
 		 
@@ -122,7 +122,7 @@ public class PinkBlueRainDanmuku extends ADanmuku {
 		
 		olg.setLauncherConfig((l)->{
 			l.setBulletType(HexagonBullet.class);
-			l.setBulletSpeed(75);
+			l.setBulletSpeed(81);
 			
 			l.setBulletConfig(b->{
 				((HexagonBullet)b).setColorSupplier(PresetColor.redOpacity.getByStops(stops));
@@ -165,7 +165,7 @@ public class PinkBlueRainDanmuku extends ADanmuku {
 		
 		olg.setLauncherConfig((l)->{
 			l.setBulletType(LongHexagonBullet.class);
-			l.setBulletSpeed(97.0);
+			l.setBulletSpeed(152.0);
 		
 			l.setBulletConfig(b->{
 				((LongHexagonBullet)b).setNeedPaintOutline(true);
