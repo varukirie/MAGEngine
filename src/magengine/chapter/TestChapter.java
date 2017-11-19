@@ -19,6 +19,7 @@ import magengine.bullet.impl.HexagonBullet;
 import magengine.bullet.impl.PlayerBullet;
 import magengine.bullet.impl.StarBullet;
 import magengine.chapter.util.AChapter;
+import magengine.chapter.util.ChapterLoader;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.danmuku.ReisenNonSpellCardDanmuku;
 import magengine.danmuku.RingDanmuku;
@@ -64,29 +65,6 @@ public class TestChapter extends AChapter {
 
 	@Override
 	public void design(LogicExecutor exec, MyCanvas staticCanvas, ElementUtils mEU) {
-
-		Platform.runLater(() -> {
-			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(DefaultBullet.class, (canvas) -> {
-				canvas.setEffect(new Bloom());
-			});
-			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(StarBullet.class, (canvas) -> {
-				canvas.setEffect(new Bloom());
-			});
-			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(ArrowBullet.class, (canvas) -> {
-				canvas.setEffect(new Bloom());
-			});
-			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(PlayerBullet.class, (canvas) -> {
-				canvas.setEffect(new Bloom());
-			});
-			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(HexagonBullet.class, (canvas) -> {
-				canvas.setEffect(new Bloom());
-			});
-			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(BombCircleArea.class, (canvas) -> {
-				canvas.setEffect(new BoxBlur(2.5, 2.5, 1));
-//				canvas.setEffect(new Bloom(1));
-			});
-			staticCanvas.getGraphicsContext2D().fillRect(0, 0, MyCanvas.CANVAS_WIDTH, MyCanvas.CANVAS_HEIGHT);
-		});
 		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 		Random r = new Random(C.SEED);
 		
@@ -95,7 +73,7 @@ public class TestChapter extends AChapter {
 		boss.setHP(500);
 		boss.setDanmukuStartDelay(1);
 		 boss.addDanmuku(new DeepSeaDanmuku(), DeepSeaDanmuku.DURATION);
-//		boss.addDanmuku(new UtsuhoNonSpellCard1(), UtsuhoNonSpellCard1.DURATION);
+		boss.addDanmuku(new UtsuhoNonSpellCard1(), UtsuhoNonSpellCard1.DURATION);
 //		boss.addDanmuku(new ReisenNonSpellCardDanmuku(), ReisenNonSpellCardDanmuku.DURATION + 1000);// 1秒间隔
 //		boss.addDanmuku(new RunAwayNuclearDanmuku(), RunAwayNuclearDanmuku.DURATION + 2000);// 2秒间隔
 		// boss.setOnRemoveEvent((bs)->{
@@ -113,7 +91,6 @@ public class TestChapter extends AChapter {
 			}, i * sum + 6000 + 1000);
 		}
 
-		
 //		 InvertCircleArea ica = new InvertCircleArea(300, 100, 200);
 //		 ica.setOnCollisionEvent((m) -> {
 //		 if (m.getTeam().equals(CollisionTeam.ENEMY_BULLET)) {

@@ -4,6 +4,8 @@ package magengine.game;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+
+import application.Main;
 import io.netty.channel.Channel;
 import io.netty.channel.nio.NioEventLoopGroup;
 import javafx.animation.AnimationTimer;
@@ -149,7 +151,7 @@ public class GameSession {
 	}
 
 
-
+	private long  lastTime4bench=0;
 	public void loadGameScene() {
 		Stage primaryStage=SceneManager.getInstance().getPrimaryStage();
 		BorderPane gArea = new BorderPane();
@@ -215,12 +217,12 @@ public class GameSession {
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
-//				long lasttime=System.currentTimeMillis();
 				mh.callRepaint();
 				moveableElementUtils.getSwitcher().repaint();
-//				if(Main.DEBUG_BENCH){
-//					System.out.println("2.渲染"+(System.currentTimeMillis()-lasttime)+"ms");
-//				}
+				if(Main.DEBUG_RENDER_BENCH){
+					System.out.println("2.渲染"+(System.currentTimeMillis()-lastTime4bench)+"ms");
+					lastTime4bench=System.currentTimeMillis();
+				}
 			}
 		};
 		timer.start();
@@ -365,7 +367,7 @@ public class GameSession {
 				//single
 				ChapterLoader.loadChapter(chapter);
 			}
-			MoveHandler.setDeltaTimeFactor(1);
+			
 		});
 	}
 	public Level getLevel() {

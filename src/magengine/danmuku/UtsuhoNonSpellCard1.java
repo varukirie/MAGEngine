@@ -27,11 +27,6 @@ public class UtsuhoNonSpellCard1 extends ADanmuku {
 	public void executeDanmuku() {
 		Random r = GameSession.rand();
 		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
-		Platform.runLater(()->{
-			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(CircleBullet.class, (canvas) -> {
-				canvas.setEffect(new Bloom());
-			});
-		});
 		Consumer<BaseElement> circleBulletConfig = (bullet) -> {
 //			((CircleBullet) bullet).setColorSupplier(PresetColor
 //					.getRandomColorOpacityIn(new Color[] { Color.ORANGE, Color.WHITE, Color.AQUA,Color.CADETBLUE,Color.LIGHTCORAL,Color.MISTYROSE }));

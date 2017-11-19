@@ -3,7 +3,9 @@ package magengine.bullet.impl;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.Bloom;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.Paint;
@@ -11,9 +13,12 @@ import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
 import magengine.bullet.APolygonBullet;
 import magengine.bullet.RadiusSupplier;
+import magengine.element.InitBeforeLoadChapter;
+import magengine.paint.MyCanvasSwitcher;
+import magengine.util.DI;
 import magengine.util.Transform;
 
-public class CircleBullet extends APolygonBullet implements RadiusSupplier{
+public class CircleBullet extends APolygonBullet implements RadiusSupplier,InitBeforeLoadChapter{
 	
 	private Function<RadiusSupplier,Paint> colorSupplier = (cirb)->{
 		return Color.WHITESMOKE;
@@ -67,9 +72,11 @@ public class CircleBullet extends APolygonBullet implements RadiusSupplier{
 
 	public CircleBullet(double x, double y) {
 		super(x, y); // 中心坐标
-		// TODO Auto-generated constructor stub
 	}
-
+	
+	public CircleBullet(){
+		super(0, 0);
+	}
 
 	public static final double[][] origin = new double[][] { { 0, -0.38268343236509, -0.70710678118655,
 			-0.92387953251129, -1, -0.92387953251129, -0.70710678118655, -0.38268343236509, 0, 0.38268343236509,
@@ -113,5 +120,13 @@ public class CircleBullet extends APolygonBullet implements RadiusSupplier{
 	
 	public Function<RadiusSupplier, Paint> getColorSupplier() {
 		return colorSupplier;
+	}
+	@Override
+	public void initWhenChapterLoad() {
+		Platform.runLater(()->{
+			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(CircleBullet.class, (canvas) -> {
+				canvas.setEffect(new Bloom());
+			});
+		});		
 	}
 }

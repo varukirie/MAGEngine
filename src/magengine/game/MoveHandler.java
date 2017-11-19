@@ -1,13 +1,9 @@
 package magengine.game;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 import application.Main;
 import magengine.bullet.Bullet;
 import magengine.element.Accelerated;
@@ -34,8 +30,8 @@ import magengine.util.ElementUtils;
  */
 
 public class MoveHandler implements Runnable {
-	public static final double BULLET_EX_AREA_LENGTH = 100;
-	public static final double ENEMY_EX_AREA_LENGTH = 100;
+	public static final double BULLET_EX_AREA_LENGTH = 150;
+	public static final double ENEMY_EX_AREA_LENGTH = 150;
 	public static final double DEFAULT_TIME_SPEED = 1;
 
 	/**
@@ -157,7 +153,7 @@ public class MoveHandler implements Runnable {
 			collisionCheck(m);
 		}
 
-		if (Main.DEBUG_BENCH) {
+		if (Main.DEBUG_LOGIC_BENCH) {
 			if ((deltaTime) > benchMax)
 				benchMax = (long) (deltaTime);
 			System.out
