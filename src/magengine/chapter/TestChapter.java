@@ -30,7 +30,7 @@ import magengine.danmuku.gs.Testing;
 import magengine.danmuku.yt.DirectPlayerDanmuku;
 import magengine.danmuku.yt.MulCircleDanmuku2;
 import magengine.danmuku.yt.PinkBlueRainDanmuku;
-import magengine.danmuku.yt.RotateDanmuku;
+import magengine.danmuku.yt.DeepSeaDanmuku;
 import magengine.danmuku.yt.demo1;
 import magengine.element.BaseElement;
 import magengine.element.impl.Area;
@@ -94,10 +94,10 @@ public class TestChapter extends AChapter {
 		ALoopDanmukuEnemy boss = new Enemy1(300, 100);
 		boss.setHP(500);
 		boss.setDanmukuStartDelay(1);
-		 boss.addDanmuku(new PinkBlueRainDanmuku(), PinkBlueRainDanmuku.DURATION);
-		boss.addDanmuku(new UtsuhoNonSpellCard1(), UtsuhoNonSpellCard1.DURATION);
-		boss.addDanmuku(new ReisenNonSpellCardDanmuku(), ReisenNonSpellCardDanmuku.DURATION + 1000);// 1秒间隔
-		boss.addDanmuku(new RunAwayNuclearDanmuku(), RunAwayNuclearDanmuku.DURATION + 2000);// 2秒间隔
+		 boss.addDanmuku(new DeepSeaDanmuku(), DeepSeaDanmuku.DURATION);
+//		boss.addDanmuku(new UtsuhoNonSpellCard1(), UtsuhoNonSpellCard1.DURATION);
+//		boss.addDanmuku(new ReisenNonSpellCardDanmuku(), ReisenNonSpellCardDanmuku.DURATION + 1000);// 1秒间隔
+//		boss.addDanmuku(new RunAwayNuclearDanmuku(), RunAwayNuclearDanmuku.DURATION + 2000);// 2秒间隔
 		// boss.setOnRemoveEvent((bs)->{
 		// new OvalLauncherGroup(bs.getX(), bs.getY(), 32).execute();
 		// });
