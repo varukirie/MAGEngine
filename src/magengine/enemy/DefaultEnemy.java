@@ -20,7 +20,7 @@ public class DefaultEnemy extends ADelayDanmukuEnemy {
 	private static Image img=null;
 	static {
 		try {
-			img = new Image(DefaultEnemy.class.getResourceAsStream("/img/enemy.bmp"));
+			img = new Image(DefaultEnemy.class.getResourceAsStream("/img/enemies/enemy.bmp"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
