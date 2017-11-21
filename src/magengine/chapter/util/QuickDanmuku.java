@@ -43,7 +43,7 @@ public class QuickDanmuku {
 	private ScheduledExecutorService sES = (ScheduledExecutorService) DI.di().get("sES");
 	private final double sqrt2d2 = 0.7071;
 	private int count = 0;
-	private Random r = GameSession.rand();
+	private Random r = new Random(C.SEED*2);
 	private LogicExecutor exec=LogicExecutor.getLogicExecutor();
 	
 	public QuickDanmuku(ElementUtils mEU) {
