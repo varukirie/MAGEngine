@@ -14,6 +14,7 @@ import magengine.bullet.impl.PlayerBullet;
 import magengine.element.BaseElement;
 import magengine.element.PolygonCollision;
 import magengine.element.impl.Player;
+import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
 import magengine.helper.MoveToHelper;
 import magengine.launcher.Launcher;
@@ -42,8 +43,9 @@ public class QuickDanmuku {
 	private ScheduledExecutorService sES = (ScheduledExecutorService) DI.di().get("sES");
 	private final double sqrt2d2 = 0.7071;
 	private int count = 0;
-	private Random r = new Random(C.SEED);
-
+	private Random r = GameSession.rand();
+	private LogicExecutor exec=LogicExecutor.getLogicExecutor();
+	
 	public QuickDanmuku(ElementUtils mEU) {
 		super();
 		this.mEU = mEU;
@@ -91,7 +93,12 @@ public class QuickDanmuku {
 	}
 
 	public void moveTo(BaseElement element, long timeCost, double targetX, double targetY) {
-		moveTo(element, timeCost, targetX, targetY, true);
+		moveTo(element, timeCost, targetX, targetY, true,()->{});
+	}
+	
+	public void moveTo(BaseElement element, long timeCost, double targetX, double targetY,Runnable onEnd) {
+		moveTo(element, timeCost, targetX, targetY, true,onEnd);
+		
 	}
 
 	/**
@@ -103,7 +110,7 @@ public class QuickDanmuku {
 	 * @param targetY
 	 */
 
-	public void moveTo(BaseElement element, long timeCost, double targetX, double targetY, boolean accMode) {
+	public void moveTo(BaseElement element, long timeCost, double targetX, double targetY, boolean accMode,Runnable onEnd) {
 		MoveToHelper helper = new MoveToHelper(element.getX(), element.getY(), targetX, targetY, timeCost);
 		helper.setAccMode(accMode);
 		element.setVelocityX(0);
@@ -115,7 +122,7 @@ public class QuickDanmuku {
 		this.bindToWantBeRemoved(helper, element);
 		// element.getxProperty().bind(helper.getxProperty());
 		// element.getyProperty().bind(helper.getyProperty());
-		mEU.add(r.nextInt() + "", helper);
+		mEU.add("moveTo"+r.nextInt(), helper);
 		// System.out.println(timeCost);
 		LogicExecutor.getLogicExecutor().schedule(() -> {
 			// System.out.println("execute unbind");
@@ -124,6 +131,7 @@ public class QuickDanmuku {
 			element.getxProperty().unbind();
 			element.getyProperty().unbind();
 			// element.getxProperty().set(150);
+			onEnd.run();
 		}, timeCost + 1, TimeUnit.MILLISECONDS);
 
 	}

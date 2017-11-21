@@ -8,6 +8,7 @@ import magengine.launcher.Launcher;
 
 public class TriArcDanmuku extends ADanmuku {
 
+	public static final long DURATION= 3000;
 
 	@Override
 	public void executeDanmuku() {

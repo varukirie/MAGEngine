@@ -16,6 +16,7 @@ import magengine.element.Moveable;
 import magengine.element.Paintable;
 import magengine.element.PolygonCollision;
 import magengine.element.impl.Area;
+import magengine.enemy.AEnemy;
 import magengine.enemy.APolygonEnemy;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
@@ -49,6 +50,10 @@ public class ElementUtils {
 	 * @param value
 	 */
 	public void add(String name, Object value) {
+		if(getWantMoveMap().get(name)!=null){
+			System.out.println("ElementUtils add: warning: name产生碰撞 受影响对象:"+value);
+		}
+			
 		if (Main.DEBUG_ElementCreate) {
 			System.out.println("addElement:" + value);
 		}
@@ -62,8 +67,10 @@ public class ElementUtils {
 			((MoveHandler) DI.di().get("mh")).addCollisionElement(name, (PolygonCollision) value);
 		}
 		if (mh != null)
-			if (value instanceof Moveable)
+			if (value instanceof Moveable){
 				mh.getWantMoveMap().put(name, (Moveable) value);
+			}
+				
 		if (myCanvas != null)
 			if (value instanceof Paintable)
 				if (value instanceof BaseElement) {

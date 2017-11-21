@@ -30,7 +30,7 @@ import magengine.util.ElementUtils;
  */
 
 public class MoveHandler implements Runnable {
-	public static final double BULLET_EX_AREA_LENGTH = 150;
+	public static final double BULLET_EX_AREA_LENGTH = 170;
 	public static final double ENEMY_EX_AREA_LENGTH = 150;
 	public static final double DEFAULT_TIME_SPEED = 1;
 
@@ -225,6 +225,7 @@ public class MoveHandler implements Runnable {
 	private boolean checkAndMove(Moveable m, double nextX, double nextY) {
 		boolean needMove = false;
 		boolean needDelete = false;
+		
 		if (m instanceof Bullet || m instanceof Helper || m instanceof Launcher) {
 			if (nextX < MyCanvas.CANVAS_WIDTH + BULLET_EX_AREA_LENGTH && nextX > 0 - BULLET_EX_AREA_LENGTH
 					&& nextY < MyCanvas.CANVAS_HEIGHT + BULLET_EX_AREA_LENGTH && nextY > 0 - BULLET_EX_AREA_LENGTH) {
@@ -233,6 +234,7 @@ public class MoveHandler implements Runnable {
 				needDelete=true;
 			}
 		} else if(m instanceof AEnemy) {
+			
 			if (nextX < MyCanvas.CANVAS_WIDTH + ENEMY_EX_AREA_LENGTH && nextX > 0 - ENEMY_EX_AREA_LENGTH
 					&& nextY < MyCanvas.CANVAS_HEIGHT + ENEMY_EX_AREA_LENGTH && nextY > 0 - ENEMY_EX_AREA_LENGTH) {
 				needMove = true;
