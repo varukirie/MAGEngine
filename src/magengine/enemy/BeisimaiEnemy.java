@@ -4,22 +4,21 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import magengine.paint.SpritePainter;
 
-public class Enemy1 extends ALoopDanmukuEnemy {
+public class BeisimaiEnemy extends ALoopDanmukuEnemy {
 	private static SpritePainter spritePainter = null;
 	
-	public Enemy1(double x, double y) {
+	public BeisimaiEnemy(double x, double y) {
 		super(x, y);
 	}
-	
 	private static double[][] origin = null;
-	private static int enemyWidth = 272;
-	private static int enemyHeight = 146;
+	private static int enemyWidth = 82;
+	private static int enemyHeight = 128;
 	private static int halfWidth = enemyWidth/2;
 	private static int halfHeight = enemyHeight/2;
 	private static Image img=null;
 	static {
 		try {
-			img = new Image(Enemy1.class.getResourceAsStream("/img/enemies/enemy1.png"));
+			img = new Image(BeisimaiEnemy.class.getResourceAsStream("/img/enemies/beisimaiEnemy.png"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -35,7 +34,7 @@ public class Enemy1 extends ALoopDanmukuEnemy {
 	public void paint(GraphicsContext gc) {
 		super.paint(gc);
 		//每隔interval帧换一张图
-		int interval = 5;
+		int interval = 32;
 		spritePainter.paintSprite((0+(currentSpriteIndex))/interval, getX()-halfWidth, getY()-halfHeight, gc);
 		currentSpriteIndex=(currentSpriteIndex+1)%(12*interval);
 		

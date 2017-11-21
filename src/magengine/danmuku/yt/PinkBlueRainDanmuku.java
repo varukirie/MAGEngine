@@ -125,7 +125,7 @@ public class PinkBlueRainDanmuku extends ADanmuku {
 			l.setBulletSpeed(81);
 			
 			l.setBulletConfig(b->{
-				((HexagonBullet)b).setColorSupplier(PresetColor.redOpacity.getByStops(stops));
+				((HexagonBullet)b).setColorSupplier(PresetColor.getByStops(stops));
 				((HexagonBullet)b).setR(5.0);
 			});
 			
@@ -192,7 +192,7 @@ public class PinkBlueRainDanmuku extends ADanmuku {
 			l.setBulletSpeed(110.0);
 			quick.bindToWantBeRemoved(l, getSourceElement());
 			l.setBulletConfig(b->{
-				((HexagonBullet)b).setColorSupplier(PresetColor.redOpacity.getByStops(stops));
+				((HexagonBullet)b).setColorSupplier(PresetColor.getByStops(stops));
 				((HexagonBullet)b).setR(5.0);
 			});
 			

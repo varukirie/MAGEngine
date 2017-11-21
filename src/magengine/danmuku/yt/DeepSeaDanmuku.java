@@ -79,7 +79,7 @@ public class DeepSeaDanmuku extends ADanmuku {
 		launcher.setBulletSpeed(81);
 		
 		launcher.setBulletConfig(b->{
-			((CircleBullet)b).setColorSupplier(PresetColor.blueOpacity.getByStops(deepPurpleStops));
+			((CircleBullet)b).setColorSupplier(PresetColor.getByStops(deepPurpleStops));
 			((CircleBullet)b).setR(21.0);
 			quick.VToByDirection(b, quick.getPlayerDirectionAngle(b));
 		});
@@ -129,7 +129,7 @@ public class DeepSeaDanmuku extends ADanmuku {
 		launcher.setBulletEvent((sEX, bullet) -> {
 			((PetalBullet)bullet).setR(4.7);
 
-			((PetalBullet)bullet).setColorSupplier(PresetColor.blueOpacity.getByStops(stops));
+			((PetalBullet)bullet).setColorSupplier(PresetColor.getByStops(stops));
 			
 		
 			sEX.schedule(() -> {
@@ -202,7 +202,7 @@ public class DeepSeaDanmuku extends ADanmuku {
 			launcher.setBulletSpeed(75);
 			
 			launcher.setBulletConfig(b->{
-				((CircleBullet)b).setColorSupplier(PresetColor.blueOpacity.getByStops(stops));
+				((CircleBullet)b).setColorSupplier(PresetColor.getByStops(stops));
 				((CircleBullet)b).setR(r);
 			});
 			

@@ -39,8 +39,11 @@ import magengine.element.impl.CircleArea;
 import magengine.element.impl.InvertCircleArea;
 import magengine.element.impl.Player;
 import magengine.enemy.ALoopDanmukuEnemy;
+import magengine.enemy.BeisimaiEnemy;
 import magengine.enemy.DefaultEnemy;
 import magengine.enemy.Enemy1;
+import magengine.enemy.NandaketaEnemy;
+import magengine.enemy.YanzhanEnemy;
 import magengine.game.LogicExecutor;
 import magengine.helper.Helper;
 import magengine.helper.OvalHelper;
@@ -91,7 +94,10 @@ public class TestChapter extends AChapter {
 		Random r = new Random(C.SEED);
 		
 		LogicExecutor executor = LogicExecutor.getLogicExecutor();
-		ALoopDanmukuEnemy boss = new Enemy1(300, 100);
+//		ALoopDanmukuEnemy boss = new Enemy1(300, 100);
+		ALoopDanmukuEnemy boss = new BeisimaiEnemy(300,100);
+//		ALoopDanmukuEnemy boss = new YanzhanEnemy(300,100);
+//		ALoopDanmukuEnemy boss = new NandaketaEnemy(300,100);
 		boss.setHP(500);
 		boss.setDanmukuStartDelay(1);
 		boss.addDanmuku(new FllowerArrayDanmuku(),FllowerArrayDanmuku.DURATION);
