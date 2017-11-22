@@ -32,7 +32,6 @@ public class WaveParticleDanmuku extends ADanmuku {
 		
 		for(int i=0;i<lchCount;i++){
 			final double angle = 2*PI/lchCount*i;
-			System.out.println(angle);
 			Launcher lch = new Launcher(se.getX(), se.getY());
 			quick.bindToXY(lch, se);
 			quick.bindToWantBeRemoved(lch, se);
