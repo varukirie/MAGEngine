@@ -71,9 +71,9 @@ public class TestChapter extends AChapter {
 	ElementUtils mEU = ((ElementUtils) DI.di().get("mEU"));
 	@Override
 	public void design(LogicExecutor exec, MyCanvas staticCanvas, ElementUtils mEU) {
-		createElf(e1->{
-			createBoss(e2->{});
-		},4,1500);
+//		createElf(e1->{
+			createStage1Boss(e2->{});
+//		},4,1500);
 		
 		//性能测试
 		// for(int i=1;i<=1000;i++){
@@ -89,26 +89,30 @@ public class TestChapter extends AChapter {
 //		 ALoopDanmukuEnemy boss = new NandaketaEnemy(300,100);
 		boss.setHP(500);
 		boss.setDanmukuStartDelay(1000);
+	}
+	private void createStage1Boss(Consumer<BaseElement> onEnd) {
+		ALoopDanmukuEnemy bossM1 = new BeisimaiEnemy(300, -100);
+		// ALoopDanmukuEnemy boss = new YanzhanEnemy(300,100);
+		// ALoopDanmukuEnemy boss = new NandaketaEnemy(300,100);
+		bossM1.setHP(100);
+		bossM1.setDanmukuStartDelay(1000);
 //		boss.addDanmuku(new FllowerArrayDanmuku(), FllowerArrayDanmuku.DURATION);
 //		boss.addDanmuku(new DeepSeaDanmuku(), DeepSeaDanmuku.DURATION);
-		boss.addDanmuku(new PinkBlueRainDanmuku(), PinkBlueRainDanmuku.DURATION);
-		boss.addDanmuku(new UtsuhoNonSpellCard1(), UtsuhoNonSpellCard1.DURATION);
-		boss.addDanmuku(new ReisenNonSpellCardDanmuku(), ReisenNonSpellCardDanmuku.DURATION + 1000);// 1绉掗棿闅�
-		boss.addDanmuku(new RunAwayNuclearDanmuku(), RunAwayNuclearDanmuku.DURATION + 2000);// 2绉掗棿闅�
-		boss.setOnRemoveEvent((bs) -> {
-			onEnd.accept(bs);
+//		bossM1.addDanmuku(new PinkBlueRainDanmuku(), PinkBlueRainDanmuku.DURATION);
+		bossM1.addDanmuku(new UtsuhoNonSpellCard1(), UtsuhoNonSpellCard1.DURATION);
+		bossM1.addDanmuku(new RunAwayNuclearDanmuku(), RunAwayNuclearDanmuku.DURATION + 2000);
+		bossM1.setOnRemoveEvent((bsM1) -> {
+			ALoopDanmukuEnemy bossM2 = new BeisimaiEnemy(bsM1.getX(), bsM1.getY());
+			bossM2.setDanmukuStartDelay(2000).setHP(100);
+			bossM2.addDanmuku(new ReisenNonSpellCardDanmuku(), ReisenNonSpellCardDanmuku.DURATION + 1000)
+			.addDanmuku(new PinkBlueRainDanmuku(), PinkBlueRainDanmuku.DURATION);
+			bossM2.setOnRemoveEvent(bsM2->{
+				onEnd.accept(bsM2);
+			});
+			mEU.add("bossM2", bossM2);
 		});
-		mEU.add("enemy", boss);
-
-		for (int i = 0; i < 100; i++) {
-			long sum = 6000 + 1000 + 6000 + 1000;
-			executor.schedule(() -> {
-				quick.moveTo(boss, 6000, 100, 120);
-			}, i * sum);
-			executor.schedule(() -> {
-				quick.moveTo(boss, 6000, 500, 100);
-			}, i * sum + 6000 + 1000);
-		}
+		bossM1.setMoveLoop(new double[][]{{100,500,300,340},{120,100,130,90}}, 4000, 1000);
+		mEU.add("bossM1", bossM1);
 	}
 	
 	/**

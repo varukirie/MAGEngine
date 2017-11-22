@@ -36,7 +36,7 @@ public class BeisimaiEnemy extends ALoopDanmukuEnemy {
 		super.paint(gc);
 		int count=12;
 		//每隔interval帧换一张图
-		int interval = 2;
+		int interval = 4;
 		spritePainter.paintSprite((0+(currentSpriteIndex))/interval, getX()-halfWidth, getY()-halfHeight, gc);
 		currentSpriteIndex=(currentSpriteIndex+spriteDelta)%(count*interval);
 		if(currentSpriteIndex==count*interval-1||currentSpriteIndex==0){

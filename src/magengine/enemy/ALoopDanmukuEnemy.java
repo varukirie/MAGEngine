@@ -3,6 +3,7 @@ package magengine.enemy;
 import java.util.ArrayList;
 import java.util.List;
 
+import magengine.chapter.util.QuickDanmuku;
 import magengine.danmuku.ADanmuku;
 import magengine.game.LogicExecutor;
 /**
@@ -41,8 +42,9 @@ public abstract class ALoopDanmukuEnemy extends APolygonEnemy {
 	 * @param DURATION
 	 *            弹幕开始到结束所使用的时间
 	 */
-	public void addDanmuku(ADanmuku danmuku, long duration) {
+	public ALoopDanmukuEnemy addDanmuku(ADanmuku danmuku, long duration) {
 		danmukuList.add(new DanmukuAndDuration(danmuku, duration));
+		return this;
 	}
 
 	@Override
@@ -51,17 +53,20 @@ public abstract class ALoopDanmukuEnemy extends APolygonEnemy {
 			x.danmuku.setSourceElement(this);
 		});
 		exec.schedule(()->{
-			executeNext();
+			doNextDmk();
 		}, danmukuStartDelay);
+		if(movePoints!=null){
+			doNextMove();
+		}
 	}
 	private int currentDanmukuIndex=-1;
-	private void executeNext(){
+	private void doNextDmk(){
 		if(danmukuList.size()!=0){
 			currentDanmukuIndex=(currentDanmukuIndex+1)%danmukuList.size();
 			if(currentDanmukuIndex<danmukuList.size()&&this.deleted==false){
 				danmukuList.get(currentDanmukuIndex).danmuku.executeDanmuku();
 				exec.schedule(()->{
-					executeNext();
+					doNextDmk();
 				}, danmukuList.get(currentDanmukuIndex).duration);
 			}
 		}
@@ -82,8 +87,36 @@ public abstract class ALoopDanmukuEnemy extends APolygonEnemy {
  * 设置敌人从出场到发射第一个弹幕的间隔
  * @param danmukuStartDelay
  */
-	public void setDanmukuStartDelay(long danmukuStartDelay) {
+	public ALoopDanmukuEnemy setDanmukuStartDelay(long danmukuStartDelay) {
 		this.danmukuStartDelay = danmukuStartDelay;
+		return this;
+	}
+	
+	
+	private double[][] movePoints=null;
+	private long moveInterval = 100;
+	private long moveDuration = 3000;
+	/**
+	 * 循环运动
+	 * @param points checkpoints格式{{x1,x2,x3...},{y1,y2,y3...}}
+	 * @return
+	 */
+	public ALoopDanmukuEnemy setMoveLoop(double[][] points,long moveDuration,long moveInterval){
+		this.movePoints=points;
+		this.moveDuration=moveDuration;
+		this.moveInterval=moveInterval;
+		return this;
+	}
+	private int moveMark = 0;
+	private void doNextMove(){
+		if(!getDeleted()){
+			QuickDanmuku.getQuickDanmuku().moveTo(this, moveDuration, movePoints[0][moveMark], movePoints[1][moveMark],()->{
+				exec.schedule(()->{
+					doNextMove();
+				}, moveInterval);
+			});
+			moveMark=(moveMark+1)%movePoints[0].length;
+		}
 	}
 	
 }
