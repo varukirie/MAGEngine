@@ -36,9 +36,8 @@ public class PlayerControlHandler {
 
 	private static PlayerControlHandler pch = null;
 	// 速度V
-	public static double DEFAULT_BALL_V = 4;
-	public static double BALL_V = DEFAULT_BALL_V;
-	public static double PLAYER_V = 200;// 用于设置按键导致的player移动速度
+	
+	public static double PLAYER_V = 250;// 用于设置按键导致的player移动速度
 	private Player player = null;
 	private ElementUtils elementUtils = null;
 
@@ -187,16 +186,6 @@ public class PlayerControlHandler {
 		changeV();
 	}
 
-	private void playerShootToMouse() {
-		DefaultBullet ball = new DefaultBullet(player.getX(), player.getY());
-		double dx = PlayerControlHandler.mouseX - player.getX();
-		double dy = PlayerControlHandler.mouseY - player.getY();
-		double s = Math.sqrt(dx * dx + dy * dy);
-		ball.setVelocityX(dx * BALL_V / s);
-		ball.setVelocityY(dy * BALL_V / s);
-		elementUtils.add("ball" + ballCount++, ball);
-
-	}
 
 	public static double getMouseX() {
 		return mouseX;
@@ -224,11 +213,11 @@ public class PlayerControlHandler {
 			}
 		});
 		ca.setOnPaintEvent((gc)->{
-			gc.setFill(Color.rgb(245, 245, 245,0.3));
-//			gc.setStroke(Color.rgb(245, 245, 90,0.7));
+			gc.setFill(Color.rgb(150, 0, 0,0.1));
+//			gc.setStroke(Color.rgb(245, 245, 150,0.2));
 			gc.setStroke(Color.GHOSTWHITE);
 			gc.fillOval(ca.getX()-r, ca.getY()-r, r*2, r*2);
-			double angleDelta = sin(LogicExecutor.gameTime()/500.0)*1;
+			double angleDelta = sin(LogicExecutor.gameTime()/500.0)*6;
 			
 			{
 				double angle=0+angleDelta;

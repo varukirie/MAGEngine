@@ -26,6 +26,7 @@ import magengine.danmuku.RunAwayNuclearDanmuku;
 import magengine.danmuku.StarDanmuku;
 import magengine.danmuku.TriArcDanmuku;
 import magengine.danmuku.UtsuhoNonSpellCard1;
+import magengine.danmuku.WaveParticleDanmuku;
 import magengine.danmuku.gs.Testing;
 import magengine.danmuku.yt.FllowerArrayDanmuku;
 import magengine.danmuku.yt.MulCircleDanmuku2;
@@ -72,9 +73,9 @@ public class TestChapter extends AChapter {
 	@Override
 	public void design(LogicExecutor exec, MyCanvas staticCanvas, ElementUtils mEU) {
 //		createElf(e1->{
-			createStage1Boss(e2->{});
+//			createStage1Boss(e2->{});
 //		},4,1500);
-		
+		createBossTest((e)->{});
 		//性能测试
 		// for(int i=1;i<=1000;i++){
 		// new StarDanmuku().setDelay(700*i).delayExecute();
@@ -83,12 +84,14 @@ public class TestChapter extends AChapter {
 	}
 	
 	
-	private void createBoss(Consumer<BaseElement> onEnd) {
-		ALoopDanmukuEnemy boss = new BeisimaiEnemy(300, -100);
+	private void createBossTest(Consumer<BaseElement> onEnd) {
+		ALoopDanmukuEnemy boss = new BeisimaiEnemy(300, 100);
 //		 ALoopDanmukuEnemy boss = new YanzhanEnemy(300,100);
 //		 ALoopDanmukuEnemy boss = new NandaketaEnemy(300,100);
 		boss.setHP(500);
-		boss.setDanmukuStartDelay(1000);
+		boss.setDanmukuStartDelay(1);
+		boss.addDanmuku(new WaveParticleDanmuku(), WaveParticleDanmuku.DURATION+1000);
+		mEU.add("testBoss", boss);
 	}
 	private void createStage1Boss(Consumer<BaseElement> onEnd) {
 		ALoopDanmukuEnemy bossM1 = new BeisimaiEnemy(300, -100);
@@ -110,6 +113,7 @@ public class TestChapter extends AChapter {
 				onEnd.accept(bsM2);
 			});
 			mEU.add("bossM2", bossM2);
+			quick.moveTo(bossM2, 500, 300, 110);
 		});
 		bossM1.setMoveLoop(new double[][]{{100,500,300,340},{120,100,130,90}}, 4000, 1000);
 		mEU.add("bossM1", bossM1);
