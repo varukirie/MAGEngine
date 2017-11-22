@@ -88,7 +88,7 @@ public class TestChapter extends AChapter {
 		ALoopDanmukuEnemy boss = new BeisimaiEnemy(300, 100);
 //		 ALoopDanmukuEnemy boss = new YanzhanEnemy(300,100);
 //		 ALoopDanmukuEnemy boss = new NandaketaEnemy(300,100);
-		boss.setHP(500);
+		boss.setHP(100);
 		boss.setDanmukuStartDelay(1);
 		boss.addDanmuku(new WaveParticleDanmuku(), WaveParticleDanmuku.DURATION+1000);
 		mEU.add("testBoss", boss);
@@ -106,9 +106,10 @@ public class TestChapter extends AChapter {
 		bossM1.addDanmuku(new RunAwayNuclearDanmuku(), RunAwayNuclearDanmuku.DURATION + 2000);
 		bossM1.setOnRemoveEvent((bsM1) -> {
 			ALoopDanmukuEnemy bossM2 = new BeisimaiEnemy(bsM1.getX(), bsM1.getY());
-			bossM2.setDanmukuStartDelay(2000).setHP(100);
-			bossM2.addDanmuku(new ReisenNonSpellCardDanmuku(), ReisenNonSpellCardDanmuku.DURATION + 1000)
-			.addDanmuku(new PinkBlueRainDanmuku(), PinkBlueRainDanmuku.DURATION);
+			bossM2.setDanmukuStartDelay(2000)
+			.addDanmuku(new ReisenNonSpellCardDanmuku(), ReisenNonSpellCardDanmuku.DURATION + 1000)
+			.addDanmuku(new PinkBlueRainDanmuku(), PinkBlueRainDanmuku.DURATION)
+			.setHP(100);
 			bossM2.setOnRemoveEvent(bsM2->{
 				onEnd.accept(bsM2);
 			});
@@ -126,9 +127,9 @@ public class TestChapter extends AChapter {
 		ALoopDanmukuEnemy elf = null;
 		for(int i = 1;i<=elfCount;i++){
 			elf = new BeisimaiEnemy(20, -110);
-			elf.setDanmukuStartDelay(1000);
-			elf.addDanmuku(new TriArcDanmuku(), TriArcDanmuku.DURATION);
-			elf.setHP(10);
+			elf.setDanmukuStartDelay(1000)
+			.addDanmuku(new TriArcDanmuku(), TriArcDanmuku.DURATION)
+			.setHP(10);
 			final ALoopDanmukuEnemy fElf = elf;
 			final int fi = i;
 			executor.schedule(()->{

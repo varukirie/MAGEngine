@@ -7,6 +7,7 @@ import java.util.function.Supplier;
 
 import javafx.scene.paint.Color;
 import magengine.bullet.impl.HexagonBullet;
+import magengine.bullet.impl.PetalBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.element.BaseElement;
 import magengine.game.GameSession;
@@ -27,7 +28,7 @@ public class WaveParticleDanmuku extends ADanmuku {
 		Random r = GameSession.rand();
 		
 		Supplier<Double> angleDeltaSupplier = ()->{
-			return sin(LogicExecutor.gameTime()/3500.0)*16;
+			return sin(LogicExecutor.gameTime()/3500.0)*16;//3500 16
 		};
 		
 		for(int i=0;i<lchCount;i++){
