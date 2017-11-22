@@ -150,9 +150,14 @@ public class PinkBlueRainDanmuku extends ADanmuku {
 		
 			
 			});
-			
+
+
+			quick.bindToWantBeRemoved(l, getSourceElement());
 			quick.bindToXY(l, getSourceElement());
+			
 		});
+		
+		
 		olg.delayExecute(52+2*delayTime);
 		
 
@@ -176,8 +181,10 @@ public class PinkBlueRainDanmuku extends ADanmuku {
 			});
 			
 	
-			
+
+			quick.bindToWantBeRemoved(l, getSourceElement());
 			quick.bindToXY(l, getSourceElement());
+			
 		});
 		olg.delayExecute(1500+delayTime);
 		
@@ -211,6 +218,8 @@ public class PinkBlueRainDanmuku extends ADanmuku {
 		       
 			});
 			
+
+			quick.bindToWantBeRemoved(l, getSourceElement());
 			quick.bindToXY(l, getSourceElement());
 		});
 		olg.delayExecute(executeTime+delayTime);

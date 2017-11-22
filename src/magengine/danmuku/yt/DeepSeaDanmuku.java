@@ -84,8 +84,11 @@ public class DeepSeaDanmuku extends ADanmuku {
 			quick.VToByDirection(b, quick.getPlayerDirectionAngle(b));
 		});
 		
+		     quick.bindToWantBeRemoved(launcher, getSourceElement());
+		     quick.bindToXY(launcher, getSourceElement());
+		     
 		    mEU.add("launcher", launcher);
-		    
+		  
 		    
 		
         int num =3;
@@ -179,6 +182,7 @@ public class DeepSeaDanmuku extends ADanmuku {
 			
 		});
 		
+		quick.bindToWantBeRemoved(launcher, getSourceElement());
 		
 		LogicExecutor.getLogicExecutor().schedule(() -> {
 			mEU.add("helper"+helperCount, helper);
@@ -206,6 +210,10 @@ public class DeepSeaDanmuku extends ADanmuku {
 				((CircleBullet)b).setR(r);
 			});
 			
+
+		     quick.bindToWantBeRemoved(launcher, getSourceElement());
+		     quick.bindToXY(launcher, getSourceElement());
+		     
   		    mEU.add("launcher"+midY, launcher);
 		},delayTime+interval);
 		

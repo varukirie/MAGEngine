@@ -85,8 +85,8 @@ public class TestChapter extends AChapter {
 	
 	private void createBoss(Consumer<BaseElement> onEnd) {
 		ALoopDanmukuEnemy boss = new BeisimaiEnemy(300, -100);
-		// ALoopDanmukuEnemy boss = new YanzhanEnemy(300,100);
-		// ALoopDanmukuEnemy boss = new NandaketaEnemy(300,100);
+//		 ALoopDanmukuEnemy boss = new YanzhanEnemy(300,100);
+//		 ALoopDanmukuEnemy boss = new NandaketaEnemy(300,100);
 		boss.setHP(500);
 		boss.setDanmukuStartDelay(1000);
 //		boss.addDanmuku(new FllowerArrayDanmuku(), FllowerArrayDanmuku.DURATION);

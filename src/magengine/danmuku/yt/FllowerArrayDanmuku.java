@@ -37,7 +37,7 @@ public class FllowerArrayDanmuku extends ADanmuku {
 	private Random r = GameSession.rand();
 	
 	
-	Stop[] greenStops= {
+	private Stop[] greenStops= {
 			
 			new Stop(0, Color.rgb(50 ,205 ,50,0.0)),
 			new Stop(0.2, Color.rgb(50 ,205, 50, 0.0)), 
@@ -47,7 +47,7 @@ public class FllowerArrayDanmuku extends ADanmuku {
 			
 		};
 	
-	Stop[] redStops= {
+	private Stop[] redStops= {
 			
 			new Stop(0, Color.rgb(255 ,48 ,48,0.0)),
 			new Stop(0.2, Color.rgb(255, 48, 48, 0.0)), 
@@ -57,7 +57,7 @@ public class FllowerArrayDanmuku extends ADanmuku {
 			
 		};
 
-  Stop[] stops1 ={
+  private  Stop[] stops1 ={
 		  new Stop(1.0,Color.rgb( 255,255,0,0.8)),
 			
   };
@@ -87,7 +87,7 @@ public class FllowerArrayDanmuku extends ADanmuku {
 		
 		Launcher launcher = new Launcher(100, 100, 2*Math.PI/3, 520, duration);
 		
-		
+		quick.bindToWantBeRemoved(tHelper, getSourceElement());
 		launcher.getDirectionProperty().bind(tHelper.getDirectionProperty());
 		launcher.getxProperty().bind(tHelper.getxProperty());
 		launcher.getyProperty().bind(tHelper.getyProperty());
@@ -182,6 +182,10 @@ public class FllowerArrayDanmuku extends ADanmuku {
 
 		});
 		
+		
+
+	     quick.bindToWantBeRemoved(launcher, getSourceElement());
+	     
 		LogicExecutor.getLogicExecutor().schedule(() -> {
 			mEU.add("tHelper"+currentHelperCount, tHelper);
 		}, startTime, TimeUnit.MILLISECONDS);
@@ -211,6 +215,10 @@ public class FllowerArrayDanmuku extends ADanmuku {
 			quick.VToByDirection(bullet, quick.getPlayerDirectionAngle(bullet));
 			}, 500+delayTime, TimeUnit.MILLISECONDS);
 		});
+		
+		
+		quick.bindToWantBeRemoved(launcher, getSourceElement());
+		quick.bindToXY(launcher, getSourceElement());
 		
 		LogicExecutor.getLogicExecutor().schedule(() -> {
 			mEU.add("launcher"+delayTime, launcher);

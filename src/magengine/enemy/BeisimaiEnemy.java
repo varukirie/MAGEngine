@@ -18,7 +18,7 @@ public class BeisimaiEnemy extends ALoopDanmukuEnemy {
 	private static Image img=null;
 	static {
 		try {
-			img = new Image(BeisimaiEnemy.class.getResourceAsStream("/img/enemies/sample.png"));
+			img = new Image(BeisimaiEnemy.class.getResourceAsStream("/img/enemies/beisimaiEnemy.png"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
