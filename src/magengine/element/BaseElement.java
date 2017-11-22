@@ -6,6 +6,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import magengine.util.Transform;
 
 public abstract class BaseElement implements Moveable, Paintable, Accelerated {
 	/**
@@ -95,8 +96,9 @@ public abstract class BaseElement implements Moveable, Paintable, Accelerated {
 		return deleted;
 	}
 
-	public void setDeleted(boolean isDelete) {
+	public BaseElement setDeleted(boolean isDelete) {
 		this.deleted = isDelete;
+		return this;
 	}
 
 	public DoubleProperty getxProperty() {
@@ -107,8 +109,9 @@ public abstract class BaseElement implements Moveable, Paintable, Accelerated {
 		return yProperty;
 	}
 
-	public void setLambdaModify(Consumer<BaseElement> lambdaModify) {
+	public BaseElement setLambdaModify(Consumer<BaseElement> lambdaModify) {
 		this.lambdaModify = lambdaModify;
+		return this;
 	}
 
 	public Consumer<BaseElement> getLambdaModify() {
@@ -119,22 +122,87 @@ public abstract class BaseElement implements Moveable, Paintable, Accelerated {
 		return wantBeRemoved;
 	}
 
-	public void setWantBeRemovedProperty(BooleanProperty wantBeRemoved) {
+	public BaseElement setWantBeRemovedProperty(BooleanProperty wantBeRemoved) {
 		this.wantBeRemoved = wantBeRemoved;
+		return this;
 	}
 
 	public boolean getWantBeRemoved() {
 		return wantBeRemoved.get();
 	}
 
-	public void setWantBeRemoved(boolean wantBeRemoved) {
+	public BaseElement setWantBeRemoved(boolean wantBeRemoved) {
 		this.wantBeRemoved.set(wantBeRemoved);
+		return this;
 	}
 	
-	public void setOnRemoveEvent(Consumer<BaseElement> onRemoveEvent) {
+	public BaseElement setOnRemoveEvent(Consumer<BaseElement> onRemoveEvent) {
 		this.onRemoveEvent = onRemoveEvent;
+		return this;
 	}
 	public Consumer<BaseElement> getOnRemoveEvent() {
 		return onRemoveEvent;
+	}
+	
+	public BaseElement bindToXY(BaseElement elem2) {
+		this.getxProperty().bind(elem2.getxProperty());
+		this.getyProperty().bind(elem2.getyProperty());
+		return this;
+	}
+
+	public BaseElement unbindXY(BaseElement elem) {
+		this.getxProperty().unbind();
+		this.getyProperty().unbind();
+		return this;
+	}
+
+	public BaseElement bindToWantBeRemoved(BaseElement elem2) {
+		this.getWantBeRemovedProperty().bind(elem2.getWantBeRemovedProperty());
+		return this;
+	}
+	
+	public void VTo(double targetX, double targetY) {
+		double targetS = Math.sqrt((targetX - this.getX()) * (targetX - this.getX())
+				+ (targetY - this.getY()) * (targetY - this.getY()));
+		double originS = Math.sqrt(
+				this.getVelocityX() * this.getVelocityX() + this.getVelocityY() * this.getVelocityY());
+		this.setVelocityX((targetX - this.getX()) * (originS / targetS));
+		this.setVelocityY((targetY - this.getY()) * (originS / targetS));
+	}
+	
+	public void setSpeed(double speed) {
+		double originS = Math.sqrt(
+				this.getVelocityX() * this.getVelocityX() + this.getVelocityY() * this.getVelocityY());
+		this.setVelocityX(this.getVelocityX() * (speed / originS));
+		this.setVelocityY(this.getVelocityY() * (speed / originS));
+	}
+	
+	public void VRotate(double angle) {
+		double theta = angle;
+		Transform t = new Transform(
+				new double[][] { { Math.cos(theta), Math.sin(theta) }, { -Math.sin(theta), Math.cos(theta) } });
+		double[] ans = t.transform(this.getVelocityX(), this.getVelocityY());
+		this.setVelocityX(ans[0]);
+		this.setVelocityY(ans[1]);
+	}
+	
+	/**
+	 * 
+	 * @param this
+	 * @param direction
+	 *            负角
+	 */
+	public void VToByDirection(double direction) {
+		double originS = Math.sqrt(
+				this.getVelocityX() * this.getVelocityX() + this.getVelocityY() * this.getVelocityY());
+		this.setVelocityX(Math.cos(direction) * originS);
+		this.setVelocityY(Math.sin(direction) * originS);
+	}
+	
+	public void VTransform(double[][] martix) {
+		Transform t = new Transform(martix);
+		double[] ans = t.transform(this.getVelocityX(), this.getVelocityY());
+		this.setVelocityX(ans[0]);
+		this.setVelocityY(ans[1]);
 	}
 }
