@@ -29,8 +29,9 @@ public abstract class AEnemy extends BaseElement implements Initializable{
 
 	
 	
-	public void setHP(int HP){
+	public AEnemy setHP(int HP){
 		this.HP.set(HP);
+		return this;
 	}
 	
 	public int getHP(){
