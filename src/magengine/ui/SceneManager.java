@@ -82,11 +82,16 @@ public class SceneManager {
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		VBox paneBt = new VBox(100);
 		String st = "S T A R T";
+		String hp = "H E L P" ;
 		String ex = "E X I T";
 		Button bStart = new Button(st);
+		Button bHelp = new Button(hp);
 		Button bExit = new Button(ex);
 		bStart.setOnAction((ActionEvent e) -> {
 		    SceneManager.getInstance().startGame();
+		});
+		bHelp.setOnAction((ActionEvent e) -> {
+		    loadHelpScene();
 		});
 		bExit.setOnAction((ActionEvent e) -> {
 			System.exit(-1);
@@ -105,6 +110,20 @@ public class SceneManager {
 		        	  bStart.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
 		          }
 		        });
+		bHelp.addEventHandler(MouseEvent.MOUSE_ENTERED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		        	  bHelp.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;");
+		          }
+		        });
+		bHelp.addEventHandler(MouseEvent.MOUSE_EXITED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		        	  bHelp.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
+		          }
+		        });
 		bExit.addEventHandler(MouseEvent.MOUSE_ENTERED,
 		        new EventHandler<MouseEvent>() {
 		          @Override
@@ -120,8 +139,9 @@ public class SceneManager {
 		          }
 		        });
 		bStart.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
+		bHelp.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
 		bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
-		paneBt.getChildren().addAll(bStart,bExit);
+		paneBt.getChildren().addAll(bStart,bHelp,bExit);
 		paneBt.setAlignment(Pos.CENTER);
 		btPane.setCenter(paneBt);
 //		GameButton bStart = new GameButton(),bExit = new GameButton();
@@ -170,7 +190,57 @@ public class SceneManager {
 			loadFailureScene();
 		});
 	}
-
+	
+	public void loadHelpScene()	{
+		StackPane root = new StackPane();
+		BorderPane btPane = new BorderPane();
+		BackgroundImage bimg = new BackgroundImage(new Image("/img/starbackground.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+		root.setBackground(new Background(bimg));
+		Canvas canvas = new Canvas(900, 200);
+		GraphicsContext gc = canvas.getGraphicsContext2D();
+		VBox text1 = new VBox(setTextFont2("方向键移动"));
+		VBox text2 = new VBox(setTextFont2("x间发射普通子弹"));
+		VBox text3 = new VBox(setTextFont2("c键发射炸弹"));
+		VBox help = new VBox(setTextFont("H E L P"));
+		String ex = "E X I T";
+		Button bExit = new Button(ex);
+		bExit.setOnAction((ActionEvent e) -> {
+//			System.exit(-1);
+			startMenu();
+		});
+		bExit.addEventHandler(MouseEvent.MOUSE_ENTERED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		        	  bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;");
+		          }
+		        });
+		bExit.addEventHandler(MouseEvent.MOUSE_EXITED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		        	  bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
+		          }
+		        });
+		bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
+		VBox paneBt = new VBox(100);
+		paneBt.setAlignment(Pos.TOP_CENTER);
+		help.setAlignment(Pos.TOP_CENTER);
+		text1.setAlignment(Pos.TOP_CENTER);
+		text2.setAlignment(Pos.TOP_CENTER);
+		text3.setAlignment(Pos.TOP_CENTER);
+		bExit.setAlignment(Pos.BOTTOM_CENTER);
+		btPane.setMargin(help, new Insets(100,0,100,0));
+		btPane.setTop(help);
+		btPane.setBottom(bExit);
+		paneBt.getChildren().addAll(text1,text2,text3);
+		btPane.setCenter(paneBt);
+		root.getChildren().add(btPane);
+		Scene scene = new Scene(root,900,700);
+		primaryStage.setScene(scene);
+//		primaryStage.show();
+	}
+	
 	public void loadFailureScene() {
 		primaryStage.setResizable(false);
 		StackPane root = new StackPane();
@@ -181,7 +251,7 @@ public class SceneManager {
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		VBox pause = new VBox(setTextFont("F A I L !"));
 		VBox paneBt = new VBox(100);
-		String rs = "R E S E T";
+		String rs = "R E S T A R T";
 		String ex = "E X I T";
 		Button bReset = new Button(rs);
 		Button bExit = new Button(ex);
@@ -314,6 +384,16 @@ public class SceneManager {
 		text.setFill(new LinearGradient(0, 0, 1, 2, true, CycleMethod.REPEAT, new
 		         Stop[]{new Stop(0, Color.YELLOW), new Stop(0.5f, Color.BLUE)}));
 		text.setFont(Font.font("黑体", FontWeight.BOLD,50));//斜体
+		text.setStrokeWidth(2);
+		text.setStroke(Color.WHITE);
+		return text;
+	}
+	
+	public static Text setTextFont2(String s){
+		Text text = TextBuilder.create().text(s).font(Font.font("新宋体", 30)).build();
+		text.setFill(new LinearGradient(0, 0, 1, 2, true, CycleMethod.REPEAT, new
+		         Stop[]{new Stop(0, Color.WHITE), new Stop(0.5f, Color.GREY)}));
+		text.setFont(Font.font("黑体", FontWeight.BOLD,30));//斜体
 		text.setStrokeWidth(2);
 		text.setStroke(Color.WHITE);
 		return text;

@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -40,6 +41,7 @@ import magengine.chapter.util.ChapterLoader;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.control.PlayerControlHandler;
 import magengine.control.PlayerLaunchHandler;
+import magengine.element.BaseElement;
 import magengine.element.impl.DisplayMessage;
 import magengine.element.impl.Player;
 import magengine.mulplay.Client;
@@ -54,9 +56,10 @@ import magengine.util.ElementUtils;
 public class GameSession {
 
 	public static GameSession instance = null;
-	
+	public static Canvas canvas = new Canvas(900, 700);  
+    public static GraphicsContext gc = canvas.getGraphicsContext2D();
 	private Level level = Level.NORMAL;
-	
+	public boolean gameRunning = true;
 	private static Random rand=null;
 	public static Random rand() {
 		return rand;
@@ -67,7 +70,7 @@ public class GameSession {
 	public static final int POWER_LIMIT = 100;
 
 	public static final int PRESET_BOMB = 2;
-	public static final int PRESET_HEALTH = 1;
+	public static final int PRESET_HEALTH = 10;
 	public static final int PRESET_POWER = 0;
 	private int bomb = PRESET_BOMB;
 	private int health = PRESET_HEALTH;
@@ -144,6 +147,7 @@ public class GameSession {
 	public boolean decHealthAndCheck() {
 		if (health > 0) {
 			health--;
+			
 			return false;
 		} else {
 			return true;
@@ -153,6 +157,8 @@ public class GameSession {
 
 	private long  lastTime4bench=0;
 	public void loadGameScene() {
+//		Canvas canvas = new Canvas(900, 700);  
+//	    GraphicsContext gc = canvas.getGraphicsContext2D();
 		Stage primaryStage=SceneManager.getInstance().getPrimaryStage();
 		BorderPane gArea = new BorderPane();
 		BackgroundImage bimg = new BackgroundImage(new Image("/img/starbackground.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -167,8 +173,8 @@ public class GameSession {
 //		VBox power = new VBox(new Label("力量"));
 //		VBox bomb = new VBox(new Label("炸弹"));
 //		VBox life = new VBox(new Label("生命"));
-		BloodBar bb = new BloodBar();
-		VBox power = new VBox(setTextFont("POWER"));
+		BloodBar bb = new BloodBar(0,0);
+//		VBox power = new VBox(setTextFont("POWER"));
 		VBox bomb = new VBox(setTextFont("BOMB"));
 		VBox life = new VBox(setTextFont("LIFE"));
 		StackPane root = new StackPane();
@@ -178,23 +184,34 @@ public class GameSession {
 		root.getChildren().add(staticCanvas);
 		root.getChildren().add(moveableCanvas);
 		root.getChildren().add(secondaryMCanvas);
-		gDataArea.getChildren().addAll(life,power,bomb);
+		
+		gDataArea.getChildren().addAll(life,bomb);
 		gDataArea.setAlignment(Pos.TOP_LEFT);;
 		gArea.setLeft(root);
 		gArea.setCenter(gDataArea);
 		DI.di().put("staticCanvas", staticCanvas); 
-//		血条测试    javafx没有像awt一样提供单独重载单独组件GraphicsContext的机制  对重载组件没头绪  不会做血条 javafx没提供repaint或update功能
-//	    Canvas canvas = new Canvas(900, 700);  
-//	    GraphicsContext gc = canvas.getGraphicsContext2D();  
-//	    bb.draw(gc);
-	    
-	        
-//	    gArea.getChildren().add(canvas);
 //		staticCanvas.getWantPaintMap().put("indicator", Player.getPlayer());
-		staticCanvas.repaint();
+//		staticCanvas.repaint();
 		Scene scene=new Scene(gArea,900,700);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("MAGEngine!");
+		gArea.getChildren().add(canvas);
+		new Thread(new Runnable(){
+
+			@Override
+			public void run() {
+				while(gameRunning){
+			    try {
+			    	bb.paint(gc);
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+//			    System.out.println("test thread");
+				}
+			}
+			
+		}).start();
 		primaryStage.show();
 		
 		LogicExecutor logicExecutor=LogicExecutor.getLogicExecutor();
@@ -280,21 +297,29 @@ public class GameSession {
 //		ChapterLoader.loadChapter(new ChapterDemo());
 		new Thread(new PlayerLaunchHandler()).start();
 	}
-	private class BloodBar{
-		public void draw(GraphicsContext g){
-			int x=600,y=40,w,h=30;
-			g.setFill(Color.MAGENTA);
-			g.setStroke(Color.RED);
-			g.fillRect(x, y, 200, h);
-			g.setFill(Color.RED);
-			w=(int)(200*(getHealth()*1.0/10));
-			g.fillRect(x+2, y+2, w-4, h-4);
-			
+	private class BloodBar extends BaseElement{
+
+		public BloodBar(double x, double y) {
+			super(x, y);
 		}
+
+		@Override
+		public void paint(GraphicsContext gc) {
+			int x=600,y=40,w,h=30;
+			gc.setFill(Color.MAGENTA);
+			gc.setStroke(Color.RED);
+			gc.fillRect(x, y, 200, h);
+			gc.setFill(Color.RED);
+			w=(int)(200*((getHealth()+1)*1.0/(PRESET_HEALTH+1)));
+			gc.fillRect(x+2, y+2, w-4, h-4);
+		}
+		
+		
 	}
 	
 	private void shutdownGame(){
 		MoveHandler mh=((MoveHandler)(DI.di().get("mh")));
+		gameRunning = false;
 		if(mh!=null){
 			mh.keepRun=false;//关闭MoveHandler
 			mh.clear();
@@ -380,6 +405,7 @@ public class GameSession {
 		return bomb;
 	}
 	public int getHealth() {
+//		System.out.println("gethealth");
 		return health;
 	}
 	public void incrPower(int delta) {
