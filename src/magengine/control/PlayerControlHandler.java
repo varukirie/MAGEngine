@@ -116,6 +116,7 @@ public class PlayerControlHandler {
 		player.setVelocityY(vy);
 	}
 
+	
 	@SuppressWarnings("incomplete-switch")
 	public void pressHandle(KeyEvent e) {
 
@@ -134,7 +135,6 @@ public class PlayerControlHandler {
 			break;
 		case X:
 			Player.getPlayer1().isShooting = true;
-			
 			break;
 		}
 		changeV();
@@ -197,7 +197,6 @@ public class PlayerControlHandler {
 	}
 	
 	
-	public static boolean boomEffectSetted = false;
 	private void doBomb(){
 		double x  = Player.getPlayer1().getX();
 		double y = Player.getPlayer1().getY();
@@ -205,7 +204,7 @@ public class PlayerControlHandler {
 //		double x=MyCanvas.CANVAS_WIDTH/2;
 //		double y=MyCanvas.CANVAS_HEIGHT;
 		BombCircleArea ca = new BombCircleArea(x, y, r);
-		ca.setAccY(-255);
+		ca.setAccY(-200);
 		ca.setOnCollisionEvent((m)->{
 			if(m instanceof BaseElement){
 				if(m.getTeam().equals(CollisionTeam.ENEMY_BULLET)){
@@ -214,9 +213,9 @@ public class PlayerControlHandler {
 			}
 		});
 		ca.setOnPaintEvent((gc)->{
-			gc.setFill(Color.rgb(150, 0, 0,0.1));
+			gc.setFill(Color.rgb(245, 50, 50,0.2));
 //			gc.setStroke(Color.rgb(245, 245, 150,0.2));
-			gc.setStroke(Color.GHOSTWHITE);
+			gc.setStroke(Color.WHITE);
 			gc.fillOval(ca.getX()-r, ca.getY()-r, r*2, r*2);
 			double angleDelta = sin(LogicExecutor.gameTime()/500.0)*6;
 			
@@ -262,4 +261,5 @@ public class PlayerControlHandler {
 		ElementUtils mEU = (ElementUtils) DI.di().get("mEU");
 		mEU.add("bombCircleArea", ca);
 	}
+	
 }

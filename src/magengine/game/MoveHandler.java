@@ -39,7 +39,7 @@ public class MoveHandler implements Runnable {
 	 */
 	public static double absoluteTimeSpeed = DEFAULT_TIME_SPEED;
 	private static volatile double deltaTimeFactor = 0;
-	public static final long SLEEP_TIME = 6;
+	public static final long SLEEP_TIME = 3;
 	public static final long BLANK = 1000;
 
 	private Map<String, Moveable> wantMoveMap = new ConcurrentHashMap<>();

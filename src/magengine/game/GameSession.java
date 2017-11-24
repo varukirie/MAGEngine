@@ -47,6 +47,7 @@ import magengine.element.impl.Player;
 import magengine.mulplay.Client;
 import magengine.mulplay.Server;
 import magengine.mulplay.Transport;
+import magengine.paint.BackgroundUtil;
 import magengine.paint.MyCanvas;
 import magengine.ui.SceneManager;
 import magengine.util.C;
@@ -178,9 +179,19 @@ public class GameSession {
 		VBox bomb = new VBox(setTextFont("BOMB"));
 		VBox life = new VBox(setTextFont("LIFE"));
 		StackPane root = new StackPane();
+		BackgroundUtil bu = BackgroundUtil.getInstance();
+		MyCanvas bgCanvas = bu.getBGCanvas();
+		Image gamebgimg=null;
+		try {
+			gamebgimg = new Image(this.getClass().getResourceAsStream("/img/gameplaybackground.jpg"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		bu.setBackgroundImg(gamebgimg);
 		MyCanvas moveableCanvas = new MyCanvas();
 		MyCanvas staticCanvas = new MyCanvas();
 		MyCanvas secondaryMCanvas = new MyCanvas(moveableCanvas.getWantPaintMap());
+		root.getChildren().add(bgCanvas);
 		root.getChildren().add(staticCanvas);
 		root.getChildren().add(moveableCanvas);
 		root.getChildren().add(secondaryMCanvas);
@@ -234,6 +245,7 @@ public class GameSession {
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
+				BackgroundUtil.getInstance().paintBackground(1);
 				mh.callRepaint();
 				moveableElementUtils.getSwitcher().repaint();
 				if(Main.DEBUG_RENDER_BENCH){
@@ -294,8 +306,8 @@ public class GameSession {
 			}
 			
 		}
+		PlayerLaunchHandler.shootSchedule(100);
 //		ChapterLoader.loadChapter(new ChapterDemo());
-		new Thread(new PlayerLaunchHandler()).start();
 	}
 	private class BloodBar extends BaseElement{
 

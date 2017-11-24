@@ -13,7 +13,6 @@ import javafx.application.Platform;
 import javafx.scene.effect.Bloom;
 import javafx.scene.effect.BoxBlur;
 import magengine.bullet.impl.ArrowBullet;
-import magengine.bullet.impl.DefaultBullet;
 import magengine.bullet.impl.HexagonBullet;
 import magengine.bullet.impl.HiddenBullet;
 import magengine.bullet.impl.PlayerBullet;
@@ -74,10 +73,10 @@ public class ChapterLoader {
 				canvas.setEffect(new Bloom());
 			});
 			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(BombCircleArea.class, (canvas) -> {
-				canvas.setEffect(new BoxBlur(2.5, 2.5, 1));
+				canvas.setEffect(new BoxBlur(5, 5, 1));
 //				canvas.setEffect(new Bloom(1));
 			});
-			staticCanvas.getGraphicsContext2D().fillRect(0, 0, MyCanvas.CANVAS_WIDTH, MyCanvas.CANVAS_HEIGHT);
+//			staticCanvas.getGraphicsContext2D().fillRect(0, 0, MyCanvas.CANVAS_WIDTH, MyCanvas.CANVAS_HEIGHT);
 		});
 		
 		

@@ -72,14 +72,14 @@ public class TestChapter extends AChapter {
 	ElementUtils mEU = ((ElementUtils) DI.di().get("mEU"));
 	@Override
 	public void design(LogicExecutor exec, MyCanvas staticCanvas, ElementUtils mEU) {
-//		createElf(e1->{
-//			createStage1Boss(e2->{});
-//		},4,1500);
-		createBossTest((e)->{});
-		//性能测试
-		// for(int i=1;i<=1000;i++){
-		// new StarDanmuku().setDelay(700*i).delayExecute();
-		// }
+		createElf(e1->{
+			createStageBoss(e2->{});
+		},4,1500);
+//		createBossTest((e)->{});
+//		性能测试
+//		 for(int i=1;i<=1000;i++){
+//		 new StarDanmuku().setDelay(700*i).delayExecute();
+//		 }
 
 	}
 	
@@ -93,23 +93,24 @@ public class TestChapter extends AChapter {
 		boss.addDanmuku(new WaveParticleDanmuku(), WaveParticleDanmuku.DURATION+1000);
 		mEU.add("testBoss", boss);
 	}
-	private void createStage1Boss(Consumer<BaseElement> onEnd) {
+	private void createStageBoss(Consumer<BaseElement> onEnd) {
 		ALoopDanmukuEnemy bossM1 = new BeisimaiEnemy(300, -100);
 		// ALoopDanmukuEnemy boss = new YanzhanEnemy(300,100);
 		// ALoopDanmukuEnemy boss = new NandaketaEnemy(300,100);
-		bossM1.setHP(100);
+		bossM1.setHP(200);
 		bossM1.setDanmukuStartDelay(1000);
 //		boss.addDanmuku(new FllowerArrayDanmuku(), FllowerArrayDanmuku.DURATION);
 //		boss.addDanmuku(new DeepSeaDanmuku(), DeepSeaDanmuku.DURATION);
 //		bossM1.addDanmuku(new PinkBlueRainDanmuku(), PinkBlueRainDanmuku.DURATION);
+		bossM1.addDanmuku(new WaveParticleDanmuku(),WaveParticleDanmuku.DURATION);
 		bossM1.addDanmuku(new UtsuhoNonSpellCard1(), UtsuhoNonSpellCard1.DURATION);
 		bossM1.addDanmuku(new RunAwayNuclearDanmuku(), RunAwayNuclearDanmuku.DURATION + 2000);
-		bossM1.setOnRemoveEvent((bsM1) -> {
+		bossM1.setOnRemoveEvent((bsM1) -> {//一阶段结束
 			ALoopDanmukuEnemy bossM2 = new BeisimaiEnemy(bsM1.getX(), bsM1.getY());
 			bossM2.setDanmukuStartDelay(2000)
 			.addDanmuku(new ReisenNonSpellCardDanmuku(), ReisenNonSpellCardDanmuku.DURATION + 1000)
 			.addDanmuku(new PinkBlueRainDanmuku(), PinkBlueRainDanmuku.DURATION)
-			.setHP(100);
+			.setHP(200);
 			bossM2.setOnRemoveEvent(bsM2->{
 				onEnd.accept(bsM2);
 			});
