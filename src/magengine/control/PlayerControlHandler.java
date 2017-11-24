@@ -134,6 +134,7 @@ public class PlayerControlHandler {
 			break;
 		case X:
 			Player.getPlayer1().isShooting = true;
+			
 			break;
 		}
 		changeV();

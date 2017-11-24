@@ -39,7 +39,7 @@ public class MoveHandler implements Runnable {
 	 */
 	public static double absoluteTimeSpeed = DEFAULT_TIME_SPEED;
 	private static volatile double deltaTimeFactor = 0;
-	public static final long SLEEP_TIME = 2;
+	public static final long SLEEP_TIME = 6;
 	public static final long BLANK = 1000;
 
 	private Map<String, Moveable> wantMoveMap = new ConcurrentHashMap<>();
@@ -82,6 +82,7 @@ public class MoveHandler implements Runnable {
 			gameLogic();
 
 			try {
+//				Thread.sleep((long) (SLEEP_TIME-deltaTime>0?(SLEEP_TIME-deltaTime):1));
 				Thread.sleep(SLEEP_TIME);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
