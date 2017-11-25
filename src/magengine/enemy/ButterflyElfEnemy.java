@@ -4,21 +4,21 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import magengine.paint.SpritePainter;
 
-public class YellowElfEnemy extends ALoopDanmukuEnemy {
+public class ButterflyElfEnemy extends ALoopDanmukuEnemy {
 	private static SpritePainter spritePainter = null;
 	
-	public YellowElfEnemy(double x, double y) {
+	public ButterflyElfEnemy(double x, double y) {
 		super(x, y);
 	}
 	private static double[][] origin = null;
-	private static int enemyWidth = 33;
-	private static int enemyHeight = 34;
+	private static int enemyWidth = 80;
+	private static int enemyHeight = 60;
 	private static int halfWidth = enemyWidth/2;
 	private static int halfHeight = enemyHeight/2;
 	private static Image img=null;
 	static {
 		try {
-			img = new Image(YellowElfEnemy.class.getResourceAsStream("/img/enemies/yellowElfEnemy01.png"));
+			img = new Image(ButterflyElfEnemy.class.getResourceAsStream("/img/enemies/butterFlyElfEnemy.png"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -34,7 +34,7 @@ public class YellowElfEnemy extends ALoopDanmukuEnemy {
 	@Override
 	public void paint(GraphicsContext gc) {
 		super.paint(gc);
-		int count=5;
+		int count=4;
 		//每隔interval帧换一张图
 		int interval = 3;
 		spritePainter.paintSprite((0+(currentSpriteIndex))/interval, getX()-halfWidth, getY()-halfHeight, gc);

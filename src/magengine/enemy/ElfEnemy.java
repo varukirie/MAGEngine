@@ -23,7 +23,7 @@ public class ElfEnemy extends ALoopDanmukuEnemy {
 			e.printStackTrace();
 		}
 
-		spritePainter=new SpritePainter(img, enemyWidth,enemyHeight,4);
+		spritePainter=new SpritePainter(img, enemyWidth,enemyHeight);
 		origin = new double[][]{
 			{-halfWidth,halfWidth,halfWidth,-halfWidth},
 			{-halfHeight,-halfHeight,halfHeight,halfHeight}
@@ -36,7 +36,7 @@ public class ElfEnemy extends ALoopDanmukuEnemy {
 		super.paint(gc);
 		int count=4;
 		//每隔interval帧换一张图
-		int interval = 5;
+		int interval = 3;
 		spritePainter.paintSprite((0+(currentSpriteIndex))/interval, getX()-halfWidth, getY()-halfHeight, gc);
 		currentSpriteIndex=(currentSpriteIndex+spriteDelta)%(count*interval);
 		if(currentSpriteIndex==count*interval-1||currentSpriteIndex==0){
