@@ -129,7 +129,7 @@ public class TestChapter extends AChapter {
 	private void createElf(Consumer<BaseElement> onEnd,int elfCount,long interval) {
 		ALoopDanmukuEnemy elf = null;
 		for(int i = 1;i<=elfCount;i++){
-			elf = new ElfEnemy(20, -110);
+			elf = new YellowElfEnemy(20, -110);
 			elf.setDanmukuStartDelay(1000)
 			.addDanmuku(new TriArcDanmuku(), TriArcDanmuku.DURATION)
 			.setHP(10);
