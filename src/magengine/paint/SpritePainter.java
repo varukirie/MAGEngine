@@ -16,6 +16,7 @@ public class SpritePainter {
 	private Image sprite = null;
 	private int spriteWidth = 0;
 	private int spriteHeight = 0;
+	private int col = 3;
 /**
  * 
  * @param sprite
@@ -28,6 +29,20 @@ public class SpritePainter {
 		this.spriteWidth = spriteWidth;
 		this.spriteHeight = spriteHeight;
 	}
+	
+	/**
+	 * 
+	 * @param sprite
+	 * @param spriteWidth
+	 * @param spriteHeight
+	 */
+		public SpritePainter(Image sprite, int spriteWidth, int spriteHeight,int col) {
+			super();
+			this.sprite = sprite;
+			this.spriteWidth = spriteWidth;
+			this.spriteHeight = spriteHeight;
+			this.col=col;
+		}
 
 	/**
 	 * 输出精灵动画,三个一行切割
@@ -42,7 +57,7 @@ public class SpritePainter {
 	 *            Canvas的GraphicsContext
 	 */
 	public void paintSprite(int index, double x, double y, GraphicsContext gc) {
-		gc.drawImage(sprite, (index % 3) * this.spriteWidth, (index / 3) * this.spriteHeight, 
+		gc.drawImage(sprite, (index % col) * this.spriteWidth, (index / col) * this.spriteHeight, 
 				this.spriteWidth,this.spriteHeight, 
 				x, y, this.spriteWidth, this.spriteHeight);
 	}
