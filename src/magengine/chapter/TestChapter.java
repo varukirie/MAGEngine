@@ -42,6 +42,7 @@ import magengine.element.impl.Player;
 import magengine.enemy.ADelayDanmukuEnemy;
 import magengine.enemy.ALoopDanmukuEnemy;
 import magengine.enemy.BeisimaiEnemy;
+import magengine.enemy.YellowElfEnemy;
 import magengine.enemy.DefaultEnemy;
 import magengine.enemy.ElfEnemy;
 import magengine.enemy.Enemy1;
@@ -103,12 +104,12 @@ public class TestChapter extends AChapter {
 //		boss.addDanmuku(new FllowerArrayDanmuku(), FllowerArrayDanmuku.DURATION);
 //		boss.addDanmuku(new DeepSeaDanmuku(), DeepSeaDanmuku.DURATION);
 //		bossM1.addDanmuku(new PinkBlueRainDanmuku(), PinkBlueRainDanmuku.DURATION);
+		bossM1.addDanmuku(new WaveParticleDanmuku(),WaveParticleDanmuku.DURATION);
 		bossM1.addDanmuku(new UtsuhoNonSpellCard1(), UtsuhoNonSpellCard1.DURATION);
 		bossM1.addDanmuku(new RunAwayNuclearDanmuku(), RunAwayNuclearDanmuku.DURATION + 2000);
 		bossM1.setOnRemoveEvent((bsM1) -> {//一阶段结束
 			ALoopDanmukuEnemy bossM2 = new BeisimaiEnemy(bsM1.getX(), bsM1.getY());
-			bossM2.setDanmukuStartDelay(1500)
-			.addDanmuku(new WaveParticleDanmuku(),WaveParticleDanmuku.DURATION)
+			bossM2.setDanmukuStartDelay(2000)
 			.addDanmuku(new ReisenNonSpellCardDanmuku(), ReisenNonSpellCardDanmuku.DURATION + 1000)
 			.addDanmuku(new PinkBlueRainDanmuku(), PinkBlueRainDanmuku.DURATION)
 			.setHP(200);
@@ -128,7 +129,7 @@ public class TestChapter extends AChapter {
 	private void createElf(Consumer<BaseElement> onEnd,int elfCount,long interval) {
 		ALoopDanmukuEnemy elf = null;
 		for(int i = 1;i<=elfCount;i++){
-			elf = new ElfEnemy(20, -110);
+			elf = new YellowElfEnemy(20, -110);
 			elf.setDanmukuStartDelay(1000)
 			.addDanmuku(new TriArcDanmuku(), TriArcDanmuku.DURATION)
 			.setHP(10);
