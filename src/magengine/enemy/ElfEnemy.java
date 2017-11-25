@@ -23,7 +23,7 @@ public class ElfEnemy extends ALoopDanmukuEnemy {
 			e.printStackTrace();
 		}
 
-		spritePainter=new SpritePainter(img, enemyWidth,enemyHeight);
+		spritePainter=new SpritePainter(img, enemyWidth,enemyHeight,4);
 		origin = new double[][]{
 			{-halfWidth,halfWidth,halfWidth,-halfWidth},
 			{-halfHeight,-halfHeight,halfHeight,halfHeight}
