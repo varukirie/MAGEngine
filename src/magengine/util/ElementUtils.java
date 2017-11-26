@@ -100,6 +100,7 @@ public class ElementUtils {
 		}
 		mh.getWantMoveMap().remove(key);
 		if (obj instanceof BaseElement) {
+			((BaseElement) obj).onRemove();
 			Consumer<BaseElement> event = ((BaseElement) obj).getOnRemoveEvent();
 			if (event != null)
 				event.accept((BaseElement) obj);

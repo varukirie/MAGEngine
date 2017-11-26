@@ -127,6 +127,10 @@ public abstract class BaseElement implements Moveable, Paintable, Accelerated {
 		return this;
 	}
 
+	public void onRemove(){
+		
+	}
+	
 	public boolean getWantBeRemoved() {
 		return wantBeRemoved.get();
 	}
