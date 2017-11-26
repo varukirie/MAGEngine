@@ -306,7 +306,7 @@ public class GameSession {
 			}
 			
 		}
-		PlayerLaunchHandler.shootSchedule(100);
+		PlayerLaunchHandler.shootSchedule();
 //		ChapterLoader.loadChapter(new ChapterDemo());
 	}
 	private class BloodBar extends BaseElement{

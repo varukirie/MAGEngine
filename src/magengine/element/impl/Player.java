@@ -25,6 +25,7 @@ import magengine.util.CollisionTeam;
 public class Player extends BaseElement implements LimitedByCanvas ,PolygonCollision,MulSync {
 	private static volatile Player player1 = null;
 	private static volatile Player player2 = null;
+	public static boolean showCollision = true;
 	public final int width = 10;
 	public final int height = 10;
 	private SpritePainter spritePainter = null;
@@ -114,11 +115,11 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 				spritePainter.paintSprite(4+(currentSpriteIndex), getX()-imgwidth/2, getY()-imgheight/2, gc);
 				currentSpriteIndex=(currentSpriteIndex+1)%(4);
 			}
-			if(Main.DEBUG_COLLISION){
+			if(Main.DEBUG_COLLISION||showCollision){
 				getPolygon();
-				gc.setFill(Color.INDIANRED);
+				gc.setFill(Color.rgb(150, 100, 100,0.7));
 				paintPolygon(vertices, gc);
-				gc.setFill(Color.WHITESMOKE);
+//				gc.setFill(Color.WHITESMOKE);
 			}
 		}
 	}

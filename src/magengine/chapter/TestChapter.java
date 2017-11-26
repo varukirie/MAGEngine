@@ -39,6 +39,7 @@ import magengine.element.impl.BombCircleArea;
 import magengine.element.impl.CircleArea;
 import magengine.element.impl.InvertCircleArea;
 import magengine.element.impl.Player;
+import magengine.element.impl.Spark;
 import magengine.enemy.ADelayDanmukuEnemy;
 import magengine.enemy.ALoopDanmukuEnemy;
 import magengine.enemy.BeisimaiEnemy;
@@ -74,10 +75,10 @@ public class TestChapter extends AChapter {
 	ElementUtils mEU = ((ElementUtils) DI.di().get("mEU"));
 	@Override
 	public void design(LogicExecutor exec, MyCanvas staticCanvas, ElementUtils mEU) {
-//		createElf(e1->{
-//			createStageBoss(e2->{});
-//		},4,1500);
-		createBossTest((e)->{});
+		createElf(e1->{
+			createStageBoss(e2->{});
+		},4,1500);
+//		createBossTest((e)->{});
 //		性能测试
 //		 for(int i=1;i<=1000;i++){
 //		 new StarDanmuku().setDelay(700*i).delayExecute();
@@ -88,12 +89,14 @@ public class TestChapter extends AChapter {
 	
 	private void createBossTest(Consumer<BaseElement> onEnd) {
 //		ALoopDanmukuEnemy boss = new BeisimaiEnemy(300, 100);
+		
 		 ALoopDanmukuEnemy boss = new YanzhanEnemy(300,100);
 //		 ALoopDanmukuEnemy boss = new NandaketaEnemy(300,100);
 		boss.setHP(100);
 		boss.setDanmukuStartDelay(1);
 //		boss.addDanmuku(new WaveParticleDanmuku(), WaveParticleDanmuku.DURATION+1000);
 		mEU.add("testBoss", boss);
+		mEU.add("testSpark", new Spark(300,100));
 	}
 	private void createStageBoss(Consumer<BaseElement> onEnd) {
 //		ALoopDanmukuEnemy bossM1 = new BeisimaiEnemy(300, -100);

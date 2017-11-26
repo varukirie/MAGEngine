@@ -12,7 +12,9 @@ import magengine.util.ElementUtils;
 
 public class PlayerLaunchHandler{
 
+	private static PlayerPowerType playerPowerType= PlayerPowerType.MID;
 	private static long count=0;
+	private static long interval = 150;
 
 	public static  void playerShooting() {
 		shooting(Player.getPlayer1().getX(), Player.getPlayer1().getY());
@@ -22,21 +24,10 @@ public class PlayerLaunchHandler{
 	}
 	
 	public static void shooting(double x,double y){
-		ElementUtils mEU = (ElementUtils) DI.di().get("mEU");
-		{
-			Bullet bullet = new PlayerBullet(x-10, y);
-			bullet.setVelocityY(-600);
-			bullet.setVelocityX(60);
-			mEU.add("playerBullet" + count++, bullet);
-		}
-		
-		Bullet bullet = new PlayerBullet(x+10, y);
-		bullet.setVelocityY(-600);
-		bullet.setVelocityX(-60);
-		mEU.add("playerBullet" + count++, bullet);
+		playerPowerType.getDoShoot().accept(x, y);
 	}
 	
-	public static void shootSchedule(long interval){
+	public static void shootSchedule(){
 		if(Player.getPlayer1().isShooting){
 			playerShooting();
 		}
@@ -44,7 +35,7 @@ public class PlayerLaunchHandler{
 			player2Shooting();
 		}
 		LogicExecutor.getLogicExecutor().schedule(()->{
-			shootSchedule(interval);
+			shootSchedule();
 		},interval);
 	}
 }

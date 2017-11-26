@@ -37,7 +37,7 @@ public class PlayerControlHandler {
 	private static PlayerControlHandler pch = null;
 	// 速度V
 	
-	public static double PLAYER_V = 250;// 用于设置按键导致的player移动速度
+	public static double PLAYER_V = 270;// 用于设置按键导致的player移动速度
 	private Player player = null;
 	private ElementUtils elementUtils = null;
 
@@ -91,7 +91,7 @@ public class PlayerControlHandler {
 
 	// 顺序是上、右、下、左
 	public boolean[] pressed = new boolean[] { false, false, false, false };
-	private int ballCount = 0;
+	private boolean shiftPressed = false;
 
 	private void changeV() {
 		double vx = 0;
@@ -112,8 +112,13 @@ public class PlayerControlHandler {
 			vx *= 0.7071;
 			vy *= 0.7071;
 		}
-		player.setVelocityX(vx);
-		player.setVelocityY(vy);
+		if(this.shiftPressed){
+			player.setVelocityX(vx*0.5);
+			player.setVelocityY(vy*0.5);
+		}else{
+			player.setVelocityX(vx);
+			player.setVelocityY(vy);
+		}
 	}
 
 	
@@ -132,6 +137,9 @@ public class PlayerControlHandler {
 			break;
 		case LEFT:
 			pressed[3] = true;
+			break;
+		case SHIFT:
+			shiftPressed=true;
 			break;
 		case X:
 			Player.getPlayer1().isShooting = true;
@@ -157,6 +165,9 @@ public class PlayerControlHandler {
 			break;
 		case LEFT:
 			pressed[3] = false;
+			break;
+		case SHIFT:
+			shiftPressed=false;
 			break;
 		case X:
 			Player.getPlayer1().isShooting = false;

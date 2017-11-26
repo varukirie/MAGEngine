@@ -2,7 +2,6 @@ package magengine.util;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 /**
  * 通过该类能获得的对象有：<br>
  * <table>
@@ -23,4 +22,12 @@ public class DI {
 	public static Map<String, Object> di() {
 		return di;
 	}
+	/**
+	 * return (ElementUtils) di.get("mEU");
+	 * @return
+	 */
+	public  static ElementUtils getmEU(){
+		return (ElementUtils) di.get("mEU");
+	}
+	
 }

@@ -5,11 +5,12 @@ import javafx.scene.image.Image;
 import magengine.paint.SpritePainter;
 
 public class YanzhanEnemy extends ALoopDanmukuEnemy {
-	private static SpritePainter spritePainter = null;
+	
 	
 	public YanzhanEnemy(double x, double y) {
 		super(x, y);
 	}
+	private static SpritePainter spritePainter = null;
 	private static double[][] origin = null;
 	private static int enemyWidth = 130;
 	private static int enemyHeight = 122;
