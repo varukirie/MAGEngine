@@ -197,7 +197,7 @@ public class GameSession {
 		root.getChildren().add(secondaryMCanvas);
 		
 		gDataArea.getChildren().addAll(life,bomb);
-		gDataArea.setAlignment(Pos.TOP_LEFT);
+		gDataArea.setAlignment(Pos.TOP_LEFT);;
 		gArea.setLeft(root);
 		gArea.setCenter(gDataArea);
 		DI.di().put("staticCanvas", staticCanvas); 
