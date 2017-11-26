@@ -29,15 +29,19 @@ public class YanzhanEnemy extends ALoopDanmukuEnemy {
 			{-halfHeight,-halfHeight,halfHeight,halfHeight}
 		};
 	}
+	private int spriteDelta=1;
 	private int currentSpriteIndex=0;
 	@Override
 	public void paint(GraphicsContext gc) {
 		super.paint(gc);
+		int count=12;
 		//每隔interval帧换一张图
-		int interval = 5;
+		int interval = 4;
 		spritePainter.paintSprite((0+(currentSpriteIndex))/interval, getX()-halfWidth, getY()-halfHeight, gc);
-		currentSpriteIndex=(currentSpriteIndex+1)%(12*interval);
-		
+		currentSpriteIndex=(currentSpriteIndex+spriteDelta)%(count*interval);
+		if(currentSpriteIndex==count*interval-1||currentSpriteIndex==0){
+			spriteDelta=-spriteDelta;
+		}
 	}
 
 

@@ -73,10 +73,10 @@ public class TestChapter extends AChapter {
 	ElementUtils mEU = ((ElementUtils) DI.di().get("mEU"));
 	@Override
 	public void design(LogicExecutor exec, MyCanvas staticCanvas, ElementUtils mEU) {
-		createElf(e1->{
-			createStageBoss(e2->{});
-		},4,1500);
-//		createBossTest((e)->{});
+//		createElf(e1->{
+//			createStageBoss(e2->{});
+//		},4,1500);
+		createBossTest((e)->{});
 //		性能测试
 //		 for(int i=1;i<=1000;i++){
 //		 new StarDanmuku().setDelay(700*i).delayExecute();
@@ -86,17 +86,17 @@ public class TestChapter extends AChapter {
 	
 	
 	private void createBossTest(Consumer<BaseElement> onEnd) {
-		ALoopDanmukuEnemy boss = new BeisimaiEnemy(300, 100);
-//		 ALoopDanmukuEnemy boss = new YanzhanEnemy(300,100);
+//		ALoopDanmukuEnemy boss = new BeisimaiEnemy(300, 100);
+		 ALoopDanmukuEnemy boss = new YanzhanEnemy(300,100);
 //		 ALoopDanmukuEnemy boss = new NandaketaEnemy(300,100);
 		boss.setHP(100);
 		boss.setDanmukuStartDelay(1);
-		boss.addDanmuku(new WaveParticleDanmuku(), WaveParticleDanmuku.DURATION+1000);
+//		boss.addDanmuku(new WaveParticleDanmuku(), WaveParticleDanmuku.DURATION+1000);
 		mEU.add("testBoss", boss);
 	}
 	private void createStageBoss(Consumer<BaseElement> onEnd) {
-		ALoopDanmukuEnemy bossM1 = new BeisimaiEnemy(300, -100);
-		// ALoopDanmukuEnemy boss = new YanzhanEnemy(300,100);
+//		ALoopDanmukuEnemy bossM1 = new BeisimaiEnemy(300, -100);
+		 ALoopDanmukuEnemy bossM1 = new YanzhanEnemy(300,100);
 		// ALoopDanmukuEnemy boss = new NandaketaEnemy(300,100);
 		bossM1.setHP(200);
 		bossM1.setDanmukuStartDelay(1000);
