@@ -59,8 +59,8 @@ public class GameSession {
 	public static GameSession instance = null;
 	public static Canvas canvas = new Canvas(900, 700);  
     public static GraphicsContext gc = canvas.getGraphicsContext2D();
+    public static BloodBar bb;
 	private Level level = Level.NORMAL;
-	public boolean gameRunning = true;
 	private static Random rand=null;
 	public static Random rand() {
 		return rand;
@@ -145,10 +145,11 @@ public class GameSession {
 	 * 
 	 * @return 如果死亡了返回true，如果没死返回false
 	 */
-	public boolean decHealthAndCheck() {
+	public boolean decHealthAndCheck(GraphicsContext gc, BloodBar bb) {
 		if (health > 0) {
 			health--;
-			
+			bb = new BloodBar(0,0);
+			bb.paint(gc);
 			return false;
 		} else {
 			return true;
@@ -174,7 +175,8 @@ public class GameSession {
 //		VBox power = new VBox(new Label("力量"));
 //		VBox bomb = new VBox(new Label("炸弹"));
 //		VBox life = new VBox(new Label("生命"));
-		BloodBar bb = new BloodBar(0,0);
+		bb = new BloodBar(0,0);
+		bb.paint(gc);
 //		VBox power = new VBox(setTextFont("POWER"));
 		VBox bomb = new VBox(setTextFont("BOMB"));
 		VBox life = new VBox(setTextFont("LIFE"));
@@ -207,22 +209,22 @@ public class GameSession {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("MAGEngine!");
 		gArea.getChildren().add(canvas);
-		new Thread(new Runnable(){
-
-			@Override
-			public void run() {
-				while(gameRunning){
-			    try {
-			    	bb.paint(gc);
-					Thread.sleep(500);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-//			    System.out.println("test thread");
-				}
-			}
-			
-		}).start();
+//		new Thread(new Runnable(){
+//
+//			@Override
+//			public void run() {
+//				while(gameRunning){
+//			    try {
+//			    	bb.paint(gc);
+//					Thread.sleep(500);
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
+////			    System.out.println("test thread");
+//				}
+//			}
+//			
+//		}).start();
 		primaryStage.show();
 		
 		LogicExecutor logicExecutor=LogicExecutor.getLogicExecutor();
@@ -309,7 +311,7 @@ public class GameSession {
 		PlayerLaunchHandler.shootSchedule();
 //		ChapterLoader.loadChapter(new ChapterDemo());
 	}
-	private class BloodBar extends BaseElement{
+	public class BloodBar extends BaseElement{
 
 		public BloodBar(double x, double y) {
 			super(x, y);
@@ -331,7 +333,6 @@ public class GameSession {
 	
 	private void shutdownGame(){
 		MoveHandler mh=((MoveHandler)(DI.di().get("mh")));
-		gameRunning = false;
 		if(mh!=null){
 			mh.keepRun=false;//关闭MoveHandler
 			mh.clear();

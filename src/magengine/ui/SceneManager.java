@@ -241,6 +241,69 @@ public class SceneManager {
 //		primaryStage.show();
 	}
 	
+	public void loadClearScene(){
+		primaryStage.setResizable(false);
+		StackPane root = new StackPane();
+		BorderPane btPane = new BorderPane();
+		BackgroundImage bimg = new BackgroundImage(new Image("/img/starbackground.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+		root.setBackground(new Background(bimg));
+		Canvas canvas = new Canvas(900, 200);
+		GraphicsContext gc = canvas.getGraphicsContext2D();
+		VBox pause = new VBox(setTextFont2("Clear and thank you for playing!"));
+		VBox paneBt = new VBox(100);
+		String rs = "R E S T A R T";
+		String ex = "E X I T";
+		Button bReset = new Button(rs);
+		Button bExit = new Button(ex);
+		bReset.setOnAction((ActionEvent e) -> {
+		    SceneManager.getInstance().startGame();
+		});
+		bExit.setOnAction((ActionEvent e) -> {
+//			System.exit(-1);
+			startMenu();
+		});
+		bReset.addEventHandler(MouseEvent.MOUSE_ENTERED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		        	  bReset.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;");
+		          }
+		        });
+		bReset.addEventHandler(MouseEvent.MOUSE_EXITED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		        	  bReset.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
+		          }
+		        });
+		bExit.addEventHandler(MouseEvent.MOUSE_ENTERED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		        	  bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;");
+		          }
+		        });
+		bExit.addEventHandler(MouseEvent.MOUSE_EXITED,
+		        new EventHandler<MouseEvent>() {
+		          @Override
+		          public void handle(MouseEvent e) {
+		        	  bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
+		          }
+		        });
+		bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
+		bReset.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
+		paneBt.getChildren().addAll(bReset,bExit);
+		paneBt.setAlignment(Pos.TOP_CENTER);
+		pause.setAlignment(Pos.TOP_CENTER);
+		btPane.setMargin(pause, new Insets(100,0,100,0));
+		btPane.setTop(pause);
+		btPane.setCenter(paneBt);
+		root.getChildren().add(btPane);
+		Scene scene = new Scene(root,900,700);
+		primaryStage.setScene(scene);
+//		primaryStage.show();
+	}
+	
 	public void loadFailureScene() {
 		primaryStage.setResizable(false);
 		StackPane root = new StackPane();
