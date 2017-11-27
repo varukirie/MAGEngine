@@ -12,7 +12,7 @@ public class ButterflyElfEnemy extends ALoopDanmukuEnemy {
 	}
 	private static double[][] origin = null;
 	private static int enemyWidth = 80;
-	private static int enemyHeight = 60;
+	private static int enemyHeight = 58;
 	private static int halfWidth = enemyWidth/2;
 	private static int halfHeight = enemyHeight/2;
 	private static Image img=null;

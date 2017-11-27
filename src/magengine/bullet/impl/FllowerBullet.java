@@ -13,7 +13,7 @@ import magengine.bullet.APolygonBullet;
 import magengine.bullet.RadiusSupplier;
 import magengine.util.Transform;
 
-public class FllowerBullet extends APolygonBullet implements RadiusSupplier{
+public class FllowerBullet extends APolygonBullet{
 	
 	private Function<RadiusSupplier,Paint> colorSupplier = (cirb)->{
 		return Color.WHITESMOKE;
@@ -30,10 +30,7 @@ public class FllowerBullet extends APolygonBullet implements RadiusSupplier{
 	 * 取得缩放后的半径
 	 * @return
 	 */
-	@Override
-	public double getR() {
-		return r*super.getScale();
-	}
+
 	/**
 	 * 取得缩放后前的半�?
 	 * @return
@@ -97,7 +94,7 @@ public class FllowerBullet extends APolygonBullet implements RadiusSupplier{
 
 	public void paint(GraphicsContext gc) {
 		
-		gc.setFill(colorSupplier.apply(this));
+		gc.setFill(Color.ALICEBLUE);
 		super.paint(gc);
 		
 			
