@@ -43,6 +43,7 @@ import magengine.element.impl.Spark;
 import magengine.enemy.ADelayDanmukuEnemy;
 import magengine.enemy.ALoopDanmukuEnemy;
 import magengine.enemy.BeisimaiEnemy;
+import magengine.enemy.BossbuEnemy;
 import magengine.enemy.ButterflyElfEnemy;
 import magengine.enemy.DefaultEnemy;
 import magengine.enemy.ElfEnemy;
@@ -90,7 +91,7 @@ public class TestChapter extends AChapter {
 	private void createBossTest(Consumer<BaseElement> onEnd) {
 //		ALoopDanmukuEnemy boss = new BeisimaiEnemy(300, 100);
 		
-		 ALoopDanmukuEnemy boss = new YanzhanEnemy(300,100);
+		 ALoopDanmukuEnemy boss = new BossbuEnemy(300,100);
 //		 ALoopDanmukuEnemy boss = new NandaketaEnemy(300,100);
 		boss.setHP(100);
 		boss.setDanmukuStartDelay(1);
@@ -100,7 +101,7 @@ public class TestChapter extends AChapter {
 	}
 	private void createStageBoss(Consumer<BaseElement> onEnd) {
 //		ALoopDanmukuEnemy bossM1 = new BeisimaiEnemy(300, -100);
-		 ALoopDanmukuEnemy bossM1 = new YanzhanEnemy(300,100);
+		 ALoopDanmukuEnemy bossM1 = new BossbuEnemy(300,100);
 		// ALoopDanmukuEnemy boss = new NandaketaEnemy(300,100);
 		bossM1.setHP(200);
 		bossM1.setDanmukuStartDelay(1000);
