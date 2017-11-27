@@ -32,9 +32,10 @@ import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
 import magengine.util.ElementUtils;
 
-public class textDanmuku extends ADanmuku{
+public class BoomDemoDanmuku extends ADanmuku{
 	/*
 	 * 实现子弹中可以爆开新的子弹
+	 * 可以作用于小怪
 	 */
 	public static final long DURATION = 25000;
 	ElementUtils mEU = getmEU();
@@ -88,3 +89,4 @@ public class textDanmuku extends ADanmuku{
 	}
 	
 }
+

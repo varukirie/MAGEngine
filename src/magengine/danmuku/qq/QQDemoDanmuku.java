@@ -1,5 +1,7 @@
 package magengine.danmuku.qq;
 
+import magengine.bullet.PresetColor;
+import magengine.bullet.impl.ArrowBullet;
 import magengine.bullet.impl.StarBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.danmuku.ADanmuku;
@@ -9,10 +11,14 @@ import magengine.util.ElementUtils;
 
 import java.util.concurrent.TimeUnit;
 
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Stop;
+
 public class QQDemoDanmuku extends ADanmuku {
 	public static final long DURATION = 10000;
 	@Override
 	public void executeDanmuku() {
+		
 		ElementUtils mEU= super.getmEU();
 		int delay = 3000;
 		Launcher startLauncher = new Launcher(300, 200, Math.PI / 2, 20, delay);
@@ -42,7 +48,7 @@ public class QQDemoDanmuku extends ADanmuku {
 		});
 		oLG.delayExecute(500);
 		
-		OvalLauncherGroup smallOLG = new OvalLauncherGroup(300, 200, 200);
+		OvalLauncherGroup smallOLG = new OvalLauncherGroup(300, 200, 100);
 		smallOLG.setLauncherConfig((ovalLauncher)->{
 			ovalLauncher.setBulletEvent((sESx, bullet)->{
 				sESx.schedule(()->{
