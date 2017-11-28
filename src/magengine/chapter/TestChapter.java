@@ -28,6 +28,9 @@ import magengine.danmuku.TriArcDanmuku;
 import magengine.danmuku.UtsuhoNonSpellCard1;
 import magengine.danmuku.WaveParticleDanmuku;
 import magengine.danmuku.gs.Testing;
+import magengine.danmuku.qq.BoomDemoDanmuku;
+import magengine.danmuku.qq.TrackDemoDanmuku;
+import magengine.danmuku.qq.textDanmuku;
 import magengine.danmuku.yt.FllowerArrayDanmuku;
 import magengine.danmuku.yt.MulCircleDanmuku2;
 import magengine.danmuku.yt.PinkBlueRainDanmuku;
@@ -92,10 +95,12 @@ public class TestChapter extends AChapter {
 //		ALoopDanmukuEnemy boss = new BeisimaiEnemy(300, 100);
 		
 		 ALoopDanmukuEnemy boss = new BossbuEnemy(300,100);
+		 boss.setMoveLoop(new double[][]{{300,350,240,370},{100,110,110,100}}, 3000, 2000);
 //		 ALoopDanmukuEnemy boss = new NandaketaEnemy(300,100);
 		boss.setHP(100);
 		boss.setDanmukuStartDelay(1);
-//		boss.addDanmuku(new WaveParticleDanmuku(), WaveParticleDanmuku.DURATION+1000);
+//		boss.addDanmuku(new TrackDemoDanmuku(),TrackDemoDanmuku.DURATION);
+		boss.addDanmuku(new BoomDemoDanmuku(),BoomDemoDanmuku.DURATION);
 		mEU.add("testBoss", boss);
 	}
 	private void createStageBoss(Consumer<BaseElement> onEnd) {
