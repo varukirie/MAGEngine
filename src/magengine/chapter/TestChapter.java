@@ -76,10 +76,10 @@ public class TestChapter extends AChapter {
 	ElementUtils mEU = ((ElementUtils) DI.di().get("mEU"));
 	@Override
 	public void design(LogicExecutor exec, MyCanvas staticCanvas, ElementUtils mEU) {
-		createElf(e1->{
-			createStageBoss(e2->{});
-		},4,1500);
-//		createBossTest((e)->{});
+//		createElf(e1->{
+//			createStageBoss(e2->{});
+//		},4,1500);
+		createBossTest((e)->{});
 //		性能测试
 //		 for(int i=1;i<=1000;i++){
 //		 new StarDanmuku().setDelay(700*i).delayExecute();
@@ -97,7 +97,6 @@ public class TestChapter extends AChapter {
 		boss.setDanmukuStartDelay(1);
 //		boss.addDanmuku(new WaveParticleDanmuku(), WaveParticleDanmuku.DURATION+1000);
 		mEU.add("testBoss", boss);
-		mEU.add("testSpark", new Spark(300,100));
 	}
 	private void createStageBoss(Consumer<BaseElement> onEnd) {
 //		ALoopDanmukuEnemy bossM1 = new BeisimaiEnemy(300, -100);

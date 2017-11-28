@@ -34,10 +34,10 @@ public class BossbuEnemy extends ALoopDanmukuEnemy {
 	@Override
 	public void paint(GraphicsContext gc) {
 		super.paint(gc);
-		int count=12;
+		int count=5;
 		//每隔interval帧换一张图
 		int interval = 5;
-		spritePainter.paintSprite((0+(currentSpriteIndex))/interval, getX()-halfWidth, getY()-halfHeight, gc);
+		spritePainter.paintSprite(0+((currentSpriteIndex))/interval, getX()-halfWidth, getY()-halfHeight, gc);
 		currentSpriteIndex=(currentSpriteIndex+spriteDelta)%(count*interval);
 		if(currentSpriteIndex==count*interval-1||currentSpriteIndex==0){
 			spriteDelta=-spriteDelta;
