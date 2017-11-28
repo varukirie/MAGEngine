@@ -60,6 +60,7 @@ public class GameSession {
 	public static Canvas canvas = new Canvas(900, 700);  
     public static GraphicsContext gc = canvas.getGraphicsContext2D();
     public static BloodBar bb;
+    public static EmBloodBar emBb;
 	private Level level = Level.NORMAL;
 	private static Random rand=null;
 	public static Random rand() {
@@ -148,7 +149,6 @@ public class GameSession {
 	public boolean decHealthAndCheck(GraphicsContext gc, BloodBar bb) {
 		if (health > 0) {
 			health--;
-			bb = new BloodBar(0,0);
 			bb.paint(gc);
 			return false;
 		} else {
@@ -176,6 +176,7 @@ public class GameSession {
 //		VBox bomb = new VBox(new Label("炸弹"));
 //		VBox life = new VBox(new Label("生命"));
 		bb = new BloodBar(0,0);
+		emBb = new EmBloodBar(0,0);
 		bb.paint(gc);
 //		VBox power = new VBox(setTextFont("POWER"));
 		VBox bomb = new VBox(setTextFont("BOMB"));
@@ -326,6 +327,37 @@ public class GameSession {
 			gc.setFill(Color.RED);
 			w=(int)(200*((getHealth()+1)*1.0/(PRESET_HEALTH+1)));
 			gc.fillRect(x+2, y+2, w-4, h-4);
+		}
+		
+		
+	}
+	
+	public class EmBloodBar extends BaseElement{
+
+		public EmBloodBar(double x, double y) {
+			super(x, y);
+		}
+		
+		public EmBloodBar createEmbb(double x, double y){
+			return new EmBloodBar(x,y);	
+		}
+
+		
+		public void paint(GraphicsContext gc, int HP, int presetHP) {
+			int x=870,y=0,w=30,h,yt=0;
+			gc.setFill(Color.MAGENTA);
+			gc.setStroke(Color.RED);
+			gc.fillRect(x, y, w, 700);
+			gc.setFill(Color.RED);
+			h=(int)(700*((HP+1)*1.0/(presetHP+1)));
+			yt+=700-(int)(700*((HP+1)*1.0/(presetHP+1)));
+			gc.fillRect(x+2, yt+2, w-4, h-4);
+		}
+
+		@Override
+		public void paint(GraphicsContext gc) {
+			// TODO Auto-generated method stub
+			
 		}
 		
 		

@@ -9,6 +9,8 @@ import javafx.scene.image.Image;
 import magengine.danmuku.ADanmuku;
 import magengine.element.BaseElement;
 import magengine.element.Initializable;
+import magengine.game.GameSession;
+import magengine.game.GameSession.EmBloodBar;
 import magengine.mulplay.MulSync;
 import magengine.paint.SpritePainter;
 
@@ -26,11 +28,12 @@ public abstract class AEnemy extends BaseElement implements Initializable{
 	}
 	
 	private AtomicInteger HP=new AtomicInteger(10);
-
-	
+	private boolean bloodState = true;
+	private int presetHP = 5;
 	
 	public AEnemy setHP(int HP){
 		this.HP.set(HP);
+		this.presetHP = HP;
 		return this;
 	}
 	
@@ -40,6 +43,12 @@ public abstract class AEnemy extends BaseElement implements Initializable{
 	
 	public int addAndGetHP(int delta){
 		return HP.addAndGet(delta);
+	}
+	
+	public void setNeedPaintBloodBar(GraphicsContext gc, EmBloodBar bb){
+		if(bloodState){
+		bb.paint(gc,getHP(),this.presetHP);
+		}
 	}
 
 	
