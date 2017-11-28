@@ -157,6 +157,7 @@ public class GameSession {
 	}
 
 
+	private BackgroundUtil backgroundUtil = new BackgroundUtil();
 	private long  lastTime4bench=0;
 	public void loadGameScene() {
 //		Canvas canvas = new Canvas(900, 700);  
@@ -182,7 +183,7 @@ public class GameSession {
 		VBox bomb = new VBox(setTextFont("BOMB"));
 		VBox life = new VBox(setTextFont("LIFE"));
 		StackPane root = new StackPane();
-		BackgroundUtil bu = BackgroundUtil.getInstance();
+		BackgroundUtil bu = backgroundUtil;
 		MyCanvas bgCanvas = bu.getBGCanvas();
 		Image gamebgimg=null;
 		try {
@@ -248,7 +249,7 @@ public class GameSession {
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
-				BackgroundUtil.getInstance().paintBackground(1);
+				backgroundUtil.paintBackground(1);
 				mh.callRepaint();
 				moveableElementUtils.getSwitcher().repaint();
 				if(Main.DEBUG_RENDER_BENCH){
@@ -406,7 +407,7 @@ public class GameSession {
 	private Future<?> loadChapterFuture;
 	
 	public Text setTextFont(String s){
-		Text text = TextBuilder.create().text(s).font(Font.font("新宋体", 30)).build();
+		Text text = new Text(s);
 		text.setFill(new LinearGradient(0, 0, 1, 2, true, CycleMethod.REPEAT, new
 		         Stop[]{new Stop(0, Color.RED), new Stop(0.5f, Color.BLUE)}));
 		text.setFont(Font.font("黑体", FontWeight.BOLD,30));//斜体
@@ -528,5 +529,9 @@ public class GameSession {
 	}
 	public Channel getMulplayChannel() {
 		return mulplayChannel;
+	}
+	
+	public BackgroundUtil getBackgroundUtil() {
+		return backgroundUtil;
 	}
 }
