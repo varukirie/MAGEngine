@@ -35,7 +35,8 @@ import magengine.util.ElementUtils;
 
 public class BoomDemoDanmuku extends ADanmuku {
 	/*
-	 * 实现子弹中可以爆开新的子弹 可以作用于小怪
+	 * 实现子弹中可以爆开新的子弹 
+	 * 可作用于boss
 	 */
 	public static final long DURATION = 25000;
 	ElementUtils mEU = getmEU();
@@ -72,10 +73,10 @@ public class BoomDemoDanmuku extends ADanmuku {
 		// mEU.add("textLauncher"+r.nextInt(), launcher);
 		// }
 		ArcLauncherGroup alg = new ArcLauncherGroup(getSourceElement().getX(), getSourceElement().getY(), Math.PI / 2*3,
-				Math.PI / 3, 3);
+				Math.PI / 3, 5);
 		alg.setLauncherConfig(l -> {
 			l.bindToXY(getSourceElement());
-			l.setInterval(5000);
+			l.setInterval(3000);
 			l.setDuration(DURATION);
 			l.setBulletType(CircleBullet.class);
 			l.bindToWantBeRemoved(sourceElement);
@@ -85,14 +86,20 @@ public class BoomDemoDanmuku extends ADanmuku {
 			});
 			l.setBulletEvent((executor, bullet) -> {
 				executor.schedule(() -> {
-					OvalLauncherGroup olg = new OvalLauncherGroup(bullet.getX(), bullet.getY(), 16, Math.PI / 2);
+					OvalLauncherGroup olg = new OvalLauncherGroup(bullet.getX(), bullet.getY(), 22, Math.PI / 2);
 					olg.setLauncherConfig((subl) -> {
-						subl.setBulletSpeed(105);
+						subl.setBulletSpeed(145);
 						subl.setBulletType(LongHexagonBullet.class);
 						subl.setBulletConfig(b->{
 							if(b instanceof LongHexagonBullet){
-								((LongHexagonBullet) b).setR(5);
+								((LongHexagonBullet) b).setR(12);
+								((LongHexagonBullet) b).setOutlineColor(Color.YELLOWGREEN);
 							}
+						});
+						subl.setBulletEvent((sESx, sbullet)->{
+							sESx.schedule(()->{
+								quick.setSpeed(sbullet, 270);
+							}, 500);
 						});
 						subl.bindToXY(bullet);
 					});
