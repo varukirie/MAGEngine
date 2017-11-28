@@ -11,8 +11,8 @@ public class BossbuEnemy extends ALoopDanmukuEnemy {
 		super(x, y);
 	}
 	private static double[][] origin = null;
-	private static int enemyWidth = 110;
-	private static int enemyHeight = 110;
+	private static int enemyWidth = 72;
+	private static int enemyHeight = 11;
 	private static int halfWidth = enemyWidth/2;
 	private static int halfHeight = enemyHeight/2;
 	private static Image img=null;
