@@ -83,6 +83,10 @@ public class ElementUtils {
 	public void removeBoth(String key) {
 
 		Object obj = getWantMoveMap().get(key);
+		if(obj==null){
+			System.out.println("warning:ElementUtil:obj==null! [key:"+key+"]");
+			return ;
+		}
 		if (Main.DEBUG_ElementCreate) {
 			System.out.println("removeElement:" + obj);
 		}

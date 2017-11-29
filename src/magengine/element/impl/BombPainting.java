@@ -1,5 +1,6 @@
 package magengine.element.impl;
 
+import javafx.application.Platform;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -17,13 +18,15 @@ public class BombPainting {
 	}
 	
 	public void paint(int bombnum){
-		int xt = this.x;
-		GraphicsContext gc = canvas.getGraphicsContext2D();
-		gc.clearRect(x, y, 900, 120);
-		for(int i=0;i<bombnum; i++){
-		gc.drawImage(img, xt, y);
-		xt+=50;
-		}
+		Platform.runLater(()->{
+			int xt = this.x;
+			GraphicsContext gc = canvas.getGraphicsContext2D();
+			gc.clearRect(x, y, 900, 120);
+			for(int i=0;i<bombnum; i++){
+			gc.drawImage(img, xt, y);
+			xt+=50;
+			}
+		});
 	}
 	
 }

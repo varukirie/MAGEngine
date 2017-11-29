@@ -151,7 +151,7 @@ public class GameSession {
 	public boolean decHealthAndCheck() {
 		if (health > 0) {
 			health--;
-			bb.paint(this.getHealth(), this.PRESET_HEALTH);
+			bb.paint(this.getHealth(), PRESET_HEALTH);
 			return false;
 		} else {
 			return true;
@@ -168,7 +168,7 @@ public class GameSession {
 		emBb = new EmBloodBar(870,0,30,700);
 		this.bp = new BombPainting(600,120);
 		bp.paint(getBomb());
-		bb.paint(this.getHealth(), this.PRESET_HEALTH);
+		bb.paint(this.getHealth(), PRESET_HEALTH);
 		Stage primaryStage=SceneManager.getInstance().getPrimaryStage();
 		BorderPane gArea = new BorderPane();
 		BackgroundImage bimg = new BackgroundImage(new Image("/img/starbackground.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
