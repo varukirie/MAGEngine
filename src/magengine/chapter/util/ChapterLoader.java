@@ -26,6 +26,7 @@ import magengine.paint.MyCanvas;
 import magengine.paint.MyCanvasSwitcher;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
+import magengine.util.PackageScan;
 /**
  * 此类负责装载游戏关卡
  * 此类不可实例化
@@ -93,11 +94,8 @@ public class ChapterLoader {
 	}
 
 	private static void scanPackage4CanvasConfig(){
-		File root = new File(ChapterLoader.class.getResource("/").getPath());
-		String prefix = "magengine";
-		scanClass(root, Arrays.asList(root),prefix, (cls)->{
-			boolean initBeforeLoad = Arrays.asList(cls.getInterfaces()).contains(InitBeforeLoadChapter.class);
-			if(initBeforeLoad){
+		PackageScan.doScan(InitBeforeLoadChapter.class,"magengine").forEach((cls)->{
+			if(!cls.isInterface()){
 				try {
 					cls.getMethod("initWhenChapterLoad", new Class[0]).invoke(cls.newInstance(), new Object[0]);
 				} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | InstantiationException e1) {
@@ -107,24 +105,7 @@ public class ChapterLoader {
 		});
 	}
 	
-	private static void scanClass(File root,List<File> files,String prefix,Consumer<Class<?>> run){
-		files.stream().filter(File::isFile).forEach(e->{
-			String rPath = e.getAbsolutePath().substring(root.getAbsolutePath().length()+1);
-			rPath = rPath.replace('\\', '.');
-			if(rPath.contains(".class")){
-				String className = rPath.substring(0, rPath.length()-6);
-				try {
-					Class<?> cls = Class.forName(className);
-					run.accept(cls);
-				} catch (ClassNotFoundException  e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
-		files.stream().filter(File::isDirectory).forEach(e->{
-			scanClass(root, Arrays.asList(e.listFiles()),prefix, run);
-		});
-	}
+	
 	
 	
 
