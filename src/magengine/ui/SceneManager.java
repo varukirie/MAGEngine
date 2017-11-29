@@ -513,16 +513,19 @@ public class SceneManager {
 	public void setPrimaryStage(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 	}
-	
 	public void shakeInScene(){
+		shakeInScene(1000);
+	}
+	public void shakeInScene(long duration){
 		Parent root  = this.primaryStage.getScene().getRoot();
 		LogicExecutor exec= LogicExecutor.getLogicExecutor();
 		if(exec==null){
 			System.out.println("fail to execute shakeInGameScene():exec==null");
 		}
 		
-		int ct = 20;
+		
 		int itv = 50;
+		int ct = (int) (duration/itv);
 		for(int i=1;i<=ct;i++){
 			final int ci = i;
 			exec.schedule(()->{

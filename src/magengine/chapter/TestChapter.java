@@ -20,6 +20,7 @@ import magengine.bullet.impl.PlayerBullet;
 import magengine.bullet.impl.StarBullet;
 import magengine.chapter.util.AChapter;
 import magengine.chapter.util.QuickDanmuku;
+import magengine.control.PlayerControlHandler;
 import magengine.danmuku.ReisenNonSpellCardDanmuku;
 import magengine.danmuku.RingDanmuku;
 import magengine.danmuku.RunAwayNuclearDanmuku;
@@ -75,36 +76,19 @@ public class TestChapter extends AChapter {
 	int midY = 200;
 	QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 	Random r = new Random(C.SEED);
-	LogicExecutor executor = LogicExecutor.getLogicExecutor();
+	LogicExecutor exec = LogicExecutor.getLogicExecutor();
 	ElementUtils mEU = ((ElementUtils) DI.di().get("mEU"));
 
 	@Override
 	public void design(LogicExecutor exec, MyCanvas staticCanvas, ElementUtils mEU) {
-		createElf(e1 -> {
-			createStageBoss(e2 -> {
-				Platform.runLater(() -> {
-					SceneManager.getInstance().shakeInScene();
-				});
-				exec.schedule(() -> {
-					Platform.runLater(() -> {
-						SceneManager.getInstance().loadClearScene();
-						GameSession.closeGameSession();
-					});
-
-				}, 2000);
-			});
-		}, 4, 1500);
-//		createBossTest((e) -> {
-//			Platform.runLater(() -> {
-//				SceneManager.getInstance().shakeInScene();
+//		createElf(e1 -> {
+//			createStageBoss(e2 -> {
+//				clearGame();
 //			});
-//			exec.schedule(() -> {
-//				Platform.runLater(() -> {
-//					SceneManager.getInstance().loadClearScene();
-//					GameSession.closeGameSession();
-//				});
-//			}, 1500);
-//		});
+//		}, 4, 1500);
+		createBossTest((e) -> {
+			clearGame();
+		});
 		// 性能测试
 		// for(int i=1;i<=1000;i++){
 		// new StarDanmuku().setDelay(700*i).delayExecute();
@@ -128,7 +112,7 @@ public class TestChapter extends AChapter {
 
 	private void createStageBoss(Consumer<BaseElement> onEnd) {
 		// ALoopDanmukuEnemy bossM1 = new BeisimaiEnemy(300, -100);
-		ALoopDanmukuEnemy bossM1 = new BossbuEnemy(300, 100);
+		ALoopDanmukuEnemy bossM1 = new BossbuEnemy(300, -50);
 		// ALoopDanmukuEnemy boss = new NandaketaEnemy(300,100);
 		bossM1.setHP(300);
 		bossM1.setDanmukuStartDelay(1000);
@@ -164,7 +148,7 @@ public class TestChapter extends AChapter {
 			elf.setDanmukuStartDelay(1000).addDanmuku(new TriArcDanmuku(), TriArcDanmuku.DURATION).setHP(10);
 			final ALoopDanmukuEnemy fElf = elf;
 			final int fi = i;
-			executor.schedule(() -> {
+			exec.schedule(() -> {
 				mEU.add("elf:" + r.nextInt(), fElf);
 				quick.moveTo(fElf, 1200, 150, 185, () -> {
 					fElf.setVelocityX(58);
@@ -175,5 +159,20 @@ public class TestChapter extends AChapter {
 			}, interval * i);
 		}
 
+	}
+	
+	
+	private void clearGame(){
+		PlayerControlHandler.getInstance().doBomb();
+		Platform.runLater(() -> {
+			SceneManager.getInstance().shakeInScene();
+		});
+		exec.schedule(() -> {
+			Platform.runLater(() -> {
+				SceneManager.getInstance().loadClearScene();
+				GameSession.closeGameSession();
+			});
+
+		}, 2000);
 	}
 }

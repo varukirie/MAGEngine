@@ -1,5 +1,6 @@
 package magengine.control;
 
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.effect.Bloom;
 import javafx.scene.effect.BoxBlur;
@@ -36,7 +37,7 @@ public class PlayerControlHandler {
 
 	private static PlayerControlHandler pch = null;
 	// 速度V
-	
+	public static PlayerControlHandler getInstance(){return pch;}
 	public static double PLAYER_V = 270;// 用于设置按键导致的player移动速度
 	private Player player = null;
 	private ElementUtils elementUtils = null;
@@ -208,7 +209,10 @@ public class PlayerControlHandler {
 	}
 	
 	
-	private void doBomb(){
+	public void doBomb(){
+		Platform.runLater(() -> {
+			SceneManager.getInstance().shakeInScene(500);
+		});
 		double x  = Player.getPlayer1().getX();
 		double y = Player.getPlayer1().getY();
 		double r = 175;
