@@ -5,7 +5,6 @@ import java.util.function.Consumer;
 
 import magengine.bullet.Bullet;
 import magengine.bullet.impl.PlayerBullet;
-import magengine.chapter.util.QuickDanmuku;
 import magengine.game.GameSession;
 import magengine.util.DI;
 import magengine.util.ElementUtils;

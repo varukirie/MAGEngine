@@ -46,7 +46,7 @@ public abstract class ALauncherGroup {
 	}
 	public void delayExecuteCheck(long delay,BaseElement sourceElement){
 		LogicExecutor.getLogicExecutor().schedule(()->{
-			if(sourceElement.getDeleted()==false){
+			if(!sourceElement.getDeleted()){
 				execute();
 			}
 		}, delay, TimeUnit.MILLISECONDS);
@@ -54,7 +54,7 @@ public abstract class ALauncherGroup {
 	
 	public void delayExecuteCheckAndWith(long delay,BaseElement sourceElement,Runnable task){
 		LogicExecutor.getLogicExecutor().schedule(()->{
-			if(sourceElement.getDeleted()==false){
+			if(!sourceElement.getDeleted()){
 				if(task!=null)
 					task.run();
 				execute();

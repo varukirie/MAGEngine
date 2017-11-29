@@ -4,20 +4,14 @@ import java.util.Random;
 import java.util.function.Consumer;
 
 
-import javafx.application.Platform;
-import javafx.scene.effect.Bloom;
 import magengine.bullet.PresetColor;
 import magengine.bullet.impl.CircleBullet;
-import magengine.bullet.impl.HexagonBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.element.BaseElement;
-import magengine.element.impl.Player;
 import magengine.game.GameSession;
 import magengine.launcher.ArcLauncherGroup;
 import magengine.launcher.BurstLauncher;
 import magengine.launcher.OvalLauncherGroup;
-import magengine.paint.MyCanvasSwitcher;
-import magengine.util.DI;
 
 public class UtsuhoNonSpellCard1 extends ADanmuku {
 

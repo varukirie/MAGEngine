@@ -1,8 +1,5 @@
 package magengine.paint;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 

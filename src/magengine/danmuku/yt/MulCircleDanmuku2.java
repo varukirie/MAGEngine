@@ -1,26 +1,13 @@
 package magengine.danmuku.yt;
 
 import java.util.Random;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import magengine.bullet.impl.ArrowBullet;
-import magengine.bullet.impl.CircleBullet;
-import magengine.bullet.impl.DefaultBullet;
-import magengine.bullet.impl.DiamondBullet;
 import magengine.bullet.impl.LongHexagonBullet;
-import magengine.bullet.impl.StarBullet;
 import magengine.chapter.util.QuickDanmuku;
-import magengine.chapter.util.SeqDanmuku;
 import magengine.danmuku.ADanmuku;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
-import magengine.helper.Helper;
-import magengine.helper.OvalHelper;
-import magengine.launcher.ALauncherGroup;
-import magengine.launcher.ArcLauncherGroup;
-import magengine.launcher.BulletEvent;
-import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
 import magengine.util.ElementUtils;
 

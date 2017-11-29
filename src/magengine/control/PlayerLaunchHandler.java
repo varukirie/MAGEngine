@@ -1,14 +1,8 @@
 package magengine.control;
 
-import magengine.bullet.Bullet;
-import magengine.bullet.impl.DefaultBullet;
-import magengine.bullet.impl.PlayerBullet;
 import magengine.element.impl.Player;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
-import magengine.game.MoveHandler;
-import magengine.util.DI;
-import magengine.util.ElementUtils;
 
 public class PlayerLaunchHandler{
 
@@ -31,7 +25,7 @@ public class PlayerLaunchHandler{
 		if(Player.getPlayer1().isShooting){
 			playerShooting();
 		}
-		if(GameSession.getGameSession().mulplay&&Player.getPlayer2().isShooting==true){
+		if(GameSession.getGameSession().mulplay&& Player.getPlayer2().isShooting){
 			player2Shooting();
 		}
 		LogicExecutor.getLogicExecutor().schedule(()->{

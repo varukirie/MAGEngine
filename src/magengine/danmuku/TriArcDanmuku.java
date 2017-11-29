@@ -2,7 +2,6 @@ package magengine.danmuku;
 
 import java.util.function.Consumer;
 
-import magengine.element.BaseElement;
 import magengine.launcher.ArcLauncherGroup;
 import magengine.launcher.Launcher;
 

@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.jar.JarEntry;  
 import java.util.jar.JarFile;
 
-import magengine.element.InitBeforeLoadChapter;  
 /** 
  * 扫描包下路径  
  * 包括本地文件和jar包文件 
@@ -69,28 +68,25 @@ public class PackageScan {
         }  
           
         File file = new File(url);  
-        file.listFiles(new FileFilter() {  
-                  
-                public boolean accept(File chiFile) {  
-                    if(chiFile.isDirectory()){  
-                        findClassLocal(packName+"."+chiFile.getName());  
-                    }  
-                    if(chiFile.getName().endsWith(".class")){  
-                        Class<?> clazz = null;  
-                        try {  
-                            clazz = classLoader.loadClass(packName + "." + chiFile.getName().replace(".class", ""));  
-                        } catch (ClassNotFoundException e) {  
-                            e.printStackTrace();  
-                        }  
-//                        System.out.println(chiFile);  
-                        if(superStrategy.isAssignableFrom(clazz)){  
-                            eleStrategyList.add((Class<?>) clazz);  
-                        }  
-                        return true;  
-                    }  
-                    return false;  
-                }  
-            });  
+        file.listFiles(chiFile -> {
+            if(chiFile.isDirectory()){
+                findClassLocal(packName+"."+chiFile.getName());
+            }
+            if(chiFile.getName().endsWith(".class")){
+                Class<?> clazz = null;
+                try {
+                    clazz = classLoader.loadClass(packName + "." + chiFile.getName().replace(".class", ""));
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+//                        System.out.println(chiFile);
+                if(superStrategy.isAssignableFrom(clazz)){
+                    eleStrategyList.add((Class<?>) clazz);
+                }
+                return true;
+            }
+            return false;
+        });
            
     }  
       

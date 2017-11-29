@@ -1,7 +1,6 @@
 package magengine.enemy;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import magengine.chapter.util.QuickDanmuku;
 import magengine.danmuku.ADanmuku;
@@ -63,7 +62,7 @@ public abstract class ALoopDanmukuEnemy extends APolygonEnemy {
 	private void doNextDmk(){
 		if(danmukuList.size()!=0){
 			currentDanmukuIndex=(currentDanmukuIndex+1)%danmukuList.size();
-			if(currentDanmukuIndex<danmukuList.size()&&this.deleted==false){
+			if(currentDanmukuIndex<danmukuList.size()&& !this.deleted){
 				danmukuList.get(currentDanmukuIndex).danmuku.executeDanmuku();
 				exec.schedule(()->{
 					doNextDmk();

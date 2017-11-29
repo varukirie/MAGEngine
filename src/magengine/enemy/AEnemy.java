@@ -1,18 +1,10 @@
 package magengine.enemy;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import magengine.danmuku.ADanmuku;
 import magengine.element.BaseElement;
 import magengine.element.Initializable;
 import magengine.element.impl.EmBloodBar;
-import magengine.game.GameSession;
-import magengine.mulplay.MulSync;
-import magengine.paint.SpritePainter;
 
 public abstract class AEnemy extends BaseElement implements Initializable{
 	public AEnemy(double x, double y, double velocityX, double velocityY, double ax, double ay) {

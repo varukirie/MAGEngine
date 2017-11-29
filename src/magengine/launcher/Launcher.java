@@ -9,7 +9,6 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import magengine.bullet.Bullet;
 import magengine.bullet.impl.DefaultBullet;
 import magengine.element.BaseElement;
 import magengine.element.DurationManage;

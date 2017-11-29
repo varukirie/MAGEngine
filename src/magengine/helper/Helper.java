@@ -1,11 +1,8 @@
 package magengine.helper;
 
 import application.Main;
-import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.effect.Bloom;
 import javafx.scene.paint.Color;
-import magengine.bullet.impl.DefaultBullet;
 import magengine.element.BaseElement;
 import magengine.element.DurationManage;
 /**
@@ -19,9 +16,7 @@ import magengine.element.DurationManage;
  * @author MegaAstronic
  *
  */
-import magengine.element.Initializable;
-import magengine.paint.MyCanvasSwitcher;
-import magengine.util.DI;
+
 public class Helper extends BaseElement implements DurationManage {
 	private long duration=10000000;
 	private long startTime = 0;

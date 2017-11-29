@@ -24,20 +24,18 @@ public class PlayerVOHandler extends SimpleChannelInboundHandler<PlayerVO> {
 		ctx.channel().eventLoop().scheduleWithFixedDelay(() -> {
 			PlayerVO vo = null;
 			MoveHandler mh = (MoveHandler) DI.di().get("mh");
-			Iterator<Entry<String, Moveable>> iter = mh.getWantMoveMap().entrySet().iterator();
-			while (iter.hasNext()) {
-				Entry<String, Moveable> entry = iter.next();
+			for (Entry<String, Moveable> entry : mh.getWantMoveMap().entrySet()) {
 				Moveable m = entry.getValue();
 				if (m instanceof MulSync) {
 					try {
 						switch (entry.getKey()) {
-						case "player1":
-							vo = new PlayerVO(round2(m.getX()), round2(m.getY()), round2(m.getVelocityX()),
-									round2(m.getVelocityY()), Player.getPlayer1().isShooting,
-									Player.getPlayer1().getNoHurtMode());
-							ctx.channel().writeAndFlush(vo).sync();
-							break;
-						default:
+							case "player1":
+								vo = new PlayerVO(round2(m.getX()), round2(m.getY()), round2(m.getVelocityX()),
+										round2(m.getVelocityY()), Player.getPlayer1().isShooting,
+										Player.getPlayer1().getNoHurtMode());
+								ctx.channel().writeAndFlush(vo).sync();
+								break;
+							default:
 						}
 
 					} catch (InterruptedException e) {

@@ -2,23 +2,13 @@ package magengine.danmuku.qq;
 
 import java.util.concurrent.TimeUnit;
 
-import javax.crypto.AEADBadTagException;
-import javax.print.attribute.SetOfIntegerSyntax;
-
-import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
-
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Stop;
 import magengine.bullet.PresetColor;
 import magengine.bullet.impl.CircleBullet;
-import magengine.bullet.impl.FllowerBullet;
-import magengine.bullet.impl.HexagonBullet;
 import magengine.bullet.impl.LongHexagonBullet;
-import magengine.bullet.impl.PlayerBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.danmuku.ADanmuku;
-import magengine.helper.OvalHelper;
-import magengine.launcher.ArcLauncherGroup;
 import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
 import magengine.util.ElementUtils;

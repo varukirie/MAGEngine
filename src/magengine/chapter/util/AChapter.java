@@ -1,7 +1,5 @@
 package magengine.chapter.util;
 
-import java.util.concurrent.ScheduledExecutorService;
-
 import magengine.game.LogicExecutor;
 import magengine.paint.MyCanvas;
 import magengine.util.ElementUtils;

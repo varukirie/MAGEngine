@@ -1,35 +1,21 @@
 package magengine.danmuku.qq;
 
-import static java.lang.Math.PI;
 import static java.lang.Math.sin;
 
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
-import javax.crypto.AEADBadTagException;
-import javax.print.attribute.SetOfIntegerSyntax;
-
-import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 
 import io.netty.util.internal.shaded.org.jctools.queues.MessagePassingQueue.Supplier;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Stop;
 import magengine.bullet.PresetColor;
-import magengine.bullet.impl.ArrowBullet;
 import magengine.bullet.impl.CircleBullet;
-import magengine.bullet.impl.DiamondBullet;
-import magengine.bullet.impl.FllowerBullet;
-import magengine.bullet.impl.HexagonBullet;
 import magengine.bullet.impl.LongHexagonBullet;
-import magengine.bullet.impl.PlayerBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.danmuku.ADanmuku;
 import magengine.element.BaseElement;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
-import magengine.helper.OvalHelper;
 import magengine.launcher.ArcLauncherGroup;
-import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
 import magengine.util.ElementUtils;
 

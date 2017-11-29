@@ -1,7 +1,5 @@
 package magengine.danmuku.qq;
 
-import magengine.bullet.PresetColor;
-import magengine.bullet.impl.ArrowBullet;
 import magengine.bullet.impl.StarBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.danmuku.ADanmuku;
@@ -10,9 +8,6 @@ import magengine.launcher.OvalLauncherGroup;
 import magengine.util.ElementUtils;
 
 import java.util.concurrent.TimeUnit;
-
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Stop;
 
 public class QQDemoDanmuku extends ADanmuku {
 	public static final long DURATION = 10000;

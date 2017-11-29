@@ -93,16 +93,15 @@ public class MoveHandler implements Runnable {
 	}
 
 	private void gameLogic(){
-		Iterator<Entry<String, Moveable>> iter = wantMoveMap.entrySet().iterator();
-		while (iter.hasNext()) {
-			entry = iter.next();
+		for (Entry<String, Moveable> stringMoveableEntry : wantMoveMap.entrySet()) {
+			entry = stringMoveableEntry;
 			m = entry.getValue();
 			m.modify();
 			if (m instanceof BaseElement) {
 				if (((BaseElement) m).getLambdaModify() != null) {
 					((BaseElement) m).getLambdaModify().accept((BaseElement) m);
 				}
-				if (((BaseElement) m).getWantBeRemoved() == true) {
+				if (((BaseElement) m).getWantBeRemoved()) {
 					removeElement(entry.getKey());
 					continue;
 				}

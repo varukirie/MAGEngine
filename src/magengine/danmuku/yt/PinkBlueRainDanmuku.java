@@ -1,22 +1,14 @@
 package magengine.danmuku.yt;
 
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Stop;
 import magengine.bullet.PresetColor;
-import magengine.bullet.impl.CircleBullet;
 import magengine.bullet.impl.HexagonBullet;
 import magengine.bullet.impl.LongHexagonBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.danmuku.ADanmuku;
-import magengine.element.BaseElement;
 import magengine.game.LogicExecutor;
-import magengine.helper.OvalHelper;
-import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
-import magengine.util.ElementUtils;
 
 public class PinkBlueRainDanmuku extends ADanmuku {
 

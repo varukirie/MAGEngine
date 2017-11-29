@@ -1,16 +1,9 @@
 package magengine.ui;
 
-import org.ietf.jgss.GSSContext;
-
-import com.sun.glass.ui.PlatformFactory;
-
 import application.Main;
-import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.concurrent.ScheduledService;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -32,7 +25,6 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -42,24 +34,11 @@ import javafx.scene.paint.Stop;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextBuilder;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-import magengine.chapter.ChapterDemo;
 import magengine.chapter.TestChapter;
-import magengine.chapter.TestChapter1;
-import magengine.chapter.util.ChapterLoader;
-import magengine.chapter.util.QuickDanmuku;
-import magengine.control.PlayerControlHandler;
-import magengine.control.PlayerLaunchHandler;
-import magengine.element.impl.DisplayMessage;
-import magengine.element.impl.Player;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
 import magengine.game.MoveHandler;
-import magengine.paint.MyCanvas;
-import magengine.util.DI;
-import magengine.util.ElementUtils;
 
 /**
  * 负责Scene切换
@@ -104,47 +83,17 @@ public class SceneManager {
 			System.exit(-1);
 		});
 		bStart.addEventHandler(MouseEvent.MOUSE_ENTERED,
-		        new EventHandler<MouseEvent>() {
-		          @Override
-		          public void handle(MouseEvent e) {
-		        	  bStart.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;");
-		          }
-		        });
+                e -> bStart.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;"));
 		bStart.addEventHandler(MouseEvent.MOUSE_EXITED,
-		        new EventHandler<MouseEvent>() {
-		          @Override
-		          public void handle(MouseEvent e) {
-		        	  bStart.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
-		          }
-		        });
+                e -> bStart.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;"));
 		bHelp.addEventHandler(MouseEvent.MOUSE_ENTERED,
-		        new EventHandler<MouseEvent>() {
-		          @Override
-		          public void handle(MouseEvent e) {
-		        	  bHelp.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;");
-		          }
-		        });
+                e -> bHelp.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;"));
 		bHelp.addEventHandler(MouseEvent.MOUSE_EXITED,
-		        new EventHandler<MouseEvent>() {
-		          @Override
-		          public void handle(MouseEvent e) {
-		        	  bHelp.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
-		          }
-		        });
+                e -> bHelp.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;"));
 		bExit.addEventHandler(MouseEvent.MOUSE_ENTERED,
-		        new EventHandler<MouseEvent>() {
-		          @Override
-		          public void handle(MouseEvent e) {
-		        	  bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;");
-		          }
-		        });
+                e -> bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;"));
 		bExit.addEventHandler(MouseEvent.MOUSE_EXITED,
-		        new EventHandler<MouseEvent>() {
-		          @Override
-		          public void handle(MouseEvent e) {
-		        	  bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
-		          }
-		        });
+                e -> bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;"));
 		bStart.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
 		bHelp.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
 		bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
@@ -217,19 +166,9 @@ public class SceneManager {
 			startMenu();
 		});
 		bExit.addEventHandler(MouseEvent.MOUSE_ENTERED,
-		        new EventHandler<MouseEvent>() {
-		          @Override
-		          public void handle(MouseEvent e) {
-		        	  bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;");
-		          }
-		        });
+                e -> bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;"));
 		bExit.addEventHandler(MouseEvent.MOUSE_EXITED,
-		        new EventHandler<MouseEvent>() {
-		          @Override
-		          public void handle(MouseEvent e) {
-		        	  bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
-		          }
-		        });
+                e -> bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;"));
 		bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
 		VBox paneBt = new VBox(100);
 		paneBt.setAlignment(Pos.TOP_CENTER);
@@ -272,33 +211,13 @@ public class SceneManager {
 			startMenu();
 		});
 		bReset.addEventHandler(MouseEvent.MOUSE_ENTERED,
-		        new EventHandler<MouseEvent>() {
-		          @Override
-		          public void handle(MouseEvent e) {
-		        	  bReset.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;");
-		          }
-		        });
+                e -> bReset.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;"));
 		bReset.addEventHandler(MouseEvent.MOUSE_EXITED,
-		        new EventHandler<MouseEvent>() {
-		          @Override
-		          public void handle(MouseEvent e) {
-		        	  bReset.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
-		          }
-		        });
+                e -> bReset.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;"));
 		bExit.addEventHandler(MouseEvent.MOUSE_ENTERED,
-		        new EventHandler<MouseEvent>() {
-		          @Override
-		          public void handle(MouseEvent e) {
-		        	  bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;");
-		          }
-		        });
+                e -> bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;"));
 		bExit.addEventHandler(MouseEvent.MOUSE_EXITED,
-		        new EventHandler<MouseEvent>() {
-		          @Override
-		          public void handle(MouseEvent e) {
-		        	  bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
-		          }
-		        });
+                e -> bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;"));
 		bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
 		bReset.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
 		paneBt.getChildren().addAll(bReset,bExit);
@@ -335,33 +254,13 @@ public class SceneManager {
 			startMenu();
 		});
 		bReset.addEventHandler(MouseEvent.MOUSE_ENTERED,
-		        new EventHandler<MouseEvent>() {
-		          @Override
-		          public void handle(MouseEvent e) {
-		        	  bReset.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;");
-		          }
-		        });
+                e -> bReset.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;"));
 		bReset.addEventHandler(MouseEvent.MOUSE_EXITED,
-		        new EventHandler<MouseEvent>() {
-		          @Override
-		          public void handle(MouseEvent e) {
-		        	  bReset.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
-		          }
-		        });
+                e -> bReset.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;"));
 		bExit.addEventHandler(MouseEvent.MOUSE_ENTERED,
-		        new EventHandler<MouseEvent>() {
-		          @Override
-		          public void handle(MouseEvent e) {
-		        	  bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;");
-		          }
-		        });
+                e -> bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;"));
 		bExit.addEventHandler(MouseEvent.MOUSE_EXITED,
-		        new EventHandler<MouseEvent>() {
-		          @Override
-		          public void handle(MouseEvent e) {
-		        	  bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
-		          }
-		        });
+                e -> bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;"));
 		bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
 		bReset.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
 		paneBt.getChildren().addAll(bReset,bExit);
@@ -403,33 +302,13 @@ public class SceneManager {
 			startMenu();
 		});
 		bResume.addEventHandler(MouseEvent.MOUSE_ENTERED,
-		        new EventHandler<MouseEvent>() {
-		          @Override
-		          public void handle(MouseEvent e) {
-		        	  bResume.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;");
-		          }
-		        });
+                e -> bResume.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;"));
 		bResume.addEventHandler(MouseEvent.MOUSE_EXITED,
-		        new EventHandler<MouseEvent>() {
-		          @Override
-		          public void handle(MouseEvent e) {
-		        	  bResume.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
-		          }
-		        });
+                e -> bResume.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;"));
 		bExit.addEventHandler(MouseEvent.MOUSE_ENTERED,
-		        new EventHandler<MouseEvent>() {
-		          @Override
-		          public void handle(MouseEvent e) {
-		        	  bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;");
-		          }
-		        });
+                e -> bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:#fff;"));
 		bExit.addEventHandler(MouseEvent.MOUSE_EXITED,
-		        new EventHandler<MouseEvent>() {
-		          @Override
-		          public void handle(MouseEvent e) {
-		        	  bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
-		          }
-		        });
+                e -> bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;"));
 		bExit.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
 		bResume.setStyle("-fx-font: 50 arial; -fx-background-color:null; -fx-text-fill:grey;");
 		paneBt.getChildren().addAll(bResume,bExit);

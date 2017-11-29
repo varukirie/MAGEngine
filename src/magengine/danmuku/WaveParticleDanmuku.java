@@ -7,7 +7,6 @@ import java.util.function.Supplier;
 
 import javafx.scene.paint.Color;
 import magengine.bullet.impl.HexagonBullet;
-import magengine.bullet.impl.PetalBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.element.BaseElement;
 import magengine.game.GameSession;

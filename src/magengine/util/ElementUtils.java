@@ -2,13 +2,10 @@ package magengine.util;
 
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Consumer;
 
 import application.Main;
-import javafx.application.Platform;
 import javafx.scene.layout.StackPane;
-import magengine.bullet.Bullet;
 import magengine.element.BaseElement;
 import magengine.element.DurationManage;
 import magengine.element.Initializable;
@@ -16,7 +13,6 @@ import magengine.element.Moveable;
 import magengine.element.Paintable;
 import magengine.element.PolygonCollision;
 import magengine.element.impl.Area;
-import magengine.enemy.AEnemy;
 import magengine.enemy.APolygonEnemy;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
@@ -149,7 +145,7 @@ public class ElementUtils {
 	private Random random = GameSession.rand();
 
 	public void addAll(BaseElement... value) {
-		for (int i = 0; i < value.length; i++) {
+		for (BaseElement aValue : value) {
 			this.add(random.nextLong() + "", value);
 		}
 	}

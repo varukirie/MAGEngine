@@ -1,7 +1,6 @@
 package magengine.danmuku;
 
 import java.util.Random;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 

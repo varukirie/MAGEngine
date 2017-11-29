@@ -14,8 +14,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -24,7 +22,6 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -41,7 +38,6 @@ import magengine.chapter.util.ChapterLoader;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.control.PlayerControlHandler;
 import magengine.control.PlayerLaunchHandler;
-import magengine.element.BaseElement;
 import magengine.element.impl.BloodBar;
 import magengine.element.impl.BombPainting;
 import magengine.element.impl.DisplayMessage;
@@ -251,12 +247,7 @@ public class GameSession {
 		timer.start();
 		DI.di().put("animationTimer", timer);
 		//关闭窗口时关闭所有线程
-		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			@Override
-			public void handle(WindowEvent event) {
-				shutdownGame();
-			}
-		});
+		primaryStage.setOnCloseRequest(event -> shutdownGame());
 
 		
 		
@@ -331,9 +322,7 @@ public class GameSession {
 				if(loadChapterFuture!=null){
 					try {
 						loadChapterFuture.get();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					} catch (ExecutionException e) {
+					} catch (InterruptedException | ExecutionException e) {
 						e.printStackTrace();
 					}
 				}

@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.Polygon;
 import application.Main;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import magengine.bullet.impl.PlayerBullet;
 import magengine.element.PolygonCollision;
 import magengine.game.GameSession;
 import magengine.util.CollisionTeam;

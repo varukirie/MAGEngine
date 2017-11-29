@@ -6,7 +6,6 @@ import application.Main;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import magengine.bullet.Bullet;
 import magengine.element.BaseElement;
 import magengine.element.LimitedByCanvas;
 import magengine.element.PolygonCollision;
@@ -169,7 +168,7 @@ public class Player extends BaseElement implements LimitedByCanvas ,PolygonColli
 	@Override
 	public void onCollision(PolygonCollision m) {
 		if(m.getTeam().equals(CollisionTeam.ENEMY_BULLET)){
-			if(noHurtMode==false){
+			if(!noHurtMode){
 				if(GameSession.getGameSession().decHealthAndCheck()&&!Main.DEBUG_NO_FAILURE){
 						GameSession.getGameSession().failure();
 				}else{

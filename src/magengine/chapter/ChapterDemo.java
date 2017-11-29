@@ -1,13 +1,10 @@
 package magengine.chapter;
 
 import java.util.Random;
-import java.util.UUID;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import javafx.application.Platform;
 import javafx.scene.effect.Bloom;
-import magengine.bullet.Bullet;
 import magengine.bullet.impl.ArrowBullet;
 import magengine.bullet.impl.DefaultBullet;
 import magengine.bullet.impl.StarBullet;
@@ -17,7 +14,6 @@ import magengine.chapter.util.QuickDanmuku;
 import magengine.chapter.util.SeqDanmuku;
 import magengine.game.LogicExecutor;
 import magengine.launcher.ArcLauncherGroup;
-import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
 import magengine.paint.MyCanvas;
 import magengine.paint.MyCanvasSwitcher;

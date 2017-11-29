@@ -1,13 +1,9 @@
 package magengine.chapter.util;
 
-import java.io.File;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.function.Consumer;
 
 import javafx.application.Platform;
 import javafx.scene.effect.Bloom;

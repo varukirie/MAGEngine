@@ -1,13 +1,9 @@
 package magengine.element.impl;
 
-import java.util.Arrays;
-
-import application.Main;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import magengine.paint.MyCanvas;
-import magengine.util.Transform;
-//TODO 
+
+//TODO
 public class InvertCircleArea extends CircleArea {
 
 	public InvertCircleArea(double x, double y, double r) {

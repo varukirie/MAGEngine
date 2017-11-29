@@ -1,14 +1,12 @@
 package magengine.danmuku;
 
 import java.util.Random;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import magengine.bullet.impl.DefaultBullet;
 import magengine.bullet.impl.StarBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.chapter.util.SeqDanmuku;
-import magengine.element.BaseElement;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
 import magengine.helper.PolygonalLineHelper;

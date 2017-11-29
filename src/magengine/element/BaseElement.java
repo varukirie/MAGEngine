@@ -47,7 +47,7 @@ public abstract class BaseElement implements Moveable, Paintable, Accelerated {
 	}
 
 	public void setX(double x) {
-		if (this.xProperty.isBound() == false)
+		if (!this.xProperty.isBound())
 			this.xProperty.set(x);
 	}
 
@@ -56,7 +56,7 @@ public abstract class BaseElement implements Moveable, Paintable, Accelerated {
 	}
 
 	public void setY(double y) {
-		if (this.yProperty.isBound() == false)
+		if (!this.yProperty.isBound())
 			this.yProperty.set(y);
 	}
 

@@ -19,7 +19,7 @@ public abstract class ADelayDanmukuEnemy extends APolygonEnemy {
 		super(x, y);
 	}
 
-	private List<ADanmuku> danmukuList = new ArrayList<ADanmuku>();
+	private List<ADanmuku> danmukuList = new ArrayList<>();
 
 	public void addDanmuku(ADanmuku danmuku) {
 		danmukuList.add(danmuku);

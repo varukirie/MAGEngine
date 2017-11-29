@@ -2,18 +2,11 @@ package magengine.bullet.impl;
 
 import java.util.function.Function;
 
-import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.effect.Bloom;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.Paint;
-import javafx.scene.paint.RadialGradient;
-import javafx.scene.paint.Stop;
 import magengine.bullet.APolygonBullet;
 import magengine.bullet.RadiusSupplier;
-import magengine.paint.MyCanvasSwitcher;
-import magengine.util.DI;
 import magengine.util.Transform;
 
 /**
