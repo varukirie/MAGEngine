@@ -2,14 +2,19 @@ package magengine.ui;
 
 import org.ietf.jgss.GSSContext;
 
+import com.sun.glass.ui.PlatformFactory;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.concurrent.ScheduledService;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -249,7 +254,7 @@ public class SceneManager {
 		root.setBackground(new Background(bimg));
 		Canvas canvas = new Canvas(900, 200);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
-		VBox pause = new VBox(setTextFont2("Clear and thank you for playing!"));
+		VBox pause = new VBox(setTextFont2("Thank you for playing!"));
 		VBox paneBt = new VBox(100);
 		String rs = "R E S T A R T";
 		String ex = "E X I T";
@@ -443,7 +448,7 @@ public class SceneManager {
 	
 	
 	public static Text setTextFont(String s){
-		Text text = TextBuilder.create().text(s).font(Font.font("新宋体", 50)).build();
+		Text text = new Text(s);
 		text.setFill(new LinearGradient(0, 0, 1, 2, true, CycleMethod.REPEAT, new
 		         Stop[]{new Stop(0, Color.YELLOW), new Stop(0.5f, Color.BLUE)}));
 		text.setFont(Font.font("黑体", FontWeight.BOLD,50));//斜体
@@ -453,10 +458,10 @@ public class SceneManager {
 	}
 	
 	public static Text setTextFont2(String s){
-		Text text = TextBuilder.create().text(s).font(Font.font("新宋体", 30)).build();
+		Text text = new Text(s);
 		text.setFill(new LinearGradient(0, 0, 1, 2, true, CycleMethod.REPEAT, new
 		         Stop[]{new Stop(0, Color.WHITE), new Stop(0.5f, Color.GREY)}));
-		text.setFont(Font.font("黑体", FontWeight.BOLD,30));//斜体
+		text.setFont(Font.font("黑体", FontWeight.BOLD,50));//斜体
 		text.setStrokeWidth(2);
 		text.setStroke(Color.WHITE);
 		return text;
@@ -507,6 +512,32 @@ public class SceneManager {
 
 	public void setPrimaryStage(Stage primaryStage) {
 		this.primaryStage = primaryStage;
+	}
+	
+	public void shakeInScene(){
+		Parent root  = this.primaryStage.getScene().getRoot();
+		LogicExecutor exec= LogicExecutor.getLogicExecutor();
+		if(exec==null){
+			System.out.println("fail to execute shakeInGameScene():exec==null");
+		}
+		
+		int ct = 20;
+		int itv = 50;
+		for(int i=1;i<=ct;i++){
+			final int ci = i;
+			exec.schedule(()->{
+				Platform.runLater(()->{
+					root.setTranslateX(Math.sin(ci/1.0)*10);
+					root.setTranslateY(Math.sin(ci/1.3)*10);
+				});
+			}, i*itv);
+		}
+		exec.schedule(()->{
+			Platform.runLater(()->{
+				root.setTranslateX(0);
+				root.setTranslateY(0);
+			});
+		}, ct*itv+itv);
 	}
 
 }

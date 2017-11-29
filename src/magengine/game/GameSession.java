@@ -33,7 +33,6 @@ import javafx.scene.paint.Stop;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextBuilder;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import magengine.chapter.util.AChapter;
@@ -42,7 +41,10 @@ import magengine.chapter.util.QuickDanmuku;
 import magengine.control.PlayerControlHandler;
 import magengine.control.PlayerLaunchHandler;
 import magengine.element.BaseElement;
+import magengine.element.impl.BloodBar;
+import magengine.element.impl.BombPainting;
 import magengine.element.impl.DisplayMessage;
+import magengine.element.impl.EmBloodBar;
 import magengine.element.impl.Player;
 import magengine.mulplay.Client;
 import magengine.mulplay.Server;
@@ -57,10 +59,6 @@ import magengine.util.ElementUtils;
 public class GameSession {
 
 	public static GameSession instance = null;
-	public static Canvas canvas = new Canvas(900, 700);  
-    public static GraphicsContext gc = canvas.getGraphicsContext2D();
-    public static BloodBar bb;
-    public static EmBloodBar emBb;
 	private Level level = Level.NORMAL;
 	private static Random rand=null;
 	public static Random rand() {
@@ -72,7 +70,7 @@ public class GameSession {
 	public static final int POWER_LIMIT = 100;
 
 	public static final int PRESET_BOMB = 2;
-	public static final int PRESET_HEALTH = 10;
+	public static final int PRESET_HEALTH = 2;
 	public static final int PRESET_POWER = 0;
 	private int bomb = PRESET_BOMB;
 	private int health = PRESET_HEALTH;
@@ -84,6 +82,9 @@ public class GameSession {
 	
 	public boolean mulplay = false;
 	public boolean mulplayServer=false;
+	public BloodBar bb;
+	public EmBloodBar emBb;
+	public BombPainting bp;
 	public static final int PORT = 10231;
 	public static String remoteHost = "127.0.0.1";
 	private NioEventLoopGroup loopGroup;
@@ -131,6 +132,7 @@ public class GameSession {
 	public boolean useBomb() {
 		if (bomb > 0) {
 			bomb--;
+			bp.paint(getBomb());
 			return true;
 		} else {
 			return false;
@@ -146,10 +148,10 @@ public class GameSession {
 	 * 
 	 * @return 如果死亡了返回true，如果没死返回false
 	 */
-	public boolean decHealthAndCheck(GraphicsContext gc, BloodBar bb) {
+	public boolean decHealthAndCheck() {
 		if (health > 0) {
 			health--;
-			bb.paint(gc);
+			bb.paint(this.getHealth(), PRESET_HEALTH);
 			return false;
 		} else {
 			return true;
@@ -157,10 +159,16 @@ public class GameSession {
 	}
 
 
+	private BackgroundUtil backgroundUtil = new BackgroundUtil();
 	private long  lastTime4bench=0;
 	public void loadGameScene() {
 //		Canvas canvas = new Canvas(900, 700);  
 //	    GraphicsContext gc = canvas.getGraphicsContext2D();
+		this.bb = new BloodBar(600,40,200,30);
+		emBb = new EmBloodBar(870,0,30,700);
+		this.bp = new BombPainting(600,120);
+		bp.paint(getBomb());
+		bb.paint(this.getHealth(), PRESET_HEALTH);
 		Stage primaryStage=SceneManager.getInstance().getPrimaryStage();
 		BorderPane gArea = new BorderPane();
 		BackgroundImage bimg = new BackgroundImage(new Image("/img/starbackground.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -175,14 +183,11 @@ public class GameSession {
 //		VBox power = new VBox(new Label("力量"));
 //		VBox bomb = new VBox(new Label("炸弹"));
 //		VBox life = new VBox(new Label("生命"));
-		bb = new BloodBar(0,0);
-		emBb = new EmBloodBar(0,0);
-		bb.paint(gc);
 //		VBox power = new VBox(setTextFont("POWER"));
 		VBox bomb = new VBox(setTextFont("BOMB"));
 		VBox life = new VBox(setTextFont("LIFE"));
 		StackPane root = new StackPane();
-		BackgroundUtil bu = BackgroundUtil.getInstance();
+		BackgroundUtil bu = backgroundUtil;
 		MyCanvas bgCanvas = bu.getBGCanvas();
 		Image gamebgimg=null;
 		try {
@@ -209,23 +214,7 @@ public class GameSession {
 		Scene scene=new Scene(gArea,900,700);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("MAGEngine!");
-		gArea.getChildren().add(canvas);
-//		new Thread(new Runnable(){
-//
-//			@Override
-//			public void run() {
-//				while(gameRunning){
-//			    try {
-//			    	bb.paint(gc);
-//					Thread.sleep(500);
-//				} catch (InterruptedException e) {
-//					e.printStackTrace();
-//				}
-////			    System.out.println("test thread");
-//				}
-//			}
-//			
-//		}).start();
+		gArea.getChildren().add(bb.getBcanvas());
 		primaryStage.show();
 		
 		LogicExecutor logicExecutor=LogicExecutor.getLogicExecutor();
@@ -248,7 +237,7 @@ public class GameSession {
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
-				BackgroundUtil.getInstance().paintBackground(1);
+				backgroundUtil.paintBackground(1);
 				mh.callRepaint();
 				moveableElementUtils.getSwitcher().repaint();
 				if(Main.DEBUG_RENDER_BENCH){
@@ -312,56 +301,6 @@ public class GameSession {
 		PlayerLaunchHandler.shootSchedule();
 //		ChapterLoader.loadChapter(new ChapterDemo());
 	}
-	public class BloodBar extends BaseElement{
-
-		public BloodBar(double x, double y) {
-			super(x, y);
-		}
-
-		@Override
-		public void paint(GraphicsContext gc) {
-			int x=600,y=40,w,h=30;
-			gc.setFill(Color.MAGENTA);
-			gc.setStroke(Color.RED);
-			gc.fillRect(x, y, 200, h);
-			gc.setFill(Color.RED);
-			w=(int)(200*((getHealth()+1)*1.0/(PRESET_HEALTH+1)));
-			gc.fillRect(x+2, y+2, w-4, h-4);
-		}
-		
-		
-	}
-	
-	public class EmBloodBar extends BaseElement{
-
-		public EmBloodBar(double x, double y) {
-			super(x, y);
-		}
-		
-		public EmBloodBar createEmbb(double x, double y){
-			return new EmBloodBar(x,y);	
-		}
-
-		
-		public void paint(GraphicsContext gc, int HP, int presetHP) {
-			int x=870,y=0,w=30,h,yt=0;
-			gc.setFill(Color.MAGENTA);
-			gc.setStroke(Color.RED);
-			gc.fillRect(x, y, w, 700);
-			gc.setFill(Color.RED);
-			h=(int)(700*((HP+1)*1.0/(presetHP+1)));
-			yt+=700-(int)(700*((HP+1)*1.0/(presetHP+1)));
-			gc.fillRect(x+2, yt+2, w-4, h-4);
-		}
-
-		@Override
-		public void paint(GraphicsContext gc) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		
-	}
 	
 	private void shutdownGame(){
 		MoveHandler mh=((MoveHandler)(DI.di().get("mh")));
@@ -406,7 +345,7 @@ public class GameSession {
 	private Future<?> loadChapterFuture;
 	
 	public Text setTextFont(String s){
-		Text text = TextBuilder.create().text(s).font(Font.font("新宋体", 30)).build();
+		Text text = new Text(s);
 		text.setFill(new LinearGradient(0, 0, 1, 2, true, CycleMethod.REPEAT, new
 		         Stop[]{new Stop(0, Color.RED), new Stop(0.5f, Color.BLUE)}));
 		text.setFont(Font.font("黑体", FontWeight.BOLD,30));//斜体
@@ -528,5 +467,9 @@ public class GameSession {
 	}
 	public Channel getMulplayChannel() {
 		return mulplayChannel;
+	}
+	
+	public BackgroundUtil getBackgroundUtil() {
+		return backgroundUtil;
 	}
 }

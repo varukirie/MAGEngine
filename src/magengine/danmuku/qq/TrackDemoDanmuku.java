@@ -34,12 +34,12 @@ public class TrackDemoDanmuku extends ADanmuku{
 	@Override
 	public void executeDanmuku() {
 		// TODO Auto-generated method stub
-		Stop[] YellowAndGreenstops = new Stop[]{new Stop(0, Color.YELLOW), new Stop(1, Color.GREEN)};
+		Stop[] YellowAndGreenstops = new Stop[]{new Stop(1, Color.YELLOW), new Stop(0, Color.GREEN)};
 		Stop[] RedAndOrangestops = new Stop[]{new Stop(1, Color.RED), new Stop(0, Color.ORANGE)};
 		Stop[] BlueAndWhitestops = new Stop[]{new Stop(1, Color.BLUE), new Stop(0, Color.WHITE)};
 		
-		followBulletLauncher(midX+200, midY-50, 2*Math.PI/3, speed+40, DURATION, BlueAndWhitestops);
-		aroundFollowCircleBulletLauncher(midX, midY, Math.PI/2, speed, DURATION, RedAndOrangestops);
+		followBulletLauncher(midX+200, midY-50, 2*Math.PI/3, speed+40, DURATION, YellowAndGreenstops);
+		aroundFollowCircleBulletLauncher(midX, midY, Math.PI/2, speed, DURATION, BlueAndWhitestops);
 		followLongBulletLauncher(midX, midY, Math.PI/2, DURATION, YellowAndGreenstops);
 	}
 	
@@ -78,11 +78,22 @@ public class TrackDemoDanmuku extends ADanmuku{
 		OvalLauncherGroup oLG = new OvalLauncherGroup(midX, midY, 20);
 		oLG.setDuration(DURATION);
 		oLG.setLauncherConfig((aroundFollowLauncher)->{
+//			aroundFollowLauncher.bindToXY(getSourceElement());
 			aroundFollowLauncher.setBulletType(CircleBullet.class);
+			aroundFollowLauncher.setBulletConfig(b->{
+				((CircleBullet)b).setR(8);
+			});
 			aroundFollowLauncher.setBulletEvent((executor, bullet)->{
 				executor.schedule(()->{
-					((CircleBullet)bullet).setR(10);
+					((CircleBullet)bullet).setR(15);
 					((CircleBullet)bullet).setColorSupplier(PresetColor.getByStops(stops));
+//					quick.VToByDirection(bullet, quick.getPlayerDirectionAngle(bullet));
+					quick.stopBullet(bullet);
+				}, 4000 ,TimeUnit.MILLISECONDS);
+				executor.schedule(()->{
+//					((CircleBullet)bullet).setR(15);
+//					((CircleBullet)bullet).setColorSupplier(PresetColor.getByStops(stops));
+					quick.runBullet(bullet);
 					quick.VToByDirection(bullet, quick.getPlayerDirectionAngle(bullet));
 				}, 5000 ,TimeUnit.MILLISECONDS);
 			});//setBulletEvent
@@ -99,9 +110,10 @@ public class TrackDemoDanmuku extends ADanmuku{
 		OvalLauncherGroup oLGForLongBullet = new OvalLauncherGroup(midX, midY);
 		oLGForLongBullet.setAmount(20);
 		oLGForLongBullet.setLauncherConfig((longBulletLauncher)->{
-			longBulletLauncher.getxProperty().bind(getSourceElement().getxProperty());
-			longBulletLauncher.getyProperty().bind(getSourceElement().getyProperty());
+			longBulletLauncher.bindToXY(getSourceElement());
 			longBulletLauncher.setBulletType(LongHexagonBullet.class);
+			longBulletLauncher.setInterval(300);
+			longBulletLauncher.setDuration(900);
 			longBulletLauncher.setBulletConfig(b->{
 				((LongHexagonBullet)b).setR(3);
 			});

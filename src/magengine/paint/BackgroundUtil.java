@@ -5,10 +5,6 @@ import javafx.scene.image.Image;
 
 public class BackgroundUtil {
 
-	private static BackgroundUtil instance = new BackgroundUtil();
-	public static BackgroundUtil getInstance(){
-		return instance;
-	}
 	private Image bgimg = null;
 	public void setBackgroundImg(Image img){
 		bgimg=img;
