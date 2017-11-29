@@ -206,8 +206,9 @@ public class SceneManager {
 		Canvas canvas = new Canvas(900, 200);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		VBox text1 = new VBox(setTextFont2("方向键移动"));
-		VBox text2 = new VBox(setTextFont2("x间发射普通子弹"));
+		VBox text2 = new VBox(setTextFont2("x键发射普通子弹"));
 		VBox text3 = new VBox(setTextFont2("c键发射炸弹"));
+		VBox text4 = new VBox(setTextFont2("shift键慢速模式"));
 		VBox help = new VBox(setTextFont("H E L P"));
 		String ex = "E X I T";
 		Button bExit = new Button(ex);
@@ -236,11 +237,12 @@ public class SceneManager {
 		text1.setAlignment(Pos.TOP_CENTER);
 		text2.setAlignment(Pos.TOP_CENTER);
 		text3.setAlignment(Pos.TOP_CENTER);
+		text4.setAlignment(Pos.TOP_CENTER);
 		bExit.setAlignment(Pos.BOTTOM_CENTER);
-		btPane.setMargin(help, new Insets(100,0,100,0));
+		btPane.setMargin(help, new Insets(50,0,0,0));
 		btPane.setTop(help);
 		btPane.setBottom(bExit);
-		paneBt.getChildren().addAll(text1,text2,text3);
+		paneBt.getChildren().addAll(text1,text2,text3,text4);
 		btPane.setCenter(paneBt);
 		root.getChildren().add(btPane);
 		Scene scene = new Scene(root,900,700);
