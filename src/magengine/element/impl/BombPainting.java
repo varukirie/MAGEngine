@@ -21,7 +21,7 @@ public class BombPainting {
 		Platform.runLater(()->{
 			int xt = this.x;
 			GraphicsContext gc = canvas.getGraphicsContext2D();
-			gc.clearRect(x, y, 900, 120);
+			gc.clearRect(600, 120, 250, 50);
 			for(int i=0;i<bombnum; i++){
 			gc.drawImage(img, xt, y);
 			xt+=50;
