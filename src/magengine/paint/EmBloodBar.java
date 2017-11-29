@@ -1,4 +1,4 @@
-package magengine.element.impl;
+package magengine.paint;
 
 import javafx.application.Platform;
 import javafx.scene.canvas.Canvas;
