@@ -69,8 +69,8 @@ public class GameSession {
 	public static final int HEALTH_LIMIT = 10;
 	public static final int POWER_LIMIT = 100;
 
-	public static final int PRESET_BOMB = 2;
-	public static final int PRESET_HEALTH = 2;
+	public static final int PRESET_BOMB = 3;
+	public static final int PRESET_HEALTH = 4;
 	public static final int PRESET_POWER = 0;
 	private int bomb = PRESET_BOMB;
 	private int health = PRESET_HEALTH;

@@ -26,9 +26,15 @@ public class DisplayMessage extends BaseElement {
 		if(Main.DEBUG){
 			MoveHandler mh = (MoveHandler) DI.di().get("mh");
 			msg=" Element count="+mh.getSize()+" Executor　Task Count:"+LogicExecutor.getLogicExecutor().getTaskCount();
+		}else{
+			if(Main.DEBUG_NO_FAILURE){
+				msg=" NO_FAIL_MODE ";
+			}
 		}
+		
 		gc.setFill(Color.WHITE);
-		gc.fillText("Time = "+(LogicExecutor.gameTime()-this.startTime)/1000+msg+"\n"+GameSession.getGameSession(), getX(), getY());
+		gc.fillText("Time = "+(LogicExecutor.gameTime()-this.startTime)/1000+msg, getX(), getY());
+//		gc.fillText("Time = "+(LogicExecutor.gameTime()-this.startTime)/1000+msg+"\n"+GameSession.getGameSession(), getX(), getY());
 
 	}
 

@@ -4,6 +4,7 @@ import org.ietf.jgss.GSSContext;
 
 import com.sun.glass.ui.PlatformFactory;
 
+import application.Main;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -78,6 +79,7 @@ public class SceneManager {
 	private static SceneManager instance = new SceneManager();
 	private Stage primaryStage;
 	public void startMenu(){
+		primaryStage.setTitle("MAGEngine");
 		primaryStage.setResizable(false);
 		StackPane root = new StackPane();
 		BorderPane btPane = new BorderPane();
@@ -161,11 +163,11 @@ public class SceneManager {
 		root.getChildren().add(btPane);
 //		root.getChildren().add(canvas);
 		Scene scene = new Scene(root,900,700);
-//		scene.setOnKeyReleased((e) -> {
-//			if (KeyCode.R.equals(e.getCode())) {
-//				SceneManager.getInstance().startGame();
-//			}
-//		});
+		scene.setOnKeyReleased((e) -> {
+			if (KeyCode.F12.equals(e.getCode())) {
+				Main.DEBUG_NO_FAILURE=!Main.DEBUG_NO_FAILURE;
+			}
+		});
 //		bStart.addActionListener(new ActionListener(){
 //			@Override
 //			public void actionPerformed(ActionEvent e) {
@@ -502,7 +504,6 @@ public class SceneManager {
 		StackPane root = new StackPane();
 		root.getChildren().add(grid);
 		Scene scene = new Scene(root, 600, 300);
-		primaryStage.setTitle("MAGEngine");
 		primaryStage.setScene(scene);
 	}
 

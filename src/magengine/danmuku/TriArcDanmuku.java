@@ -16,7 +16,7 @@ public class TriArcDanmuku extends ADanmuku {
 			launcher.bindToXY(sourceElement);
 			launcher.bindToWantBeRemoved(sourceElement);
 		};
-		new ArcLauncherGroup(sourceElement.getX(), sourceElement.getY(), Math.PI/2, Math.PI/3, 6).setLauncherConfig(config).delayExecute(700);
+		new ArcLauncherGroup(sourceElement.getX(), sourceElement.getY(), Math.PI/2, Math.PI/3, 3).setLauncherConfig(config).delayExecute(700);
 		ArcLauncherGroup alg = new ArcLauncherGroup(sourceElement.getX(), sourceElement.getY(), Math.PI/2, Math.PI/3, 6);
 		alg.setLauncherConfig((launcher)->{
 			config.accept(launcher);
@@ -25,7 +25,7 @@ public class TriArcDanmuku extends ADanmuku {
 			launcher.bindToWantBeRemoved(sourceElement);
 		}).delayExecute(850);
 
-		new ArcLauncherGroup(sourceElement.getX(), sourceElement.getY(), Math.PI/2+Math.PI/5, Math.PI/3, 6).setLauncherConfig(config).delayExecute(1300);
+		new ArcLauncherGroup(sourceElement.getX(), sourceElement.getY(), Math.PI/2+Math.PI/5, Math.PI/3, 5).setLauncherConfig(config).delayExecute(1300);
 		new ArcLauncherGroup(sourceElement.getX(), sourceElement.getY(), Math.PI/2-Math.PI/5, Math.PI/3, 6).setLauncherConfig(config).delayExecute(1900);
 	}
 
