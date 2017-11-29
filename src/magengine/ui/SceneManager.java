@@ -518,7 +518,7 @@ public class SceneManager {
 		shakeInScene(1000);
 	}
 	public void shakeInScene(long duration){
-		Parent root  = this.primaryStage.getScene().getRoot();
+		Parent gameNode  =GameSession.getGameSession().getGameRoot();
 		LogicExecutor exec= LogicExecutor.getLogicExecutor();
 		if(exec==null){
 			System.out.println("fail to execute shakeInGameScene():exec==null");
@@ -531,15 +531,15 @@ public class SceneManager {
 			final int ci = i;
 			exec.schedule(()->{
 				Platform.runLater(()->{
-					root.setTranslateX(Math.sin(ci/1.0)*10);
-					root.setTranslateY(Math.sin(ci/1.3)*10);
+					gameNode.setTranslateX(Math.sin(ci/1.0)*10);
+					gameNode.setTranslateY(Math.sin(ci/1.3)*10);
 				});
 			}, i*itv);
 		}
 		exec.schedule(()->{
 			Platform.runLater(()->{
-				root.setTranslateX(0);
-				root.setTranslateY(0);
+				gameNode.setTranslateX(0);
+				gameNode.setTranslateY(0);
 			});
 		}, ct*itv+itv);
 	}

@@ -24,6 +24,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -79,6 +80,7 @@ public class GameSession {
 	public final double PRESET_PLAYER_POSITION_X=MyCanvas.CANVAS_WIDTH/2;
 	public final double PRESET_PLAYER_POSITION_Y=MyCanvas.CANVAS_HEIGHT-100;
 	public final double MULPLAY_PLAYER_POSITION_DELTA_X=100;
+	
 	
 	public boolean mulplay = false;
 	public boolean mulplayServer=false;
@@ -158,7 +160,7 @@ public class GameSession {
 		}
 	}
 
-
+	private StackPane gameRoot ;
 	private BackgroundUtil backgroundUtil = new BackgroundUtil();
 	private long  lastTime4bench=0;
 	public void loadGameScene() {
@@ -203,7 +205,7 @@ public class GameSession {
 		root.getChildren().add(staticCanvas);
 		root.getChildren().add(moveableCanvas);
 		root.getChildren().add(secondaryMCanvas);
-		
+		this.gameRoot = root;
 		gDataArea.getChildren().addAll(life,bomb);
 		gDataArea.setAlignment(Pos.TOP_LEFT);;
 		gArea.setLeft(root);
@@ -471,5 +473,8 @@ public class GameSession {
 	
 	public BackgroundUtil getBackgroundUtil() {
 		return backgroundUtil;
+	}
+	public StackPane getGameRoot() {
+		return gameRoot;
 	}
 }
