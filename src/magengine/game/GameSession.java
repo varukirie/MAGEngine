@@ -42,6 +42,7 @@ import magengine.control.PlayerControlHandler;
 import magengine.control.PlayerLaunchHandler;
 import magengine.element.BaseElement;
 import magengine.element.impl.BloodBar;
+import magengine.element.impl.BombPainting;
 import magengine.element.impl.DisplayMessage;
 import magengine.element.impl.EmBloodBar;
 import magengine.element.impl.Player;
@@ -69,7 +70,7 @@ public class GameSession {
 	public static final int POWER_LIMIT = 100;
 
 	public static final int PRESET_BOMB = 2;
-	public static final int PRESET_HEALTH = 3;
+	public static final int PRESET_HEALTH = 2;
 	public static final int PRESET_POWER = 0;
 	private int bomb = PRESET_BOMB;
 	private int health = PRESET_HEALTH;
@@ -83,6 +84,7 @@ public class GameSession {
 	public boolean mulplayServer=false;
 	public BloodBar bb;
 	public EmBloodBar emBb;
+	public BombPainting bp;
 	public static final int PORT = 10231;
 	public static String remoteHost = "127.0.0.1";
 	private NioEventLoopGroup loopGroup;
@@ -130,6 +132,7 @@ public class GameSession {
 	public boolean useBomb() {
 		if (bomb > 0) {
 			bomb--;
+			bp.paint(getBomb());
 			return true;
 		} else {
 			return false;
@@ -163,6 +166,8 @@ public class GameSession {
 //	    GraphicsContext gc = canvas.getGraphicsContext2D();
 		this.bb = new BloodBar(600,40,200,30);
 		emBb = new EmBloodBar(870,0,30,700);
+		this.bp = new BombPainting(600,120);
+		bp.paint(getBomb());
 		bb.paint(this.getHealth(), this.PRESET_HEALTH);
 		Stage primaryStage=SceneManager.getInstance().getPrimaryStage();
 		BorderPane gArea = new BorderPane();
