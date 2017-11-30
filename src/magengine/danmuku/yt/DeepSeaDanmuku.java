@@ -202,7 +202,6 @@ public class DeepSeaDanmuku extends ADanmuku {
 			
 
 		     quick.bindToWantBeRemoved(launcher, getSourceElement());
-		     quick.bindToXY(launcher, getSourceElement());
 		     
   		    mEU.add("launcher"+midY, launcher);
 		},delayTime+interval);
