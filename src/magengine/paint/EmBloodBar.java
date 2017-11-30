@@ -39,8 +39,13 @@ public class EmBloodBar {
 			ht = (int) (h * ((HP + 1) * 1.0 / (presetHP + 1)));
 			yt += h - (int) (h * ((HP + 1) * 1.0 / (presetHP + 1)));
 			gc.fillRect(x + 2, yt + 2, w - 4, ht - 4);
-			if (HP <= 0)
-				gc.clearRect(x, y, w, h);
+		});
+	}
+	
+	public void clear(){
+		Platform.runLater(() -> {
+			GraphicsContext gc = bcanvas.getGraphicsContext2D();
+			gc.clearRect(x, y, w, h);
 		});
 	}
 }

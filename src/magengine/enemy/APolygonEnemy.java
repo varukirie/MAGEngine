@@ -68,7 +68,7 @@ public abstract class APolygonEnemy extends AEnemy implements PolygonCollision{
 			if(this.addAndGetHP(-1)<=0){
 				this.setWantBeRemoved(true);
 			}
-			this.paintBloodBar(GameSession.getGameSession().emBb);
+			this.paintBloodBar(this.getEmBb());
 		}
 	
 	}
