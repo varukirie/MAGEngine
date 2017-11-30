@@ -7,6 +7,12 @@ import magengine.element.Initializable;
 import magengine.paint.EmBloodBar;
 
 public abstract class AEnemy extends BaseElement implements Initializable{
+	@Override
+	public void onRemove() {
+		super.onRemove();
+		this.emBb.clear();
+	}
+
 	public AEnemy(double x, double y, double velocityX, double velocityY, double ax, double ay) {
 		super(x, y, velocityX, velocityY, ax, ay);
 	}
@@ -21,6 +27,15 @@ public abstract class AEnemy extends BaseElement implements Initializable{
 	
 	private AtomicInteger HP=new AtomicInteger(10);
 	private boolean bloodState = true;
+	private EmBloodBar emBb = new EmBloodBar(870,0,30,700);
+	public EmBloodBar getEmBb() {
+		return emBb;
+	}
+
+	public void setEmBb(EmBloodBar emBb) {
+		this.emBb = emBb;
+	}
+
 	public boolean isBloodState() {
 		return bloodState;
 	}

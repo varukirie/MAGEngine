@@ -81,7 +81,6 @@ public class GameSession {
 	public boolean mulplay = false;
 	public boolean mulplayServer=false;
 	public BloodBar bb;
-	public EmBloodBar emBb;
 	public BombPainting bp;
 	public static final int PORT = 10231;
 	public static String remoteHost = "127.0.0.1";
@@ -160,10 +159,7 @@ public class GameSession {
 	private BackgroundUtil backgroundUtil = new BackgroundUtil();
 	private long  lastTime4bench=0;
 	public void loadGameScene() {
-//		Canvas canvas = new Canvas(900, 700);  
-//	    GraphicsContext gc = canvas.getGraphicsContext2D();
 		this.bb = new BloodBar(600,40,200,30);
-		emBb = new EmBloodBar(870,0,30,700);
 		this.bp = new BombPainting(600,120);
 		bp.paint(getBomb());
 		bb.paint(this.getHealth(), PRESET_HEALTH);
@@ -175,13 +171,6 @@ public class GameSession {
 		FlowPane gDataArea = new FlowPane(Orientation.VERTICAL,10,50);//未设置node gap
 //		gDataArea.setBackground(new Background(new BackgroundFill(Color.GREY,null,null)));
 		gDataArea.setPrefWrapLength(200);
-//		Label label1 = new Label();
-//		label1.setFont(Font.font("力量"));
-//		power.getChildren().add(label1);字体样式测试
-//		VBox power = new VBox(new Label("力量"));
-//		VBox bomb = new VBox(new Label("炸弹"));
-//		VBox life = new VBox(new Label("生命"));
-//		VBox power = new VBox(setTextFont("POWER"));
 		VBox bomb = new VBox(setTextFont("BOMB"));
 		VBox life = new VBox(setTextFont("LIFE"));
 		StackPane root = new StackPane();
