@@ -294,7 +294,7 @@ public class SceneManager {
 		Button bExit = new Button(ex);
 		final Runnable resume = ()->{
 			primaryStage.setScene(gameScene);
-			MoveHandler.setDeltaTimeFactor(1);
+			MoveHandler.setDeltaTimeFactor(MoveHandler.PRESET_DELTA_TIME_FACTOR);
 			BGMUtil.play();
 		};
 		bResume.setOnAction((ActionEvent e) -> {

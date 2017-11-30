@@ -53,7 +53,7 @@ public class ChapterLoader {
 		c.design(LogicExecutor.getLogicExecutor(),staticCanvas,mEU);
 		long end = System.currentTimeMillis();
 		System.out.println("装载关卡使用 "+(end-start)+" 毫秒");
-		MoveHandler.setDeltaTimeFactor(1);
+		MoveHandler.setDeltaTimeFactor(MoveHandler.PRESET_DELTA_TIME_FACTOR);
 		
 		scanPackage4CanvasConfig();
 		Platform.runLater(() -> {
