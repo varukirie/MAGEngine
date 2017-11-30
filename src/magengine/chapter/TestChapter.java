@@ -4,6 +4,8 @@ import java.util.Random;
 import java.util.function.Consumer;
 
 import javafx.application.Platform;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import magengine.chapter.util.AChapter;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.control.PlayerControlHandler;
@@ -21,6 +23,7 @@ import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
 import magengine.paint.MyCanvas;
 import magengine.ui.SceneManager;
+import magengine.util.BGMUtil;
 import magengine.util.C;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
@@ -32,9 +35,11 @@ public class TestChapter extends AChapter {
 	Random r = new Random(C.SEED);
 	LogicExecutor exec = LogicExecutor.getLogicExecutor();
 	ElementUtils mEU = ((ElementUtils) DI.di().get("mEU"));
-
+	
 	@Override
 	public void design(LogicExecutor exec, MyCanvas staticCanvas, ElementUtils mEU) {
+		BGMUtil.loadResource("/music/arrival.mp3");
+		BGMUtil.play();
 		createElf(elf1 -> {
 			exec.schedule(()->{
 				createElf(elf2 -> {

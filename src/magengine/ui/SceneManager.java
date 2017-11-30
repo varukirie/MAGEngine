@@ -39,6 +39,7 @@ import magengine.chapter.TestChapter;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
 import magengine.game.MoveHandler;
+import magengine.util.BGMUtil;
 
 /**
  * 负责Scene切换
@@ -276,6 +277,7 @@ public class SceneManager {
 	}
 	
 	public void loadPauseScene() {
+		BGMUtil.pause();
 		Scene gameScene=this.primaryStage.getScene();
 		primaryStage.setResizable(false);
 		StackPane root = new StackPane();
@@ -293,6 +295,7 @@ public class SceneManager {
 		final Runnable resume = ()->{
 			primaryStage.setScene(gameScene);
 			MoveHandler.setDeltaTimeFactor(1);
+			BGMUtil.play();
 		};
 		bResume.setOnAction((ActionEvent e) -> {
 			resume.run();

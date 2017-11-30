@@ -7,7 +7,6 @@ import magengine.game.LogicExecutor;
 public class PlayerLaunchHandler{
 
 	private static PlayerPowerType playerPowerType= PlayerPowerType.MID;
-	private static long count=0;
 	private static long interval = 150;
 
 	public static  void playerShooting() {

@@ -49,6 +49,7 @@ import magengine.paint.BombPainting;
 import magengine.paint.EmBloodBar;
 import magengine.paint.MyCanvas;
 import magengine.ui.SceneManager;
+import magengine.util.BGMUtil;
 import magengine.util.C;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
@@ -316,6 +317,7 @@ public class GameSession {
 		QuickDanmuku.clear();
 		Player.clear();
 		PlayerControlHandler.clear();
+		BGMUtil.stop();
 		try {
 			if(mulplay){
 				clientOrServer.close();
