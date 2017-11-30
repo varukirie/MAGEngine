@@ -32,7 +32,7 @@ public class DisplayMessage extends BaseElement {
 		}
 		
 		gc.setFill(Color.WHITE);
-		gc.fillText("Time = "+(LogicExecutor.gameTime()-this.startTime)/1000+msg, getX(), getY());
+		gc.fillText((Main.DEBUG_NO_FAILURE?"":"\n")+"Time = "+(LogicExecutor.gameTime()-this.startTime)/1000+msg, getX(), getY());
 //		gc.fillText("Time = "+(LogicExecutor.gameTime()-this.startTime)/1000+msg+"\n"+GameSession.getGameSession(), getX(), getY());
 
 	}
