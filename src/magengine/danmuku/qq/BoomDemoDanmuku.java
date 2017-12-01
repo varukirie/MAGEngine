@@ -24,7 +24,7 @@ public class BoomDemoDanmuku extends ADanmuku {
 	 * 实现子弹中可以爆开新的子弹 
 	 * 可作用于boss
 	 */
-	public static final long DURATION = 25000;
+	public static final long DURATION = 5000;
 	ElementUtils mEU = getmEU();
 	QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 	BaseElement be = getSourceElement();// 弹幕绑定的对象
@@ -59,12 +59,13 @@ public class BoomDemoDanmuku extends ADanmuku {
 		// mEU.add("textLauncher"+r.nextInt(), launcher);
 		// }
 		ArcLauncherGroup alg = new ArcLauncherGroup(getSourceElement().getX(), getSourceElement().getY(), Math.PI / 2*3,
-				Math.PI / 3, 5);
+				Math.PI / 3*1.5, 3);
 		alg.setLauncherConfig(l -> {
 			l.bindToXY(getSourceElement());
 			l.setInterval(3000);
 			l.setDuration(DURATION);
 			l.setBulletType(CircleBullet.class);
+			l.setBulletSpeed(150);
 			l.bindToWantBeRemoved(sourceElement);
 			l.setBulletConfig(b -> {
 				((CircleBullet) b).setR(10);
@@ -78,7 +79,7 @@ public class BoomDemoDanmuku extends ADanmuku {
 						subl.setBulletType(LongHexagonBullet.class);
 						subl.setBulletConfig(b->{
 							if(b instanceof LongHexagonBullet){
-								((LongHexagonBullet) b).setR(12);
+								((LongHexagonBullet) b).setR(10);
 								((LongHexagonBullet) b).setOutlineColor(Color.YELLOWGREEN);
 							}
 						});

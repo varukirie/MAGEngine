@@ -3,6 +3,10 @@ package magengine.chapter;
 import java.util.Random;
 import java.util.function.Consumer;
 
+import org.omg.PortableInterceptor.SUCCESSFUL;
+
+import com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable;
+
 import javafx.application.Platform;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -14,8 +18,11 @@ import magengine.danmuku.RunAwayNuclearDanmuku;
 import magengine.danmuku.TriArcDanmuku;
 import magengine.danmuku.UtsuhoNonSpellCard1;
 import magengine.danmuku.WaveParticleDanmuku;
+import magengine.danmuku.qq.BoomDemoDanmuku;
+import magengine.danmuku.yt.FllowerArrayDanmuku;
 import magengine.danmuku.yt.PinkBlueRainDanmuku;
 import magengine.element.BaseElement;
+import magengine.element.InitBeforeLoadChapter;
 import magengine.enemy.ALoopDanmukuEnemy;
 import magengine.enemy.BossbuEnemy;
 import magengine.enemy.ButterflyElfEnemy;
@@ -27,15 +34,15 @@ import magengine.util.BGMUtil;
 import magengine.util.C;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
+import magengine.util.SoundUtil;
 
-public class TestChapter extends AChapter {
+public class TestChapter extends AChapter{
 	int midX = MyCanvas.CANVAS_WIDTH / 2;
 	int midY = 200;
 	QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 	Random r = new Random(C.SEED);
 	LogicExecutor exec = LogicExecutor.getLogicExecutor();
 	ElementUtils mEU = ((ElementUtils) DI.di().get("mEU"));
-	
 	@Override
 	public void design(LogicExecutor exec, MyCanvas staticCanvas, ElementUtils mEU) {
 		BGMUtil.loadResource("/music/arrival.mp3");
@@ -67,8 +74,8 @@ public class TestChapter extends AChapter {
 		// ALoopDanmukuEnemy boss = new NandaketaEnemy(300,100);
 		boss.setHP(20);
 		boss.setDanmukuStartDelay(1);
-		boss.addDanmuku(new WaveParticleDanmuku(), WaveParticleDanmuku.DURATION);
-		// boss.addDanmuku(new BoomDemoDanmuku(),BoomDemoDanmuku.DURATION);
+//		boss.addDanmuku(new WaveParticleDanmuku(), WaveParticleDanmuku.DURATION);
+		 boss.addDanmuku(new BoomDemoDanmuku(),BoomDemoDanmuku.DURATION);
 		boss.setOnRemoveEvent(onEnd);
 		mEU.add("testBoss", boss);
 	}
@@ -93,10 +100,19 @@ public class TestChapter extends AChapter {
 			ALoopDanmukuEnemy bossM2 = new BossbuEnemy(bsM1.getX(), bsM1.getY());
 			bossM2.setDanmukuStartDelay(1500).addDanmuku(new WaveParticleDanmuku(), WaveParticleDanmuku.DURATION)
 					.addDanmuku(new ReisenNonSpellCardDanmuku(), ReisenNonSpellCardDanmuku.DURATION + 1000)
-					.addDanmuku(new PinkBlueRainDanmuku(), PinkBlueRainDanmuku.DURATION)
-					.setHP(700);
+					.setHP(400);
 			bossM2.setOnRemoveEvent(bsM2 -> {
-				onEnd.accept(bsM2);
+				Platform.runLater(() -> {
+					SceneManager.getInstance().shakeInScene(250);
+				});
+				ALoopDanmukuEnemy bossM3 = new BossbuEnemy(bsM2.getX(), bsM2.getY());
+				bossM3.setDanmukuStartDelay(1000)
+				.addDanmuku(new BoomDemoDanmuku(),BoomDemoDanmuku.DURATION)	
+				.addDanmuku(new PinkBlueRainDanmuku(), PinkBlueRainDanmuku.DURATION)		
+				.setHP(350);
+				bossM3.setOnRemoveEvent(onEnd);
+				bossM3.setMoveLoop(new double[][] { { 100, 500, 300, 340 }, { 120, 100, 130, 90 } }, 4000, 1000);
+				mEU.add("bossM3", bossM3);
 			});
 			mEU.add("bossM2", bossM2);
 			quick.moveTo(bossM2, 500, 300, 110);
@@ -153,4 +169,6 @@ public class TestChapter extends AChapter {
 
 		}, 2000);
 	}
+
+
 }

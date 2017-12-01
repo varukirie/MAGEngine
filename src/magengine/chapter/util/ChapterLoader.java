@@ -23,6 +23,7 @@ import magengine.paint.MyCanvasSwitcher;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
 import magengine.util.PackageScan;
+import magengine.util.SoundUtil;
 /**
  * 此类负责装载游戏关卡
  * 此类不可实例化
@@ -43,6 +44,7 @@ public class ChapterLoader {
 		ChapterLoader.mEU = (ElementUtils) DI.di().get("mEU");
 		ChapterLoader.scheduleES=Executors.newScheduledThreadPool(4);
 		DI.di().put("sES", scheduleES);
+		loadMusicResource();
 	}
 	public static void loadChapter(AChapter c){
 		MoveHandler.setDeltaTimeFactor(0);
@@ -99,6 +101,11 @@ public class ChapterLoader {
 				}
 			}
 		});
+	}
+	
+	private static void loadMusicResource(){
+		SoundUtil.getInstance().loadResource("glass", "/music/glass.wav");
+		SoundUtil.getInstance().loadResource("hit", "/music/hit.wav");
 	}
 	
 	

@@ -5,6 +5,7 @@ import magengine.element.impl.Spark;
 import magengine.game.GameSession;
 import magengine.util.CollisionTeam;
 import magengine.util.DI;
+import magengine.util.SoundUtil;
 
 public class PlayerBullet extends ArrowBullet {
 
