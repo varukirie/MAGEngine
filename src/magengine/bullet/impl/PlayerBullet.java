@@ -21,6 +21,7 @@ public class PlayerBullet extends ArrowBullet {
 	@Override
 	public void onCollision(PolygonCollision m) {
 		if(m.getTeam().equals(CollisionTeam.ENEMY)){
+			SoundUtil.getInstance().play("hit");
 			setWantBeRemoved(true);
 			Spark spark = new Spark(this.getX(), this.getY());
 			DI.getmEU().add("spark"+GameSession.rand().nextInt(), spark);

@@ -2,6 +2,8 @@ package magengine.util;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
@@ -13,17 +15,12 @@ public class SoundUtil {
 		return instance;
 	}
 	
-	private Map<String,MediaPlayer> soundMap = new HashMap<>();
+	private Map<String,AudioClip> soundMap = new HashMap<>();
 	
 	public void loadResource(String name,String path){
-		MediaPlayer mp ;
-		Media media = new Media(BGMUtil.class.getResource(path).toString());
-		mp = new MediaPlayer(media);
-		mp.setCycleCount(1);
-		mp.setOnEndOfMedia(()->{
-			mp.stop();
-		});
-		soundMap.put(name, mp);
+		AudioClip ac = new AudioClip(path);
+		ac.setVolume(0.3);
+		soundMap.put(name, ac);
 	}
 	
 	public void play(String name){

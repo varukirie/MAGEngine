@@ -140,6 +140,11 @@ public class GameSession {
 	public boolean haveBomb(){
 		return bomb>0;
 	}
+	
+	public void addBomb(){
+		bomb++;
+		bp.paint(getBomb());
+	}
 
 	/**
 	 * 减少生命值 如果生命值不足则死亡

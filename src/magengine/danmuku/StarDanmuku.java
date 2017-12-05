@@ -17,7 +17,7 @@ import magengine.util.ElementUtils;
 
 public class StarDanmuku extends ADanmuku {
 
-
+public static final long DURATION = 8000;
 	@Override
 	public void executeDanmuku() {
 		ElementUtils mEU=getmEU();

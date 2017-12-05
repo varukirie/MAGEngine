@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import magengine.bullet.Bullet;
 import magengine.bullet.impl.DefaultBullet;
 import magengine.element.BaseElement;
+import magengine.element.impl.BombItem;
 import magengine.element.impl.Player;
 import magengine.game.LogicExecutor;
 import magengine.helper.MoveToHelper;
@@ -240,5 +241,8 @@ public class QuickDanmuku {
 	public double getPlayerDirectionAngle(BaseElement elem) {
 		return getDirectionAngle(elem, Player.getPlayer1().getX(), Player.getPlayer1().getY());
 	}
-	
+
+	public void createBombItem(double x,double y){
+		mEU.add("bombItem"+r.nextInt(), new BombItem(x, y));
+	}
 }

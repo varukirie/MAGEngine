@@ -104,8 +104,8 @@ public class ChapterLoader {
 	}
 	
 	private static void loadMusicResource(){
-		SoundUtil.getInstance().loadResource("glass", "/music/glass.wav");
-		SoundUtil.getInstance().loadResource("hit", "/music/hit.wav");
+		SoundUtil.getInstance().loadResource("glass", ChapterLoader.class.getResource("/music/glass.wav").toString());
+		SoundUtil.getInstance().loadResource("hit", ChapterLoader.class.getResource("/music/hit.wav").toString());
 	}
 	
 	

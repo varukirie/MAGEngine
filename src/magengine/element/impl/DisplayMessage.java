@@ -4,6 +4,7 @@ import application.Main;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import magengine.element.BaseElement;
+import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
 import magengine.game.MoveHandler;
 import magengine.util.DI;

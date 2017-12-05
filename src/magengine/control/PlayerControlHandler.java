@@ -204,6 +204,7 @@ public class PlayerControlHandler {
 	
 	
 	public void doBomb(){
+		SoundUtil.getInstance().play("glass");
 		Platform.runLater(() -> {
 			SceneManager.getInstance().shakeInScene(500);
 		});

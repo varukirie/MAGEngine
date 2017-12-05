@@ -16,7 +16,7 @@ import magengine.util.ElementUtils;
 
 public class WaveParticleDanmuku extends ADanmuku {
 
-	public static final long DURATION = 12000;
+	public static final long DURATION = 18000;
 	@Override
 	public void executeDanmuku() {
 		final int lchCount = 12;

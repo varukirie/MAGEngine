@@ -47,7 +47,7 @@ public class ElementUtils {
 	 */
 	public void add(String name, Object value) {
 		if(getWantMoveMap().get(name)!=null){
-			System.out.println("ElementUtils add: warning: name产生碰撞 受影响对象:"+value);
+			System.out.println("ElementUtils add: warning: name产生碰撞 受影响对象:"+value+"  name:"+name);
 		}
 			
 		if (Main.DEBUG_ElementCreate) {

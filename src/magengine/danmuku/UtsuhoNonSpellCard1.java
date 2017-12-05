@@ -26,7 +26,7 @@ public class UtsuhoNonSpellCard1 extends ADanmuku {
 //					.getRandomColorOpacityIn(new Color[] { Color.ORANGE, Color.WHITE, Color.AQUA,Color.CADETBLUE,Color.LIGHTCORAL,Color.MISTYROSE }));
 			((CircleBullet) bullet).setR(22);
 		};
-		ArcLauncherGroup alg= new ArcLauncherGroup(300, 200, Math.PI/2, Math.PI/3,7);
+		ArcLauncherGroup alg= new ArcLauncherGroup(300, 200, Math.PI/2, Math.PI*2,39);// Math.PI/3,7
 		alg.setLauncherConfig((l)->{
 			l.setBulletSpeed(190);
 			((BurstLauncher)l).setBurstAmount(16);
