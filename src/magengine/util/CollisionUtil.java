@@ -1,12 +1,8 @@
 package magengine.util;
 
-import java.util.Arrays;
-
 import com.badlogic.gdx.math.Polygon;
 
-import magengine.bullet.impl.PlayerBullet;
 import magengine.element.PolygonCollision;
-import magengine.enemy.APolygonEnemy;
 
 public class CollisionUtil {
 

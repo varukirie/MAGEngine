@@ -51,6 +51,8 @@
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
 							<mainClass>application.Main</mainClass>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>  
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 						</manifest>
 					</archive>
 				</configuration>

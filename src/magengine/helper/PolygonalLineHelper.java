@@ -3,14 +3,13 @@ package magengine.helper;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 import magengine.chapter.util.QuickDanmuku;
 import magengine.element.Initializable;
 import magengine.game.LogicExecutor;
 import magengine.game.MoveHandler;
 import magengine.util.DI;
-import magengine.util.ElementUtils;
+
 /**
  * 折线路径的Helper
  * @author MegaAstronic

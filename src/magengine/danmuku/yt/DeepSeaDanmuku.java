@@ -1,27 +1,17 @@
 package magengine.danmuku.yt;
 
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import application.Main;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Stop;
 import magengine.bullet.PresetColor;
-import magengine.bullet.impl.ArrowBullet;
 import magengine.bullet.impl.CircleBullet;
-import magengine.bullet.impl.DefaultBullet;
-import magengine.bullet.impl.HexagonBullet;
 import magengine.bullet.impl.PetalBullet;
 import magengine.chapter.util.QuickDanmuku;
-import magengine.chapter.util.SeqDanmuku;
 import magengine.danmuku.ADanmuku;
-import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
 import magengine.helper.OvalHelper;
-import magengine.launcher.ArcLauncherGroup;
-import magengine.launcher.BurstLauncher;
 import magengine.launcher.Launcher;
-import magengine.launcher.OvalLauncherGroup;
 import magengine.util.ElementUtils;
 
 public class DeepSeaDanmuku extends ADanmuku {
@@ -84,8 +74,11 @@ public class DeepSeaDanmuku extends ADanmuku {
 			quick.VToByDirection(b, quick.getPlayerDirectionAngle(b));
 		});
 		
+		     quick.bindToWantBeRemoved(launcher, getSourceElement());
+		     quick.bindToXY(launcher, getSourceElement());
+		     
 		    mEU.add("launcher", launcher);
-		    
+		  
 		    
 		
         int num =3;
@@ -179,6 +172,7 @@ public class DeepSeaDanmuku extends ADanmuku {
 			
 		});
 		
+		quick.bindToWantBeRemoved(launcher, getSourceElement());
 		
 		LogicExecutor.getLogicExecutor().schedule(() -> {
 			mEU.add("helper"+helperCount, helper);
@@ -206,6 +200,9 @@ public class DeepSeaDanmuku extends ADanmuku {
 				((CircleBullet)b).setR(r);
 			});
 			
+
+		     quick.bindToWantBeRemoved(launcher, getSourceElement());
+		     
   		    mEU.add("launcher"+midY, launcher);
 		},delayTime+interval);
 		

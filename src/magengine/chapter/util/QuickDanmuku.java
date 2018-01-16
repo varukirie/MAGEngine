@@ -2,24 +2,18 @@ package magengine.chapter.util;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
-import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import javafx.scene.shape.MoveTo;
-import magengine.bullet.APolygonBullet;
 import magengine.bullet.Bullet;
 import magengine.bullet.impl.DefaultBullet;
-import magengine.bullet.impl.PlayerBullet;
 import magengine.element.BaseElement;
-import magengine.element.PolygonCollision;
+import magengine.element.impl.BombItem;
 import magengine.element.impl.Player;
-import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
 import magengine.helper.MoveToHelper;
 import magengine.launcher.Launcher;
 import magengine.util.C;
-import magengine.util.CollisionTeam;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
 import magengine.util.Transform;
@@ -247,5 +241,8 @@ public class QuickDanmuku {
 	public double getPlayerDirectionAngle(BaseElement elem) {
 		return getDirectionAngle(elem, Player.getPlayer1().getX(), Player.getPlayer1().getY());
 	}
-	
+
+	public void createBombItem(double x,double y){
+		mEU.add("bombItem"+r.nextInt(), new BombItem(x, y));
+	}
 }

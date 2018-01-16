@@ -1,7 +1,6 @@
 package magengine.bullet.impl;
 
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 
 import javafx.scene.canvas.GraphicsContext;
@@ -9,7 +8,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import magengine.bullet.APolygonBullet;
 import magengine.bullet.RadiusSupplier;
-import magengine.util.Transform;
 
 /**
  * 画矩形子弹 继承多边形

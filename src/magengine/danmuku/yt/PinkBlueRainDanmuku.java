@@ -20,7 +20,7 @@ import magengine.util.ElementUtils;
 
 public class PinkBlueRainDanmuku extends ADanmuku {
 
-	public static final long DURATION = 35000;
+	public static final long DURATION = 18000;
 
 	private QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
 	
@@ -40,89 +40,53 @@ public class PinkBlueRainDanmuku extends ADanmuku {
 		
 		
 		
-			setOvalLauncher(stops1,1,0);
-			setOvalLauncher(stops2,-1,0);
+			setOvalLauncher(stops1,1,25);
+			setOvalLauncher(stops2,-1,25);
 		
 			setOvalLauncher(stops1,1,720);
 			setOvalLauncher(stops2,-1,720);
 		
-			setOvalLauncher(stops1,-1,3200);
-			setOvalLauncher(stops2, 1,3200);
+			setOvalLauncher(stops1,-1,1200);
+			setOvalLauncher(stops2, 1,1200);
 			
-			setOvalLauncher(stops1,-1,3750);
-			setOvalLauncher(stops2, 1,3750);
-		
-	
-			
-			
-			setOvalLauncher(stops1,-1,0);
-			setOvalLauncher(stops2,1,0);
-		
-			setOvalLauncher(stops1,-1,720);
-			setOvalLauncher(stops2,1,720);
-		
-			setOvalLauncher(stops1,1,3200);
-			setOvalLauncher(stops2,-1,3200);
-			
+			setOvalLauncher(stops1,-1,1800);
+			setOvalLauncher(stops2, 1,1800);
 
 			
-			
 
-			
-			setOvalLauncher(stops1,1,5200);
-			setOvalLauncher(stops2,-1,5200);
-		
-			setOvalLauncher(stops1,1,7200);
-			setOvalLauncher(stops2,-1,7200);
-		
-			setOvalLauncher(stops1,-1,81000);
-			setOvalLauncher(stops2, 1,81000);
-			
-			
 
 		
 		for(int i=0;i<5;i++) {
-			RandomRovateLauncher(stops2,i*520,9,17200);
-			RandomRovateLauncher(stops1,i*520,9,17200);
+			RandomRovateLauncher(stops2,i*520,21,9000);
+			RandomRovateLauncher(stops1,i*520,18,9000);
 		}
-	
-		for(int i=0;i<5;i++) {
-			RandomRovateLauncher(stops2,i*520,9,21000);
-			RandomRovateLauncher(stops1,i*520,9,21000);
-		}
-		for(int i=0;i<5;i++) {
-			RandomRovateLauncher(stops2,i*520,9,25000);
-			RandomRovateLauncher(stops1,i*520,9,25000);
-		}
-	
-	
 		
-	 
-		 
-		 for(int j=0;j<5;j++){
-			 setLongHexagonLauncher(320+j*4250,9, Color.rgb(255, 255, 0,0.5));
+		for(int i=0;i<5;i++) {
+			RandomRovateLauncher(stops2,i*420,15,13000);
+			RandomRovateLauncher(stops1,i*420,18,13000);
+		}
+		
+		
+
+		 for(int j=0;j<2;j++){
+			 setLongHexagonLauncher(320+j*4250,9, Color.rgb(255, 255, 0,0.5),5.2);
 		
 		 }
-		 
-		 
-		 
-		 for(int k=0;k<2;k++){
-			 
-			 setLongHexagonLauncher(2700+k*4200,15, Color.rgb(238, 0, 0,0.5));
-		
-		 }
+		 setLongHexagonLauncher(2700,15, Color.rgb(238, 0, 0,0.5),5.2);
+		 setLongHexagonLauncher(4250+2100,21, Color.rgb(238, 0, 0,0.5),2.5);
+
 		 
 	}
 	
-	
-	
+		
 	private void setOvalLauncher(Stop[] stops,int rRL,int delayTime){
 		
 		OvalLauncherGroup olg = new OvalLauncherGroup(sourceElement.getX(), sourceElement.getY(), 18);
 		
 		olg.setLauncherConfig((l)->{
 			l.setBulletType(HexagonBullet.class);
-			l.setBulletSpeed(81);
+			l.setBulletSpeed(120);
+			
 			
 			l.setBulletConfig(b->{
 				((HexagonBullet)b).setColorSupplier(PresetColor.getByStops(stops));
@@ -133,51 +97,50 @@ public class PinkBlueRainDanmuku extends ADanmuku {
 				s.schedule(()->{
 				quick.stopBullet(b);
 				quick.VRotate(b, rRL*4*Math.PI/3);
-				}, 52+delayTime);
+				}, delayTime-250);
 				
 				
 				s.schedule(()->{
 					quick.runBullet(b);
-					quick.VRotate(b, 2*rRL*Math.PI/3);
-					}, 520+delayTime);
-				
-              
-				
-				s.schedule(()->{
-					quick.VRotate(b, rRL*Math.PI/2);
 					
-					}, 970+delayTime);
-		
-			
+					}, 120+delayTime);
+	
 			});
-			
+
+
+			quick.bindToWantBeRemoved(l, getSourceElement());
 			quick.bindToXY(l, getSourceElement());
+			
 		});
+		
+		
 		olg.delayExecute(52+2*delayTime);
 		
 
 	}
 
 	
-	private void setLongHexagonLauncher(int delayTime,int num,Color color) {
+	private void setLongHexagonLauncher(int delayTime,int num,Color color,double R) {
 		
 		OvalLauncherGroup olg= new OvalLauncherGroup(sourceElement.getX(), sourceElement.getY(), num);
 		
 		olg.setLauncherConfig((l)->{
 			l.setBulletType(LongHexagonBullet.class);
-			l.setBulletSpeed(152.0);
+			l.setBulletSpeed(112.0);
 		
 			l.setBulletConfig(b->{
 				((LongHexagonBullet)b).setNeedPaintOutline(true);
 				
 				((LongHexagonBullet)b).setOutlineColor(color);
 				
-				((LongHexagonBullet)b).setR(5.2);
+				((LongHexagonBullet)b).setR(R);
 			});
 			
 	
-			
+
+			quick.bindToWantBeRemoved(l, getSourceElement());
 			quick.bindToXY(l, getSourceElement());
+			
 		});
 		olg.delayExecute(1500+delayTime);
 		
@@ -189,7 +152,7 @@ public class PinkBlueRainDanmuku extends ADanmuku {
 		OvalLauncherGroup olg = new OvalLauncherGroup(sourceElement.getX(), sourceElement.getY(), num);
 		olg.setLauncherConfig((l)->{
 			l.setBulletType(HexagonBullet.class);
-			l.setBulletSpeed(110.0);
+			l.setBulletSpeed(132.0);
 			quick.bindToWantBeRemoved(l, getSourceElement());
 			l.setBulletConfig(b->{
 				((HexagonBullet)b).setColorSupplier(PresetColor.getByStops(stops));
@@ -197,28 +160,25 @@ public class PinkBlueRainDanmuku extends ADanmuku {
 			});
 			
 			l.setBulletEvent((s,b)->{
-				quick.VRotateRandom(b,2*Math.PI/3);
+				quick.VRotateRandom(b,2*Math.PI);
 		       LogicExecutor.getLogicExecutor().schedule(() -> {
 					quick.stopBullet(b);
 					}, delayTime);
-					
-		       
+	       
 		       LogicExecutor.getLogicExecutor().schedule(() -> {
 		    	   quick.runBullet(b);
-					quick.VRotateRandom(b,2*Math.PI/3);
 					}, 6+delayTime);
 					
 		       
 			});
 			
+
+			quick.bindToWantBeRemoved(l, getSourceElement());
 			quick.bindToXY(l, getSourceElement());
 		});
 		olg.delayExecute(executeTime+delayTime);
-		
-	
-		
-	}
-	
+
+	}	
 	
 
 }

@@ -1,13 +1,9 @@
 package magengine.danmuku;
 
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
-import application.Main;
-import javafx.scene.paint.Color;
 import magengine.bullet.PresetColor;
 import magengine.bullet.impl.CircleBullet;
-import magengine.bullet.impl.HexagonBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.element.BaseElement;
 import magengine.game.GameSession;

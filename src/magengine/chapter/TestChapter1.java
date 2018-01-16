@@ -2,17 +2,14 @@ package magengine.chapter;
 
 import javafx.application.Platform;
 import javafx.scene.effect.Bloom;
-import magengine.bullet.Bullet;
 import magengine.bullet.impl.ArrowBullet;
 import magengine.bullet.impl.DefaultBullet;
 import magengine.bullet.impl.PlayerBullet;
 import magengine.bullet.impl.StarBullet;
 import magengine.chapter.util.AChapter;
 import magengine.chapter.util.QuickDanmuku;
-import magengine.element.BaseElement;
 import magengine.element.impl.Player;
 import magengine.enemy.DefaultEnemy;
-import magengine.enemy.Enemy1;
 import magengine.game.LogicExecutor;
 import magengine.launcher.Launcher;
 import magengine.paint.MyCanvas;

@@ -1,12 +1,8 @@
 package magengine.bullet.impl;
 
-import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.effect.Bloom;
 import javafx.scene.paint.Color;
 import magengine.bullet.APolygonBullet;
-import magengine.paint.MyCanvasSwitcher;
-import magengine.util.DI;
 
 public class StarBullet extends APolygonBullet {
 

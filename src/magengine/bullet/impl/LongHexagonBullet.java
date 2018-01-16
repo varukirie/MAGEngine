@@ -3,12 +3,16 @@ package magengine.bullet.impl;
 import java.util.function.Function;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.Bloom;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import magengine.bullet.APolygonBullet;
+import magengine.element.InitBeforeLoadChapter;
+import magengine.paint.MyCanvasSwitcher;
+import magengine.util.DI;
 import magengine.util.Transform;
 
-public class LongHexagonBullet extends APolygonBullet {
+public class LongHexagonBullet extends APolygonBullet implements InitBeforeLoadChapter{
 	private double r = 1;
 	private double[][] martix ;
 	
@@ -65,7 +69,9 @@ public class LongHexagonBullet extends APolygonBullet {
 		super(x, y); // 中心坐标
 		// TODO Auto-generated constructor stub
 	}
-
+	public LongHexagonBullet() {
+		super(0, 0); // 中心坐标
+	}
 	
 	
 	
@@ -101,6 +107,12 @@ public class LongHexagonBullet extends APolygonBullet {
 			
 			gc.setFill(Color.WHITE);
 			super.paint(gc);
+		}
+		@Override
+		public void initWhenChapterLoad() {
+			((MyCanvasSwitcher) DI.di().get("switcher")).configCanvas(LongHexagonBullet.class, (canvas) -> {
+				canvas.setEffect(new Bloom());
+			});
 		}
 
   

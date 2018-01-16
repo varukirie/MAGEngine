@@ -1,37 +1,22 @@
 package magengine.danmuku.yt;
 
-import static java.lang.Math.PI;
-
 import java.util.Random;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Consumer;
 
 import com.badlogic.gdx.math.Ellipse;
 
-import application.Main;
-import magengine.bullet.Bullet;
-import magengine.bullet.impl.ArrowBullet;
 import magengine.bullet.impl.CircleBullet;
-import magengine.bullet.impl.DefaultBullet;
 import magengine.bullet.impl.DiamondBullet;
-import magengine.bullet.impl.StarBullet;
 import magengine.chapter.util.QuickDanmuku;
-import magengine.chapter.util.SeqDanmuku;
 import magengine.danmuku.ADanmuku;
 import magengine.element.BaseElement;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
-import magengine.helper.Helper;
 import magengine.helper.OvalHelper;
-import magengine.helper.PolygonalLineHelper;
-import magengine.launcher.ALauncherGroup;
 import magengine.launcher.ArcLauncherGroup;
-import magengine.launcher.BulletEvent;
 import magengine.launcher.Launcher;
 import magengine.launcher.OvalLauncherGroup;
 import magengine.launcher.yt.LineLauncherGroup;
-import magengine.paint.MyCanvas;
 import magengine.util.ElementUtils;
 
 public class demo1 extends ADanmuku  {

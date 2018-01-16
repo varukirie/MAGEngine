@@ -1,7 +1,5 @@
 package magengine.bullet;
 
-import java.util.Arrays;
-
 import com.badlogic.gdx.math.Polygon;
 
 import javafx.scene.canvas.GraphicsContext;

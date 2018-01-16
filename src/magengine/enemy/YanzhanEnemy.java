@@ -5,14 +5,15 @@ import javafx.scene.image.Image;
 import magengine.paint.SpritePainter;
 
 public class YanzhanEnemy extends ALoopDanmukuEnemy {
-	private static SpritePainter spritePainter = null;
+	
 	
 	public YanzhanEnemy(double x, double y) {
 		super(x, y);
 	}
+	private static SpritePainter spritePainter = null;
 	private static double[][] origin = null;
-	private static int enemyWidth = 128;
-	private static int enemyHeight = 82;
+	private static int enemyWidth = 130;
+	private static int enemyHeight = 122;
 	private static int halfWidth = enemyWidth/2;
 	private static int halfHeight = enemyHeight/2;
 	private static Image img=null;
@@ -29,15 +30,19 @@ public class YanzhanEnemy extends ALoopDanmukuEnemy {
 			{-halfHeight,-halfHeight,halfHeight,halfHeight}
 		};
 	}
+	private int spriteDelta=1;
 	private int currentSpriteIndex=0;
 	@Override
 	public void paint(GraphicsContext gc) {
 		super.paint(gc);
+		int count=12;
 		//每隔interval帧换一张图
-		int interval = 32;
+		int interval = 4;
 		spritePainter.paintSprite((0+(currentSpriteIndex))/interval, getX()-halfWidth, getY()-halfHeight, gc);
-		currentSpriteIndex=(currentSpriteIndex+1)%(12*interval);
-		
+		currentSpriteIndex=(currentSpriteIndex+spriteDelta)%(count*interval);
+		if(currentSpriteIndex==count*interval-1||currentSpriteIndex==0){
+			spriteDelta=-spriteDelta;
+		}
 	}
 
 

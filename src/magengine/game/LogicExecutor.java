@@ -1,9 +1,6 @@
 package magengine.game;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class LogicExecutor {

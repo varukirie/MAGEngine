@@ -1,7 +1,5 @@
 package magengine.bullet;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import magengine.element.BaseElement;
 import magengine.element.Initializable;
 import magengine.game.LogicExecutor;

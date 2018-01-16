@@ -14,7 +14,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -32,7 +31,6 @@ import javafx.scene.paint.Stop;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextBuilder;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import magengine.chapter.util.AChapter;
@@ -45,8 +43,13 @@ import magengine.element.impl.Player;
 import magengine.mulplay.Client;
 import magengine.mulplay.Server;
 import magengine.mulplay.Transport;
+import magengine.paint.BackgroundUtil;
+import magengine.paint.BloodBar;
+import magengine.paint.BombPainting;
+import magengine.paint.EmBloodBar;
 import magengine.paint.MyCanvas;
 import magengine.ui.SceneManager;
+import magengine.util.BGMUtil;
 import magengine.util.C;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
@@ -54,9 +57,7 @@ import magengine.util.ElementUtils;
 public class GameSession {
 
 	public static GameSession instance = null;
-	
 	private Level level = Level.NORMAL;
-	
 	private static Random rand=null;
 	public static Random rand() {
 		return rand;
@@ -66,8 +67,8 @@ public class GameSession {
 	public static final int HEALTH_LIMIT = 10;
 	public static final int POWER_LIMIT = 100;
 
-	public static final int PRESET_BOMB = 2;
-	public static final int PRESET_HEALTH = 1;
+	public static final int PRESET_BOMB = 3;
+	public static final int PRESET_HEALTH = 4;
 	public static final int PRESET_POWER = 0;
 	private int bomb = PRESET_BOMB;
 	private int health = PRESET_HEALTH;
@@ -77,8 +78,11 @@ public class GameSession {
 	public final double PRESET_PLAYER_POSITION_Y=MyCanvas.CANVAS_HEIGHT-100;
 	public final double MULPLAY_PLAYER_POSITION_DELTA_X=100;
 	
+	
 	public boolean mulplay = false;
 	public boolean mulplayServer=false;
+	public BloodBar bb;
+	public BombPainting bp;
 	public static final int PORT = 10231;
 	public static String remoteHost = "127.0.0.1";
 	private NioEventLoopGroup loopGroup;
@@ -126,6 +130,7 @@ public class GameSession {
 	public boolean useBomb() {
 		if (bomb > 0) {
 			bomb--;
+			bp.paint(getBomb());
 			return true;
 		} else {
 			return false;
@@ -134,6 +139,11 @@ public class GameSession {
 	
 	public boolean haveBomb(){
 		return bomb>0;
+	}
+	
+	public void addBomb(){
+		bomb++;
+		bp.paint(getBomb());
 	}
 
 	/**
@@ -144,15 +154,21 @@ public class GameSession {
 	public boolean decHealthAndCheck() {
 		if (health > 0) {
 			health--;
+			bb.paint(this.getHealth(), PRESET_HEALTH);
 			return false;
 		} else {
 			return true;
 		}
 	}
 
-
+	private StackPane gameRoot ;
+	private BackgroundUtil backgroundUtil = new BackgroundUtil();
 	private long  lastTime4bench=0;
 	public void loadGameScene() {
+		this.bb = new BloodBar(600,40,200,30);
+		this.bp = new BombPainting(600,120);
+		bp.paint(getBomb());
+		bb.paint(this.getHealth(), PRESET_HEALTH);
 		Stage primaryStage=SceneManager.getInstance().getPrimaryStage();
 		BorderPane gArea = new BorderPane();
 		BackgroundImage bimg = new BackgroundImage(new Image("/img/starbackground.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -161,40 +177,37 @@ public class GameSession {
 		FlowPane gDataArea = new FlowPane(Orientation.VERTICAL,10,50);//未设置node gap
 //		gDataArea.setBackground(new Background(new BackgroundFill(Color.GREY,null,null)));
 		gDataArea.setPrefWrapLength(200);
-//		Label label1 = new Label();
-//		label1.setFont(Font.font("力量"));
-//		power.getChildren().add(label1);字体样式测试
-//		VBox power = new VBox(new Label("力量"));
-//		VBox bomb = new VBox(new Label("炸弹"));
-//		VBox life = new VBox(new Label("生命"));
-		BloodBar bb = new BloodBar();
-		VBox power = new VBox(setTextFont("POWER"));
 		VBox bomb = new VBox(setTextFont("BOMB"));
 		VBox life = new VBox(setTextFont("LIFE"));
 		StackPane root = new StackPane();
+		BackgroundUtil bu = backgroundUtil;
+		MyCanvas bgCanvas = bu.getBGCanvas();
+		Image gamebgimg=null;
+		try {
+			gamebgimg = new Image(this.getClass().getResourceAsStream("/img/gameplaybackground.jpg"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		bu.setBackgroundImg(gamebgimg);
 		MyCanvas moveableCanvas = new MyCanvas();
 		MyCanvas staticCanvas = new MyCanvas();
 		MyCanvas secondaryMCanvas = new MyCanvas(moveableCanvas.getWantPaintMap());
+		root.getChildren().add(bgCanvas);
 		root.getChildren().add(staticCanvas);
 		root.getChildren().add(moveableCanvas);
 		root.getChildren().add(secondaryMCanvas);
-		gDataArea.getChildren().addAll(life,power,bomb);
+		this.gameRoot = root;
+		gDataArea.getChildren().addAll(life,bomb);
 		gDataArea.setAlignment(Pos.TOP_LEFT);;
 		gArea.setLeft(root);
 		gArea.setCenter(gDataArea);
 		DI.di().put("staticCanvas", staticCanvas); 
-//		血条测试    javafx没有像awt一样提供单独重载单独组件GraphicsContext的机制  对重载组件没头绪  不会做血条 javafx没提供repaint或update功能
-//	    Canvas canvas = new Canvas(900, 700);  
-//	    GraphicsContext gc = canvas.getGraphicsContext2D();  
-//	    bb.draw(gc);
-	    
-	        
-//	    gArea.getChildren().add(canvas);
 //		staticCanvas.getWantPaintMap().put("indicator", Player.getPlayer());
-		staticCanvas.repaint();
+//		staticCanvas.repaint();
 		Scene scene=new Scene(gArea,900,700);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("MAGEngine!");
+		gArea.getChildren().add(bb.getBcanvas());
 		primaryStage.show();
 		
 		LogicExecutor logicExecutor=LogicExecutor.getLogicExecutor();
@@ -217,6 +230,7 @@ public class GameSession {
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
+				backgroundUtil.paintBackground(1);
 				mh.callRepaint();
 				moveableElementUtils.getSwitcher().repaint();
 				if(Main.DEBUG_RENDER_BENCH){
@@ -228,12 +242,7 @@ public class GameSession {
 		timer.start();
 		DI.di().put("animationTimer", timer);
 		//关闭窗口时关闭所有线程
-		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			@Override
-			public void handle(WindowEvent event) {
-				shutdownGame();
-			}
-		});
+		primaryStage.setOnCloseRequest(event -> shutdownGame());
 
 		
 		
@@ -277,20 +286,8 @@ public class GameSession {
 			}
 			
 		}
+		PlayerLaunchHandler.shootSchedule();
 //		ChapterLoader.loadChapter(new ChapterDemo());
-		new Thread(new PlayerLaunchHandler()).start();
-	}
-	private class BloodBar{
-		public void draw(GraphicsContext g){
-			int x=600,y=40,w,h=30;
-			g.setFill(Color.MAGENTA);
-			g.setStroke(Color.RED);
-			g.fillRect(x, y, 200, h);
-			g.setFill(Color.RED);
-			w=(int)(200*(getHealth()*1.0/10));
-			g.fillRect(x+2, y+2, w-4, h-4);
-			
-		}
 	}
 	
 	private void shutdownGame(){
@@ -314,15 +311,14 @@ public class GameSession {
 		QuickDanmuku.clear();
 		Player.clear();
 		PlayerControlHandler.clear();
+		BGMUtil.stop();
 		try {
 			if(mulplay){
 				clientOrServer.close();
 				if(loadChapterFuture!=null){
 					try {
 						loadChapterFuture.get();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					} catch (ExecutionException e) {
+					} catch (InterruptedException | ExecutionException e) {
 						e.printStackTrace();
 					}
 				}
@@ -336,7 +332,7 @@ public class GameSession {
 	private Future<?> loadChapterFuture;
 	
 	public Text setTextFont(String s){
-		Text text = TextBuilder.create().text(s).font(Font.font("新宋体", 30)).build();
+		Text text = new Text(s);
 		text.setFill(new LinearGradient(0, 0, 1, 2, true, CycleMethod.REPEAT, new
 		         Stop[]{new Stop(0, Color.RED), new Stop(0.5f, Color.BLUE)}));
 		text.setFont(Font.font("黑体", FontWeight.BOLD,30));//斜体
@@ -380,6 +376,7 @@ public class GameSession {
 		return bomb;
 	}
 	public int getHealth() {
+//		System.out.println("gethealth");
 		return health;
 	}
 	public void incrPower(int delta) {
@@ -457,5 +454,12 @@ public class GameSession {
 	}
 	public Channel getMulplayChannel() {
 		return mulplayChannel;
+	}
+	
+	public BackgroundUtil getBackgroundUtil() {
+		return backgroundUtil;
+	}
+	public StackPane getGameRoot() {
+		return gameRoot;
 	}
 }

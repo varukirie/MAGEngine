@@ -4,20 +4,14 @@ import java.util.Random;
 import java.util.function.Consumer;
 
 
-import javafx.application.Platform;
-import javafx.scene.effect.Bloom;
 import magengine.bullet.PresetColor;
 import magengine.bullet.impl.CircleBullet;
-import magengine.bullet.impl.HexagonBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.element.BaseElement;
-import magengine.element.impl.Player;
 import magengine.game.GameSession;
 import magengine.launcher.ArcLauncherGroup;
 import magengine.launcher.BurstLauncher;
 import magengine.launcher.OvalLauncherGroup;
-import magengine.paint.MyCanvasSwitcher;
-import magengine.util.DI;
 
 public class UtsuhoNonSpellCard1 extends ADanmuku {
 
@@ -32,7 +26,7 @@ public class UtsuhoNonSpellCard1 extends ADanmuku {
 //					.getRandomColorOpacityIn(new Color[] { Color.ORANGE, Color.WHITE, Color.AQUA,Color.CADETBLUE,Color.LIGHTCORAL,Color.MISTYROSE }));
 			((CircleBullet) bullet).setR(22);
 		};
-		ArcLauncherGroup alg= new ArcLauncherGroup(300, 200, Math.PI/2, Math.PI/3,7);
+		ArcLauncherGroup alg= new ArcLauncherGroup(300, 200, Math.PI/2, Math.PI*2,39);// Math.PI/3,7
 		alg.setLauncherConfig((l)->{
 			l.setBulletSpeed(190);
 			((BurstLauncher)l).setBurstAmount(16);

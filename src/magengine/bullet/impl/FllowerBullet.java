@@ -1,19 +1,15 @@
 package magengine.bullet.impl;
 
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.Paint;
-import javafx.scene.paint.RadialGradient;
-import javafx.scene.paint.Stop;
 import magengine.bullet.APolygonBullet;
 import magengine.bullet.RadiusSupplier;
 import magengine.util.Transform;
 
-public class FllowerBullet extends APolygonBullet implements RadiusSupplier{
+public class FllowerBullet extends APolygonBullet{
 	
 	private Function<RadiusSupplier,Paint> colorSupplier = (cirb)->{
 		return Color.WHITESMOKE;
@@ -30,10 +26,7 @@ public class FllowerBullet extends APolygonBullet implements RadiusSupplier{
 	 * 取得缩放后的半径
 	 * @return
 	 */
-	@Override
-	public double getR() {
-		return r*super.getScale();
-	}
+
 	/**
 	 * 取得缩放后前的半�?
 	 * @return
@@ -97,7 +90,7 @@ public class FllowerBullet extends APolygonBullet implements RadiusSupplier{
 
 	public void paint(GraphicsContext gc) {
 		
-		gc.setFill(colorSupplier.apply(this));
+		gc.setFill(Color.ALICEBLUE);
 		super.paint(gc);
 		
 			

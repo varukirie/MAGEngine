@@ -1,12 +1,12 @@
 package magengine.danmuku;
 
 import java.util.Random;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 import magengine.bullet.Bullet;
 import magengine.bullet.impl.DefaultBullet;
+import magengine.bullet.impl.DiamondBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
@@ -21,17 +21,19 @@ import static java.lang.Math.*;
 
 public class RingDanmuku extends ADanmuku {
 
+	
+	public static final long DURATION = 20000;
 	@Override
 	public void executeDanmuku() {
 		ElementUtils mEU = getmEU();
 		QuickDanmuku quick = QuickDanmuku.getQuickDanmuku();
-		
+		Random r = GameSession.rand();
 		
 		//Ring
 		double[][] midArray = new double[][] { { 300, 150, 470, 125, 300 }, { 150, 150, 150, 150, 150 } };
 		double[] rArray = new double[] { 100, 70, 50, 100, 70 };
-		double[] rotateSpeedArray = new double[] { 30, 10, 25, 50, 20 };
-		double[] downSpeedArray = new double[] { 50, 60, 20, 60, 50 };
+		double[] rotateSpeedArray = new double[] { 30, 60, 75, 50, 65 };
+		double[] downSpeedArray = new double[] { 110, 120, 80, 90, 200 };
 		int bulletCount = 8;
 		for (int j = 0; j < midArray[0].length; j++) {
 			int i = j;
@@ -39,6 +41,8 @@ public class RingDanmuku extends ADanmuku {
 				OvalLauncherGroup olg = new OvalLauncherGroup(midArray[0][i], midArray[1][i]);
 				olg.setAmount(bulletCount);
 				olg.setLauncherConfig((launcher) -> {
+					launcher.setBulletType(DiamondBullet.class);
+					launcher.bindToWantBeRemoved(sourceElement);
 					launcher.setBulletSpeed(rArray[i]);
 					launcher.setBulletEvent((sesx, b) -> {
 						LogicExecutor.getLogicExecutor().schedule(() -> {
@@ -48,24 +52,26 @@ public class RingDanmuku extends ADanmuku {
 				});
 				olg.execute();
 				LogicExecutor.getLogicExecutor().schedule(() -> {
-					Helper midHelper = new Helper(midArray[0][i], midArray[1][i]);
-					midHelper.setVelocityY(downSpeedArray[i]);
-					for (int k = 0; k < bulletCount; k++) {
-						Bullet bullet = new DefaultBullet(midArray[0][i], midArray[1][i]);
-						OvalHelper helper = new OvalHelper(midArray[0][i], midArray[1][i], rArray[i],
-								rotateSpeedArray[i], Math.PI * 2 / bulletCount * k);
-						helper.getOvalMidXProperty().bind(midHelper.getxProperty());
-						helper.getOvalMidYProperty().bind(midHelper.getyProperty());
-						bullet.getxProperty().bind(helper.getxProperty());
-						bullet.getyProperty().bind(helper.getyProperty());
-						bullet.setVelocityX(1);
-						bullet.setLambdaModify((x) -> {
-							quick.VToByDirection(x, helper.getDirection() + Math.PI / 2);
-						});
-						Random r = GameSession.rand();
-						mEU.add("bullet" + r.nextInt(), bullet);
-						mEU.add("helper" + r.nextInt(), helper);
-						mEU.add("midHelper" + i * i * 10007, midHelper);
+					if(!sourceElement.getDeleted()){
+						Helper midHelper = new Helper(midArray[0][i], midArray[1][i]);
+						midHelper.setVelocityY(downSpeedArray[i]);
+						mEU.add("midHelper" +r.nextInt(), midHelper);
+						for (int k = 0; k < bulletCount; k++) {
+							Bullet bullet = new DiamondBullet(midArray[0][i], midArray[1][i]);
+							OvalHelper helper = new OvalHelper(midArray[0][i], midArray[1][i], rArray[i],
+									rotateSpeedArray[i], Math.PI * 2 / bulletCount * k);
+							helper.getOvalMidXProperty().bind(midHelper.getxProperty());
+							helper.getOvalMidYProperty().bind(midHelper.getyProperty());
+							bullet.getxProperty().bind(helper.getxProperty());
+							bullet.getyProperty().bind(helper.getyProperty());
+							bullet.setVelocityX(1);
+							bullet.setLambdaModify((x) -> {
+								quick.VToByDirection(x, helper.getDirection() + Math.PI / 2);
+							});
+							
+							mEU.add("bullet" + r.nextInt(), bullet);
+							mEU.add("helper" + r.nextInt(), helper);
+						}
 					}
 				}, 1000, TimeUnit.MILLISECONDS);
 			}, j * 2000, TimeUnit.MILLISECONDS);
@@ -73,10 +79,12 @@ public class RingDanmuku extends ADanmuku {
 		
 		//Snipe
 		Consumer<Launcher> config = (Launcher launcher)->{
+			launcher.bindToWantBeRemoved(sourceElement);
+			launcher.bindToXY(sourceElement);
 			launcher.setBulletSpeed(200);
 			launcher.setBulletEvent((sesx,bullet)->{
 				LogicExecutor.getLogicExecutor().schedule(() -> {
-					bullet.setVelocityX(70);
+					bullet.setVelocityX(120);
 					bullet.setVelocityY(0);
 					quick.snipePlayer(bullet);
 				}, 1000, TimeUnit.MILLISECONDS);
@@ -84,23 +92,17 @@ public class RingDanmuku extends ADanmuku {
 		};
 		ArcLauncherGroup alg = new ArcLauncherGroup(getSourceElement().getX(), getSourceElement().getY(), Math.PI/2*3, PI/2, 5);
 		alg.setLauncherConfig(config);
-		long startTime = 4000;
-		LogicExecutor.getLogicExecutor().schedule(() -> {
-			alg.setMidX(getSourceElement().getX());
-			alg.setMidY(getSourceElement().getY());
-			alg.execute();
-		}, startTime , TimeUnit.MILLISECONDS);
-		LogicExecutor.getLogicExecutor().schedule(() -> {
-			alg.setMidX(getSourceElement().getX());
-			alg.setMidY(getSourceElement().getY());
-			alg.execute();
-		}, startTime+400 , TimeUnit.MILLISECONDS);
-		LogicExecutor.getLogicExecutor().schedule(() -> {
-			alg.setMidX(getSourceElement().getX());
-			alg.setMidY(getSourceElement().getY());
-			alg.execute();
-		}, startTime+800 , TimeUnit.MILLISECONDS);
+		long startTime = 1000;
 		
+		for(int k=0;k<4;k++){
+			for(int i=0;i<5;i++){
+				LogicExecutor.getLogicExecutor().schedule(() -> {
+					alg.setMidX(getSourceElement().getX());
+					alg.setMidY(getSourceElement().getY());
+					alg.execute();
+				}, startTime+i*400+k*4000 , TimeUnit.MILLISECONDS);
+			}
+		}
 		
 	}
 

@@ -5,8 +5,8 @@ import com.badlogic.gdx.math.Polygon;
 import application.Main;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import magengine.bullet.impl.PlayerBullet;
 import magengine.element.PolygonCollision;
+import magengine.game.GameSession;
 import magengine.util.CollisionTeam;
 import magengine.util.CollisionUtil;
 import magengine.util.Transform;
@@ -68,6 +68,7 @@ public abstract class APolygonEnemy extends AEnemy implements PolygonCollision{
 			if(this.addAndGetHP(-1)<=0){
 				this.setWantBeRemoved(true);
 			}
+			this.paintBloodBar(this.getEmBb());
 		}
 	
 	}

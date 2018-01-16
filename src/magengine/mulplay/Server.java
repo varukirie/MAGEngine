@@ -63,12 +63,7 @@ public class Server extends Transport {
 						}
 					});
 			ChannelFuture cf = boot.bind(port).sync();
-			cf.channel().closeFuture().addListener(new GenericFutureListener<Future<? super Void>>() {
-				@Override
-				public void operationComplete(Future<? super Void> future) throws Exception {
-					close();
-				}
-			});
+			cf.channel().closeFuture().addListener(future -> close());
 		} catch (Exception e) {
 			Thread.interrupted();
 			e.printStackTrace();

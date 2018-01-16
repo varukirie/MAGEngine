@@ -1,14 +1,13 @@
 package magengine.bullet.impl;
 
-import javafx.application.Platform;
-import javafx.scene.effect.Bloom;
 import magengine.element.PolygonCollision;
-import magengine.enemy.AEnemy;
-import magengine.paint.MyCanvasSwitcher;
+import magengine.element.impl.Spark;
+import magengine.game.GameSession;
 import magengine.util.CollisionTeam;
 import magengine.util.DI;
+import magengine.util.SoundUtil;
 
-public class PlayerBullet extends StarBullet {
+public class PlayerBullet extends ArrowBullet {
 
 	public PlayerBullet(double x, double y) {
 		super(x, y);
@@ -18,11 +17,14 @@ public class PlayerBullet extends StarBullet {
 	public CollisionTeam getTeam() {
 		return CollisionTeam.PLAYER_BULLET;
 	}
-	
+
 	@Override
 	public void onCollision(PolygonCollision m) {
 		if(m.getTeam().equals(CollisionTeam.ENEMY)){
+			SoundUtil.getInstance().play("hit");
 			setWantBeRemoved(true);
+			Spark spark = new Spark(this.getX(), this.getY());
+			DI.getmEU().add("spark"+GameSession.rand().nextInt(), spark);
 		}
 	}
 }

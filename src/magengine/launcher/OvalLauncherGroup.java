@@ -1,7 +1,5 @@
 package magengine.launcher;
 
-import java.util.UUID;
-
 public class OvalLauncherGroup extends ALauncherGroup {
 
 	private double midX=200;

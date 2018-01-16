@@ -8,7 +8,6 @@ import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.Paint;
 import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
-import magengine.bullet.impl.CircleBullet;
 
 public enum PresetColor {
 

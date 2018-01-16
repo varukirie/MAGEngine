@@ -39,7 +39,8 @@ public class MoveHandler implements Runnable {
 	 */
 	public static double absoluteTimeSpeed = DEFAULT_TIME_SPEED;
 	private static volatile double deltaTimeFactor = 0;
-	public static final long SLEEP_TIME = 2;
+	public static volatile double PRESET_DELTA_TIME_FACTOR = 1.0;
+	public static final long SLEEP_TIME = 3;
 	public static final long BLANK = 1000;
 
 	private Map<String, Moveable> wantMoveMap = new ConcurrentHashMap<>();
@@ -82,6 +83,7 @@ public class MoveHandler implements Runnable {
 			gameLogic();
 
 			try {
+//				Thread.sleep((long) (SLEEP_TIME-deltaTime>0?(SLEEP_TIME-deltaTime):1));
 				Thread.sleep(SLEEP_TIME);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -92,16 +94,15 @@ public class MoveHandler implements Runnable {
 	}
 
 	private void gameLogic(){
-		Iterator<Entry<String, Moveable>> iter = wantMoveMap.entrySet().iterator();
-		while (iter.hasNext()) {
-			entry = iter.next();
+		for (Entry<String, Moveable> stringMoveableEntry : wantMoveMap.entrySet()) {
+			entry = stringMoveableEntry;
 			m = entry.getValue();
 			m.modify();
 			if (m instanceof BaseElement) {
 				if (((BaseElement) m).getLambdaModify() != null) {
 					((BaseElement) m).getLambdaModify().accept((BaseElement) m);
 				}
-				if (((BaseElement) m).getWantBeRemoved() == true) {
+				if (((BaseElement) m).getWantBeRemoved()) {
 					removeElement(entry.getKey());
 					continue;
 				}

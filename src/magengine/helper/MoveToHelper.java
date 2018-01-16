@@ -1,12 +1,10 @@
 package magengine.helper;
 
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import magengine.chapter.util.QuickDanmuku;
 import magengine.element.Initializable;
 import magengine.game.LogicExecutor;
-import magengine.util.DI;
 
 public class MoveToHelper extends Helper implements Initializable{
 	

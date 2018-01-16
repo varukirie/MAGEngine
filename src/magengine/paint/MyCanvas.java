@@ -26,7 +26,7 @@ public class MyCanvas extends Canvas {
 	
 	
 	public MyCanvas(){
-		this(new ConcurrentHashMap<String,Paintable>());
+		this(new ConcurrentHashMap<>());
 	}
 	public MyCanvas(Map<String, Paintable> wantPaintMap){
 		super(CANVAS_WIDTH,CANVAS_HEIGHT);
@@ -43,9 +43,8 @@ public class MyCanvas extends Canvas {
 		//清空屏幕
 		this.clear();
 		//绘制wantPaint的内容
-		Iterator<Entry<String, Paintable>> iter = wantPaintMap.entrySet().iterator();
-		while(iter.hasNext()){
-			iter.next().getValue().paint(gc);
+		for (Entry<String, Paintable> stringPaintableEntry : wantPaintMap.entrySet()) {
+			stringPaintableEntry.getValue().paint(gc);
 		}
 	}
 }

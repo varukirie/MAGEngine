@@ -2,13 +2,10 @@ package magengine.util;
 
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Consumer;
 
 import application.Main;
-import javafx.application.Platform;
 import javafx.scene.layout.StackPane;
-import magengine.bullet.Bullet;
 import magengine.element.BaseElement;
 import magengine.element.DurationManage;
 import magengine.element.Initializable;
@@ -16,7 +13,6 @@ import magengine.element.Moveable;
 import magengine.element.Paintable;
 import magengine.element.PolygonCollision;
 import magengine.element.impl.Area;
-import magengine.enemy.AEnemy;
 import magengine.enemy.APolygonEnemy;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
@@ -51,7 +47,7 @@ public class ElementUtils {
 	 */
 	public void add(String name, Object value) {
 		if(getWantMoveMap().get(name)!=null){
-			System.out.println("ElementUtils add: warning: name产生碰撞 受影响对象:"+value);
+			System.out.println("ElementUtils add: warning: name产生碰撞 受影响对象:"+value+"  name:"+name);
 		}
 			
 		if (Main.DEBUG_ElementCreate) {
@@ -83,6 +79,10 @@ public class ElementUtils {
 	public void removeBoth(String key) {
 
 		Object obj = getWantMoveMap().get(key);
+		if(obj==null){
+			System.out.println("warning:ElementUtil:obj==null! [key:"+key+"]");
+			return ;
+		}
 		if (Main.DEBUG_ElementCreate) {
 			System.out.println("removeElement:" + obj);
 		}
@@ -100,6 +100,7 @@ public class ElementUtils {
 		}
 		mh.getWantMoveMap().remove(key);
 		if (obj instanceof BaseElement) {
+			((BaseElement) obj).onRemove();
 			Consumer<BaseElement> event = ((BaseElement) obj).getOnRemoveEvent();
 			if (event != null)
 				event.accept((BaseElement) obj);
@@ -144,7 +145,7 @@ public class ElementUtils {
 	private Random random = GameSession.rand();
 
 	public void addAll(BaseElement... value) {
-		for (int i = 0; i < value.length; i++) {
+		for (BaseElement aValue : value) {
 			this.add(random.nextLong() + "", value);
 		}
 	}

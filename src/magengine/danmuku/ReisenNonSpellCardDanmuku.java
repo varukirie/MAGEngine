@@ -3,9 +3,7 @@ package magengine.danmuku;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import application.Main;
 import javafx.scene.paint.Color;
-import magengine.bullet.PresetColor;
 import magengine.bullet.impl.HexagonBullet;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.element.BaseElement;
@@ -15,8 +13,6 @@ import magengine.helper.OvalHelper;
 import magengine.helper.RelativeAnchorHelper;
 import magengine.launcher.Launcher;
 import magengine.util.ElementUtils;
-
-import static application.Main.*;
 
 public class ReisenNonSpellCardDanmuku extends ADanmuku{
 

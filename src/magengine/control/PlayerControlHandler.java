@@ -1,26 +1,21 @@
 package magengine.control;
 
+import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.scene.effect.Bloom;
-import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import magengine.bullet.impl.DefaultBullet;
-import magengine.bullet.impl.HexagonBullet;
 import magengine.element.BaseElement;
 import magengine.element.impl.BombCircleArea;
-import magengine.element.impl.CircleArea;
 import magengine.element.impl.Player;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
 import magengine.game.MoveHandler;
-import magengine.paint.MyCanvas;
-import magengine.paint.MyCanvasSwitcher;
 import magengine.ui.SceneManager;
 import magengine.util.CollisionTeam;
 import magengine.util.DI;
 import magengine.util.ElementUtils;
+import magengine.util.SoundUtil;
 
 import static java.lang.Math.*;
 /**
@@ -36,9 +31,8 @@ public class PlayerControlHandler {
 
 	private static PlayerControlHandler pch = null;
 	// 速度V
-	public static double DEFAULT_BALL_V = 4;
-	public static double BALL_V = DEFAULT_BALL_V;
-	public static double PLAYER_V = 200;// 用于设置按键导致的player移动速度
+	public static PlayerControlHandler getInstance(){return pch;}
+	public static double PLAYER_V = 270;// 用于设置按键导致的player移动速度
 	private Player player = null;
 	private ElementUtils elementUtils = null;
 
@@ -92,7 +86,7 @@ public class PlayerControlHandler {
 
 	// 顺序是上、右、下、左
 	public boolean[] pressed = new boolean[] { false, false, false, false };
-	private int ballCount = 0;
+	private boolean shiftPressed = false;
 
 	private void changeV() {
 		double vx = 0;
@@ -113,10 +107,16 @@ public class PlayerControlHandler {
 			vx *= 0.7071;
 			vy *= 0.7071;
 		}
-		player.setVelocityX(vx);
-		player.setVelocityY(vy);
+		if(this.shiftPressed){
+			player.setVelocityX(vx*0.5);
+			player.setVelocityY(vy*0.5);
+		}else{
+			player.setVelocityX(vx);
+			player.setVelocityY(vy);
+		}
 	}
 
+	
 	@SuppressWarnings("incomplete-switch")
 	public void pressHandle(KeyEvent e) {
 
@@ -132,6 +132,9 @@ public class PlayerControlHandler {
 			break;
 		case LEFT:
 			pressed[3] = true;
+			break;
+		case SHIFT:
+			shiftPressed=true;
 			break;
 		case X:
 			Player.getPlayer1().isShooting = true;
@@ -157,6 +160,9 @@ public class PlayerControlHandler {
 			break;
 		case LEFT:
 			pressed[3] = false;
+			break;
+		case SHIFT:
+			shiftPressed=false;
 			break;
 		case X:
 			Player.getPlayer1().isShooting = false;
@@ -187,16 +193,6 @@ public class PlayerControlHandler {
 		changeV();
 	}
 
-	private void playerShootToMouse() {
-		DefaultBullet ball = new DefaultBullet(player.getX(), player.getY());
-		double dx = PlayerControlHandler.mouseX - player.getX();
-		double dy = PlayerControlHandler.mouseY - player.getY();
-		double s = Math.sqrt(dx * dx + dy * dy);
-		ball.setVelocityX(dx * BALL_V / s);
-		ball.setVelocityY(dy * BALL_V / s);
-		elementUtils.add("ball" + ballCount++, ball);
-
-	}
 
 	public static double getMouseX() {
 		return mouseX;
@@ -207,15 +203,18 @@ public class PlayerControlHandler {
 	}
 	
 	
-	public static boolean boomEffectSetted = false;
-	private void doBomb(){
+	public void doBomb(){
+		SoundUtil.getInstance().play("glass");
+		Platform.runLater(() -> {
+			SceneManager.getInstance().shakeInScene(500);
+		});
 		double x  = Player.getPlayer1().getX();
 		double y = Player.getPlayer1().getY();
 		double r = 175;
 //		double x=MyCanvas.CANVAS_WIDTH/2;
 //		double y=MyCanvas.CANVAS_HEIGHT;
 		BombCircleArea ca = new BombCircleArea(x, y, r);
-		ca.setAccY(-255);
+		ca.setAccY(-200);
 		ca.setOnCollisionEvent((m)->{
 			if(m instanceof BaseElement){
 				if(m.getTeam().equals(CollisionTeam.ENEMY_BULLET)){
@@ -224,11 +223,11 @@ public class PlayerControlHandler {
 			}
 		});
 		ca.setOnPaintEvent((gc)->{
-			gc.setFill(Color.rgb(245, 245, 245,0.3));
-//			gc.setStroke(Color.rgb(245, 245, 90,0.7));
-			gc.setStroke(Color.GHOSTWHITE);
+			gc.setFill(Color.rgb(245, 50, 50,0.2));
+//			gc.setStroke(Color.rgb(245, 245, 150,0.2));
+			gc.setStroke(Color.WHITE);
 			gc.fillOval(ca.getX()-r, ca.getY()-r, r*2, r*2);
-			double angleDelta = sin(LogicExecutor.gameTime()/500.0)*1;
+			double angleDelta = sin(LogicExecutor.gameTime()/500.0)*6;
 			
 			{
 				double angle=0+angleDelta;
@@ -272,4 +271,5 @@ public class PlayerControlHandler {
 		ElementUtils mEU = (ElementUtils) DI.di().get("mEU");
 		mEU.add("bombCircleArea", ca);
 	}
+	
 }

@@ -56,7 +56,7 @@ public abstract class ADanmuku {
 	 */
 	public void delayExecute(){
 		LogicExecutor.getLogicExecutor().schedule(() -> {
-			if(getSourceElement()==null||getSourceElement().getDeleted()==false){
+			if(getSourceElement()==null|| !getSourceElement().getDeleted()){
 				this.executeDanmuku();
 			}
 		}, getDelay(), TimeUnit.MILLISECONDS);
