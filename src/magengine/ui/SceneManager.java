@@ -1,5 +1,7 @@
 package magengine.ui;
 
+import java.io.File;
+
 import application.Main;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -142,6 +144,7 @@ public class SceneManager {
 		session.setMulplayServer(mulplayServer);
 		session.loadGameScene();
 		session.loadChapter(new TestChapter());
+		
 		session.setFailureEvent(() -> {
 			GameSession.closeGameSession();
 			loadFailureScene();

@@ -1,9 +1,13 @@
 package magengine.chapter.util;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+
+import org.codehaus.groovy.control.CompilationFailedException;
 
 import javafx.application.Platform;
 import javafx.scene.effect.Bloom;
@@ -17,6 +21,7 @@ import magengine.element.InitBeforeLoadChapter;
 import magengine.element.impl.BombCircleArea;
 import magengine.game.LogicExecutor;
 import magengine.game.MoveHandler;
+import magengine.groovy.GroovySheetExecutor;
 import magengine.launcher.Launcher;
 import magengine.paint.MyCanvas;
 import magengine.paint.MyCanvasSwitcher;
@@ -46,6 +51,7 @@ public class ChapterLoader {
 		DI.di().put("sES", scheduleES);
 		loadMusicResource();
 	}
+	
 	public static void loadChapter(AChapter c){
 		MoveHandler.setDeltaTimeFactor(0);
 		long start = System.currentTimeMillis();
@@ -80,6 +86,8 @@ public class ChapterLoader {
 		
 		
 	}
+	
+	
 	
 	public static void loadChapter(String chapterName) throws Exception{
 		Class<?> cls = Class.forName(chapterName);
