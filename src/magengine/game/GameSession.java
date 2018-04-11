@@ -5,7 +5,6 @@ import java.util.Random;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import application.Main;
 import io.netty.channel.Channel;
 import io.netty.channel.nio.NioEventLoopGroup;
 import javafx.animation.AnimationTimer;
@@ -33,6 +32,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import magengine.application.Main;
 import magengine.chapter.util.AChapter;
 import magengine.chapter.util.ChapterLoader;
 import magengine.chapter.util.QuickDanmuku;

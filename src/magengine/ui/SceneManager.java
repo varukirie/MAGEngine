@@ -1,6 +1,5 @@
 package magengine.ui;
 
-import application.Main;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -35,6 +34,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import magengine.application.Main;
 import magengine.chapter.TestChapter;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;

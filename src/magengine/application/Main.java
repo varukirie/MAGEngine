@@ -1,4 +1,4 @@
-package application;
+package magengine.application;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -19,8 +19,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			SceneManager.init(primaryStage);
-//			SceneManager.getInstance().startMenu();
-			SceneManager.getInstance().loadMulplaySelectScene();
+			SceneManager.getInstance().startMenu();
+//			SceneManager.getInstance().loadMulplaySelectScene();
 			primaryStage.show();
 //			SceneManager.shutdownGame();
 //			SceneManager.startGame(primaryStage);	

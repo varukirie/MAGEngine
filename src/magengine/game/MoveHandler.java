@@ -4,7 +4,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
-import application.Main;
+
+import magengine.application.Main;
 import magengine.bullet.Bullet;
 import magengine.element.Accelerated;
 import magengine.element.BaseElement;

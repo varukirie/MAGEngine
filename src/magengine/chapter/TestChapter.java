@@ -3,16 +3,11 @@ package magengine.chapter;
 import java.util.Random;
 import java.util.function.Consumer;
 
-import org.omg.PortableInterceptor.SUCCESSFUL;
-
-import com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable;
-
 import javafx.application.Platform;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import magengine.chapter.util.AChapter;
 import magengine.chapter.util.QuickDanmuku;
-import magengine.control.PlayerControlHandler;
+import magengine.danmuku.RayzerDanmuku;
+import magengine.danmuku.PinkBlueRainDanmuku;
 import magengine.danmuku.ReisenNonSpellCardDanmuku;
 import magengine.danmuku.RingDanmuku;
 import magengine.danmuku.RunAwayNuclearDanmuku;
@@ -21,15 +16,10 @@ import magengine.danmuku.TriArcDanmuku;
 import magengine.danmuku.TriBurstDmk;
 import magengine.danmuku.UtsuhoNonSpellCard1;
 import magengine.danmuku.WaveParticleDanmuku;
-import magengine.danmuku.qq.BoomDemoDanmuku;
-import magengine.danmuku.yt.FllowerArrayDanmuku;
-import magengine.danmuku.yt.PinkBlueRainDanmuku;
 import magengine.element.BaseElement;
-import magengine.element.InitBeforeLoadChapter;
 import magengine.enemy.ALoopDanmukuEnemy;
 import magengine.enemy.BossbuEnemy;
 import magengine.enemy.ButterflyElfEnemy;
-import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
 import magengine.paint.MyCanvas;
 import magengine.ui.SceneManager;
@@ -89,16 +79,10 @@ public class TestChapter extends AChapter{
 	}
 
 	private void createStageBoss(Consumer<BaseElement> onEnd) {
-		// ALoopDanmukuEnemy bossM1 = new BeisimaiEnemy(300, -100);
 		ALoopDanmukuEnemy bossM1 = new BossbuEnemy(300, -50);
-		// ALoopDanmukuEnemy boss = new NandaketaEnemy(300,100);
 		bossM1.setHP(400);
 		bossM1.setDanmukuStartDelay(1000);
-		// boss.addDanmuku(new FllowerArrayDanmuku(),
-		// FllowerArrayDanmuku.DURATION);
-		// boss.addDanmuku(new DeepSeaDanmuku(), DeepSeaDanmuku.DURATION);
-		// bossM1.addDanmuku(new PinkBlueRainDanmuku(),
-		// PinkBlueRainDanmuku.DURATION);
+
 		bossM1.addDanmuku(new UtsuhoNonSpellCard1(), UtsuhoNonSpellCard1.DURATION);
 		bossM1.addDanmuku(new RunAwayNuclearDanmuku(), RunAwayNuclearDanmuku.DURATION + 2000);
 		bossM1.setOnRemoveEvent((bsM1) -> {// 一阶段结束
@@ -117,7 +101,7 @@ public class TestChapter extends AChapter{
 				});
 				ALoopDanmukuEnemy bossM3 = new BossbuEnemy(bsM2.getX(), bsM2.getY());
 				bossM3.setDanmukuStartDelay(1000)
-				.addDanmuku(new BoomDemoDanmuku(),BoomDemoDanmuku.DURATION)	
+				.addDanmuku(new RayzerDanmuku(),RayzerDanmuku.DURATION)	
 				.addDanmuku(new PinkBlueRainDanmuku(), PinkBlueRainDanmuku.DURATION)		
 				.setHP(500);
 				bossM3.setOnRemoveEvent(onEnd);

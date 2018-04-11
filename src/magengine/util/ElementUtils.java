@@ -4,8 +4,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.function.Consumer;
 
-import application.Main;
 import javafx.scene.layout.StackPane;
+import magengine.application.Main;
 import magengine.element.BaseElement;
 import magengine.element.DurationManage;
 import magengine.element.Initializable;
