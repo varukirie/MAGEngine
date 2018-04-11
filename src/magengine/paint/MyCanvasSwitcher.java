@@ -3,6 +3,8 @@ package magengine.paint;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 
+import javax.annotation.Resource;
+
 import javafx.application.Platform;
 import javafx.scene.effect.Effect;
 import javafx.scene.layout.StackPane;
@@ -10,15 +12,17 @@ import magengine.element.BaseElement;
 import magengine.game.MoveHandler;
 
 public class MyCanvasSwitcher {
-	private MoveHandler mh=null;
+	@Resource
+	private MoveHandler mh;
 	private ConcurrentHashMap<Class<?>, MyCanvas> fmyCanvasMap=new ConcurrentHashMap<>();
 	private ConcurrentHashMap<Class<?>, MyCanvas> smyCanvasMap=new ConcurrentHashMap<>();
 	private StackPane root=null;
 
-	
-	public MyCanvasSwitcher(StackPane root,MoveHandler mh){
+	public MyCanvasSwitcher(){
+		
+	}
+	public MyCanvasSwitcher(StackPane root){
 		this.root=root;
-		this.mh=mh;
 	}
 	
 	public void addElement(String key,BaseElement e){
@@ -91,6 +95,12 @@ public class MyCanvasSwitcher {
 			root.getChildren().add(canvas);
 			root.getChildren().add(scanvas);
 		});
+	}
+	public StackPane getRoot() {
+		return root;
+	}
+	public void setRoot(StackPane root) {
+		this.root = root;
 	}
 	
 	

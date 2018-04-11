@@ -1,5 +1,8 @@
 package magengine.application;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import magengine.ui.SceneManager;
@@ -15,9 +18,21 @@ public class Main extends Application {
 	public static final boolean ACC_ENABLE=true;
 	public static final boolean DEBUG_COLLISION_AREA=false;
 
+	private static ApplicationContext ctx;
+	
+	
+	public static void generateNewContext(){
+		if(ctx!=null){
+			ClassPathXmlApplicationContext xmlctx=(ClassPathXmlApplicationContext) ctx;
+			xmlctx.close();
+		}
+		ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+	}
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			generateNewContext();
 			SceneManager.init(primaryStage);
 			SceneManager.getInstance().startMenu();
 //			SceneManager.getInstance().loadMulplaySelectScene();
@@ -36,5 +51,9 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
+	}
+	
+	public static ApplicationContext ctx(){
+		return ctx;
 	}
 }

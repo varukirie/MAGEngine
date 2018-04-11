@@ -64,8 +64,12 @@ public class MoveHandler implements Runnable {
 	int switchCount = 0;
 	private double deltaTime = 0;
 	private long current4Delta = System.currentTimeMillis();
-	private LogicExecutor logicExecutor= (LogicExecutor) DI.di().get("logicExecutor");
+	private LogicExecutor logicExecutor= LogicExecutor.getLogicExecutor();
 	
+	@SuppressWarnings("unused")
+	private MoveHandler(){
+		
+	}
 	public MoveHandler(MyCanvas myCanvas, MyCanvas sCanvas) {
 		this.myCanvas = myCanvas;
 		this.sCanvas = sCanvas;
@@ -275,6 +279,12 @@ public class MoveHandler implements Runnable {
 	public static void setDeltaTimeFactor(double deltaTimeFactor) {
 		MoveHandler.deltaTimeFactor = deltaTimeFactor;
 	}
+	public void setMyCanvas(MyCanvas myCanvas) {
+		this.myCanvas = myCanvas;
+	}
+	public void setsCanvas(MyCanvas sCanvas) {
+		this.sCanvas = sCanvas;
+	}
 	
-
+	
 }
