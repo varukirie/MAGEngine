@@ -13,6 +13,7 @@ import magengine.launcher.Launcher;
 import magengine.util.C;
 import magengine.util.ElementUtils;
 
+@Deprecated
 public class SeqDanmuku {
 	private ElementUtils mEU;
 	private QuickDanmuku quick;
