@@ -1,4 +1,4 @@
-package magengine.danmuku.yt;
+package magengine.danmuku;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -10,7 +10,6 @@ import magengine.bullet.impl.CircleBullet;
 import magengine.bullet.impl.HexagonBullet;
 import magengine.bullet.impl.LongHexagonBullet;
 import magengine.chapter.util.QuickDanmuku;
-import magengine.danmuku.ADanmuku;
 import magengine.element.BaseElement;
 import magengine.game.LogicExecutor;
 import magengine.helper.OvalHelper;

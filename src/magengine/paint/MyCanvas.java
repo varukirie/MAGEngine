@@ -25,12 +25,19 @@ public class MyCanvas extends Canvas {
 	}
 	
 	
+	
+	public void setWantPaintMap(Map<String, Paintable> wantPaintMap) {
+		this.wantPaintMap = wantPaintMap;
+	}
+
+
+
 	public MyCanvas(){
 		this(new ConcurrentHashMap<>());
 	}
 	public MyCanvas(Map<String, Paintable> wantPaintMap){
 		super(CANVAS_WIDTH,CANVAS_HEIGHT);
-		this.wantPaintMap = wantPaintMap;
+		setWantPaintMap(wantPaintMap);
 		gc = super.getGraphicsContext2D();
 	}
 	public void clear(){

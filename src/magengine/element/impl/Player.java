@@ -2,10 +2,10 @@ package magengine.element.impl;
 
 import com.badlogic.gdx.math.Polygon;
 
-import application.Main;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import magengine.application.Main;
 import magengine.element.BaseElement;
 import magengine.element.LimitedByCanvas;
 import magengine.element.PolygonCollision;

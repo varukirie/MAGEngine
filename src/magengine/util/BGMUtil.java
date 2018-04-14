@@ -8,6 +8,9 @@ import javafx.scene.media.MediaPlayer;
 public class BGMUtil {
 	
 	private static MediaPlayer mp;
+	private BGMUtil(){
+		
+	}
 	public static void loadResource(String path){
 		Media media = new Media(BGMUtil.class.getResource(path).toString());
 		mp = new MediaPlayer(media);

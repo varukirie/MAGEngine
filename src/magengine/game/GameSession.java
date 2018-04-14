@@ -7,13 +7,11 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 import org.codehaus.groovy.control.CompilationFailedException;
-
-import application.Main;
+import javax.annotation.Resource;
 import io.netty.channel.Channel;
 import io.netty.channel.nio.NioEventLoopGroup;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -35,7 +33,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+import magengine.application.Main;
 import magengine.chapter.util.AChapter;
 import magengine.chapter.util.ChapterLoader;
 import magengine.chapter.util.QuickDanmuku;
@@ -50,8 +48,8 @@ import magengine.mulplay.Transport;
 import magengine.paint.BackgroundUtil;
 import magengine.paint.BloodBar;
 import magengine.paint.BombPainting;
-import magengine.paint.EmBloodBar;
 import magengine.paint.MyCanvas;
+import magengine.paint.MyCanvasSwitcher;
 import magengine.ui.SceneManager;
 import magengine.util.BGMUtil;
 import magengine.util.C;
@@ -98,8 +96,8 @@ public class GameSession {
 	public static GameSession startGameSession() {
 		if (instance != null)
 			throw new IllegalStateException("GameSession已经存在 需要先调用closeGameSession");
-		else {
-			instance = new GameSession();
+		else{
+			instance = Main.ctx().getBean("gameSession",GameSession.class);
 		}
 
 		return instance;
@@ -116,7 +114,8 @@ public class GameSession {
 		if (instance != null) {
 			instance.shutdownGame();
 		}
-		instance = null;
+		instance=null;
+		Main.generateNewContext();
 	}
 
 	public void resetByPreset() {
@@ -167,7 +166,26 @@ public class GameSession {
 
 	private StackPane gameRoot;
 	private BackgroundUtil backgroundUtil = new BackgroundUtil();
-	private long lastTime4bench = 0;
+
+	private long  lastTime4bench=0;
+	
+	@Resource
+	private MyCanvas moveableCanvas;
+	@Resource
+	private MyCanvas staticCanvas ;
+	@Resource
+	private MyCanvas secondaryMCanvas ;
+	@Resource
+	private MoveHandler mh ;
+	@Resource
+	private ElementUtils mEU ;
+	
+	@Resource
+	private MyCanvasSwitcher myCanvasSwitcher ;
+	
+	/**
+	 * 装载游戏的画面
+	 */
 
 	public void loadGameScene() {
 		this.bb = new BloodBar(600, 40, 200, 30);
@@ -198,13 +216,12 @@ public class GameSession {
 			e.printStackTrace();
 		}
 		bu.setBackgroundImg(gamebgimg);
-		MyCanvas moveableCanvas = new MyCanvas();
-		MyCanvas staticCanvas = new MyCanvas();
-		MyCanvas secondaryMCanvas = new MyCanvas(moveableCanvas.getWantPaintMap());
 		root.getChildren().add(bgCanvas);
 		root.getChildren().add(staticCanvas);
 		root.getChildren().add(moveableCanvas);
 		root.getChildren().add(secondaryMCanvas);
+		
+		myCanvasSwitcher.setRoot(root);
 		this.gameRoot = root;
 		gDataArea.getChildren().addAll(life, bomb);
 		gDataArea.setAlignment(Pos.TOP_LEFT);
@@ -219,31 +236,25 @@ public class GameSession {
 		primaryStage.setTitle("MAGEngine!");
 		gArea.getChildren().add(bb.getBcanvas());
 		primaryStage.show();
-
-		LogicExecutor logicExecutor = LogicExecutor.getLogicExecutor();
-		DI.di().put("logicExecutor", logicExecutor);
-		// 运行 线程MoveHandle
-		MoveHandler mh = new MoveHandler(moveableCanvas, secondaryMCanvas);
+		LogicExecutor logicExecutor=LogicExecutor.getLogicExecutor();
+		DI.di().put("logicExecutor",logicExecutor);
 		DI.di().put("mh", mh);
-
 		Thread mhThread = new Thread(mh);
 		// mhThread.setPriority(Thread.MAX_PRIORITY);
 		mhThread.start();
-
-		ElementUtils moveableElementUtils = new ElementUtils(mh, moveableCanvas, root);
-		mh.setmEU(moveableElementUtils);
-		DI.di().put("mEU", moveableElementUtils);
-		DI.di().put("switcher", moveableElementUtils.getSwitcher());
-
+		mh.setmEU(mEU);
+		DI.di().put("mEU", mEU);
+		DI.di().put("switcher", mEU.getSwitcher());
+		
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
 				backgroundUtil.paintBackground(1);
 				mh.callRepaint();
-				moveableElementUtils.getSwitcher().repaint();
-				if (Main.DEBUG_RENDER_BENCH) {
-					System.out.println("2.渲染" + (System.currentTimeMillis() - lastTime4bench) + "ms");
-					lastTime4bench = System.currentTimeMillis();
+				mEU.getSwitcher().repaint();
+				if(Main.DEBUG_RENDER_BENCH){
+					System.out.println("2.渲染"+(System.currentTimeMillis()-lastTime4bench)+"ms");
+					lastTime4bench=System.currentTimeMillis();
 				}
 			}
 		};
@@ -256,13 +267,12 @@ public class GameSession {
 		Player player1 = Player.getPlayer1(PRESET_PLAYER_POSITION_X, PRESET_PLAYER_POSITION_Y);
 		mh.addCollisionElement("player1", player1);
 
-		// 绑定玩家与键盘控制
-		PlayerControlHandler PCH = PlayerControlHandler.getPlayerControlHandler(moveableElementUtils, player1);
+		//绑定玩家与键盘控制
+		PlayerControlHandler PCH= PlayerControlHandler.getPlayerControlHandler(mEU, player1);
 		PCH.bindEvent(scene);
-		//
-		moveableElementUtils.add("player1", player1);
+		mEU.add("player1", player1);
 
-		moveableElementUtils.add("displayMessage", new DisplayMessage(1, MyCanvas.CANVAS_HEIGHT - 20));
+		mEU.add("displayMessage", new DisplayMessage(1, MyCanvas.CANVAS_HEIGHT-20));
 		ChapterLoader.init(staticCanvas);
 		if (this.mulplay) {
 			if (this.mulplayServer) {
@@ -272,11 +282,10 @@ public class GameSession {
 				setLoopGroup(server.getBossLoop());
 				player1.setX(PRESET_PLAYER_POSITION_X - MULPLAY_PLAYER_POSITION_DELTA_X);
 				player1.setY(PRESET_PLAYER_POSITION_Y);
-				Player player2 = Player.getPlayer2(PRESET_PLAYER_POSITION_X + MULPLAY_PLAYER_POSITION_DELTA_X,
-						PRESET_PLAYER_POSITION_Y);
-				moveableElementUtils.add("player2", player2);
-
-			} else {
+				Player player2 = Player.getPlayer2(PRESET_PLAYER_POSITION_X+MULPLAY_PLAYER_POSITION_DELTA_X,PRESET_PLAYER_POSITION_Y);
+				mEU.add("player2", player2);
+				
+			}else{
 				client = new Client(remoteHost, PORT);
 				clientOrServer = client;
 				client.start();// client完成连接
@@ -286,9 +295,9 @@ public class GameSession {
 				}
 				player1.setX(PRESET_PLAYER_POSITION_X + MULPLAY_PLAYER_POSITION_DELTA_X);
 				player1.setY(PRESET_PLAYER_POSITION_Y);
-				Player player2 = Player.getPlayer2(PRESET_PLAYER_POSITION_X - MULPLAY_PLAYER_POSITION_DELTA_X,
-						PRESET_PLAYER_POSITION_Y);
-				moveableElementUtils.add("player2", player2);
+				Player player2 = Player.getPlayer2(PRESET_PLAYER_POSITION_X-MULPLAY_PLAYER_POSITION_DELTA_X, PRESET_PLAYER_POSITION_Y);
+				mEU.add("player2", player2);
+
 			}
 
 		}

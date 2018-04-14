@@ -2,9 +2,9 @@ package magengine.element.impl;
 
 import java.util.function.Consumer;
 
-import application.Main;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import magengine.application.Main;
 import magengine.bullet.APolygonBullet;
 import magengine.element.PolygonCollision;
 import magengine.util.Transform;

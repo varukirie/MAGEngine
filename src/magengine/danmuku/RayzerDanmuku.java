@@ -1,4 +1,4 @@
-package magengine.danmuku.qq;
+package magengine.danmuku;
 
 import static java.lang.Math.sin;
 
@@ -11,7 +11,6 @@ import magengine.bullet.PresetColor;
 import magengine.bullet.impl.CircleBullet;
 import magengine.bullet.impl.LongHexagonBullet;
 import magengine.chapter.util.QuickDanmuku;
-import magengine.danmuku.ADanmuku;
 import magengine.element.BaseElement;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
@@ -19,7 +18,7 @@ import magengine.launcher.ArcLauncherGroup;
 import magengine.launcher.OvalLauncherGroup;
 import magengine.util.ElementUtils;
 
-public class BoomDemoDanmuku extends ADanmuku {
+public class RayzerDanmuku extends ADanmuku {
 	/*
 	 * 实现子弹中可以爆开新的子弹 
 	 * 可作用于boss

@@ -4,8 +4,10 @@ import java.util.Map;
 import java.util.Random;
 import java.util.function.Consumer;
 
-import application.Main;
+import javax.annotation.Resource;
+
 import javafx.scene.layout.StackPane;
+import magengine.application.Main;
 import magengine.element.BaseElement;
 import magengine.element.DurationManage;
 import magengine.element.Initializable;
@@ -28,15 +30,18 @@ import magengine.paint.MyCanvasSwitcher;
  *
  */
 public class ElementUtils {
+	@Resource
 	private MoveHandler mh = null;
 	private MyCanvas myCanvas = null;
 	private MyCanvasSwitcher switcher = null;
 
-	public ElementUtils(MoveHandler mh, MyCanvas myCanvas, StackPane root) {
+	public ElementUtils(){
+		
+	}
+	public ElementUtils(MyCanvas myCanvas, StackPane root) {
 		super();
-		this.mh = mh;
 		this.myCanvas = myCanvas;
-		this.switcher = new MyCanvasSwitcher(root, mh);
+		this.switcher = new MyCanvasSwitcher(root);
 	}
 
 	/**
@@ -149,4 +154,9 @@ public class ElementUtils {
 			this.add(random.nextLong() + "", value);
 		}
 	}
+	public void setSwitcher(MyCanvasSwitcher switcher) {
+		this.switcher = switcher;
+	}
+	
+	
 }
