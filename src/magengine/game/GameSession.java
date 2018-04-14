@@ -367,7 +367,8 @@ public class GameSession {
 				+ "import static magengine.paint.MyCanvas.*;"
 				+ "import magengine.bullet.impl.*;"
 				+ "import magengine.enemy.impl.*;"
-				+ "import magengine.danmuku.impl.*;\n");
+				+ "import magengine.danmuku.impl.*;"
+				+ "import static magengine.chapter.util.AChapter.*;\n");
 
 	}
 	

@@ -14,7 +14,7 @@ public abstract class AChapter {
 	/**
 	 * 通关时调用该函数
 	 */
-	protected void clearGame(){
+	public static void clearGame(){
 		PlayerControlHandler.getInstance().doBomb();
 		Platform.runLater(() -> {
 			SceneManager.getInstance().shakeInScene();
