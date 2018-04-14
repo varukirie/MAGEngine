@@ -145,7 +145,8 @@ public class SceneManager {
 		session.setMulplayServer(mulplayServer);
 		session.loadGameScene();
 //		session.loadChapter(new TestChapter());
-		session.loadChapterByGroovySheet(new File("d:/T.groovy"));
+//		session.loadChapterByGroovySheet(new File("d:/T.groovy"));
+		session.loadChapterByGroovySheet("/magengine/groovy/chapter/GChapter.groovy");
 		
 		session.setFailureEvent(() -> {
 			GameSession.closeGameSession();

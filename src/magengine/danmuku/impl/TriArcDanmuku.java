@@ -1,7 +1,8 @@
-package magengine.danmuku;
+package magengine.danmuku.impl;
 
 import java.util.function.Consumer;
 
+import magengine.danmuku.ADanmuku;
 import magengine.launcher.ArcLauncherGroup;
 import magengine.launcher.Launcher;
 

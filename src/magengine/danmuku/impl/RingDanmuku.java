@@ -1,4 +1,4 @@
-package magengine.danmuku;
+package magengine.danmuku.impl;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -8,6 +8,7 @@ import magengine.bullet.Bullet;
 import magengine.bullet.impl.DefaultBullet;
 import magengine.bullet.impl.DiamondBullet;
 import magengine.chapter.util.QuickDanmuku;
+import magengine.danmuku.ADanmuku;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
 import magengine.helper.Helper;

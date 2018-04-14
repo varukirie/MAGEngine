@@ -1,9 +1,10 @@
-package magengine.danmuku;
+package magengine.danmuku.impl;
 
 import javafx.scene.paint.Color;
 import magengine.bullet.PresetColor;
 import magengine.bullet.impl.CircleBullet;
 import magengine.chapter.util.QuickDanmuku;
+import magengine.danmuku.ADanmuku;
 import magengine.launcher.ArcLauncherGroup;
 import magengine.launcher.BurstLauncher;
 

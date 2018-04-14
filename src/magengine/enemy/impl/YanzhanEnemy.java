@@ -1,7 +1,8 @@
-package magengine.enemy;
+package magengine.enemy.impl;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import magengine.enemy.ALoopDanmukuEnemy;
 import magengine.paint.SpritePainter;
 
 public class YanzhanEnemy extends ALoopDanmukuEnemy {

@@ -1,10 +1,11 @@
-package magengine.danmuku;
+package magengine.danmuku.impl;
 
 import java.util.Random;
 
 import magengine.bullet.PresetColor;
 import magengine.bullet.impl.CircleBullet;
 import magengine.chapter.util.QuickDanmuku;
+import magengine.danmuku.ADanmuku;
 import magengine.element.BaseElement;
 import magengine.game.GameSession;
 import magengine.helper.OvalHelper;

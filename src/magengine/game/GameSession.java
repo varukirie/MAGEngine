@@ -360,12 +360,28 @@ public class GameSession {
 	
 	{//static code 
 		gse =  new GroovySheetExecutor();
-		gse.loadInClassPath("/magengine/groovy/CDSL.groovy");
+		gse.loadDSLInClassPath("/magengine/groovy/CDSL.groovy");
 		gse.setHeader("import static magengine.groovy.CDSL.*;"
 				+ "import magengine.groovy.CDSL;"
 				+ "import static magengine.groovy.ClosureLambdaConverter.*;"
-				+ "import static magengine.paint.MyCanvas.*;\n");
+				+ "import static magengine.paint.MyCanvas.*;"
+				+ "import magengine.bullet.impl.*;"
+				+ "import magengine.enemy.impl.*;"
+				+ "import magengine.danmuku.impl.*;\n");
 
+	}
+	
+	public void loadChapterByGroovySheet(String groovySheetClasspathPath) {
+		loadChapter(new AChapter() {
+			@Override
+			public void design(LogicExecutor executor, MyCanvas staticCanvas, ElementUtils mEU) {
+				try {
+					gse.invokeCp(GameSession.class.getResourceAsStream(groovySheetClasspathPath));
+				} catch (CompilationFailedException | IOException | ReflectiveOperationException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 	public void loadChapterByGroovySheet(File groovySheet) {
 		loadChapter(new AChapter() {

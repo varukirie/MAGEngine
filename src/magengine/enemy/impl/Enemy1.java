@@ -1,24 +1,26 @@
-package magengine.enemy;
+package magengine.enemy.impl;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import magengine.enemy.ALoopDanmukuEnemy;
 import magengine.paint.SpritePainter;
 
-public class BeisimaiEnemy extends ALoopDanmukuEnemy {
+public class Enemy1 extends ALoopDanmukuEnemy {
 	private static SpritePainter spritePainter = null;
 	
-	public BeisimaiEnemy(double x, double y) {
+	public Enemy1(double x, double y) {
 		super(x, y);
 	}
+	
 	private static double[][] origin = null;
-	private static int enemyWidth = 110;
-	private static int enemyHeight = 111;
+	private static int enemyWidth = 272;
+	private static int enemyHeight = 146;
 	private static int halfWidth = enemyWidth/2;
 	private static int halfHeight = enemyHeight/2;
 	private static Image img=null;
 	static {
 		try {
-			img = new Image(BeisimaiEnemy.class.getResourceAsStream("/img/enemies/beisimaiEnemy.png"));
+			img = new Image(Enemy1.class.getResourceAsStream("/img/enemies/enemy1.png"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -30,18 +32,13 @@ public class BeisimaiEnemy extends ALoopDanmukuEnemy {
 		};
 	}
 	private int currentSpriteIndex=0;
-	private int spriteDelta=1;
 	@Override
 	public void paint(GraphicsContext gc) {
 		super.paint(gc);
-		int count=12;
 		//每隔interval帧换一张图
-		int interval = 4;
+		int interval = 5;
 		spritePainter.paintSprite((0+(currentSpriteIndex))/interval, getX()-halfWidth, getY()-halfHeight, gc);
-		currentSpriteIndex=(currentSpriteIndex+spriteDelta)%(count*interval);
-		if(currentSpriteIndex==count*interval-1||currentSpriteIndex==0){
-			spriteDelta=-spriteDelta;
-		}
+		currentSpriteIndex=(currentSpriteIndex+1)%(12*interval);
 		
 	}
 

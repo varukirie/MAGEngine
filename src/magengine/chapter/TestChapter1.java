@@ -9,7 +9,7 @@ import magengine.bullet.impl.StarBullet;
 import magengine.chapter.util.AChapter;
 import magengine.chapter.util.QuickDanmuku;
 import magengine.element.impl.Player;
-import magengine.enemy.DefaultEnemy;
+import magengine.enemy.impl.DefaultEnemy;
 import magengine.game.LogicExecutor;
 import magengine.launcher.Launcher;
 import magengine.paint.MyCanvas;

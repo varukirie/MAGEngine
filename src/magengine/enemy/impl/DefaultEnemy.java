@@ -1,7 +1,8 @@
-package magengine.enemy;
+package magengine.enemy.impl;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import magengine.enemy.ADelayDanmukuEnemy;
 /**
  * 测试用的 敌人
  * @author MegaAstronic

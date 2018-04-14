@@ -1,4 +1,4 @@
-package magengine.danmuku;
+package magengine.danmuku.impl;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import javafx.scene.paint.Color;
 import magengine.bullet.impl.HexagonBullet;
 import magengine.chapter.util.QuickDanmuku;
+import magengine.danmuku.ADanmuku;
 import magengine.element.BaseElement;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;

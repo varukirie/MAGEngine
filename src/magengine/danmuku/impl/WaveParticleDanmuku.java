@@ -1,4 +1,4 @@
-package magengine.danmuku;
+package magengine.danmuku.impl;
 
 import static java.lang.Math.*;
 
@@ -8,6 +8,7 @@ import java.util.function.Supplier;
 import javafx.scene.paint.Color;
 import magengine.bullet.impl.HexagonBullet;
 import magengine.chapter.util.QuickDanmuku;
+import magengine.danmuku.ADanmuku;
 import magengine.element.BaseElement;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;

@@ -1,4 +1,4 @@
-package magengine.danmuku;
+package magengine.danmuku.impl;
 
 import static java.lang.Math.sin;
 
@@ -11,6 +11,7 @@ import magengine.bullet.PresetColor;
 import magengine.bullet.impl.CircleBullet;
 import magengine.bullet.impl.LongHexagonBullet;
 import magengine.chapter.util.QuickDanmuku;
+import magengine.danmuku.ADanmuku;
 import magengine.element.BaseElement;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;

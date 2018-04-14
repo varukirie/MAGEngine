@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.util.Map;
@@ -30,19 +31,45 @@ public class GroovySheetExecutor {
 	
 	public Class<?> load(File sheetFile)throws IOException{
 		String md5 = MD5Util.getFileMD5String(sheetFile);
-		return loadWithName(sheetFile,md5);
+		return loadWithName(new FileInputStream(sheetFile),md5);
 	}
 	
-	public Class<?> loadWithName(File sheetFile,String name)throws IOException{
+	public Class<?> loadCp(InputStream in) throws IOException{
+		return loadWithName(in,in.hashCode()+"");
+	}
+	/**
+	 * 执行classpath下的groovysheet
+	 * @param in
+	 * @throws IOException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
+	public void invokeCp(InputStream in) throws IOException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		Class<?> cls = loadCp(in);
+		Method m = cls.getMethod("main", String[].class);
+		Object[] x = new Object[] { new String[0] };
+		m.invoke(null, x);
+	}
+	
+	public Class<?> loadWithName(InputStream in,String name)throws IOException{
 		Class<?> cls = classCache.get(name);
 		if (cls == null) {
-			cls = loader.parseClass(appendHeaderInMemStream(this.header, sheetFile));
+			cls = loader.parseClass(appendHeaderInMemStream(this.header, in));
 			classCache.put(name, cls);
 		}
 		return cls;
 	}
-	
-	public Class<?> loadInClassPath(String path){
+	/**
+	 * 用于装载DSL进入JVM 不会append header
+	 * 
+	 * @param path
+	 * @return
+	 */
+	@SuppressWarnings("deprecation")
+	public Class<?> loadDSLInClassPath(String path){
 		return loader.parseClass(GroovySheetExecutor.class.getResourceAsStream(path), "CDSL.groovy");
 	}
 	
@@ -73,8 +100,7 @@ public class GroovySheetExecutor {
 	}
 	
 	
-	private String appendHeaderInMemStream(String header,File file) throws IOException{
-		InputStream in = new FileInputStream(file);
+	private String appendHeaderInMemStream(String header,InputStream in) throws IOException{
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		baos.write(header.getBytes());
 		byte[] buffer = new byte[1024 * 4];
