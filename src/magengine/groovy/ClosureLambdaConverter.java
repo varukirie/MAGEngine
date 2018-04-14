@@ -30,4 +30,6 @@ public class ClosureLambdaConverter {
 	public static BiFunction $BiFunc(Closure<?> c){
 		return c::call;
 	}
+	
+	
 }

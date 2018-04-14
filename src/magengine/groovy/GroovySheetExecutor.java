@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.net.URI;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -40,6 +41,11 @@ public class GroovySheetExecutor {
 		}
 		return cls;
 	}
+	
+	public Class<?> loadInClassPath(String path){
+		return loader.parseClass(GroovySheetExecutor.class.getResourceAsStream(path), "CDSL.groovy");
+	}
+	
 	/**
 	 * 执行 groovy脚本 
 	 * 会以文件的md5码为凭据缓存Class对象

@@ -143,7 +143,8 @@ public class SceneManager {
 		session.setMulplay(mulplay);
 		session.setMulplayServer(mulplayServer);
 		session.loadGameScene();
-		session.loadChapter(new TestChapter());
+//		session.loadChapter(new TestChapter());
+		session.loadChapterByGroovySheet(new File("d:/T.groovy"));
 		
 		session.setFailureEvent(() -> {
 			GameSession.closeGameSession();

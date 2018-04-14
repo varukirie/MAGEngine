@@ -347,8 +347,17 @@ public class GameSession {
 		return text;
 	}
 
-	private static GroovySheetExecutor gse = new GroovySheetExecutor();
+	private static GroovySheetExecutor gse =null;
+	
+	{//static code 
+		gse =  new GroovySheetExecutor();
+		gse.loadInClassPath("/magengine/groovy/CDSL.groovy");
+		gse.setHeader("import static magengine.groovy.CDSL.*;"
+				+ "import magengine.groovy.CDSL;"
+				+ "import static magengine.groovy.ClosureLambdaConverter.*;"
+				+ "import static magengine.paint.MyCanvas.*;\n");
 
+	}
 	public void loadChapterByGroovySheet(File groovySheet) {
 		loadChapter(new AChapter() {
 			@Override

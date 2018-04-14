@@ -18,9 +18,15 @@
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
-			<artifactId>groovy-all</artifactId>
-			<version>2.4.13</version>
+			<artifactId>groovy-eclipse-compiler</artifactId>
+			<version>2.9.2-01</version>
 		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-eclipse-batch</artifactId>
+			<version>2.4.3-01</version>
+		</dependency>
+
 
 
 
@@ -40,7 +46,16 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.6.1</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.groovy</groupId>
+						<artifactId>groovy-eclipse-compiler</artifactId>
+						<version>2.7.0-01</version>
+					</dependency>
+				</dependencies>
 				<configuration>
+					<compilerId>groovy-eclipse-compiler</compilerId>
+					<verbose>true</verbose>
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
@@ -83,6 +98,7 @@
 					</execution>
 				</executions>
 			</plugin>
+
 		</plugins>
 
 	</build>

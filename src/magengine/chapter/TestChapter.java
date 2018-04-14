@@ -3,9 +3,7 @@ package magengine.chapter;
 import java.util.Random;
 import java.util.function.Consumer;
 
-import org.omg.PortableInterceptor.SUCCESSFUL;
 
-import com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable;
 
 import javafx.application.Platform;
 import javafx.scene.media.Media;
@@ -31,6 +29,7 @@ import magengine.enemy.BossbuEnemy;
 import magengine.enemy.ButterflyElfEnemy;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
+
 import magengine.paint.MyCanvas;
 import magengine.ui.SceneManager;
 import magengine.util.BGMUtil;
