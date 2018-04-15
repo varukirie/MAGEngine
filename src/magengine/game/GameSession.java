@@ -85,13 +85,8 @@ public class GameSession {
 	public boolean mulplayServer = false;
 	public BloodBar bb;
 	public BombPainting bp;
-	public static final int PORT = 10231;
-	public static String remoteHost = "127.0.0.1";
-	private NioEventLoopGroup loopGroup;
-	private Channel mulplayChannel;
-	private Server server;
-	private Client client;
-	private Transport clientOrServer;
+	public final MulplaySession mulSession=new MulplaySession();
+	private Player player1;
 
 	public static GameSession startGameSession() {
 		if (instance != null)
@@ -264,7 +259,7 @@ public class GameSession {
 		primaryStage.setOnCloseRequest(event -> shutdownGame());
 
 		// 创建玩家
-		Player player1 = Player.getPlayer1(PRESET_PLAYER_POSITION_X, PRESET_PLAYER_POSITION_Y);
+		player1 = Player.getPlayer1(PRESET_PLAYER_POSITION_X, PRESET_PLAYER_POSITION_Y);
 		mh.addCollisionElement("player1", player1);
 
 		//绑定玩家与键盘控制
@@ -274,33 +269,7 @@ public class GameSession {
 
 		mEU.add("displayMessage", new DisplayMessage(1, MyCanvas.CANVAS_HEIGHT-20));
 		ChapterLoader.init(staticCanvas);
-		if (this.mulplay) {
-			if (this.mulplayServer) {
-				server = new Server(PORT);
-				clientOrServer = server;
-				server.start();// 监听端口
-				setLoopGroup(server.getBossLoop());
-				player1.setX(PRESET_PLAYER_POSITION_X - MULPLAY_PLAYER_POSITION_DELTA_X);
-				player1.setY(PRESET_PLAYER_POSITION_Y);
-				Player player2 = Player.getPlayer2(PRESET_PLAYER_POSITION_X+MULPLAY_PLAYER_POSITION_DELTA_X,PRESET_PLAYER_POSITION_Y);
-				mEU.add("player2", player2);
-				
-			}else{
-				client = new Client(remoteHost, PORT);
-				clientOrServer = client;
-				client.start();// client完成连接
-				setLoopGroup(client.getGroup());
-				if (client.getChannel() == null) {
-					System.out.println("连接失败");
-				}
-				player1.setX(PRESET_PLAYER_POSITION_X + MULPLAY_PLAYER_POSITION_DELTA_X);
-				player1.setY(PRESET_PLAYER_POSITION_Y);
-				Player player2 = Player.getPlayer2(PRESET_PLAYER_POSITION_X-MULPLAY_PLAYER_POSITION_DELTA_X, PRESET_PLAYER_POSITION_Y);
-				mEU.add("player2", player2);
-
-			}
-
-		}
+		mulplayProcess();
 		PlayerLaunchHandler.shootSchedule();
 		// ChapterLoader.loadChapter(new ChapterDemo());
 	}
@@ -329,7 +298,7 @@ public class GameSession {
 		BGMUtil.stop();
 		try {
 			if (mulplay) {
-				clientOrServer.close();
+				mulSession.clientOrServer.close();
 				if (loadChapterFuture != null) {
 					try {
 						loadChapterFuture.get();
@@ -356,12 +325,12 @@ public class GameSession {
 		return text;
 	}
 
-	private static GroovySheetExecutor gse =null;
+	private static GroovySheetExecutor chapterGSE =null;
 	
 	{//static code 
-		gse =  new GroovySheetExecutor();
-		gse.loadDSLInClassPath("/magengine/groovy/CDSL.groovy");
-		gse.setHeader("import static magengine.groovy.CDSL.*;"
+		chapterGSE =  new GroovySheetExecutor();
+		chapterGSE.loadDSLInClassPath("/magengine/groovy/CDSL.groovy");
+		chapterGSE.setHeader("import static magengine.groovy.CDSL.*;"
 				+ "import magengine.groovy.CDSL;"
 				+ "import static magengine.groovy.ClosureLambdaConverter.*;"
 				+ "import static magengine.paint.MyCanvas.*;"
@@ -377,7 +346,7 @@ public class GameSession {
 			@Override
 			public void design(LogicExecutor executor, MyCanvas staticCanvas, ElementUtils mEU) {
 				try {
-					gse.invokeCp(GameSession.class.getResourceAsStream(groovySheetClasspathPath));
+					chapterGSE.invokeCp(GameSession.class.getResourceAsStream(groovySheetClasspathPath));
 				} catch (CompilationFailedException | IOException | ReflectiveOperationException e) {
 					e.printStackTrace();
 				}
@@ -389,7 +358,7 @@ public class GameSession {
 			@Override
 			public void design(LogicExecutor executor, MyCanvas staticCanvas, ElementUtils mEU) {
 				try {
-					gse.invoke(groovySheet);
+					chapterGSE.invoke(groovySheet);
 				} catch (CompilationFailedException | IOException | ReflectiveOperationException e) {
 					e.printStackTrace();
 				}
@@ -402,7 +371,7 @@ public class GameSession {
 		loadChapterFuture = ChapterLoader.getScheduledExecutorService().submit(() -> {
 			if (mulplay && (mulplayServer)) {
 				System.out.println("waiting connection...");
-				long delay = server.getDelay();// server等待连接 并获取延迟
+				long delay = mulSession.server.getDelay();// server等待连接 并获取延迟
 				System.out.println("delay:" + delay + " ms");
 				try {
 					Thread.sleep(delay / 2);
@@ -412,7 +381,7 @@ public class GameSession {
 				ChapterLoader.loadChapter(chapter);
 			} else if (mulplay && (!mulplayServer)) {
 				System.out.println("waiting server pong");
-				client.waitPing();
+				mulSession.client.waitPing();
 				ChapterLoader.loadChapter(chapter);
 			} else {
 				// single
@@ -509,27 +478,41 @@ public class GameSession {
 		this.mulplayServer = mulplayServer;
 	}
 
-	public NioEventLoopGroup getLoopGroup() {
-		return loopGroup;
-	}
-
-	public void setLoopGroup(NioEventLoopGroup loopGroup) {
-		this.loopGroup = loopGroup;
-	}
-
-	public void setMulplayChannel(Channel mulplayChannel) {
-		this.mulplayChannel = mulplayChannel;
-	}
-
-	public Channel getMulplayChannel() {
-		return mulplayChannel;
-	}
-
 	public BackgroundUtil getBackgroundUtil() {
 		return backgroundUtil;
 	}
 
 	public StackPane getGameRoot() {
 		return gameRoot;
+	}
+	
+	public void mulplayProcess(){
+		if (this.mulplay) {
+			if (this.mulplayServer) {
+				mulSession.server = new Server(MulplaySession.PORT);
+				mulSession.clientOrServer = mulSession.server;
+				mulSession.server.start();// 监听端口
+				mulSession.setLoopGroup(mulSession.server.getBossLoop());
+				player1.setX(PRESET_PLAYER_POSITION_X - MULPLAY_PLAYER_POSITION_DELTA_X);
+				player1.setY(PRESET_PLAYER_POSITION_Y);
+				Player player2 = Player.getPlayer2(PRESET_PLAYER_POSITION_X+MULPLAY_PLAYER_POSITION_DELTA_X,PRESET_PLAYER_POSITION_Y);
+				mEU.add("player2", player2);
+				
+			}else{
+				mulSession.client = new Client(MulplaySession.remoteHost, MulplaySession.PORT);
+				mulSession.clientOrServer = mulSession.client;
+				mulSession.client.start();// client完成连接
+				mulSession.setLoopGroup(mulSession.client.getGroup());
+				if (mulSession.client.getChannel() == null) {
+					System.out.println("连接失败");
+				}
+				player1.setX(PRESET_PLAYER_POSITION_X + MULPLAY_PLAYER_POSITION_DELTA_X);
+				player1.setY(PRESET_PLAYER_POSITION_Y);
+				Player player2 = Player.getPlayer2(PRESET_PLAYER_POSITION_X-MULPLAY_PLAYER_POSITION_DELTA_X, PRESET_PLAYER_POSITION_Y);
+				mEU.add("player2", player2);
+
+			}
+
+		}
 	}
 }

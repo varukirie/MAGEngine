@@ -42,6 +42,7 @@ import magengine.chapter.TestChapter;
 import magengine.game.GameSession;
 import magengine.game.LogicExecutor;
 import magengine.game.MoveHandler;
+import magengine.game.MulplaySession;
 import magengine.util.BGMUtil;
 
 /**
@@ -375,7 +376,7 @@ public class SceneManager {
 			startGame(true, true);
 		});
 		clientbtn.setOnAction((e)->{
-			GameSession.remoteHost=ipProps.get();
+			MulplaySession.remoteHost=ipProps.get();
 			startGame(true, false);
 		});
 		
